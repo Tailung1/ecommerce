@@ -3,30 +3,10 @@
   padding: 0;
 }
 img {
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
+}
+.mainn {
+    position: relative;
 }
 
-header {
-  display: flex;
-  justify-content: space-between;
-  background-color: wheat;
-  padding: 10px 40px;
-  opacity: 90%;
-}
-
-header * {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  cursor: pointer;
-}
-.main-logo-div {
-  gap: 2px;
-}
-.flag-wrapper {
-  border: 1px solid rgb(227, 196, 196);
-  border-radius: 10%;
-  padding: 1px 10px;
-}

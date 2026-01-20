@@ -1,15 +1,27 @@
-import { useState } from "react";
-// import { motion, AnimatePresence } from "framer-motion";
+import "/css/header.css";
+import { type SetStateAction } from "react";
+import HeaderSlider from "./HeaderSlider";
 
-export default function Header() {
-  //   const [show, setShow] = useState<boolean>(false);
+
+export default function Header({
+  show,
+  setShow,
+}: {
+  show: boolean;
+  setShow: React.Dispatch<SetStateAction<boolean>>;
+}) {
+
 
   return (
     <header>
       <div>
         {" "}
-        <img src='../assets/slide-icon.png' alt='slide-icon' />
-        <div className="main-logo-div">
+        <img
+          onClick={() => setShow(true)}
+          src='../assets/slide-icon.png'
+          alt='slide-icon'
+        />
+        <div className='main-logo-div'>
           <img src='/assets/main-logo.png' alt='main-logo' />
           <p>Balisha store</p>
         </div>
@@ -21,6 +33,7 @@ export default function Header() {
           <img src='/assets/united-states.png' alt='flag-logo' />
         </div>
       </div>
+ 
     </header>
   );
 }

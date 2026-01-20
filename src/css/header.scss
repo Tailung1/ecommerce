@@ -1,4 +1,8 @@
-
+%display-shared {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 header {
   display: flex;
@@ -11,17 +15,17 @@ header {
 }
 
 header > div {
- display: flex;
-  align-items: center;
-  justify-content: center;
+  @extend %display-shared;
   gap: 15px;
   cursor: pointer;
 }
 .main-logo-div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @extend %display-shared;
   gap: 2px;
+}
+.balisha {
+    width: 50px;
+    height: 50px;
 }
 
 .flag-wrapper {
@@ -62,9 +66,7 @@ header > div {
   width: 100%;
 }
 .serach-input-items {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @extend %display-shared;
   gap: 10px;
   position: absolute;
   left: 5%;
@@ -73,7 +75,6 @@ header > div {
 .serach-input-wrapper input {
   width: 100%;
   padding: 10px;
-  /* padding: 10px 0; */
   border: none;
   background-color: rgb(255, 255, 255);
   border-radius: 10px;
@@ -86,10 +87,8 @@ header > div {
   gap: 10px;
 }
 .items-vertical-section {
-  display: flex;
+  @extend %display-shared;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   gap: 2px;
 }
 .items-vertical-section * img {

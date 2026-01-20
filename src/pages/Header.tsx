@@ -1,4 +1,4 @@
-import "../css/header.css";
+import "../css/output.css";
 import { type SetStateAction } from "react";
 import mainLogo from "../assets/main-logo.png";
 import slideIcon from "../assets/slide-icon.png";
@@ -22,8 +22,8 @@ export default function Header({
           alt='slide-icon'
         />
         <div className='main-logo-div'>
-          <img src={mainLogo} alt='main-logo' />
-          <p>Balisha store</p>
+          <img className='balisha' src={mainLogo} alt='main-logo' />
+          <p>Balisha</p>
         </div>
       </div>
       <div>

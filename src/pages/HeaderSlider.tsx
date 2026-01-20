@@ -13,11 +13,10 @@ export default function HeaderSlider({
       animate={{ x: 0 }}
       exit={{ x: "-100vw" }}
       transition={{ duration: 0.5,ease:easeOut }}
-
       className='slider-wrapper'
     >
       <div className='exit-and-input-parent'>
-        <p onClick={() => setShow(false)}>X</p>
+        <p className="" onClick={() => setShow(false)}>X</p>
         <div className='serach-input-wrapper'>
           <input type='text' />
           <div className='serach-input-items'>

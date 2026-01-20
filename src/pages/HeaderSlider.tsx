@@ -1,76 +1,77 @@
-import { easeIn, easeInOut, easeOut, motion } from "framer-motion";
+import { easeOut, motion } from "framer-motion";
 import type { SetStateAction } from "react";
 import type React from "react";
+
+import searchIcon from "../assets/search-icon.png";
+import mobilePhone from "../assets/mobile-phone.png";
+import tablet from "../assets/tablet.png";
+import laptop from "../assets/laptop.png";
+import consoleIcon from "../assets/console.png";
+import television from "../assets/television.png";
+import smartHome from "../assets/smart-home.png";
 
 export default function HeaderSlider({
   setShow,
 }: {
-  setShow:React.Dispatch<SetStateAction<boolean>>;
+  setShow: React.Dispatch<SetStateAction<boolean>>;
 }) {
   return (
     <motion.div
       initial={{ x: "-100vw" }}
       animate={{ x: 0 }}
       exit={{ x: "-100vw" }}
-      transition={{ duration: 0.5,ease:easeOut }}
+      transition={{ duration: 0.5, ease: easeOut }}
       className='slider-wrapper'
     >
       <div className='exit-and-input-parent'>
-        <p className="" onClick={() => setShow(false)}>X</p>
+        <p className='cursor-pointer' onClick={() => setShow(false)}>
+          X
+        </p>
         <div className='serach-input-wrapper'>
           <input type='text' />
           <div className='serach-input-items'>
-            <img src='/assets/search-icon.png' alt='search icon' />
+            <img src={searchIcon} alt='search icon' />
             <span>Search</span>
           </div>
         </div>
       </div>
       <div className='items-vertical-wrapper'>
         <section className='items-vertical-section'>
-          {" "}
           <div>
-            {" "}
-            <img
-              src='/assets/mobile-phone.png'
-              alt='mobile-phone icon'
-            />
+            <img src={mobilePhone} alt='mobile-phone icon' />
             <div className='mobile-phones'>
               <p>Mobile</p>
               <p>phones</p>
             </div>
           </div>
           <div>
-            <img src='/assets/tablet.png' alt='tablet icon' />
+            <img src={tablet} alt='tablet icon' />
             <p>Tabs</p>
           </div>
           <div>
-            {" "}
-            <img src='/assets/laptop.png' alt='laptop icon' />
+            <img src={laptop} alt='laptop icon' />
             <p>Laptops</p>
           </div>
           <div>
-            <img src='/assets/console.png' alt='console icon' />
+            <img src={consoleIcon} alt='console icon' />
             <p>Gaming</p>
           </div>
           <div>
-            {" "}
-            <img src='/assets/television.png' alt='tv icon' />
+            <img src={television} alt='tv icon' />
             <p>TV</p>
           </div>
           <div>
-            {" "}
-            <img src='/assets/smart-home.png' alt='tv icon' />
-            <div className="smart-home">
-                <span>Smart</span>
-                <span>home</span>
+            <img src={smartHome} alt='smart home icon' />
+            <div className='smart-home'>
+              <span>Smart</span>
+              <span>home</span>
             </div>
-        
           </div>
         </section>
         <section className='brands-wrapper'>
           <div>Samsung</div>
-          <div>Apple </div>
-          <div>Xiamo</div>
+          <div>Apple</div>
+          <div>Xiaomi</div>
         </section>
       </div>
     </motion.div>

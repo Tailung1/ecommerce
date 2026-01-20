@@ -1,39 +1,38 @@
-import "/css/header.css";
+import "../css/header.css";
 import { type SetStateAction } from "react";
-import HeaderSlider from "./HeaderSlider";
-
+import mainLogo from "../assets/main-logo.png";
+import slideIcon from "../assets/slide-icon.png";
+import searchIcon from "../assets/search-icon.png";
+import cartIcon from "../assets/shopping-cart.png";
+import usaFlagIcon from "../assets/united-states.png";
 
 export default function Header({
-  show,
   setShow,
 }: {
   show: boolean;
   setShow: React.Dispatch<SetStateAction<boolean>>;
 }) {
-
-
   return (
     <header>
       <div>
         {" "}
         <img
           onClick={() => setShow(true)}
-          src='../assets/slide-icon.png'
+          src={slideIcon}
           alt='slide-icon'
         />
         <div className='main-logo-div'>
-          <img src='/assets/main-logo.png' alt='main-logo' />
+          <img src={mainLogo} alt='main-logo' />
           <p>Balisha store</p>
         </div>
       </div>
       <div>
-        <img src='/assets/search-icon.png' alt='search-logo' />
-        <img src='/assets/shopping-cart.png' alt='cart-logo' />
+        <img src={searchIcon} alt='search-logo' />
+        <img src={cartIcon} alt='cart-logo' />
         <div className='flag-wrapper'>
-          <img src='/assets/united-states.png' alt='flag-logo' />
+          <img src={usaFlagIcon} alt='flag-logo' />
         </div>
       </div>
- 
     </header>
   );
 }

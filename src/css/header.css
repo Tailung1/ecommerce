@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+
 
 header {
   display: flex;
@@ -13,7 +11,7 @@ header {
 }
 
 header > div {
-  display: flex;
+ display: flex;
   align-items: center;
   justify-content: center;
   gap: 15px;
@@ -25,10 +23,7 @@ header > div {
   justify-content: center;
   gap: 2px;
 }
-.mainn {
-  min-width: 100vw;
-  background-color: blue;
-}
+
 .flag-wrapper {
   border: 1px solid rgb(227, 196, 196);
   border-radius: 10%;

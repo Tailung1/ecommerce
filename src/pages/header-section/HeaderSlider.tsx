@@ -1,14 +1,15 @@
 import { easeOut, motion } from "framer-motion";
 import type { SetStateAction } from "react";
 import type React from "react";
+import Brands from "./Brands";
 
-import searchIcon from "../assets/search-icon.png";
-import mobilePhone from "../assets/mobile-phone.png";
-import tablet from "../assets/tablet.png";
-import laptop from "../assets/laptop.png";
-import consoleIcon from "../assets/console.png";
-import television from "../assets/television.png";
-import smartHome from "../assets/smart-home.png";
+import searchIcon from "../../assets/search-icon.png";
+import mobilePhone from "../../assets/mobile-phone.png";
+import tablet from "../../assets/tablet.png";
+import laptop from "../../assets/laptop.png";
+import consoleIcon from "../../assets/console.png";
+import television from "../../assets/television.png";
+import smartHome from "../../assets/smart-home.png";
 
 export default function HeaderSlider({
   setShow,
@@ -68,11 +69,9 @@ export default function HeaderSlider({
             </div>
           </div>
         </section>
-        <section className='brands-wrapper'>
-          <div>Samsung</div>
-          <div>Apple</div>
-          <div>Xiaomi</div>
-        </section>
+
+          <Brands />
+
       </div>
     </motion.div>
   );

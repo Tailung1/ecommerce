@@ -24,8 +24,8 @@ header > div {
   gap: 2px;
 }
 .balisha {
-    width: 50px;
-    height: 50px;
+  width: 50px;
+  height: 50px;
 }
 
 .flag-wrapper {
@@ -103,7 +103,15 @@ header > div {
   gap: 5px;
   background-color: rgba(242, 245, 245, 0.444);
   width: 100%;
+  cursor: pointer;
 }
+.items-vertical-section > div:hover {
+  background-color: white;
+}
+.items-vertical-section > div:active {
+  background-color: white;
+}
+
 .mobile-phones {
   display: flex;
   flex-direction: column;
@@ -116,5 +124,13 @@ header > div {
 .brands-wrapper {
   display: flex;
   flex-wrap: wrap;
-  background-color: blue;
+  gap: 15px;
+  width: 100vw;
+  height: fit-content;
+}
+
+.brands-wrapper  div {
+  width: 100px;
+  height: 100px;
+  background-color: rgb(177, 226, 201);
 }

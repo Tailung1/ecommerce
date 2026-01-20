@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Header from "./pages/Header";
-import HeaderSlider from "./pages/HeaderSlider";
+import Header from "./pages/header-section/Header";
+import HeaderSlider from "./pages/header-section/HeaderSlider";
 import { AnimatePresence } from "framer-motion";
 
 function App() {

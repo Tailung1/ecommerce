@@ -1,10 +1,10 @@
-import "../css/output.css";
+import "../../css/header-output.css"
 import { type SetStateAction } from "react";
-import mainLogo from "../assets/main-logo.png";
-import slideIcon from "../assets/slide-icon.png";
-import searchIcon from "../assets/search-icon.png";
-import cartIcon from "../assets/shopping-cart.png";
-import usaFlagIcon from "../assets/united-states.png";
+import mainLogo from "../../assets/main-logo.png";
+import slideIcon from "../../assets/slide-icon.png";
+import searchIcon from "../../assets/search-icon.png";
+import cartIcon from "../../assets/shopping-cart.png";
+import usaFlagIcon from "../../assets/united-states.png";
 
 export default function Header({
   setShow,

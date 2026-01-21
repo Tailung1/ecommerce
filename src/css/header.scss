@@ -3,6 +3,10 @@
   align-items: center;
   justify-content: center;
 }
+%flex-col {
+  display: flex;
+  flex-direction: column;
+}
 
 header {
   display: flex;
@@ -86,51 +90,68 @@ header > div {
   align-items: flex-start;
   gap: 10px;
 }
-.items-vertical-section {
+.items-vertical-sections {
   @extend %display-shared;
   flex-direction: column;
   gap: 2px;
 }
-.items-vertical-section * img {
+.items-vertical-sections * img {
   width: 20px;
   height: 20px;
 }
-.items-vertical-section > div {
-  display: flex;
+.items-vertical-sections > div {
+  @extend %display-shared;
   flex-direction: column;
-  align-items: center;
   padding: 10px 5px;
   gap: 5px;
   background-color: rgba(242, 245, 245, 0.444);
   width: 100%;
   cursor: pointer;
 }
-.items-vertical-section > div:hover {
+.items-vertical-sections > div * {
+  pointer-events: none;
+}
+.items-vertical-sections > div:hover {
+  animation: scaleEffct 0.2s ease;
+}
+
+@keyframes scaleEffct {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.items-vertical-sections > div:hover {
   background-color: white;
 }
-.items-vertical-section > div:active {
+.items-vertical-sections > div:active {
   background-color: white;
 }
 
 .mobile-phones {
-  display: flex;
-  flex-direction: column;
+  @extend %flex-col;
 }
 .smart-home {
-  display: flex;
-  flex-direction: column;
+  @extend %flex-col;
 }
-
 .brands-wrapper {
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
   width: 100vw;
   height: fit-content;
+  height: 100vh;
+  height: fit-content;
 }
 
-.brands-wrapper  div {
-  width: 100px;
+.brands-wrapper div {
+  width: 20%;
   height: 100px;
   background-color: rgb(177, 226, 201);
 }

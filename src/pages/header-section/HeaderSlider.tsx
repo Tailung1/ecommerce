@@ -2,6 +2,7 @@ import { easeOut, motion } from "framer-motion";
 import type { SetStateAction } from "react";
 import type React from "react";
 import Brands from "./Brands";
+import { useMyContext } from "../../MyContext";
 
 import searchIcon from "../../assets/search-icon.png";
 import mobilePhone from "../../assets/mobile-phone.png";
@@ -16,6 +17,7 @@ export default function HeaderSlider({
 }: {
   setShow: React.Dispatch<SetStateAction<boolean>>;
 }) {
+  const { setSectionToDisplay } = useMyContext();
   return (
     <motion.div
       initial={{ x: "-100vw" }}
@@ -37,31 +39,31 @@ export default function HeaderSlider({
         </div>
       </div>
       <div className='items-vertical-wrapper'>
-        <section className='items-vertical-section'>
-          <div>
+        <section className='items-vertical-sections'>
+          <div onClick={() => setSectionToDisplay("mobile-phones")}>
             <img src={mobilePhone} alt='mobile-phone icon' />
             <div className='mobile-phones'>
               <p>Mobile</p>
               <p>phones</p>
             </div>
           </div>
-          <div>
+          <div onClick={() => setSectionToDisplay("tablets")}>
             <img src={tablet} alt='tablet icon' />
             <p>Tabs</p>
           </div>
-          <div>
+          <div onClick={() => setSectionToDisplay("laptops")}>
             <img src={laptop} alt='laptop icon' />
             <p>Laptops</p>
           </div>
-          <div>
+          <div onClick={() => setSectionToDisplay("consoles")}>
             <img src={consoleIcon} alt='console icon' />
             <p>Gaming</p>
           </div>
-          <div>
+          <div onClick={() => setSectionToDisplay("televisions")}>
             <img src={television} alt='tv icon' />
             <p>TV</p>
           </div>
-          <div>
+          <div onClick={() => setSectionToDisplay("smart-home")}>
             <img src={smartHome} alt='smart home icon' />
             <div className='smart-home'>
               <span>Smart</span>
@@ -70,8 +72,7 @@ export default function HeaderSlider({
           </div>
         </section>
 
-          <Brands />
-
+        <Brands />
       </div>
     </motion.div>
   );

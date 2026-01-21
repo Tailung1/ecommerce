@@ -7,8 +7,8 @@ import {
 } from "react";
 
 interface types {
-  name: string;
-  setName: React.Dispatch<SetStateAction<string>>;
+  sectionToDisplay: string;
+  setSectionToDisplay: React.Dispatch<SetStateAction<string>>;
 }
 
 const MyContext = createContext({} as types);
@@ -18,12 +18,13 @@ export default function ContextProvider({
 }: {
   children: ReactNode;
 }) {
-  const [name, setName] = useState<string>("hello");
+  const [sectionToDisplay, setSectionToDisplay] =
+    useState<string>("mobile-phones");
   return (
     <MyContext.Provider
       value={{
-        name,
-        setName,
+        sectionToDisplay,
+        setSectionToDisplay,
       }}
     >
       {children}

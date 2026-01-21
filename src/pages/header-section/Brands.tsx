@@ -1,9 +1,10 @@
 import { useMyContext } from "../../MyContext";
 
-export default function Brands(brandtype: any) {
-  const { name, setName } = useMyContext();
-  switch (brandtype) {
-    case "phones":
+
+export default function Brands() {
+  const { sectionToDisplay } = useMyContext();
+  switch (sectionToDisplay) {
+    case "mobile-phones":
       return (
         <section className='brands-wrapper brand-mobile-phones'>
           <div>Samsung</div>
@@ -24,10 +25,9 @@ export default function Brands(brandtype: any) {
     default:
       return (
         <section className='brands-wrapper brand-mobile-phones'>
-          <div>Samsung</div>
-          <div>Apple</div>
-          <div>Xiaomi</div>
-         
+          <div>default1</div>
+          <div>default2</div>
+          <div>default3</div>
         </section>
       );
   }

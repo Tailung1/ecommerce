@@ -1,5 +1,7 @@
+import { useMyContext } from "../../MyContext";
 
-export default function Brands(brandtype:any) {
+export default function Brands(brandtype: any) {
+  const { name, setName } = useMyContext();
   switch (brandtype) {
     case "phones":
       return (
@@ -25,6 +27,7 @@ export default function Brands(brandtype:any) {
           <div>Samsung</div>
           <div>Apple</div>
           <div>Xiaomi</div>
+         
         </section>
       );
   }

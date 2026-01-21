@@ -1,5 +1,5 @@
 import { useMyContext } from "../../MyContext";
-import mainLogo from "../../assets/main-logo.png"
+import phoneImage from "../../assets/iphone.png"
 
 type BrandsData = {
   "mobile-phones": { name: string; image: string }[];
@@ -22,41 +22,38 @@ const brandsData: BrandsData = {
   ],
 
   tablets: [
-    { name: "Apple iPad", image: "/images/apple-tablet.png" },
-    {
-      name: "Samsung Galaxy Tab",
-      image: "/images/samsung-tablet.png",
-    },
-    { name: "Huawei MatePad", image: "/images/huawei-tablet.png" },
-    { name: "Lenovo Tab", image: "/images/lenovo-tablet.png" },
+    { name: "Apple", image: "/images/apple-tablet.png" },
+    { name: "Samsung", image: "/images/samsung-tablet.png" },
+    { name: "Huawei", image: "/images/huawei-tablet.png" },
+    { name: "Lenovo", image: "/images/lenovo-tablet.png" },
   ],
 
   laptops: [
-    { name: "Apple MacBook", image: "/images/apple-macbook.png" },
-    { name: "Dell XPS", image: "/images/dell-xps.png" },
-    { name: "HP Spectre", image: "/images/hp-spectre.png" },
-    { name: "Lenovo ThinkPad", image: "/images/lenovo-thinkpad.png" },
+    { name: "Apple", image: "/images/apple-laptop.png" },
+    { name: "Dell", image: "/images/dell-laptop.png" },
+    { name: "HP", image: "/images/hp-laptop.png" },
+    { name: "Lenovo", image: "/images/lenovo-laptop.png" },
   ],
 
   consoles: [
-    { name: "PlayStation 5", image: "/images/playstation-5.png" },
-    { name: "Xbox Series X", image: "/images/xbox-series-x.png" },
-    { name: "Nintendo Switch", image: "/images/nintendo-switch.png" },
-    { name: "PlayStation 4", image: "/images/playstation-4.png" },
+    { name: "PlayStation", image: "/images/playstation-console.png" },
+    { name: "Xbox", image: "/images/xbox-console.png" },
+    { name: "Nintendo", image: "/images/nintendo-console.png" },
+    { name: "Razer", image: "/images/razer-console.png" },
   ],
 
   televisions: [
-    { name: "Samsung QLED", image: "/images/samsung-qled.png" },
-    { name: "LG OLED", image: "/images/lg-oled.png" },
-    { name: "Sony Bravia", image: "/images/sony-bravia.png" },
-    { name: "TCL Roku TV", image: "/images/tcl-roku.png" },
+    { name: "Samsung", image: "/images/samsung-tv.png" },
+    { name: "LG", image: "/images/lg-tv.png" },
+    { name: "Sony", image: "/images/sony-tv.png" },
+    { name: "TCL", image: "/images/tcl-tv.png" },
   ],
 
   "smart-home": [
-    { name: "Google Nest", image: "/images/google-nest.png" },
-    { name: "Amazon Alexa", image: "/images/amazon-alexa.png" },
-    { name: "Philips Hue", image: "/images/philips-hue.png" },
-    { name: "Ring", image: "/images/ring.png" },
+    { name: "Google", image: "/images/google-home.png" },
+    { name: "Amazon", image: "/images/amazon-home.png" },
+    { name: "Philips", image: "/images/philips-home.png" },
+    { name: "Ring", image: "/images/ring-home.png" },
   ],
 };
 
@@ -71,7 +68,7 @@ export default function Brands() {
         brandList.map((brand, index) => (
           <div key={index} className='brand-item'>
             <img
-              src={mainLogo}
+              src={phoneImage}
               alt={brand.name}
               className='brand-image'
             />

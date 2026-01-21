@@ -17,7 +17,7 @@ export default function HeaderSlider({
 }: {
   setShow: React.Dispatch<SetStateAction<boolean>>;
 }) {
-  const { setSectionToDisplay } = useMyContext();
+  const { activeSection, setActiveSection } = useMyContext();
   return (
     <motion.div
       initial={{ x: "-100vw" }}
@@ -40,30 +40,77 @@ export default function HeaderSlider({
       </div>
       <div className='items-vertical-wrapper'>
         <section className='items-vertical-sections'>
-          <div onClick={() => setSectionToDisplay("mobile-phones")}>
-            <img src={mobilePhone} alt='mobile-phone icon' />
+          <div
+            className={`${
+              activeSection === "mobile-phones"
+                ? "active-section"
+                : "offline-section"
+            } section`}
+            onClick={() => setActiveSection("mobile-phones")}
+          >
+            <img src={mobilePhone} alt='mobile-phones icon' />
             <div className='mobile-phones'>
               <p>Mobile</p>
               <p>phones</p>
             </div>
           </div>
-          <div onClick={() => setSectionToDisplay("tablets")}>
+
+          <div
+            className={`${
+              activeSection === "tablets"
+                ? "active-section"
+                : "offline-section"
+            } section`}
+            onClick={() => setActiveSection("tablets")}
+          >
             <img src={tablet} alt='tablet icon' />
             <p>Tabs</p>
           </div>
-          <div onClick={() => setSectionToDisplay("laptops")}>
+
+          <div
+            className={`${
+              activeSection === "laptops"
+                ? "active-section"
+                : "offline-section"
+            } section`}
+            onClick={() => setActiveSection("laptops")}
+          >
             <img src={laptop} alt='laptop icon' />
             <p>Laptops</p>
           </div>
-          <div onClick={() => setSectionToDisplay("consoles")}>
+
+          <div
+            className={`${
+              activeSection === "consoles"
+                ? "active-section"
+                : "offline-section"
+            } section`}
+            onClick={() => setActiveSection("consoles")}
+          >
             <img src={consoleIcon} alt='console icon' />
             <p>Gaming</p>
           </div>
-          <div onClick={() => setSectionToDisplay("televisions")}>
+
+          <div
+            className={`${
+              activeSection === "televisions"
+                ? "active-section"
+                : "offline-section"
+            } section`}
+            onClick={() => setActiveSection("televisions")}
+          >
             <img src={television} alt='tv icon' />
             <p>TV</p>
           </div>
-          <div onClick={() => setSectionToDisplay("smart-home")}>
+
+          <div
+            className={`${
+              activeSection === "smart-home"
+                ? "active-section"
+                : "offline-section"
+            } section`}
+            onClick={() => setActiveSection("smart-home")}
+          >
             <img src={smartHome} alt='smart home icon' />
             <div className='smart-home'>
               <span>Smart</span>

@@ -1,10 +1,11 @@
-.items-vertical-sections > div, .items-vertical-sections, .serach-input-items, .main-logo-div, header > div {
+.section, .items-vertical-sections, .serach-input-items, .main-logo-div, header > div {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.smart-home, .mobile-phones {
+.mobile-phones,
+.smart-home {
   display: flex;
   flex-direction: column;
 }
@@ -13,7 +14,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgb(236, 236, 236);
+  background-color: rgb(240, 246, 239);
   padding: 10px 20px;
   opacity: 90%;
   position: relative;
@@ -46,7 +47,7 @@ header > div {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  background-color: rgb(213, 227, 210);
+  background-color: rgb(240, 246, 239);
   width: 100%;
   height: 100vh;
 }
@@ -57,7 +58,7 @@ header > div {
   align-items: center;
   gap: 30px;
   max-width: 100%;
-  background-color: rgb(213, 227, 210);
+  background-color: rgb(240, 246, 239);
   padding: 10px 10px 10px 25px;
 }
 
@@ -97,6 +98,7 @@ header > div {
 .items-vertical-sections {
   flex-direction: column;
   gap: 2px;
+  background-color: 240, 246, 239;
 }
 
 .items-vertical-sections * img {
@@ -104,20 +106,15 @@ header > div {
   height: 20px;
 }
 
-.items-vertical-sections > div {
+.section {
   flex-direction: column;
   padding: 10px 5px;
-  gap: 5px;
-  background-color: rgba(242, 245, 245, 0.444);
+  gap: 100px;
   width: 100%;
   cursor: pointer;
 }
 
-.items-vertical-sections > div * {
-  pointer-events: none;
-}
-
-.items-vertical-sections > div:hover {
+.section:hover {
   animation: scaleEffct 0.2s ease;
 }
 
@@ -132,18 +129,10 @@ header > div {
     transform: scale(1);
   }
 }
-.items-vertical-sections > div:hover {
-  background-color: white;
-}
-
-.items-vertical-sections > div:active {
-  background-color: white;
-}
-
 .brands-wrapper {
   display: flex;
   flex-wrap: wrap;
-  gap: 15px;
+  gap: 3px;
   width: 100vw;
   height: fit-content;
   height: 100vh;
@@ -151,9 +140,39 @@ header > div {
 }
 
 .brands-wrapper div {
-  width: 20%;
+  width: 135px;
   height: 100px;
-  background-color: rgb(177, 226, 201);
+  background-color: rgb(226, 225, 217);
+  position: relative;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.brands-wrapper p {
+  font-size: 15px;
+}
+
+.brands-wrapper img {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  bottom: 0;
+  right: 0;
+}
+
+.section {
+  flex-direction: column;
+  padding: 10px 5px;
+  gap: 5px;
+  font-size: 15px;
+}
+
+.offline-section {
+  background-color: rgb(235, 235, 235);
+}
+
+.active-section {
+  background-color: rgb(255, 255, 255);
 }
 
 /*# sourceMappingURL=header-output.css.map */

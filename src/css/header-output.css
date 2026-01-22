@@ -8,10 +8,13 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgb(240, 246, 239);
+  background-color: rgb(255, 234, 172);
   padding: 10px 20px;
-  opacity: 90%;
-  position: relative;
+  opacity: 98%;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
 header > div {
@@ -81,7 +84,6 @@ header > div {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  align-items: flex-start;
 }
 
 .popular-searches-wrapper {

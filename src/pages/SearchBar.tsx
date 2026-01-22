@@ -26,7 +26,7 @@ export default function SearchBar() {
         />
       </div>
       <div className='popular-searches-container'>
-        <p>Popular Searches</p>
+        <p>Popular Searches:</p>
         <section className='popular-searches-wrapper'>
           <p>iPhone 15 Pro Max</p>
           <p>MacBook Air M2</p>

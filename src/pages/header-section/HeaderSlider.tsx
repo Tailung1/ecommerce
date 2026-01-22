@@ -1,23 +1,22 @@
 import { easeOut, motion } from "framer-motion";
-import type { SetStateAction } from "react";
-import type React from "react";
 import Brands from "./Brands";
 import { useMyContext } from "../../MyContext";
 
-import searchIcon from "../../assets/search-icon.png";
 import mobilePhone from "../../assets/mobile-phone.png";
 import tablet from "../../assets/tablet.png";
 import laptop from "../../assets/laptop.png";
 import consoleIcon from "../../assets/console.png";
 import television from "../../assets/television.png";
 import smartHome from "../../assets/smart-home.png";
+import searchIcon from "../../assets/search-icon.png";
 
-export default function HeaderSlider({
-  setShow,
-}: {
-  setShow: React.Dispatch<SetStateAction<boolean>>;
-}) {
-  const { activeSection, setActiveSection } = useMyContext();
+export default function HeaderSlider() {
+  const {
+    activeSection,
+    setActiveSection,
+    setShowSideBar,
+    setShowSearchBar,
+  } = useMyContext();
   return (
     <motion.div
       initial={{ x: "-100vw" }}
@@ -27,15 +26,27 @@ export default function HeaderSlider({
       className='slider-wrapper'
     >
       <div className='exit-and-input-parent'>
-        <p className='cursor-pointer' onClick={() => setShow(false)}>
+        <p
+          className='cursor-pointer'
+          onClick={() => setShowSideBar(false)}
+        >
           X
         </p>
-        <div className='serach-input-wrapper'>
-          <input type='text' />
-          <div className='serach-input-items'>
-            <img src={searchIcon} alt='search icon' />
-            <span>Search</span>
+        <div className='serach-input-container'>
+          <div
+            onClick={() => {
+              setShowSideBar(false), setShowSearchBar(true);
+            }}
+            className='serach-input-wrapper'
+          >
+            <input placeholder='Search' type='text' />
+            <img
+              className='serach-icon '
+              src={searchIcon}
+              alt='search icon'
+            />
           </div>
+      
         </div>
       </div>
       <div className='items-vertical-wrapper'>

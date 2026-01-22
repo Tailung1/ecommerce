@@ -1,16 +1,19 @@
 import { useState } from "react";
+import { useMyContext } from "./MyContext";
 import Header from "./pages/header-section/Header";
 import HeaderSlider from "./pages/header-section/HeaderSlider";
 import { AnimatePresence } from "framer-motion";
+import Main from "./pages/Main";
 
 function App() {
-  const [show, setShow] = useState<boolean>(false);
+  const {showSideBar} =useMyContext()
   return (
     <div className='mainn'>
-      <Header show={show} setShow={setShow} />
+      <Header />
       <AnimatePresence>
-        {show && <HeaderSlider setShow={setShow} />}
+        {showSideBar && <HeaderSlider />}
       </AnimatePresence>
+      <Main />
     </div>
   );
 }

@@ -12,8 +12,13 @@ export default function SearchBar() {
   }, [showSearchBar]);
   return (
     <div className='serach-input-container'>
-      <div className='serach-input-wrapper'>
-        <input ref={inputRef} placeholder='Search' type='text' />
+      <div className='input-container'>
+        <input
+          className='input'
+          ref={inputRef}
+          placeholder='Search'
+          type='text'
+        />
         <img
           className='serach-icon'
           src={searchIcon}

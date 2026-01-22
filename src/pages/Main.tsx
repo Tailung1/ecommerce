@@ -4,9 +4,9 @@ import SearchBar from "./SearchBar";
 export default function Main() {
   const { showSearchBar } = useMyContext();
   return (
-    <div>
+    <div className="px-6">
       {!showSearchBar ? (
-        <p className='w-full h-screen bg-red-500'>textt</p>
+        <p className='w-full h-screen'>textt</p>
       ) : (
         <SearchBar />
       )}

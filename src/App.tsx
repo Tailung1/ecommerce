@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 import { useMyContext } from "./MyContext";
 import Header from "./pages/header-section/Header";
 import HeaderSlider from "./pages/header-section/HeaderSlider";
@@ -8,7 +8,7 @@ import Main from "./pages/Main";
 function App() {
   const {showSideBar} =useMyContext()
   return (
-    <div className='mainn'>
+    <div>
       <Header />
       <AnimatePresence>
         {showSideBar && <HeaderSlider />}

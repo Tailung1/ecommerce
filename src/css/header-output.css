@@ -4,12 +4,6 @@
   justify-content: center;
 }
 
-.mobile-phones,
-.smart-home, .popular-searches-container {
-  display: flex;
-  flex-direction: column;
-}
-
 header {
   display: flex;
   justify-content: space-between;
@@ -40,19 +34,6 @@ header > div {
   padding: 1px 10px;
 }
 
-.slider-wrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  background-color: rgb(240, 246, 239);
-  width: 100%;
-  height: 100vh;
-  z-index: 9;
-}
-
 .exit-and-input-parent {
   display: flex;
   justify-content: flex-start;
@@ -69,12 +50,12 @@ header > div {
 
 .serach-input-container {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.serach-input-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
+.input-container {
   position: relative;
   width: 100%;
 }
@@ -82,11 +63,12 @@ header > div {
 .serach-icon {
   position: absolute;
   left: 20px;
+  top: 10px;
   width: 25px;
   height: 25px;
 }
 
-.serach-input-wrapper input {
+.input {
   width: 100%;
   padding: 10px 10px 10px 50px;
   border: none;
@@ -95,15 +77,11 @@ header > div {
   border: 1px solid rgb(55, 0, 255);
 }
 
-.items-vertical-wrapper {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-}
-
 .popular-searches-container {
-  align-items: center;
-  gap: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: flex-start;
 }
 
 .popular-searches-wrapper {
@@ -112,9 +90,8 @@ header > div {
   justify-content: center;
   gap: 15px;
   font-size: 13px;
-  padding: 10px;
   border-radius: 10px;
-  width: 400px;
+  height: fit-content;
   animation: animateSearches 0.5s ease;
 }
 
@@ -132,6 +109,19 @@ header > div {
     transform: translateY(0);
   }
 }
+.slider-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background-color: rgb(240, 246, 239);
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+}
+
 .items-vertical-sections {
   flex-direction: column;
   gap: 2px;
@@ -141,6 +131,12 @@ header > div {
 .items-vertical-sections * img {
   width: 20px;
   height: 20px;
+}
+
+.items-vertical-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
 }
 
 .section {
@@ -167,6 +163,13 @@ header > div {
     transform: scale(1);
   }
 }
+.mobile-phones,
+.smart-home {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+}
+
 .brands-wrapper {
   display: flex;
   flex-wrap: wrap;

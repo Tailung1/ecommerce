@@ -37,16 +37,19 @@ export default function HeaderSlider() {
             onClick={() => {
               setShowSideBar(false), setShowSearchBar(true);
             }}
-            className='serach-input-wrapper'
+            className='input-container'
           >
-            <input placeholder='Search' type='text' />
+            <input
+              className='input'
+              placeholder='Search'
+              type='text'
+            />
             <img
-              className='serach-icon '
+              className='serach-icon'
               src={searchIcon}
               alt='search icon'
             />
           </div>
-      
         </div>
       </div>
       <div className='items-vertical-wrapper'>

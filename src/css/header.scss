@@ -3,9 +3,11 @@
   align-items: center;
   justify-content: center;
 }
-%flex-col {
+
+@mixin display-col($gap: 0px) {
   display: flex;
   flex-direction: column;
+  gap: $gap;
 }
 
 header {
@@ -31,27 +33,14 @@ header > div {
   height: 50px;
 }
 .header-right-side-items {
-      @extend %display-shared;
-      gap: 10px;
+  @extend %display-shared;
+  gap: 10px;
 }
 
 .flag-wrapper {
   border: 1px solid rgb(227, 196, 196);
   border-radius: 10%;
   padding: 1px 10px;
-}
-
-.slider-wrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  background-color: rgb(240, 246, 239);
-  width: 100%;
-  height: 100vh;
-  z-index: 9;
 }
 
 .exit-and-input-parent {
@@ -68,22 +57,21 @@ header > div {
 }
 .serach-input-container {
   width: 100%;
+  @include display-col($gap: 10px);
 }
-.serach-input-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
+.input-container {
   position: relative;
   width: 100%;
 }
 .serach-icon {
   position: absolute;
   left: 20px;
+  top: 10px;
   width: 25px;
   height: 25px;
 }
 
-.serach-input-wrapper input {
+.input {
   width: 100%;
   padding: 10px 10px 10px 50px;
   border: none;
@@ -92,17 +80,9 @@ header > div {
   border: 1px solid rgb(55, 0, 255);
 }
 
-
-.items-vertical-wrapper {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-}
-
 .popular-searches-container {
-  @extend %flex-col;
-  align-items: center;
-  gap: 5px;
+  @include display-col($gap: 15px);
+  align-items: flex-start;
 }
 .popular-searches-wrapper {
   display: flex;
@@ -110,15 +90,14 @@ header > div {
   justify-content: center;
   gap: 15px;
   font-size: 13px;
-  padding: 10px;
   border-radius: 10px;
-  width: 400px;
+  height: fit-content;
   animation: animateSearches 0.5s ease;
 }
 .popular-searches-wrapper * {
-background-color: rgb(239, 239, 234);
-padding: 8px;
-border-radius: 10px;
+  background-color: rgb(239, 239, 234);
+  padding: 8px;
+  border-radius: 10px;
 }
 
 @keyframes animateSearches {
@@ -129,6 +108,19 @@ border-radius: 10px;
     transform: translateY(0);
   }
 }
+.slider-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background-color: rgb(240, 246, 239);
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+}
+
 .items-vertical-sections {
   @extend %display-shared;
   flex-direction: column;
@@ -138,6 +130,11 @@ border-radius: 10px;
 .items-vertical-sections * img {
   width: 20px;
   height: 20px;
+}
+.items-vertical-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
 }
 .section {
   @extend %display-shared;
@@ -167,7 +164,7 @@ border-radius: 10px;
 
 .mobile-phones,
 .smart-home {
-  @extend %flex-col;
+  @include display-col;
 }
 
 .brands-wrapper {

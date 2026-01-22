@@ -22,7 +22,7 @@ export default function Header() {
           <p>Balisha</p>
         </div>
       </div>
-      <div>
+      <div className="header-right-side-items">
         <img
           onClick={() => setShowSearchBar(true)}
           src={searchIcon}

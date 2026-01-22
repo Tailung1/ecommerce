@@ -1,4 +1,4 @@
-.section, .items-vertical-sections, .main-logo-div, header > div {
+.section, .items-vertical-sections, .header-right-side-items, .main-logo-div, header > div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -21,17 +21,17 @@ header {
 }
 
 header > div {
-  gap: 15px;
+  gap: 5px;
   cursor: pointer;
-}
-
-.main-logo-div {
-  gap: 2px;
 }
 
 .balisha {
   width: 50px;
   height: 50px;
+}
+
+.header-right-side-items {
+  gap: 10px;
 }
 
 .flag-wrapper {
@@ -103,18 +103,25 @@ header > div {
 
 .popular-searches-container {
   align-items: center;
-  gap: 15px;
+  gap: 5px;
 }
 
 .popular-searches-wrapper {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  justify-content: center;
+  gap: 15px;
+  font-size: 13px;
   padding: 10px;
   border-radius: 10px;
-  background-color: rgb(251, 237, 186);
-  width: 200px;
+  width: 400px;
   animation: animateSearches 0.5s ease;
+}
+
+.popular-searches-wrapper * {
+  background-color: rgb(239, 239, 234);
+  padding: 8px;
+  border-radius: 10px;
 }
 
 @keyframes animateSearches {

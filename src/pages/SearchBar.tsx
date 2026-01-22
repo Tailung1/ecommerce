@@ -1,12 +1,19 @@
-// import { useMyContext } from "../MyContext";
+import { useMyContext } from "../MyContext";
 import searchIcon from "../assets/search-icon.png";
+import { useEffect, useRef } from "react";
 
 export default function SearchBar() {
-  //   const {  } = useMyContext();
+  const { showSearchBar } = useMyContext();
+  const inputRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (showSearchBar && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [showSearchBar]);
   return (
     <div className='serach-input-container'>
       <div className='serach-input-wrapper'>
-        <input placeholder='Search' type='text' />
+        <input ref={inputRef} placeholder='Search' type='text' />
         <img
           className='serach-icon'
           src={searchIcon}
@@ -16,10 +23,14 @@ export default function SearchBar() {
       <div className='popular-searches-container'>
         <p>Popular Searches</p>
         <section className='popular-searches-wrapper'>
-          <p>iphone 17</p>
-          <p>laptops</p>
-          <p>Sansung x</p>
-          <p>iphone 16</p>
+          <p>iPhone 15 Pro Max</p>
+          <p>MacBook Air M2</p>
+          <p>Samsung Galaxy Z Fold 5</p>
+          <p>Google Pixel 8</p>
+          <p>PlayStation 5</p>
+          <p>Apple Watch Ultra</p>
+          <p>Samsung Galaxy S23</p>
+          <p>Nintendo Switch OLED</p>
         </section>
       </div>
     </div>

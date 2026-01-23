@@ -5,13 +5,15 @@ import { useEffect, useRef } from "react";
 export default function SearchBar() {
   const { showSearchBar } = useMyContext();
   const inputRef = useRef<HTMLInputElement>(null);
+
   useEffect(() => {
     if (showSearchBar && inputRef.current) {
       inputRef.current.focus();
     }
   }, [showSearchBar]);
+
   return (
-    <div className='serach-input-container'>
+    <div className='searach-input-container'>
       <div className='input-container'>
         <input
           className='input'

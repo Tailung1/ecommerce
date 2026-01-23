@@ -23,9 +23,9 @@ export default function HeaderSlider() {
       animate={{ x: 0 }}
       exit={{ x: "-100vw" }}
       transition={{ duration: 0.5, ease: easeOut }}
-      className='slider-wrapper'
+      className='slider-container'
     >
-      <div className='exit-and-input-parent'>
+      <div className='exit-input-container'>
         <p
           className='cursor-pointer'
           onClick={() => setShowSideBar(false)}
@@ -53,7 +53,7 @@ export default function HeaderSlider() {
         </div>
       </div>
       <div className='items-vertical-wrapper'>
-        <section className='items-vertical-sections'>
+        <section className='items-vertical-section'>
           <div
             className={`${
               activeSection === "mobile-phones"
@@ -132,8 +132,10 @@ export default function HeaderSlider() {
             </div>
           </div>
         </section>
-
-        <Brands />
+        <section className='brands-wrapper'>
+          {" "}
+          <Brands />
+        </section>
       </div>
     </motion.div>
   );

@@ -1,5 +1,5 @@
 import { useMyContext } from "../../MyContext";
-import phoneImage from "../../assets/iphone.png"
+import phoneImage from "../../assets/iphone.png";
 
 type BrandsData = {
   "mobile-phones": { name: string; image: string }[];
@@ -63,7 +63,7 @@ export default function Brands() {
     brandsData[activeSection as keyof BrandsData] || [];
 
   return (
-    <section className='brands-wrapper'>
+    <>
       {brandList.length > 0 ? (
         brandList.map((brand, index) => (
           <div key={index} className='brand-item'>
@@ -78,6 +78,6 @@ export default function Brands() {
       ) : (
         <p>No brands available in this section.</p>
       )}
-    </section>
+    </>
   );
 }

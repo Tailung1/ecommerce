@@ -21,7 +21,7 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-
+  z-index: 10;
 }
 
 header > div {
@@ -47,7 +47,7 @@ header > div {
   padding: 1px 10px;
 }
 
-.exit-and-input-parent {
+.exit-input-container {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -56,10 +56,10 @@ header > div {
   background-color: rgb(240, 246, 239);
   padding: 10px 10px 10px 25px;
 }
-.exit-and-input-parent p {
+.exi-input-container p {
   cursor: pointer;
 }
-.serach-input-container {
+.searach-input-container {
   width: 100%;
   @include display-col($gap: 10px);
 }
@@ -74,7 +74,6 @@ header > div {
   width: 25px;
   height: 25px;
 }
-
 .input {
   width: 100%;
   padding: 10px 10px 10px 50px;
@@ -112,26 +111,35 @@ header > div {
     transform: translateY(0);
   }
 }
-.slider-wrapper {
-  position: absolute;
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+.slider-container {
+  position: fixed;
   top: 0;
-  left: 0;
   display: flex;
   flex-direction: column;
   gap: 5px;
   background-color: rgb(240, 246, 239);
-  width: 100%;
-  height: 100vh;
-  z-index: 1;
+  //   max-width: 100%;
+  //   min-height: 100vh;
+  //   min-height: fit-content;
+  height: 100%; /* Full viewport height */
+  overflow: hidden;
+  /* Prevent any scroll within this container */
+  z-index: 1000;
+  background-color: rgb(53, 0, 128);
 }
 
-.items-vertical-sections {
+body.no-scroll {
+  overflow: hidden;
+}
+
+.items-vertical-section {
   @extend %display-shared;
   flex-direction: column;
   gap: 2px;
   background-color: rgb(240, 246, 239);
 }
-.items-vertical-sections * img {
+.items-vertical-section * img {
   width: 20px;
   height: 20px;
 }
@@ -139,6 +147,7 @@ header > div {
   display: flex;
   align-items: flex-start;
   gap: 10px;
+  height: 100%;
 }
 .section {
   @extend %display-shared;
@@ -174,14 +183,16 @@ header > div {
 .brands-wrapper {
   display: flex;
   flex-wrap: wrap;
-  gap: 3px;
-  width: 100vw;
-  height: fit-content;
-  height: 100vh;
-  height: fit-content;
+  padding: 10px 0;
+
+  gap: 5px;
+  max-width: fit-content;
+  overflow-y: auto;
+  max-height: 670px;
+  background-color: red;
 }
 .brands-wrapper div {
-  width: 135px;
+  width: 130px;
   height: 100px;
   background-color: rgb(226, 225, 217);
   position: relative;
@@ -196,10 +207,10 @@ header > div {
 }
 .brands-wrapper img {
   position: absolute;
-  width: 100px;
-  height: 80px;
+  width: 80%;
+  height: 80%;
   right: 0;
-  transform: translateY(50%);
+  bottom: -20%;
 }
 
 .offline-section {

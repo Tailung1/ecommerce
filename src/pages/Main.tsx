@@ -4,50 +4,43 @@ import SearchBar from "./SearchBar";
 export default function Main() {
   const { showSearchBar } = useMyContext();
   return (
-    <div className='px-6 h-[100vh] bg:rgb(255, 255, 255);'>
+    <main className='main px-6 w-[100%] max-h-[100%]  flex-grow '>
       {!showSearchBar ? (
-        <div>
+        <div className='h-full'>
           {" "}
-          <p className='w-full'>textt11111221e12e</p>
-          <p className='w-full'>textt</p>
-          <p className='w-full'>textt</p>
-          <p className='w-full'>textt</p>
-          <p className='w-full'>textt</p>
-          <p className='w-full'>textt</p>
-          <p className='w-full'>textt</p>
-          <p className='w-full'>textt</p>
-          <p className='w-full'>textt</p>
-          <p className='w-full'>textt</p>
-          <p className='w-full'>textt</p>
-          <p className='w-full'>textt</p>
-          <p className='w-full'>textt</p>
-          <p className='w-full'>textt</p>
-          <p className='w-full'>textt</p>
-          <p className='w-full'>textt</p>
-          <p className='w-full'>textt</p>
-          <p className='w-full'>textt</p>
-          <p className='w-full'>textt</p>
-          <p className='w-full'>textt</p>
-          <p className='w-full'>textt</p>
-          <p className='w-full'>textt</p>
-          <p className='w-full'>textt</p>
-          <p className='w-full'>textt</p>
-          <p className='w-full'>textt</p>
-          <p className='w-full'>textt</p>
-          <p className='w-full'>textt</p>
-          <p className='w-full'>textt</p>
-          <p className='w-full'>textt</p>
-          <p className='w-full'>textt</p>
-          <p className='w-full'>textt</p>
-          <p className='w-full'>textt</p>
-          <p className='w-full'>textt</p>
-          <p className='w-full'>textt</p>
-          <p className='w-full'>textt</p>
-          <p className='w-full'>textt</p>
+          <p className='w-full'>1</p>
+          <p className='w-full'>last</p>{" "}
+          <p className='w-full'>last</p>{" "}
+          <p className='w-full'>last</p>{" "}
+          <p className='w-full'>last</p>{" "}
+          <p className='w-full'>last</p>{" "}
+          <p className='w-full'>last</p>{" "}
+          <p className='w-full'>last</p>{" "}
+          <p className='w-full'>last</p>{" "}
+          <p className='w-full'>last</p>{" "}
+          <p className='w-full'>last</p>{" "}
+          <p className='w-full'>last</p>{" "}
+          <p className='w-full'>last</p>{" "}
+          <p className='w-full'>last</p>{" "}
+          <p className='w-full'>last</p>{" "}
+          <p className='w-full'>last</p>{" "}
+          <p className='w-full'>last</p>{" "}
+          <p className='w-full'>last</p>{" "}
+          <p className='w-full'>last</p>{" "}
+          <p className='w-full'>last</p>{" "}
+          <p className='w-full'>last</p>{" "}
+          <p className='w-full'>last</p>{" "}
+          <p className='w-full'>last</p>{" "}
+          <p className='w-full'>last</p>{" "}
+          <p className='w-full'>last</p>{" "}
+          <p className='w-full'>last</p>{" "}
+          <p className='w-full'>last</p>{" "}
+          <p className='w-full'>last</p>{" "}
+          <p className='w-full'>lastOne</p>
         </div>
       ) : (
         <SearchBar />
       )}
-    </div>
+    </main>
   );
 }

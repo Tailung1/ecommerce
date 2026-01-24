@@ -119,9 +119,7 @@ header > div {
   flex-direction: column;
   gap: 5px;
   background-color: rgb(240, 246, 239);
-  height: 100%; /* Full viewport height */
-  overflow: hidden;
-  /* Prevent any scroll within this container */
+  height: 100%;
   z-index: 1000;
   background-color: rgb(53, 0, 128);
 }

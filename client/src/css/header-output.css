@@ -118,11 +118,10 @@ header > div {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  background-color: rgb(240, 246, 239);
   width: 100%;
   height: 100%;
   z-index: 1000;
-  background-color: rgb(150, 205, 139);
+  background-color: rgb(140, 139, 205);
 }
 
 body.no-scroll {

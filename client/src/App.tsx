@@ -9,7 +9,6 @@ import { useEffect } from "react";
 
 function App() {
   const { showSideBar } = useMyContext();
-
   useEffect(() => {
     if (showSideBar) {
       document.body.classList.add("no-scroll");

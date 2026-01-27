@@ -2,7 +2,6 @@ import { Pool } from "pg";
 import dotev from "dotenv";
 
 dotev.config();
-console.log("tess",process.env.DB_PASSWORD)
 
 const pool = new Pool({
   user: process.env.DB_USER,

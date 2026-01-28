@@ -1,14 +1,12 @@
 import express from "express";
-import { getProducts } from "./controllers/productController.js";
+import router from "./routes/route.js";
 
 const app = express();
 
-app.use(express());
+app.use(express.json());
 
-app.get("/", getProducts);
+app.use("/api/products", router);
 
 app.listen(3000, () =>
   console.log("Backend server is running on port '3000' ")
 );
-
-

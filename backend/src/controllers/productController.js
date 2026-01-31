@@ -1,8 +1,9 @@
 import pool from "../db.config.js";
-
+import { prisma } from "../../../lib/prisma.js";
 
 async function getProducts(req, res) {
-    const getProducts = await pool.query("SELECT * FROM products");
+  //   const getProducts = await pool.query("SELECT * FROM products");
+  const products = await prisma.products.findMany();
   res.json(products);
 }
 async function getOneProducts(req, res) {

@@ -19,4 +19,5 @@ model products {
   name       String?  @db.VarChar(255)
   price      Decimal? @db.Decimal
   color      String?  @db.VarChar(255)
+  stock      Int
 }

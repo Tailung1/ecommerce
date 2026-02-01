@@ -19,10 +19,17 @@ async function getOneProducts(req, res) {
 }
 async function createProduct(req, res) {
   const { name, price, category } = req.body;
-  const result = await pool.query(
-    "INSERT INTO products (name, price, category) VALUES ($1, $2, $3) RETURNING *",
-    [name, price, category]
-  );
+//   const result = await pool.query(
+//     "INSERT INTO products (name, price, category) VALUES ($1, $2, $3) RETURNING *",
+//     [name, price, category]
+//   );
+const result = await prisma.products.create({
+  data: {
+    name: name,
+    price: price,
+    category: category,
+  },
+});
   res.json(result.rows);
 }
 async function updateProduct(req, res) {

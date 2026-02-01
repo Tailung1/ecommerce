@@ -30,7 +30,7 @@ async function createProduct(req, res) {
 
     res.json(result);
   } catch (error) {
-    console.error(error); // Log the error for debugging purposes
+    console.error(error);
 
     res.status(500).json({
       error: "Failed to create the product. Please try again later.",

@@ -8,29 +8,34 @@ async function getProducts(req, res) {
 }
 async function getOneProducts(req, res) {
   const { id } = req.params;
-//   const result = await pool.query(
-//     "SELECT * FROM products WHERE id=$1",
-//     [id]
-//   );
+  //   const result = await pool.query(
+  //     "SELECT * FROM products WHERE id=$1",
+  //     [id]
+  //   );
   const result = await prisma.products.find({ where: { id } });
 
-  
   res.json(result.rows);
 }
 async function createProduct(req, res) {
   const { name, price, category } = req.body;
-//   const result = await pool.query(
-//     "INSERT INTO products (name, price, category) VALUES ($1, $2, $3) RETURNING *",
-//     [name, price, category]
-//   );
-const result = await prisma.products.create({
-  data: {
-    name: name,
-    price: price,
-    category: category,
-  },
-});
-  res.json(result.rows);
+
+  try {
+    const result = await prisma.products.create({
+      data: {
+        name: name,
+        price: price,
+        category: category,
+      },
+    });
+
+    res.json(result);
+  } catch (error) {
+    console.error(error); // Log the error for debugging purposes
+
+    res.status(500).json({
+      error: "Failed to create the product. Please try again later.",
+    });
+  }
 }
 async function updateProduct(req, res) {
   const { id } = req.params;

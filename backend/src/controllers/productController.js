@@ -8,10 +8,13 @@ async function getProducts(req, res) {
 }
 async function getOneProducts(req, res) {
   const { id } = req.params;
-  const result = await pool.query(
-    "SELECT * FROM products WHERE id=$1",
-    [id]
-  );
+//   const result = await pool.query(
+//     "SELECT * FROM products WHERE id=$1",
+//     [id]
+//   );
+  const result = await prisma.products.find({ where: { id } });
+
+  
   res.json(result.rows);
 }
 async function createProduct(req, res) {

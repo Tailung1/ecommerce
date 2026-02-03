@@ -1,5 +1,5 @@
 import pool from "../db.config.js";
-import { prisma } from "../../../lib/prisma.js";
+import { prisma } from "../../../lib/prisma.ts";
 
 async function getProducts(req, res) {
   //   const getProducts = await pool.query("SELECT * FROM products");
@@ -8,34 +8,19 @@ async function getProducts(req, res) {
 }
 async function getOneProducts(req, res) {
   const { id } = req.params;
-  //   const result = await pool.query(
-  //     "SELECT * FROM products WHERE id=$1",
-  //     [id]
-  //   );
-  const result = await prisma.products.find({ where: { id } });
-
+  const result = await pool.query(
+    "SELECT * FROM products WHERE id=$1",
+    [id]
+  );
   res.json(result.rows);
 }
 async function createProduct(req, res) {
   const { name, price, category } = req.body;
-
-  try {
-    const result = await prisma.products.create({
-      data: {
-        name: name,
-        price: price,
-        category: category,
-      },
-    });
-
-    res.json(result);
-  } catch (error) {
-    console.error(error);
-
-    res.status(500).json({
-      error: "Failed to create the product. Please try again later.",
-    });
-  }
+  const result = await pool.query(
+    "INSERT INTO products (name, price, category) VALUES ($1, $2, $3) RETURNING *",
+    [name, price, category]
+  );
+  res.json(result.rows);
 }
 async function updateProduct(req, res) {
   const { id } = req.params;

@@ -6,16 +6,25 @@ import Main from "./pages/Main";
 import Footer from "./pages/Footer";
 import { useEffect } from "react";
 
-
 function App() {
   const { showSideBar } = useMyContext();
   useEffect(() => {
     if (showSideBar) {
       document.body.classList.add("no-scroll");
     } else {
-     document.body.classList.remove("no-scroll");
+      document.body.classList.remove("no-scroll");
     }
   }, [showSideBar]);
+  useEffect(() => {
+    const header = document.querySelector("header");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 70) {
+        header?.classList.add("scrolled");
+      }
+      
+    });
+  }, []);
+
   return (
     <div className='flex flex-col  min-h-[100vh]'>
       <Header />

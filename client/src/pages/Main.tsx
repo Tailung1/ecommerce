@@ -4,7 +4,7 @@ import SearchBar from "./SearchBar";
 export default function Main() {
   const { showSearchBar } = useMyContext();
   return (
-    <main className='main px-6 w-[100%] max-h-[100%]  flex-grow '>
+    <main className='main px-6 w-[100%] max-h-[100%] flex-grow '>
       {!showSearchBar ? (
         <div className='h-full'>
           {" "}

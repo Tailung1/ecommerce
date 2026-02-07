@@ -3,14 +3,15 @@ import searchIcon from "../assets/search-icon.png";
 import { useEffect, useRef } from "react";
 
 export default function SearchBar() {
-  const { showSearchBar, popularSearches } = useMyContext();
+  const { showSideBar, showSearchBar, popularSearches } =
+    useMyContext();
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (showSearchBar && inputRef.current) {
       inputRef.current.focus();
     }
-  }, [showSearchBar]);
+  }, [showSearchBar, showSideBar]);
 
   return (
     <div className='searach-input-container'>

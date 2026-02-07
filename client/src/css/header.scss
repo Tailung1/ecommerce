@@ -189,11 +189,10 @@ body.no-scroll {
   display: flex;
   flex-wrap: wrap;
   padding: 10px 0;
-
   gap: 5px;
   max-width: fit-content;
   overflow-y: auto;
-  max-height: 670px;
+  max-height: 670px; //  max-height needed bcs of wider Y gap
   background-color: red;
 }
 .brands-wrapper div {

@@ -9,13 +9,20 @@ import React, {
 interface types {
   activeSection: string;
   setActiveSection: React.Dispatch<SetStateAction<string>>;
-  showSearchBar:boolean
-  setShowSearchBar:React.Dispatch<SetStateAction<boolean>>
-  showSideBar:boolean,
-        setShowSideBar:React.Dispatch<SetStateAction<boolean>>
+  showSearchBar: boolean;
+  setShowSearchBar: React.Dispatch<SetStateAction<boolean>>;
+  showSideBar: boolean;
+  popularSearches: popularSearch[];
+  setPopularSearches: React.Dispatch<SetStateAction<popularSearch[]>>;
+
+  setShowSideBar: React.Dispatch<SetStateAction<boolean>>;
 }
 
 const MyContext = createContext({} as types);
+
+interface popularSearch {
+  name: string;
+}
 
 export default function ContextProvider({
   children,
@@ -24,10 +31,11 @@ export default function ContextProvider({
 }) {
   const [activeSection, setActiveSection] =
     useState<string>("mobile-phones");
-      const [showSearchBar, setShowSearchBar] =
-        useState<boolean>(false);
-         const [showSideBar, setShowSideBar] =
-        useState<boolean>(false);
+  const [showSearchBar, setShowSearchBar] = useState<boolean>(false);
+  const [showSideBar, setShowSideBar] = useState<boolean>(false);
+  const [popularSearches, setPopularSearches] = useState<
+    popularSearch[]
+  >([]);
 
   return (
     <MyContext.Provider
@@ -36,8 +44,10 @@ export default function ContextProvider({
         setActiveSection,
         showSearchBar,
         setShowSearchBar,
-         showSideBar,
-        setShowSideBar
+        showSideBar,
+        setShowSideBar,
+        popularSearches,
+        setPopularSearches,
       }}
     >
       {children}

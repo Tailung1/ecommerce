@@ -7,7 +7,19 @@ import Footer from "./pages/Footer";
 import { useEffect } from "react";
 
 function App() {
-  const { showSideBar } = useMyContext();
+  const { showSideBar, setPopularSearches } = useMyContext();
+  useEffect(() => {
+    const getPopularSearches = async () => {
+      const items = await fetch(
+        "http://localhost:3000/api/products/popularSearches"
+      );
+      const response = await items.json();
+      console.log(response)
+      setPopularSearches(response);
+    };
+    getPopularSearches();
+  }, []);
+
   useEffect(() => {
     if (showSideBar) {
       document.body.classList.add("no-scroll");
@@ -21,7 +33,6 @@ function App() {
       if (window.scrollY > 70) {
         header?.classList.add("scrolled");
       }
-      
     });
   }, []);
 

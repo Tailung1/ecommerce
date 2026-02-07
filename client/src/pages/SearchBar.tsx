@@ -3,7 +3,7 @@ import searchIcon from "../assets/search-icon.png";
 import { useEffect, useRef } from "react";
 
 export default function SearchBar() {
-  const { showSearchBar } = useMyContext();
+  const { showSearchBar, popularSearches } = useMyContext();
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -30,14 +30,9 @@ export default function SearchBar() {
       <div className='popular-searches-container'>
         <p>Popular Searches:</p>
         <section className='popular-searches-wrapper'>
-          <p>iPhone 15 Pro Max</p>
-          <p>MacBook Air M2</p>
-          <p>Samsung Galaxy Z Fold 5</p>
-          <p>Google Pixel 8</p>
-          <p>PlayStation 5</p>
-          <p>Apple Watch Ultra</p>
-          <p>Samsung Galaxy S23</p>
-          <p>Nintendo Switch OLED</p>
+          {popularSearches.map((item) => (
+            <p>{item.name}</p>
+          ))}
         </section>
       </div>
     </div>

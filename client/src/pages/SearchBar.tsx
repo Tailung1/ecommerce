@@ -31,7 +31,7 @@ export default function SearchBar() {
         <p>Popular Searches:</p>
         <section className='popular-searches-wrapper'>
           {popularSearches.map((item) => (
-            <p>{item.name}</p>
+            <p key={Math.random() * Math.random()}>{item.name}</p>
           ))}
         </section>
       </div>

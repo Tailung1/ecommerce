@@ -14,7 +14,6 @@ function App() {
         "http://localhost:3000/api/products/popularSearches"
       );
       const response = await items.json();
-      console.log(response)
       setPopularSearches(response);
     };
     getPopularSearches();

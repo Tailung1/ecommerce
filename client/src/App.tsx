@@ -1,10 +1,12 @@
 import { useMyContext } from "./MyContext";
-import Header from "./pages/header-section/Header";
 import HeaderSlider from "./pages/header-section/HeaderSlider";
 import { AnimatePresence } from "framer-motion";
-import Main from "./pages/Main";
-import Footer from "./pages/Footer";
 import { useEffect } from "react";
+// import router from "../routes";
+// import { RouterProvider } from "react-router-dom";
+import Header from "./pages/header-section/Header";
+import Footer from "./pages/Footer";
+import Main from "./pages/Main";
 
 function App() {
   const { showSideBar, setPopularSearches } = useMyContext();

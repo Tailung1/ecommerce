@@ -5,7 +5,10 @@ async function getProducts(req, res) {
   res.json(products);
 }
 async function getPopularSearches(req, res) {
-  const products = await pool.query("SELECT name FROM popular_searches");
+//   const products = await pool.query("SELECT name FROM popular_searches");
+  const products = await pool.query(
+    "SELECT * FROM products"
+  );
   res.json(products.rows);
 }
 async function getOneProducts(req, res) {

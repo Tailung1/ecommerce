@@ -13,7 +13,7 @@ export default function Header() {
       <div>
         {" "}
         <img
-          onClick={() => {setShowSideBar(true)} }
+          onClick={() => {setShowSideBar(true)}}
           src={slideIcon}
           alt='slide-icon'
         />

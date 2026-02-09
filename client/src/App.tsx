@@ -2,8 +2,8 @@ import { useMyContext } from "./MyContext";
 import HeaderSlider from "./pages/header-section/HeaderSlider";
 import { AnimatePresence } from "framer-motion";
 import { useEffect } from "react";
-// import router from "../routes";
-// import { RouterProvider } from "react-router-dom";
+import router from "../routes";
+import { RouterProvider } from "react-router-dom";
 import Header from "./pages/header-section/Header";
 import Footer from "./pages/Footer";
 import Main from "./pages/Main";
@@ -39,12 +39,13 @@ function App() {
 
   return (
     <div className='flex flex-col  min-h-[100vh]'>
-      <Header />
+      {/* <Header /> */}
       <AnimatePresence>
         {showSideBar && <HeaderSlider />}
       </AnimatePresence>
-      <Main />
-      <Footer />
+      <RouterProvider router={router} />
+      {/* <Main />
+      <Footer /> */}
     </div>
   );
 }

@@ -1,13 +1,12 @@
 import { useMyContext } from "../../MyContext";
-import searchIcon from "../assets/search-icon.png";
-import { useEffect, useRef, useState } from "react";
+import searchIcon from "../../assets/search-icon.png";
+
+import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function SearchBar() {
   const { showSearchBar, popularSearches } = useMyContext();
   const inputRef = useRef<HTMLInputElement>(null);
-  const [product, setProduct] = useState([]);
-  const [showProduct, setShowProduct] = useState<boolean>(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,7 +15,7 @@ export default function SearchBar() {
     }
   }, [showSearchBar]);
 
-  const getProduct = async (
+  const generateSlug = async (
     name: string,
     color: string,
     id: number
@@ -43,25 +42,19 @@ export default function SearchBar() {
       </div>
       <div className='popular-searches-container'>
         <p>Popular Searches:</p>
-        {!showProduct ? (
-          <section className='popular-searches-wrapper'>
-            {popularSearches.map((item) => (
-              <p
-                onClick={() => {
-                  getProduct(item.name, item.color, item.id);
-                  setShowProduct(true);
-                }}
-                key={item.id}
-              >
-                {item.name}
-              </p>
-            ))}
-          </section>
-        ) : (
-          <div>
-            <h1>{`your product:${product.name}`}</h1>
-          </div>
-        )}
+
+        <section className='popular-searches-wrapper'>
+          {popularSearches.map((item) => (
+            <p
+              onClick={() => {
+                generateSlug(item.name, item.color, item.id);
+              }}
+              key={item.id}
+            >
+              {item.name}
+            </p>
+          ))}
+        </section>
       </div>
     </div>
   );

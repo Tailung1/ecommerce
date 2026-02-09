@@ -23,7 +23,10 @@ export default function Header() {
         />
         <div className='main-logo-div'>
           <img
-            onClick={() => navigate("/")}
+            onClick={() => {
+              navigate("/");
+              setShowSearchBar(false);
+            }}
             className='balisha'
             src={mainLogo}
             alt='main-logo'

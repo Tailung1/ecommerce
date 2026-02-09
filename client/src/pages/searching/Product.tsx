@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 export default function Product() {
   const { slug } = useParams();
 
-  const [product, setProduct ] = useState({});
+  const [product, setProduct] = useState<productType | null>(null);
 
   useEffect(() => {
     const getProduct = async () => {

@@ -4,9 +4,6 @@ import { AnimatePresence } from "framer-motion";
 import { useEffect } from "react";
 import router from "../routes";
 import { RouterProvider } from "react-router-dom";
-import Header from "./pages/header-section/Header";
-import Footer from "./pages/Footer";
-import Main from "./pages/Main";
 
 function App() {
   const { showSideBar, setPopularSearches } = useMyContext();
@@ -39,13 +36,10 @@ function App() {
 
   return (
     <div className='flex flex-col  min-h-[100vh] '>
-      {/* <Header /> */}
       <AnimatePresence>
         {showSideBar && <HeaderSlider />}
       </AnimatePresence>
       <RouterProvider router={router} />
-      {/* <Main />
-      <Footer /> */}
     </div>
   );
 }

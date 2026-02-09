@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Header() {
   const { setShowSideBar, setShowSearchBar } = useMyContext();
-  const  navigate  = useNavigate();
+  const navigate = useNavigate();
   return (
     <header>
       <div>
@@ -33,7 +33,10 @@ export default function Header() {
       </div>
       <div className='header-right-side-items'>
         <img
-          onClick={() => setShowSearchBar(true)}
+          onClick={() => {
+            setShowSearchBar(true);
+            navigate("/");
+          }}
           src={searchIcon}
           alt='search-logo'
         />

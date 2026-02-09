@@ -48,7 +48,7 @@ export default function HeaderSlider() {
               type='text'
             />
             <img
-              className='serach-icon'
+              className='search-icon'
               src={searchIcon}
               alt='search icon'
             />

@@ -26,7 +26,7 @@ export default function SearchBar() {
   };
 
   return (
-    <div className='search-input-container'>
+    <div className=''>
       <div className='input-container'>
         <input
           className='input'

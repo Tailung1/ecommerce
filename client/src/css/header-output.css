@@ -75,7 +75,7 @@ header > div {
   width: 100%;
 }
 
-.serach-icon {
+.search-icon {
   position: absolute;
   left: 20px;
   top: 10px;
@@ -124,7 +124,7 @@ header > div {
   }
 }
 .slider-container {
-  position: fixed;
+  position: absolute;
   top: 0;
   display: flex;
   flex-direction: column;
@@ -132,7 +132,7 @@ header > div {
   width: 100%;
   height: 100%;
   z-index: 1;
-  background-color: rgb(140, 139, 205);
+  background-color: rgb(18, 16, 130);
 }
 
 body.no-scroll {

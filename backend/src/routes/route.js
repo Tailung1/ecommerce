@@ -2,7 +2,7 @@ import express from "express";
 import {
   getProducts,
   getPopularSearches,
-  getOneProducts,
+  getProduct,
   createProduct,
   updateProduct,
   deleteProduct,
@@ -13,7 +13,7 @@ const router = express.Router();
 
 router.get("/", getProducts);
 router.get("/popularSearches", getPopularSearches);
-// router.get("/:id", getOneProducts);
+router.get("/getProduct/:slug", getProduct);
 router.post("/createProduct", createProduct);
 router.post("/:id", updateProduct);
 router.delete("/:id", deleteProduct);

@@ -1,5 +1,5 @@
 import { useMyContext } from "../MyContext";
-import SearchBar from "./SearchBar";
+import SearchBar from "./searching/SearchBar";
 
 export default function Main() {
   const { showSearchBar } = useMyContext();

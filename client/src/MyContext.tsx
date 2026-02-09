@@ -12,17 +12,15 @@ interface types {
   showSearchBar: boolean;
   setShowSearchBar: React.Dispatch<SetStateAction<boolean>>;
   showSideBar: boolean;
-  popularSearches: popularSearch[];
-  setPopularSearches: React.Dispatch<SetStateAction<popularSearch[]>>;
+  popularSearches: productType[];
+  setPopularSearches: React.Dispatch<SetStateAction<productType[]>>;
 
   setShowSideBar: React.Dispatch<SetStateAction<boolean>>;
 }
 
 const MyContext = createContext({} as types);
 
-interface popularSearch {
-  name: string;
-}
+
 
 export default function ContextProvider({
   children,
@@ -34,7 +32,7 @@ export default function ContextProvider({
   const [showSearchBar, setShowSearchBar] = useState<boolean>(false);
   const [showSideBar, setShowSideBar] = useState<boolean>(false);
   const [popularSearches, setPopularSearches] = useState<
-    popularSearch[]
+    productType[]
   >([]);
 
   return (

@@ -11,13 +11,14 @@ async function getPopularSearches(req, res) {
   );
   res.json(products.rows);
 }
-async function getOneProducts(req, res) {
-  const { id } = req.params;
+async function getProduct(req, res) {
+ 
+  const { slug } = req.params;
   const result = await pool.query(
-    "SELECT * FROM products WHERE id=$1",
-    [id]
+    "SELECT * FROM products WHERE slug=$1",
+    [slug]
   );
-  res.json(result.rows);
+  res.json(result.rows[0]);
 }
 async function createProduct(req, res) {
   const { name, price, category } = req.body;
@@ -57,7 +58,7 @@ async function CategoryStats(req, res) {
 export {
   getProducts,
   getPopularSearches,
-  getOneProducts,
+  getProduct,
   createProduct,
   updateProduct,
   deleteProduct,

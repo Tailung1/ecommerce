@@ -38,7 +38,7 @@ function App() {
   }, []);
 
   return (
-    <div className='flex flex-col  min-h-[100vh]'>
+    <div className='flex flex-col  min-h-[100vh] '>
       {/* <Header /> */}
       <AnimatePresence>
         {showSideBar && <HeaderSlider />}

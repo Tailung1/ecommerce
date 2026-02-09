@@ -51,7 +51,6 @@ header > div {
   gap: 10px;
 }
 
-
 .flag-wrapper {
   border: 1px solid rgb(227, 196, 196);
   border-radius: 10%;
@@ -73,8 +72,7 @@ header > div {
 .searach-input-container {
   width: 100%;
   @include display-col($gap: 10px);
-  background-color: rgb(68, 0, 128);
-  flex-grow: 1;
+  background-color: rgb(68, 0, 128)
 }
 .input-container {
   position: relative;

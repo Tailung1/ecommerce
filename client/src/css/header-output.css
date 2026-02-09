@@ -68,7 +68,6 @@ header > div {
   flex-direction: column;
   gap: 10px;
   background-color: rgb(68, 0, 128);
-  flex-grow: 1;
 }
 
 .input-container {

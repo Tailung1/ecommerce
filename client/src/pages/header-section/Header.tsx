@@ -4,12 +4,15 @@ import mainLogo from "../../assets/main-logo.png";
 import slideIcon from "../../assets/slide-icon.png";
 import searchIcon from "../../assets/search-icon.png";
 import cartIcon from "../../assets/shopping-cart.png";
-import usaFlagIcon from "../../assets/united-states.png";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export default function Header() {
-  const { setShowSideBar, setShowSearchBar } = useMyContext();
+  const { setShowSideBar, setShowSearchBar, language, setLanguage } =
+    useMyContext();
+  const [showLanguages, setShowLanguages] = useState<boolean>(false);
   const navigate = useNavigate();
+  const languages = ["EN", "GE"];
   return (
     <header>
       <div>
@@ -44,8 +47,27 @@ export default function Header() {
           alt='search-logo'
         />
         <img src={cartIcon} alt='cart-logo' />
-        <div className='flag-wrapper'>
-          <img src={usaFlagIcon} alt='flag-logo' />
+        <div
+          onClick={() => setShowLanguages(!showLanguages)}
+          className='languages-wrapper'
+        >
+          <p>{language}</p>
+          {showLanguages && (
+            <div className='bg-violet-400 flex flex-col items-center gap-3 absolute left-0 top-[30px] w-full'>
+              {languages
+                .filter((lang) => lang !== language)
+                .map((lang) => (
+                  <p
+                    onClick={() => {
+                      setLanguage(lang);
+                    }}
+                    key={lang}
+                  >
+                    {lang}
+                  </p>
+                ))}
+            </div>
+          )}
         </div>
       </div>
     </header>

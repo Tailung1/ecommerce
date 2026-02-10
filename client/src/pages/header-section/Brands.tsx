@@ -71,6 +71,7 @@ export default function Brands() {
               src={phoneImage}
               alt={brand.name}
               className='brand-image'
+              loading='lazy'
             />
             <p className='brand-name'>{brand.name}</p>
           </div>

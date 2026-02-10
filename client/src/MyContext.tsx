@@ -14,13 +14,12 @@ interface types {
   showSideBar: boolean;
   popularSearches: productType[];
   setPopularSearches: React.Dispatch<SetStateAction<productType[]>>;
-
   setShowSideBar: React.Dispatch<SetStateAction<boolean>>;
+  language: string;
+  setLanguage: React.Dispatch<SetStateAction<string>>;
 }
 
 const MyContext = createContext({} as types);
-
-
 
 export default function ContextProvider({
   children,
@@ -34,6 +33,7 @@ export default function ContextProvider({
   const [popularSearches, setPopularSearches] = useState<
     productType[]
   >([]);
+  const [language, setLanguage] = useState<string>("EN");
 
   return (
     <MyContext.Provider
@@ -46,6 +46,8 @@ export default function ContextProvider({
         setShowSideBar,
         popularSearches,
         setPopularSearches,
+        language,
+        setLanguage,
       }}
     >
       {children}

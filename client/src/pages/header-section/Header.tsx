@@ -46,7 +46,11 @@ export default function Header() {
           src={searchIcon}
           alt='search-logo'
         />
-        <img src={cartIcon} alt='cart-logo' />
+        <img
+          onClick={() => navigate("/cart")}
+          src={cartIcon}
+          alt='cart-logo'
+        />
         <div
           onClick={() => setShowLanguages(!showLanguages)}
           className='languages-wrapper'

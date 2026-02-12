@@ -17,6 +17,8 @@ interface types {
   setShowSideBar: React.Dispatch<SetStateAction<boolean>>;
   language: string;
   setLanguage: React.Dispatch<SetStateAction<string>>;
+  cart: productType[];
+  setCart: React.Dispatch<SetStateAction<productType[]>>;
 }
 
 const MyContext = createContext({} as types);
@@ -34,6 +36,7 @@ export default function ContextProvider({
     productType[]
   >([]);
   const [language, setLanguage] = useState<string>("EN");
+  const [cart, setCart] = useState<productType[] | []>([]);
 
   return (
     <MyContext.Provider
@@ -48,6 +51,8 @@ export default function ContextProvider({
         setPopularSearches,
         language,
         setLanguage,
+        cart,
+        setCart,
       }}
     >
       {children}

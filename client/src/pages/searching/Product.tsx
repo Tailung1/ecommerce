@@ -3,10 +3,13 @@ import { useParams } from "react-router-dom";
 
 export default function Product() {
   const { slug } = useParams();
+
   const productTitle = slug
     ?.split("-")
+    .slice(0, -1)
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
+
   const [product, setProduct] = useState<productType | null>(null);
 
   useEffect(() => {
@@ -27,7 +30,7 @@ export default function Product() {
   }, []);
   return (
     <div className='flex flex-col flex-grow '>
-      <h1>{`Product name: ${product?.name}`}</h1>
+      <h1>{productTitle}</h1>
       <h1>{`Product price: ${product?.price}`}</h1>
     </div>
   );

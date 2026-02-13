@@ -10,14 +10,12 @@ import television from "../../assets/television.png";
 import smartHome from "../../assets/smart-home.png";
 import searchIcon from "../../assets/search-icon.png";
 
-
 export default function HeaderSlider() {
   const {
     activeSection,
     setActiveSection,
     setShowSideBar,
     setShowSearchBar,
-
   } = useMyContext();
 
   return (

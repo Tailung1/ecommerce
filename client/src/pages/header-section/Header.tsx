@@ -1,4 +1,3 @@
-import "../../css/header-output.css";
 import { useMyContext } from "../../MyContext";
 import mainLogo from "../../assets/main-logo.png";
 import slideIcon from "../../assets/slide-icon.png";

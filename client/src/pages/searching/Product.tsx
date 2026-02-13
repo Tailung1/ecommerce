@@ -11,6 +11,7 @@ export default function Product() {
     .join(" ");
 
   const [product, setProduct] = useState<productType | null>(null);
+  const [showAuthBar, setShowAuthBar] = useState<boolean>(false);
 
   useEffect(() => {
     const getProduct = async () => {
@@ -29,12 +30,28 @@ export default function Product() {
     getProduct();
   }, []);
   return (
-    <div className='flex flex-col flex-grow relative '>
+    <div className='flex-col flex-grow relative  '>
       <h1>{productTitle}</h1>
-      <h1>{`Product price: ${product?.price}`}</h1>
-      <div className='flex  items-center  absolute w-full bottom-0 z-10  justify-between bg-orange-500 px-2 py-2'>
+      {showAuthBar && (
+        <div className='authBar flex flex-col gap-2 absolute bottom-0 bg-violet-500 p-3 w-full z-10'>
+          <div className='flex gap-2 '>
+            <p className='bg-orange-500'>Auth with number</p>
+            <p className='bg-orange-500'> Auth with gmail</p>
+          </div>
+          <input
+            className='px-3  max-w-[100px]'
+            placeholder='Enter phone number'
+          />
+          <button>Submit</button>
+        </div>
+      )}
+
+      <div className='flex  items-center  absolute w-full bottom-0  justify-between bg-orange-500 px-2 py-2  '>
         <p className='text-white font-bold'>{product?.price} Gel</p>
-        <button className='bg-white text-orange-600 font-bold py-1  px-6 rounded-md'>
+        <button
+          onClick={() => setShowAuthBar(true)}
+          className='bg-white text-orange-600 font-bold py-1  px-6 rounded-md'
+        >
           Buy
         </button>
       </div>

@@ -4,9 +4,9 @@ import Footer from "../client/src/pages/Footer";
 
 export default function Layout() {
   return (
-    <div className='flex flex-col flex-grow '>
+    <div className='flex flex-col  flex-grow'>
       <Header />
-      <main className='flex-grow  bg-yellow-600'>
+      <main className='flex-grow flex flex-col bg-violet-500'>
         <Outlet />
       </main>
       <Footer />

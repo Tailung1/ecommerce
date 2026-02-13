@@ -5,7 +5,7 @@ export default function Cart() {
   const { cart } = useMyContext();
 
   return (
-    <div className='flex items-center justify-center flex-wrap bg-green-500'>
+    <div className='flex flex-col flex-grow items-center pt-[100px] '>
       {cart.length === 0 ? (
         <img
           className='w-[200px] h-[200px]'

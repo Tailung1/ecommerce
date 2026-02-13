@@ -29,9 +29,15 @@ export default function Product() {
     getProduct();
   }, []);
   return (
-    <div className='flex flex-col flex-grow '>
+    <div className='flex flex-col flex-grow relative '>
       <h1>{productTitle}</h1>
       <h1>{`Product price: ${product?.price}`}</h1>
+      <div className='flex  items-center  absolute w-full bottom-0 z-10  justify-between bg-orange-500 px-2 py-2'>
+        <p className='text-white font-bold'>{product?.price} Gel</p>
+        <button className='bg-white text-orange-600 font-bold py-1  px-6 rounded-md'>
+          Buy
+        </button>
+      </div>
     </div>
   );
 }

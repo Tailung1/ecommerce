@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className='absolute bottom-0 h-[200px] w-full bg-red-500'>
+    <footer className='sticky bottom-0 h-[60px] w-full bg-white'>
       Footer
     </footer>
   );

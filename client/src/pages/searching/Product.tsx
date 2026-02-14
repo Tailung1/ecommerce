@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import AuthBar from "../../features/AuthBar";
 
 export default function Product() {
   const { slug } = useParams();
@@ -12,6 +13,7 @@ export default function Product() {
 
   const [product, setProduct] = useState<productType | null>(null);
   const [showAuthBar, setShowAuthBar] = useState<boolean>(false);
+  const [isExiting, setIsExiting] = useState<boolean>(false);
 
   useEffect(() => {
     const getProduct = async () => {
@@ -29,28 +31,26 @@ export default function Product() {
     };
     getProduct();
   }, []);
+
   return (
-    <div className='flex-col flex-grow relative  '>
+    <div
+      className={`flex-col flex-grow relative ${
+        showAuthBar && "layer-backgroundIN"
+      } ${isExiting && "layer-backgroundOUT"}`}
+    >
       <h1>{productTitle}</h1>
       {showAuthBar && (
-        <div className='authBar flex flex-col gap-2 absolute bottom-0 bg-violet-500 p-3 w-full z-10'>
-          <div className='flex gap-2 '>
-            <p className='bg-orange-500'>Auth with number</p>
-            <p className='bg-orange-500'> Auth with gmail</p>
-          </div>
-          <input
-            className='px-3  max-w-[100px]'
-            placeholder='Enter phone number'
-          />
-          <button>Submit</button>
-        </div>
+        <AuthBar
+          setShowAuthBar={setShowAuthBar}
+          isExiting={isExiting}
+          setIsExiting={setIsExiting}
+        />
       )}
-
-      <div className='flex  items-center  absolute w-full bottom-0  justify-between bg-orange-500 px-2 py-2  '>
+      <div className='flex items-center absolute w-full bottom-0 justify-between bg-orange-500 px-2 py-2'>
         <p className='text-white font-bold'>{product?.price} Gel</p>
         <button
           onClick={() => setShowAuthBar(true)}
-          className='bg-white text-orange-600 font-bold py-1  px-6 rounded-md'
+          className='bg-white text-orange-600 font-bold py-1 px-6 rounded-md'
         >
           Buy
         </button>

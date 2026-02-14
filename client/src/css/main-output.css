@@ -39,7 +39,7 @@
   padding: 10px 20px;
   border-radius: 50%;
   position: absolute;
-  top: -20%;
+  transform: translateY(-100%);
   right: 10px;
 }
 
@@ -51,10 +51,14 @@
   position: absolute;
   bottom: 0;
   width: 100%;
-  padding: 10px 25px;
-  z-index: 10;
+  padding: 15px 25px;
+  z-index: 2;
   background-color: rgb(255, 255, 255);
-  animation: AuthBarIn 0.3s ease;
+  transition: max-height 0.5s ease; /* Smooth transition on max-height */
+}
+
+.authBar.exit {
+  animation: AuthBarOut 0.5s ease forwards;
 }
 
 @keyframes AuthBarIn {
@@ -65,10 +69,6 @@
     transform: translateY(0);
   }
 }
-.exit {
-  animation: AuthBarOut 0.5s ease forwards;
-}
-
 @keyframes AuthBarOut {
   0% {
     transform: translateY(0);
@@ -77,12 +77,6 @@
     transform: translateY(200%);
   }
 }
-.auth-options p {
-  padding: 7px 5px;
-  font-size: 20px;
-  border-radius: 10px;
-}
-
 .login-options {
   display: flex;
   justify-content: space-around;
@@ -93,20 +87,111 @@
   border: 10px red;
 }
 
-hr {
+.auth-hr {
   height: 3px;
   margin-bottom: 10px;
   background: linear-gradient(to right, orange 25%, rgb(255, 255, 255) 25%);
-  background-size: 200% 100%; /* Stretches the gradient */
-  transition: background-position 0.3s ease; /* Smooth transition on position */
+  background-size: 200% 100%;
+  transition: background-position 0.2s ease;
 }
 
 .bg-auth {
-  background-position: -3%; /* Orange part on the left for Authentication */
+  background-position: 0%;
 }
 
 .bg-register {
-  background-position: -50%; /* Orange part moves to the right for Register */
+  background-position: -50%;
+}
+
+.auth-options {
+  padding: 10px 0 25px;
+}
+
+.auth-options p {
+  padding: 7px 15px;
+  border-radius: 20px;
+  color: gray;
+  font-weight: 500;
+}
+
+.non-active-auth-option {
+  background-color: #f2f2f2;
+  border: solid rgb(243, 239, 232);
+}
+
+.active-auth-option {
+  background-color: rgba(236, 94, 42, 0.2);
+  border: solid rgb(226, 20, 20);
+}
+
+.auth-with-number-container {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  padding-bottom: 20px;
+}
+
+.auth-with-number-container > .country-code {
+  max-width: 100px;
+}
+
+input {
+  width: 100%;
+  outline: none;
+  border-radius: 10px;
+  background-color: #f2f2f2;
+  padding: 10px 25px;
+}
+
+.auth-with-number-container * {
+  border-radius: 10px;
+  background-color: #f2f2f2;
+  padding: 10px 25px;
+}
+
+.auth-with-email-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  padding: 0px 0px 20px;
+}
+
+.submit-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+}
+
+.submit-btn {
+  background-color: #ec5e2a;
+  padding: 15px 0;
+  border-radius: 10px;
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+  width: 100%;
+}
+
+.submit-section hr {
+  background-color: rgb(255, 253, 253);
+  border: 1px solid rgb(237, 230, 230);
+  width: 100%;
+}
+
+.google-btn {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.google-icon {
+  width: 70px;
+  height: 50px;
 }
 
 /*# sourceMappingURL=main-output.css.map */

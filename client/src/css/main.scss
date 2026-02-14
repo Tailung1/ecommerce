@@ -83,3 +83,31 @@
   font-size: 20px;
   border-radius: 10px;
 }
+
+.login-options {
+  display: flex;
+  justify-content: space-around;
+}
+.login-options p {
+  font-size: 20px;
+  border: 10px red;
+}
+hr {
+  height: 3px;
+  margin-bottom: 10px;
+  background: linear-gradient(
+    to right,
+    orange 25%,
+    rgb(255, 255, 255) 25%
+  );
+  background-size: 200% 100%; /* Stretches the gradient */
+  transition: background-position 0.3s ease; /* Smooth transition on position */
+}
+
+.bg-auth {
+  background-position: -3%; /* Orange part on the left for Authentication */
+}
+
+.bg-register {
+  background-position: -50%; /* Orange part moves to the right for Register */
+}

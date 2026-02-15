@@ -1,5 +1,7 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import icon from "../assets/main-logo.png";
+import checked from "../assets/checked-rules.png";
+import unchecked from "../assets/unchecked.png";
 
 export default function AuthBar({
   isExiting,
@@ -13,15 +15,8 @@ export default function AuthBar({
   const [active, setActive] = useState<string>("auth");
   const [activeAuthOption, setActiveAuthOption] =
     useState<string>("number");
-  const authBarRef = useRef<HTMLDivElement>(null); // Ref to measure the authBar height
-  const [authBarHeight, setAuthBarHeight] = useState<number>(0); // State to hold the height
-
-  // Update the height dynamically based on the content
-  useEffect(() => {
-    if (authBarRef.current) {
-      setAuthBarHeight(authBarRef.current.scrollHeight);
-    }
-  }, [activeAuthOption, isExiting]); // Recalculate height when content changes
+  const [isChecked, setIsChecked] = useState<boolean>(false);
+  const checkIcon = isChecked ? checked : unchecked;
 
   const handleExit = () => {
     setIsExiting(true);
@@ -30,13 +25,8 @@ export default function AuthBar({
       setIsExiting(false);
     }, 500);
   };
-
   return (
-    <div
-      ref={authBarRef}
-      className={`authBar ${isExiting && "exit"}`}
-      style={{ maxHeight: isExiting ? 0 : authBarHeight }} // Dynamically adjust max-height
-    >
+    <div className={`authBar ${isExiting && "exit"}`}>
       <p onClick={handleExit} className='exit-btn'>
         X
       </p>
@@ -44,7 +34,14 @@ export default function AuthBar({
         <div className='flex flex-col gap-2 w-full'>
           <div className='login-options'>
             <p onClick={() => setActive("auth")}>Authentication</p>
-            <p onClick={() => setActive("register")}>Register</p>
+            <p
+              onClick={() => {
+                setActive("register");
+                setActiveAuthOption("number");
+              }}
+            >
+              Register
+            </p>
           </div>
           <hr
             className={`auth-hr ${
@@ -53,47 +50,89 @@ export default function AuthBar({
           />
         </div>
       </div>
-      <div className='auth-options flex gap-2'>
-        <p
-          className={`${
-            activeAuthOption === "number"
-              ? "active-auth-option"
-              : "non-active-auth-option "
-          }`}
-          onClick={() => setActiveAuthOption("number")}
-        >
-          Authenticate with Phone Number
-        </p>
-        <p
-          className={`${
-            activeAuthOption === "email"
-              ? "active-auth-option"
-              : "non-active-auth-option"
-          }`}
-          onClick={() => setActiveAuthOption("email")}
-        >
-          Authenticate with Email
-        </p>
-      </div>
-      {activeAuthOption === "number" ? (
-        <div className='auth-with-number-container'>
-          <div className='country-code'>+995</div>
-          <input placeholder='Phone Number' />
+
+      {active === "auth" && (
+        <div className='auth-options flex gap-2'>
+          <p
+            className={`${
+              activeAuthOption === "number"
+                ? "active-auth-option"
+                : "non-active-auth-option "
+            }`}
+            onClick={() => setActiveAuthOption("number")}
+          >
+            Authenticate with Phone Number
+          </p>
+          <p
+            className={`${
+              activeAuthOption === "email"
+                ? "active-auth-option"
+                : "non-active-auth-option"
+            }`}
+            onClick={() => setActiveAuthOption("email")}
+          >
+            Authenticate with Email
+          </p>
         </div>
+      )}
+      {activeAuthOption === "number" ? (
+        active === "auth" ? (
+          <div className='auth-with-number-container'>
+            <div className='country-code'>+995</div>
+            <input placeholder='Phone Number2' />
+          </div>
+        ) : (
+          <div className='register-with-number-container'>
+            <div className='register-input'>
+              <div className='country-code'>+995</div>
+              <input placeholder='Phone Number' />{" "}
+            </div>
+            {}
+            {}
+            <div className='policy-container'>
+              <img
+                onClick={() => setIsChecked((prev) => !prev)}
+                className='w-8 max-h-5'
+                src={checkIcon}
+                alt='checked icon'
+              />
+
+              <p className='text-[15px]'>
+                Read and agree to the{" "}
+                <span className='text-orange-500'>
+                  rules, conditions and personal data protection
+                  policy
+                </span>
+              </p>
+            </div>
+
+            {}
+            {}
+          </div>
+        )
       ) : (
         <div className='auth-with-email-container'>
-          <input placeholder='Email' />
-          <input placeholder='Confirm Email' />
+          <input placeholder='Phone Number' />
+          <input placeholder='Phone Number' />
         </div>
       )}
       <section className='submit-section'>
-        <button className='submit-btn'>
-          {activeAuthOption === "number" ? "SEND CODE" : "LOG IN"}
+        <button
+          className={`submit-btn ${
+            active === "register" && !isChecked && " opacity-60"
+          }`}
+          disabled={!isChecked}
+        >
+          {active === "register"
+            ? "REGISTRATION"
+            : activeAuthOption === "number"
+            ? "SEND CODE"
+            : "LOG IN"}
         </button>
         <hr />
         <p className='font-bold'>Or log in with other method</p>
         <button className='google-btn'>
-          <img className='google-icon' src={icon} />
+          <img className='google-icon ' src={icon} />
         </button>
       </section>
     </div>

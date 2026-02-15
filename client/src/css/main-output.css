@@ -52,13 +52,9 @@
   bottom: 0;
   width: 100%;
   padding: 15px 25px;
-  z-index: 2;
+  z-index: 10;
   background-color: rgb(255, 255, 255);
-  transition: max-height 0.5s ease; /* Smooth transition on max-height */
-}
-
-.authBar.exit {
-  animation: AuthBarOut 0.5s ease forwards;
+  animation: AuthBarIn 0.3s ease;
 }
 
 @keyframes AuthBarIn {
@@ -69,6 +65,10 @@
     transform: translateY(0);
   }
 }
+.exit {
+  animation: AuthBarOut 0.5s ease forwards;
+}
+
 @keyframes AuthBarOut {
   0% {
     transform: translateY(0);
@@ -124,7 +124,8 @@
   border: solid rgb(226, 20, 20);
 }
 
-.auth-with-number-container {
+.auth-with-number-container,
+.register-input {
   width: 100%;
   display: flex;
   gap: 10px;
@@ -143,7 +144,8 @@ input {
   padding: 10px 25px;
 }
 
-.auth-with-number-container * {
+.auth-with-number-container *,
+.register-input * {
   border-radius: 10px;
   background-color: #f2f2f2;
   padding: 10px 25px;
@@ -155,6 +157,19 @@ input {
   gap: 10px;
   width: 100%;
   padding: 0px 0px 20px;
+}
+
+.register-with-number-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.register-with-number-container .policy-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 0 0 20px;
 }
 
 .submit-section {

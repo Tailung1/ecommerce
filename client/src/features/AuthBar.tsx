@@ -23,7 +23,7 @@ export default function AuthBar({
     setTimeout(() => {
       setShowAuthBar(false);
       setIsExiting(false);
-    }, 500);
+    }, 800);
   };
   return (
     <div className={`authBar ${isExiting && "exit"}`}>

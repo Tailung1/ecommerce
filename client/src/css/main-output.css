@@ -60,7 +60,7 @@
   padding: 15px 25px;
   z-index: 10;
   background-color: rgb(255, 255, 255);
-  animation: AuthBarIn 0.3s ease;
+  animation: AuthBarIn 0.5s ease;
 }
 
 @keyframes AuthBarIn {
@@ -72,7 +72,7 @@
   }
 }
 .exit {
-  animation: AuthBarOut 0.5s ease forwards;
+  animation: AuthBarOut 0.8s ease forwards;
 }
 
 @keyframes AuthBarOut {
@@ -80,7 +80,7 @@
     transform: translateY(0);
   }
   100% {
-    transform: translateY(200%);
+    transform: translateY(150%);
   }
 }
 .login-options {

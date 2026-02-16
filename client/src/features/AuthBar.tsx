@@ -2,6 +2,7 @@ import { useState } from "react";
 import icon from "../assets/main-logo.png";
 import checked from "../assets/checked-rules.png";
 import unchecked from "../assets/unchecked.png";
+import FloatingInput from "../shared/FloatingInput";
 
 export default function AuthBar({
   isExiting,
@@ -32,7 +33,11 @@ export default function AuthBar({
       </p>
       <div className='w-full'>
         <div className='flex flex-col gap-2 w-full'>
-          <div className={`login-options ${active==="register"&& "pb-2"}`}>
+          <div
+            className={`login-options ${
+              active === "register" && "pb-1"
+            }`}
+          >
             <p onClick={() => setActive("auth")}>Authentication</p>
             <p
               onClick={() => {
@@ -45,7 +50,9 @@ export default function AuthBar({
           </div>
           <hr
             className={`auth-hr ${
-              active === "auth" ? "bg-auth" : "bg-register more-bottom"
+              active === "auth"
+                ? "bg-auth"
+                : "bg-register more-bottom"
             }`}
           />
         </div>
@@ -89,7 +96,11 @@ export default function AuthBar({
             </div>
             {}
             {}
-            <div className={`policy-container ${active==="register"&&"more-padding"}`}>
+            <div
+              className={`policy-container ${
+                active === "register" && "more-padding"
+              }`}
+            >
               <img
                 onClick={() => setIsChecked((prev) => !prev)}
                 className='w-8 max-h-5'
@@ -112,8 +123,8 @@ export default function AuthBar({
         )
       ) : (
         <div className='auth-with-email-container'>
-          <input placeholder='Phone Number' />
-          <input placeholder='Phone Number' />
+          <FloatingInput label={"Email"} />
+          <FloatingInput label={"Password"} />
         </div>
       )}
       <section className='submit-section'>

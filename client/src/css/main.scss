@@ -47,7 +47,7 @@
 }
 .exit-btn {
   background-color: red;
-  padding: 10px 20px;
+  padding: 5px 13px;
   border-radius: 50%;
   position: absolute;
   transform: translateY(-100%);
@@ -64,6 +64,7 @@
   z-index: 10;
   background-color: rgb(255, 255, 255);
   animation: AuthBarIn 0.5s ease;
+  border-radius: 20px 20px 0 0;
 }
 
 @keyframes AuthBarIn {
@@ -151,16 +152,9 @@
 .auth-with-number-container > .country-code {
   max-width: 100px;
 }
-input {
-  width: 100%;
-  outline: none;
-  border-radius: 10px;
-  background-color: #f2f2f2;
-  padding: 10px 25px;
-}
 
 .auth-with-number-container *,
-.register-input * {
+.register-input > div {
   border-radius: 10px;
   background-color: #f2f2f2;
   padding: 10px 25px;
@@ -213,3 +207,22 @@ input {
   width: 70px;
   height: 50px;
 }
+
+input {
+  width: 100%;
+  outline: none;
+  border-radius: 10px;
+  background-color: #f2f2f2;
+  padding: 20px 17px 5px;
+}
+// FLOATING !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+.floating-container {
+  position: relative;
+}
+
+.floating-container > label {
+  position: absolute;
+  /* transition:label-in; */
+}
+// @keyframes label-in {
+// }

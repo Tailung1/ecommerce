@@ -32,7 +32,7 @@ export default function AuthBar({
       </p>
       <div className='w-full'>
         <div className='flex flex-col gap-2 w-full'>
-          <div className='login-options'>
+          <div className={`login-options ${active==="register"&& "pb-2"}`}>
             <p onClick={() => setActive("auth")}>Authentication</p>
             <p
               onClick={() => {
@@ -45,7 +45,7 @@ export default function AuthBar({
           </div>
           <hr
             className={`auth-hr ${
-              active === "auth" ? "bg-auth" : "bg-register"
+              active === "auth" ? "bg-auth" : "bg-register more-bottom"
             }`}
           />
         </div>
@@ -89,7 +89,7 @@ export default function AuthBar({
             </div>
             {}
             {}
-            <div className='policy-container'>
+            <div className={`policy-container ${active==="register"&&"more-padding"}`}>
               <img
                 onClick={() => setIsChecked((prev) => !prev)}
                 className='w-8 max-h-5'

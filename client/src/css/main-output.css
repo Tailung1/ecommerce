@@ -95,10 +95,18 @@
 
 .auth-hr {
   height: 3px;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
   background: linear-gradient(to right, orange 25%, rgb(255, 255, 255) 25%);
   background-size: 200% 100%;
   transition: background-position 0.2s ease;
+}
+
+.more-bottom {
+  margin-bottom: 20px;
+}
+
+.more-padding {
+  padding-bottom: 30px;
 }
 
 .bg-auth {
@@ -175,7 +183,7 @@ input {
   display: flex;
   align-items: center;
   gap: 15px;
-  padding: 0 0 20px;
+  padding-bottom: 15px;
 }
 
 .submit-section {

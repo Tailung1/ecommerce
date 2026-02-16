@@ -1,3 +1,15 @@
+%display-shared {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin display-col($gap: 0px) {
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+}
+
 .layer-backgroundIN {
   animation: layer-animateIN 0.3s forwards;
 }
@@ -43,10 +55,8 @@
 }
 
 .authBar {
-  display: flex;
-  flex-direction: column;
+  @include display-col($gap: 5px);
   align-items: start;
-  gap: 5px;
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -150,18 +160,14 @@ input {
   padding: 10px 25px;
 }
 .auth-with-email-container {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  @include display-col($gap: 10px);
   width: 100%;
   padding: 0px 0px 20px;
 }
 // REGISTER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 .register-with-number-container {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  @include display-col($gap: 10px);
 }
 
 .register-with-number-container .policy-container {
@@ -173,10 +179,8 @@ input {
 
 // submit-section  !!!!!!!!!!!!!!!!
 .submit-section {
-  display: flex;
-  flex-direction: column;
+  @include display-col($gap: 15px);
   align-items: center;
-  gap: 15px;
   width: 100%;
 }
 
@@ -194,9 +198,7 @@ input {
   width: 100%;
 }
 .google-btn {
-  display: flex;
-  justify-content: center;
-  align-content: center;
+  @extend %display-shared;
   background-color: #f2f2f2;
   border-radius: 10px;
   width: 100%;

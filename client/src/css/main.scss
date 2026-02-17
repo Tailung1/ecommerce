@@ -169,7 +169,7 @@
   @include display-col($gap: 5px);
   width: fit-content;
   height: fit-content;
-  background-color: #f0d9bc;
+  background-color: #6f3f03;
   padding: 10px 10px;
   border-radius: 10px;
   position: absolute;
@@ -196,9 +196,7 @@
 }
 
 .register-with-number-container .policy-container {
-  display: flex;
-  align-items: center;
-  gap: 15px;
+  @include display-row($gap: 15px);
   padding-bottom: 15px;
 }
 

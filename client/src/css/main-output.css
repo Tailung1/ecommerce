@@ -141,11 +141,12 @@
 
 .auth-with-number-container,
 .register-input {
-  width: 100%;
   display: flex;
-  gap: 10px;
-  padding-bottom: 20px;
+  justify-content: center;
   align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding-bottom: 20px;
 }
 
 .country-code-container {
@@ -165,7 +166,7 @@
   gap: 5px;
   width: fit-content;
   height: fit-content;
-  background-color: #f0d9bc;
+  background-color: #6f3f03;
   padding: 10px 10px;
   border-radius: 10px;
   position: absolute;
@@ -198,6 +199,7 @@
 
 .register-with-number-container .policy-container {
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 15px;
   padding-bottom: 15px;

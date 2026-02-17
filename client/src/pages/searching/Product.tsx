@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import AuthBar from "../../features/AuthBar";
+import AuthBar from "../../features/AuthBar/AuthBar";
 
 export default function Product() {
   const { slug } = useParams();

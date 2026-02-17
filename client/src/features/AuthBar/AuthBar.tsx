@@ -1,8 +1,7 @@
 import { useState } from "react";
-import icon from "../assets/main-logo.png";
-import checked from "../assets/checked-rules.png";
-import unchecked from "../assets/unchecked.png";
-import FloatingInput from "../shared/FloatingInput";
+import icon from "../../assets/main-logo.png";
+import FloatingInput from "../../shared/FloatingInput";
+import RegisterSection from "./registerSection";
 
 export default function AuthBar({
   isExiting,
@@ -19,7 +18,7 @@ export default function AuthBar({
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [showCountryCodes, setShowCountryCodes] =
     useState<boolean>(false);
-  const [currentCode, setCurrentCode] = useState<string>("+995");
+  const [currentCode, setCurrentCode] = useState<string>("995");
 
   const [inputValues, setInputValues] = useState({
     email: "",
@@ -27,7 +26,6 @@ export default function AuthBar({
     auth_number: "",
     register_number: "",
   });
-  const checkIcon = isChecked ? checked : unchecked;
   const handleExit = () => {
     setIsExiting(true);
     setTimeout(() => {
@@ -115,22 +113,24 @@ export default function AuthBar({
                 onClick={() => setShowCountryCodes((prev) => !prev)}
                 className='country-code'
               >
-             {currentCode}
+                +{currentCode}
               </div>
-              <div className='codes-wrapper'>
-                {showCountryCodes &&
-                  countryCodes.map((code) => (
+
+              {showCountryCodes && (
+                <div className='codes-wrapper'>
+                  {countryCodes.map((code) => (
                     <span
                       onClick={() => {
                         setShowCountryCodes(false);
-                        setCurrentCode(code)
+                        setCurrentCode(code);
                       }}
                       key={code}
                     >
                       +{code}
                     </span>
                   ))}
-              </div>
+                </div>
+              )}
             </div>
             <FloatingInput
               label={"Enter phone number"}
@@ -141,56 +141,13 @@ export default function AuthBar({
             />
           </div>
         ) : (
-          <div className='register-with-number-container'>
-            <div className='register-input'>
-              {/* <div className='relative '> */}{" "}
-              <div
-                onClick={() => setShowCountryCodes(true)}
-                className='country-code'
-              >
-                +995
-              </div>
-              {/* <div className='flex flex-col gap-2 '>
-                  {!showCountryCodes &&
-                    countryCodes.map((code) => (
-                      <span key={code}>{code}</span>
-                    ))}
-                </div> */}
-              {/* </div>{" "} */}
-              <FloatingInput
-                label={"Enter phone number"}
-                propsedOnChange={(value: string) =>
-                  handleValuesChange("register_number", value)
-                }
-                value={inputValues.register_number}
-              />
-            </div>
-            {}
-            {}
-            <div
-              className={`policy-container ${
-                active === "register" && "more-padding"
-              }`}
-            >
-              <img
-                onClick={() => setIsChecked((prev) => !prev)}
-                className='w-8 max-h-5'
-                src={checkIcon}
-                alt='checked icon'
-              />
-
-              <p className='text-[15px]'>
-                Read and agree to the{" "}
-                <span className='text-orange-500'>
-                  rules, conditions and personal data protection
-                  policy
-                </span>
-              </p>
-            </div>
-
-            {}
-            {}
-          </div>
+          <RegisterSection
+            active={active}
+            inputValues={inputValues}
+            handleValuesChange={handleValuesChange}
+            isChecked={isChecked}
+            setIsChecked={setIsChecked}
+          />
         )
       ) : (
         <div className='auth-with-email-container'>

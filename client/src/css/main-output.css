@@ -1,4 +1,4 @@
-.google-btn, .country-code-container {
+.google-btn, .country-code, .country-code-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -157,14 +157,12 @@
 
 .country-code {
   min-width: 70px;
-  display: flex;
-  justify-content: center;
 }
 
 .codes-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 5;
+  gap: 5px;
   width: fit-content;
   height: fit-content;
   background-color: #f0d9bc;

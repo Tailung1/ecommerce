@@ -3,6 +3,12 @@
   align-items: center;
   justify-content: center;
 }
+@mixin display-row($gap: 0px) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: $gap;
+}
 
 @mixin display-col($gap: 0px) {
   display: flex;
@@ -144,28 +150,23 @@
 
 .auth-with-number-container,
 .register-input {
+  @include display-row($gap: 10px);
   width: 100%;
-  display: flex;
-  gap: 10px;
   padding-bottom: 20px;
-  align-items: center;
 }
 .country-code-container {
-    @extend %display-shared;
+  @extend %display-shared;
   max-width: 70px;
   border-radius: 10px;
   background-color: #f2f2f2;
   padding: 10px 15px;
- 
 }
 .country-code {
+  @extend %display-shared;
   min-width: 70px;
-  display: flex;
-  justify-content: center;
-
 }
 .codes-wrapper {
-    @include display-col($gap:5);
+  @include display-col($gap: 5px);
   width: fit-content;
   height: fit-content;
   background-color: #f0d9bc;

@@ -12,7 +12,7 @@ export default function Product() {
     .join(" ");
 
   const [product, setProduct] = useState<productType | null>(null);
-  const [showAuthBar, setShowAuthBar] = useState<boolean>(false);
+  const [showAuthBar, setShowAuthBar] = useState<boolean>(true);
   const [isExiting, setIsExiting] = useState<boolean>(false);
 
   useEffect(() => {

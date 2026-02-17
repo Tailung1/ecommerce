@@ -148,17 +148,41 @@
   display: flex;
   gap: 10px;
   padding-bottom: 20px;
+  align-items: center;
 }
-.auth-with-number-container > .country-code {
-  max-width: 100px;
-}
-
-.auth-with-number-container *,
-.register-input > div {
+.country-code-container {
+    @extend %display-shared;
+  max-width: 70px;
   border-radius: 10px;
   background-color: #f2f2f2;
-  padding: 10px 25px;
+  padding: 10px 15px;
+ 
 }
+.country-code {
+  min-width: 70px;
+  display: flex;
+  justify-content: center;
+
+}
+.codes-wrapper {
+    @include display-col($gap:5);
+  width: fit-content;
+  height: fit-content;
+  background-color: #f0d9bc;
+  padding: 10px 10px;
+  border-radius: 10px;
+  position: absolute;
+  left: 0;
+  bottom: -310%;
+}
+.codes-wrapper * {
+  border-bottom: 1px solid red;
+}
+.codes-wrapper *:hover {
+  color: green;
+  cursor: pointer;
+}
+
 .auth-with-email-container {
   @include display-col($gap: 10px);
   width: 100%;
@@ -220,9 +244,7 @@ input {
   position: relative;
 }
 
-.floating-container > label {
+label {
   position: absolute;
-  /* transition:label-in; */
+  pointer-events: none;
 }
-// @keyframes label-in {
-// }

@@ -17,8 +17,17 @@ export default function AuthBar({
   const [activeAuthOption, setActiveAuthOption] =
     useState<string>("number");
   const [isChecked, setIsChecked] = useState<boolean>(false);
-  const checkIcon = isChecked ? checked : unchecked;
+  const [showCountryCodes, setShowCountryCodes] =
+    useState<boolean>(false);
+  const [currentCode, setCurrentCode] = useState<string>("+995");
 
+  const [inputValues, setInputValues] = useState({
+    email: "",
+    password: "",
+    auth_number: "",
+    register_number: "",
+  });
+  const checkIcon = isChecked ? checked : unchecked;
   const handleExit = () => {
     setIsExiting(true);
     setTimeout(() => {
@@ -26,6 +35,22 @@ export default function AuthBar({
       setIsExiting(false);
     }, 800);
   };
+  const handleValuesChange = (field: any, value: string) => {
+    if (field === "auth_number" || "register_number") {
+      if (/^[0-9]+$/.test(value)) {
+        setInputValues((prev) => ({ ...prev, [field]: value }));
+      } else {
+        return;
+      }
+    }
+    setInputValues((prev) => ({ ...prev, [field]: value }));
+  };
+  const [countryCodes, setCountryCodes] = useState([
+    "995",
+    "242",
+    "927",
+    "315",
+  ]);
   return (
     <div className={`authBar ${isExiting && "exit"}`}>
       <p onClick={handleExit} className='exit-btn'>
@@ -85,14 +110,60 @@ export default function AuthBar({
       {activeAuthOption === "number" ? (
         active === "auth" ? (
           <div className='auth-with-number-container'>
-            <div className='country-code'>+995</div>
-            <input placeholder='Phone Number2' />
+            <div className='country-code-container relative flex flex-col gap-1'>
+              <div
+                onClick={() => setShowCountryCodes((prev) => !prev)}
+                className='country-code'
+              >
+             {currentCode}
+              </div>
+              <div className='codes-wrapper'>
+                {showCountryCodes &&
+                  countryCodes.map((code) => (
+                    <span
+                      onClick={() => {
+                        setShowCountryCodes(false);
+                        setCurrentCode(code)
+                      }}
+                      key={code}
+                    >
+                      +{code}
+                    </span>
+                  ))}
+              </div>
+            </div>
+            <FloatingInput
+              label={"Enter phone number"}
+              value={inputValues.auth_number}
+              propsedOnChange={(value) =>
+                handleValuesChange("auth_number", value)
+              }
+            />
           </div>
         ) : (
           <div className='register-with-number-container'>
             <div className='register-input'>
-              <div className='country-code'>+995</div>
-              <input placeholder='Phone Number' />{" "}
+              {/* <div className='relative '> */}{" "}
+              <div
+                onClick={() => setShowCountryCodes(true)}
+                className='country-code'
+              >
+                +995
+              </div>
+              {/* <div className='flex flex-col gap-2 '>
+                  {!showCountryCodes &&
+                    countryCodes.map((code) => (
+                      <span key={code}>{code}</span>
+                    ))}
+                </div> */}
+              {/* </div>{" "} */}
+              <FloatingInput
+                label={"Enter phone number"}
+                propsedOnChange={(value: string) =>
+                  handleValuesChange("register_number", value)
+                }
+                value={inputValues.register_number}
+              />
             </div>
             {}
             {}
@@ -123,8 +194,20 @@ export default function AuthBar({
         )
       ) : (
         <div className='auth-with-email-container'>
-          <FloatingInput label={"Email"} />
-          <FloatingInput label={"Password"} />
+          <FloatingInput
+            label={"Email"}
+            propsedOnChange={(value: string) =>
+              handleValuesChange("email", value)
+            }
+            value={inputValues.email}
+          />
+          <FloatingInput
+            label={"Password"}
+            propsedOnChange={(value: string) =>
+              handleValuesChange("password", value)
+            }
+            value={inputValues.password}
+          />
         </div>
       )}
       <section className='submit-section'>

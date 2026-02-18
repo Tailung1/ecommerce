@@ -47,9 +47,6 @@ export default function AuthBar({
 
   return (
     <div className={`authBar ${isExiting && "exit"}`}>
-      <p onClick={handleExit} className='exit-btn'>
-        X
-      </p>
       <div className='w-full'>
         <div className='flex flex-col gap-2 w-full'>
           <div
@@ -57,6 +54,9 @@ export default function AuthBar({
               active === "register" && "pb-1"
             }`}
           >
+            <p onClick={handleExit} className='exit-btn'>
+              X
+            </p>
             <p onClick={() => setActive("auth")}>Authentication</p>
             <p
               onClick={() => {
@@ -104,7 +104,7 @@ export default function AuthBar({
       {activeAuthOption === "number" ? (
         active === "auth" ? (
           <div className='auth-and-register-with-number-container'>
-            <div className='country-code-container relative flex flex-col gap-1'>
+            <div className='country-codes-container'>
               <div
                 onClick={() => setShowCountryCodes((prev) => !prev)}
                 className='country-code'

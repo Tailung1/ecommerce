@@ -5,7 +5,7 @@
 }
 @mixin display-row($gap: 0px) {
   display: flex;
-//   justify-content: center;
+  //   justify-content: center;
   align-items: center;
   gap: $gap;
 }
@@ -13,6 +13,8 @@
 @mixin display-col($gap: 0px) {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: $gap;
 }
 
@@ -56,8 +58,8 @@
   padding: 5px 13px;
   border-radius: 50%;
   position: absolute;
-  transform: translateY(-100%);
-  right: 10px;
+  transform: translateY(-80%);
+  right: 15px;
 }
 
 .authBar {
@@ -148,39 +150,46 @@
   border: solid rgb(226, 20, 20);
 }
 
-.auth-and-register-with-number-container{
+.auth-and-register-with-number-container {
   @include display-row($gap: 10px);
   width: 100%;
   padding-bottom: 20px;
-  background-color: red
 }
 .country-codes-container {
-  @extend %display-shared;
+  @include display-col($gap: 1px);
   max-width: 70px;
   border-radius: 10px;
-  background-color: #f2f2f2;
   padding: 10px 15px;
+  position: relative;
+  cursor: pointer;
 }
+
 .country-code {
   @extend %display-shared;
   min-width: 70px;
+  background-color: #f2f2f2;
+  padding: 8px;
+  border-radius: 8px;
+  //   font-size: 20px;
 }
 .codes-wrapper {
   @include display-col($gap: 5px);
   width: fit-content;
   height: fit-content;
-  background-color: #6f3f03;
+  background-color: #ac27b9;
   padding: 10px 10px;
   border-radius: 10px;
   position: absolute;
   left: 0;
-  bottom: -310%;
+  bottom: -210%;
+  z-index: 1;
 }
 .codes-wrapper * {
-  border-bottom: 1px solid red;
+  border-bottom: 1px solid rgb(0, 255, 55);
+  //   font-size: 20px;
 }
 .codes-wrapper *:hover {
-  color: green;
+  color: rgb(34, 20, 235);
   cursor: pointer;
 }
 
@@ -247,4 +256,16 @@ input {
 label {
   position: absolute;
   pointer-events: none;
+}
+
+.price-container {
+animation: animate-price-container 0.5s ease;
+}
+@keyframes animate-price-container {
+    0% {
+        transform: translateY(100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
 }

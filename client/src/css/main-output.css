@@ -1,4 +1,4 @@
-.google-btn, .country-code, .country-codes-container {
+.google-btn, .country-code {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -45,13 +45,15 @@
   padding: 5px 13px;
   border-radius: 50%;
   position: absolute;
-  transform: translateY(-100%);
-  right: 10px;
+  transform: translateY(-80%);
+  right: 15px;
 }
 
 .authBar {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 5px;
   align-items: start;
   position: absolute;
@@ -145,46 +147,59 @@
   gap: 10px;
   width: 100%;
   padding-bottom: 20px;
-  background-color: red;
 }
 
 .country-codes-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1px;
   max-width: 70px;
   border-radius: 10px;
-  background-color: #f2f2f2;
   padding: 10px 15px;
+  position: relative;
+  cursor: pointer;
 }
 
 .country-code {
   min-width: 70px;
+  background-color: #f2f2f2;
+  padding: 8px;
+  border-radius: 8px;
 }
 
 .codes-wrapper {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 5px;
   width: fit-content;
   height: fit-content;
-  background-color: #6f3f03;
+  background-color: #ac27b9;
   padding: 10px 10px;
   border-radius: 10px;
   position: absolute;
   left: 0;
-  bottom: -310%;
+  bottom: -210%;
+  z-index: 1;
 }
 
 .codes-wrapper * {
-  border-bottom: 1px solid red;
+  border-bottom: 1px solid rgb(0, 255, 55);
 }
 
 .codes-wrapper *:hover {
-  color: green;
+  color: rgb(34, 20, 235);
   cursor: pointer;
 }
 
 .auth-with-email-container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 10px;
   width: 100%;
   padding: 0px 0px 20px;
@@ -193,6 +208,8 @@
 .register-with-number-container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 10px;
 }
 
@@ -206,6 +223,8 @@
 .submit-section {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 15px;
   align-items: center;
   width: 100%;
@@ -253,6 +272,19 @@ input {
 label {
   position: absolute;
   pointer-events: none;
+}
+
+.price-container {
+  animation: animate-price-container 0.5s ease;
+}
+
+@keyframes animate-price-container {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 /*# sourceMappingURL=main-output.css.map */

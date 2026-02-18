@@ -21,37 +21,38 @@ export default function RegisterSection({
   handleValuesChange: (arg1: string, arg2: string) => void;
   isChecked: boolean;
   setIsChecked: React.Dispatch<SetStateAction<boolean>>;
-  countryCodes:string[]
+  countryCodes: string[];
 }) {
   const [showCountryCodes, setShowCountryCodes] =
     useState<boolean>(false);
   const [currentCode, setCurrentCode] = useState<string>("995");
   const checkIcon = isChecked ? checked : unchecked;
-
   return (
     <div className='register-with-number-container'>
       <div className='auth-and-register-with-number-container'>
-        <div
-          onClick={() => setShowCountryCodes(true)}
-          className='country-code'
-        >
-          +{currentCode}
-        </div>
-        {showCountryCodes && (
-          <div className='codes-wrapper'>
-            {countryCodes.map((code: string) => (
-              <span
-                onClick={() => {
-                  setShowCountryCodes(false);
-                  setCurrentCode(code);
-                }}
-                key={code}
-              >
-                +{code}
-              </span>
-            ))}
+        <div className='country-codes-container'>
+          <div
+            onClick={() => setShowCountryCodes((prev) => !prev)}
+            className='country-code'
+          >
+            +{currentCode}
           </div>
-        )}
+          {showCountryCodes && (
+            <div className='codes-wrapper'>
+              {countryCodes.map((code: string) => (
+                <span
+                  onClick={() => {
+                    setShowCountryCodes(false);
+                    setCurrentCode(code);
+                  }}
+                  key={code}
+                >
+                  +{code}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
         <FloatingInput
           label={"Enter phone number"}
           propsedOnChange={(value: string) =>

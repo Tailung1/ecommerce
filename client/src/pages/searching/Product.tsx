@@ -12,7 +12,7 @@ export default function Product() {
     .join(" ");
 
   const [product, setProduct] = useState<productType | null>(null);
-  const [showAuthBar, setShowAuthBar] = useState<boolean>(true);
+  const [showAuthBar, setShowAuthBar] = useState<boolean>(false);
   const [isExiting, setIsExiting] = useState<boolean>(false);
 
   useEffect(() => {
@@ -46,7 +46,7 @@ export default function Product() {
           setIsExiting={setIsExiting}
         />
       )}
-      <div className='flex items-center absolute w-full bottom-0 justify-between bg-orange-500 px-2 py-2'>
+      <div className='price-container flex items-center absolute w-full bottom-0 justify-between bg-orange-500 px-2 py-2'>
         <p className='text-white font-bold'>{product?.price} Gel</p>
         <button
           onClick={() => setShowAuthBar(true)}

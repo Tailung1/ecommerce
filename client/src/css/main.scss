@@ -5,7 +5,7 @@
 }
 @mixin display-row($gap: 0px) {
   display: flex;
-  justify-content: center;
+//   justify-content: center;
   align-items: center;
   gap: $gap;
 }
@@ -66,7 +66,7 @@
   position: absolute;
   bottom: 0;
   width: 100%;
-  padding: 15px 25px;
+  padding: 15px 15px;
   z-index: 10;
   background-color: rgb(255, 255, 255);
   animation: AuthBarIn 0.5s ease;
@@ -133,7 +133,7 @@
 }
 
 .auth-options p {
-  padding: 7px 15px;
+  padding: 7px 10px;
   border-radius: 20px;
   color: gray;
   font-weight: 500;
@@ -148,13 +148,13 @@
   border: solid rgb(226, 20, 20);
 }
 
-.auth-with-number-container,
-.register-input {
+.auth-and-register-with-number-container{
   @include display-row($gap: 10px);
   width: 100%;
   padding-bottom: 20px;
+  background-color: red
 }
-.country-code-container {
+.country-codes-container {
   @extend %display-shared;
   max-width: 70px;
   border-radius: 10px;
@@ -241,6 +241,7 @@ input {
 // FLOATING !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 .floating-container {
   position: relative;
+  width: 100%;
 }
 
 label {

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import icon from "../../assets/main-logo.png";
 import FloatingInput from "../../shared/FloatingInput";
-import RegisterSection from "./registerSection";
+import RegisterSection from "./RegisterSection";
 
 export default function AuthBar({
   isExiting,
@@ -43,12 +43,8 @@ export default function AuthBar({
     }
     setInputValues((prev) => ({ ...prev, [field]: value }));
   };
-  const [countryCodes, setCountryCodes] = useState([
-    "995",
-    "242",
-    "927",
-    "315",
-  ]);
+  const countryCodes = ["995", "242", "927", "315"];
+
   return (
     <div className={`authBar ${isExiting && "exit"}`}>
       <p onClick={handleExit} className='exit-btn'>
@@ -107,7 +103,7 @@ export default function AuthBar({
       )}
       {activeAuthOption === "number" ? (
         active === "auth" ? (
-          <div className='auth-with-number-container'>
+          <div className='auth-and-register-with-number-container'>
             <div className='country-code-container relative flex flex-col gap-1'>
               <div
                 onClick={() => setShowCountryCodes((prev) => !prev)}
@@ -147,6 +143,7 @@ export default function AuthBar({
             handleValuesChange={handleValuesChange}
             isChecked={isChecked}
             setIsChecked={setIsChecked}
+            countryCodes={countryCodes}
           />
         )
       ) : (

@@ -9,6 +9,7 @@ export default function RegisterSection({
   handleValuesChange,
   isChecked,
   setIsChecked,
+  countryCodes,
 }: {
   active: string;
   inputValues: {
@@ -20,28 +21,37 @@ export default function RegisterSection({
   handleValuesChange: (arg1: string, arg2: string) => void;
   isChecked: boolean;
   setIsChecked: React.Dispatch<SetStateAction<boolean>>;
+  countryCodes:string[]
 }) {
   const [showCountryCodes, setShowCountryCodes] =
     useState<boolean>(false);
+  const [currentCode, setCurrentCode] = useState<string>("995");
   const checkIcon = isChecked ? checked : unchecked;
 
   return (
     <div className='register-with-number-container'>
-      <div className='register-input'>
-        {/* <div className='relative '> */}{" "}
+      <div className='auth-and-register-with-number-container'>
         <div
           onClick={() => setShowCountryCodes(true)}
           className='country-code'
         >
-          +995
+          +{currentCode}
         </div>
-        {/* <div className='flex flex-col gap-2 '>
-                  {!showCountryCodes &&
-                    countryCodes.map((code) => (
-                      <span key={code}>{code}</span>
-                    ))}
-                </div> */}
-        {/* </div>{" "} */}
+        {showCountryCodes && (
+          <div className='codes-wrapper'>
+            {countryCodes.map((code: string) => (
+              <span
+                onClick={() => {
+                  setShowCountryCodes(false);
+                  setCurrentCode(code);
+                }}
+                key={code}
+              >
+                +{code}
+              </span>
+            ))}
+          </div>
+        )}
         <FloatingInput
           label={"Enter phone number"}
           propsedOnChange={(value: string) =>
@@ -71,9 +81,6 @@ export default function RegisterSection({
           </span>
         </p>
       </div>
-
-      {}
-      {}
     </div>
   );
 }

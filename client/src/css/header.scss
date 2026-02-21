@@ -1,8 +1,9 @@
- @mixin display-shared($gap:0px) {
+ @mixin display-shared($gap:0px,$padding:0px) {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: $gap;
+  padding: $padding;
 }
 
 
@@ -155,10 +156,9 @@ body.no-scroll {
   height: 100%;
 }
 .section {
-  @extend %display-shared;
+  @include display-shared($gap:5px);
   flex-direction: column;
   padding: 10px 5px;
-  gap: 5px;
   width: 100%;
   font-size: 15px;
   color: rgb(120, 49, 49);

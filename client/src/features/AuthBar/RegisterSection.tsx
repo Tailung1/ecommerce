@@ -27,6 +27,7 @@ export default function RegisterSection({
     useState<boolean>(false);
   const [currentCode, setCurrentCode] = useState<string>("995");
   const checkIcon = isChecked ? checked : unchecked;
+
   return (
     <div className='register-with-number-container'>
       <div className='auth-and-register-with-number-container'>
@@ -54,6 +55,7 @@ export default function RegisterSection({
           )}
         </div>
         <FloatingInput
+          type='number'
           label={"Enter phone number"}
           propsedOnChange={(value: string) =>
             handleValuesChange("register_number", value)

@@ -1,17 +1,293 @@
-/* Error: Positional arguments must come before keyword arguments.
- *    ,
- * 67 |   @include display-col($gap: 5px,$padding:15px,15px);
- *    |                                                ^^^^
- *    '
- *   client/src/css/main.scss 67:48  root stylesheet */
-
-body::before {
-  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
-      "Droid Sans Mono", monospace, monospace;
-  white-space: pre;
-  display: block;
-  padding: 1em;
-  margin-bottom: 1em;
-  border-bottom: 2px solid black;
-  content: "Error: Positional arguments must come before keyword arguments.\a    \2577 \a 67 \2502    @include display-col($gap: 5px,$padding:15px,15px);\a    \2502                                                 ^^^^\a    \2575 \a   client/src/css/main.scss 67:48  root stylesheet";
+.google-btn, .country-code {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+.layer-backgroundIN {
+  animation: layer-animateIN 0.3s forwards;
+}
+
+.layer-backgroundOUT {
+  animation: layer-animateOUT 0.3s forwards;
+}
+
+@keyframes layer-animateOUT {
+  0% {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  30% {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+  50% {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  100% {
+    background-color: rgba(0, 0, 0, 0);
+  }
+}
+@keyframes layer-animateIN {
+  0% {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  30% {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+  50% {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  100% {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}
+.exit-btn {
+  background-color: red;
+  padding: 5px 13px;
+  border-radius: 50%;
+  position: absolute;
+  transform: translateY(-90%);
+  right: 15px;
+}
+
+.authBar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  padding: 15px 15px;
+  align-items: start;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  z-index: 10;
+  background-color: rgb(255, 255, 255);
+  animation: AuthBarIn 0.5s ease;
+  border-radius: 20px 20px 0 0;
+}
+
+@keyframes AuthBarIn {
+  0% {
+    transform: translateY(150%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.exit {
+  animation: AuthBarOut 0.8s ease forwards;
+}
+
+@keyframes AuthBarOut {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(150%);
+  }
+}
+.login-options {
+  display: flex;
+  justify-content: space-around;
+}
+
+.login-options p {
+  font-size: 20px;
+  border: 10px red;
+}
+
+.auth-hr {
+  height: 3px;
+  margin-bottom: 6px;
+  background: linear-gradient(to right, orange 25%, rgb(255, 255, 255) 25%);
+  background-size: 200% 100%;
+  transition: background-position 0.2s ease;
+}
+
+.more-bottom {
+  margin-bottom: 20px;
+}
+
+.more-padding {
+  padding-bottom: 30px;
+}
+
+.bg-auth {
+  background-position: 0%;
+}
+
+.bg-register {
+  background-position: -50%;
+}
+
+.auth-options {
+  padding: 10px 0 25px;
+}
+
+.auth-options p {
+  padding: 7px 10px;
+  border-radius: 20px;
+  color: gray;
+  font-weight: 500;
+}
+
+.non-active-auth-option {
+  background-color: #f2f2f2;
+  border: solid rgb(243, 239, 232);
+}
+
+.active-auth-option {
+  background-color: rgba(236, 94, 42, 0.2);
+  border: solid rgb(226, 20, 20);
+}
+
+.auth-and-register-with-number-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding-bottom: 20px;
+}
+
+.country-codes-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1px;
+  padding: 10px 15px;
+  max-width: 70px;
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+}
+
+.country-code {
+  min-width: 70px;
+  background-color: #f2f2f2;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.codes-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 10px;
+  width: fit-content;
+  height: fit-content;
+  background-color: #ac27b9;
+  border-radius: 10px;
+  position: absolute;
+  left: 0;
+  bottom: -210%;
+  z-index: 1;
+}
+
+.codes-wrapper * {
+  border-bottom: 1px solid rgb(0, 255, 55);
+}
+
+.codes-wrapper *:hover {
+  color: rgb(34, 20, 235);
+  cursor: pointer;
+}
+
+.auth-with-email-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 0px 0px 20px;
+  width: 100%;
+  padding: 0px 0px 20px;
+}
+
+.register-with-number-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 0px;
+}
+
+.register-with-number-container .policy-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding-bottom: 15px;
+}
+
+.submit-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  padding: 0px;
+  align-items: center;
+  width: 100%;
+}
+
+.submit-btn {
+  background-color: #ec5e2a;
+  padding: 15px 0;
+  border-radius: 10px;
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+  width: 100%;
+}
+
+.submit-section hr {
+  background-color: rgb(255, 253, 253);
+  border: 1px solid rgb(237, 230, 230);
+  width: 100%;
+}
+
+.google-btn {
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.google-icon {
+  width: 70px;
+  height: 50px;
+}
+
+input {
+  width: 100%;
+  outline: none;
+  border-radius: 10px;
+  background-color: #f2f2f2;
+  padding: 20px 17px 5px;
+}
+
+.floating-container {
+  position: relative;
+  width: 100%;
+}
+
+label {
+  position: absolute;
+  pointer-events: none;
+}
+
+.price-container {
+  animation: animate-price-container 0.5s ease;
+}
+
+@keyframes animate-price-container {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/*# sourceMappingURL=main-output.css.map */

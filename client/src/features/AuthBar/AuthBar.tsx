@@ -34,10 +34,10 @@ export default function AuthBar({
     }, 800);
   };
   const handleValuesChange = (field: any, value: string) => {
-    if (field === "auth_number" || "register_number") {
+    if (field === "auth_number" || field === "register_number") {
       if (/^[0-9]+$/.test(value)) {
         setInputValues((prev) => ({ ...prev, [field]: value }));
-      } else {
+      } else if (value !== "") {
         return;
       }
     }
@@ -129,6 +129,7 @@ export default function AuthBar({
               )}
             </div>
             <FloatingInput
+              type='number'
               label={"Enter phone number"}
               value={inputValues.auth_number}
               propsedOnChange={(value) =>
@@ -149,6 +150,7 @@ export default function AuthBar({
       ) : (
         <div className='auth-with-email-container'>
           <FloatingInput
+            type=''
             label={"Email"}
             propsedOnChange={(value: string) =>
               handleValuesChange("email", value)
@@ -156,6 +158,7 @@ export default function AuthBar({
             value={inputValues.email}
           />
           <FloatingInput
+            type=''
             label={"Password"}
             propsedOnChange={(value: string) =>
               handleValuesChange("password", value)

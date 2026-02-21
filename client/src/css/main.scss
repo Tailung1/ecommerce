@@ -10,13 +10,13 @@
   gap: $gap;
 }
 
-@mixin display-col($gap: 0px,$padding:0px) {
+@mixin display-col($gap: 0px, $padding: 0px) {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: $gap;
-  padding:$padding ;
+  padding: $padding;
 }
 
 .layer-backgroundIN {
@@ -157,10 +157,9 @@
   padding-bottom: 20px;
 }
 .country-codes-container {
-  @include display-col($gap: 1px);
+  @include display-col($gap: 1px, $padding: 10px 15px);
   max-width: 70px;
   border-radius: 10px;
-  padding: 10px 15px;
   position: relative;
   cursor: pointer;
 }
@@ -174,11 +173,10 @@
   //   font-size: 20px;
 }
 .codes-wrapper {
-  @include display-col($gap: 5px);
+  @include display-col($gap: 5px, $padding: 10px 10px);
   width: fit-content;
   height: fit-content;
   background-color: #ac27b9;
-  padding: 10px 10px;
   border-radius: 10px;
   position: absolute;
   left: 0;
@@ -195,7 +193,7 @@
 }
 
 .auth-with-email-container {
-  @include display-col($gap: 10px);
+  @include display-col($gap: 10px, $padding: 0px 0px 20px);
   width: 100%;
   padding: 0px 0px 20px;
 }

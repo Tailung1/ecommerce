@@ -1,8 +1,10 @@
-%display-shared {
+ @mixin display-shared($gap:0px) {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: $gap;
 }
+
 
 @mixin display-col($gap: 0px) {
   display: flex;
@@ -35,8 +37,7 @@ header {
 }
 
 header > div {
-  @extend %display-shared;
-  gap: 5px;
+  @include display-shared($gap:5px);
   cursor: pointer;
 }
 .main-logo-div {
@@ -47,8 +48,7 @@ header > div {
   height: 50px;
 }
 .header-right-side-items {
-  @extend %display-shared;
-  gap: 10px;
+  @include display-shared($gap:10px);
 }
 
 .languages-wrapper {
@@ -140,9 +140,8 @@ body.no-scroll {
 }
 
 .items-vertical-section {
-  @extend %display-shared;
+  @include display-shared($gap:2px);
   flex-direction: column;
-  gap: 2px;
   background-color: rgb(240, 246, 239);
 }
 .items-vertical-section * img {

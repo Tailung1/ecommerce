@@ -1,0 +1,53 @@
+footer {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: rgb(219, 227, 219);
+  overflow: hidden;
+  padding: 10px;
+}
+footer img {
+  width: 25px;
+  height: 25px;
+}
+
+footer > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+}
+footer * img,
+p {
+  cursor: pointer;
+}
+
+.promotions-wrapper {
+  position: relative;
+}
+.promotionsIcon {
+  opacity: 0;
+  pointer-events: none;
+}
+.promotionsIcon-block {
+  background-color: orange;
+  overflow: hidden;
+  border-radius: 100px;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: -8px;
+}
+
+footer img {
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+footer * img:hover {
+  transform: scale(1.1);
+  background-color: rgb(235, 233, 186);
+  border-radius: 10px;
+}

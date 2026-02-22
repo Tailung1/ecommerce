@@ -2,15 +2,18 @@ import homeIcon from "../assets/home.png";
 import categoriesIcon from "../assets/categories.png";
 import compareIcon from "../assets/compare.png";
 import promotionsIcon from "../assets/promotions.png";
+import loginIcon from "../assets/login.png";
+import { useMyContext } from "../MyContext";
 
 export default function Footer() {
+  const { setShowSideBar } = useMyContext();
   return (
     <footer>
       <div>
         <img src={homeIcon} alt='home iocn' />
         <span>Main</span>
       </div>
-      <div>
+      <div onClick={() => setShowSideBar(true)}>
         <img src={categoriesIcon} alt='categories icon' />
         <span>Categories</span>
       </div>{" "}
@@ -23,7 +26,10 @@ export default function Footer() {
         <img src={compareIcon} alt='compare icon' />
         <span>Compare</span>
       </div>
-      <div>Login</div>
+      <div>
+        <img src={loginIcon} alt='compare icon' />
+        <span>Login</span>
+      </div>
     </footer>
   );
 }

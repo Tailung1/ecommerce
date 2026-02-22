@@ -1,11 +1,10 @@
- @mixin display-shared($gap:0px,$padding:0px) {
+@mixin display-shared($gap: 0px, $padding: 0px) {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: $gap;
   padding: $padding;
 }
-
 
 @mixin display-col($gap: 0px) {
   display: flex;
@@ -14,11 +13,8 @@
 }
 
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  @include display-shared($gap: 0, $padding: 10px 20px);
   background-color: rgb(113, 57, 57);
-  padding: 10px 20px;
   opacity: 98%;
   position: sticky;
   width: 100%;
@@ -38,7 +34,7 @@ header {
 }
 
 header > div {
-  @include display-shared($gap:5px);
+  @include display-shared($gap: 5px);
   cursor: pointer;
 }
 .main-logo-div {
@@ -49,7 +45,7 @@ header > div {
   height: 50px;
 }
 .header-right-side-items {
-  @include display-shared($gap:10px);
+  @include display-shared($gap: 10px);
 }
 
 .languages-wrapper {
@@ -60,13 +56,9 @@ header > div {
 }
 
 .exit-input-container {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 30px;
+  @include display-shared(30px, 10px 10px 10px 25px);
   max-width: 100%;
   background-color: rgb(240, 246, 239);
-  padding: 10px 10px 10px 25px;
 }
 .exi-input-container p {
   cursor: pointer;
@@ -100,10 +92,8 @@ header > div {
   @include display-col($gap: 15px);
 }
 .popular-searches-wrapper {
-  display: flex;
+  @include display-shared($gap: 15px, $padding: 0px);
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
   font-size: 13px;
   border-radius: 10px;
   height: fit-content;
@@ -141,7 +131,7 @@ body.no-scroll {
 }
 
 .items-vertical-section {
-  @include display-shared($gap:2px);
+  @include display-shared($gap: 2px);
   flex-direction: column;
   background-color: rgb(240, 246, 239);
 }
@@ -156,9 +146,8 @@ body.no-scroll {
   height: 100%;
 }
 .section {
-  @include display-shared($gap:5px);
+  @include display-shared($gap: 5px, $padding: 10px 5px);
   flex-direction: column;
-  padding: 10px 5px;
   width: 100%;
   font-size: 15px;
   color: rgb(120, 49, 49);
@@ -186,10 +175,8 @@ body.no-scroll {
 }
 
 .brands-wrapper {
-  display: flex;
+  @include display-shared(5px, 10px 0px);
   flex-wrap: wrap;
-  padding: 10px 0;
-  gap: 5px;
   max-width: fit-content;
   overflow-y: auto;
   max-height: 670px; //  max-height needed bcs of wider Y gap

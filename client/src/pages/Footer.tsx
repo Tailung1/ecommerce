@@ -22,10 +22,7 @@ export default function Footer() {
         <img className='promotionsIcon' src={promotionsIcon} />
         <span>Promotions</span>
       </div>{" "}
-      <div>
-        <img src={compareIcon} alt='compare icon' />
-        <span>Compare</span>
-      </div>
+      
       <div>
         <img src={loginIcon} alt='login icon' />
         <span>Login</span>

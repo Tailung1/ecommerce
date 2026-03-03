@@ -24,7 +24,7 @@ export default function Footer() {
       </div>{" "}
       <div>
         <img src={compareIcon} alt='compare icon' />
-        <span>Compare</span>
+        <span>Compare items</span>
       </div>
       <div>
         <img src={loginIcon} alt='login icon' />

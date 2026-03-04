@@ -17,7 +17,6 @@ export default function HeaderSlider() {
     setShowSideBar,
     setShowSearchBar,
   } = useMyContext();
-
   return (
     <motion.div
       initial={{ x: "-100vw" }}

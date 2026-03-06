@@ -1,15 +1,9 @@
-.section, .items-vertical-section, .header-right-side-items, .main-logo-div, header > div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  background-color: rgb(113, 57, 57);
+  gap: 0;
   padding: 10px 20px;
+  background-color: rgb(113, 57, 57);
   opacity: 98%;
   position: sticky;
   width: 100%;
@@ -29,8 +23,18 @@ header {
   }
 }
 header > div {
+  display: flex;
+  align-items: center;
   gap: 5px;
+  padding: 0px;
   cursor: pointer;
+}
+
+.main-logo-div {
+  display: flex;
+  align-items: center;
+  gap: 0px;
+  padding: 0px;
 }
 
 .balisha {
@@ -39,7 +43,10 @@ header > div {
 }
 
 .header-right-side-items {
+  display: flex;
+  align-items: center;
   gap: 10px;
+  padding: 0px;
 }
 
 .languages-wrapper {
@@ -51,12 +58,11 @@ header > div {
 
 .exit-input-container {
   display: flex;
-  justify-content: flex-start;
   align-items: center;
   gap: 30px;
+  padding: 10px 10px 10px 25px;
   max-width: 100%;
   background-color: rgb(240, 246, 239);
-  padding: 10px 10px 10px 25px;
 }
 
 .exi-input-container p {
@@ -101,9 +107,10 @@ header > div {
 
 .popular-searches-wrapper {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  align-items: center;
   gap: 15px;
+  padding: 0px;
+  flex-wrap: wrap;
   font-size: 13px;
   border-radius: 10px;
   height: fit-content;
@@ -140,18 +147,21 @@ body.no-scroll {
   overflow: hidden;
 }
 
-.items-vertical-section {
-  flex-direction: column;
+.categories-wrapper {
+  display: flex;
+  align-items: center;
   gap: 2px;
+  padding: 0px;
+  flex-direction: column;
   background-color: rgb(240, 246, 239);
 }
 
-.items-vertical-section * img {
+.categories-wrapper * img {
   width: 20px;
   height: 20px;
 }
 
-.items-vertical-wrapper {
+.categories-and-brands-container {
   display: flex;
   align-items: flex-start;
   gap: 10px;
@@ -159,9 +169,11 @@ body.no-scroll {
 }
 
 .section {
-  flex-direction: column;
-  padding: 10px 5px;
+  display: flex;
+  align-items: center;
   gap: 5px;
+  padding: 10px 5px;
+  flex-direction: column;
   width: 100%;
   font-size: 15px;
   color: rgb(120, 49, 49);
@@ -191,9 +203,10 @@ body.no-scroll {
 
 .brands-wrapper {
   display: flex;
-  flex-wrap: wrap;
-  padding: 10px 0;
+  align-items: center;
   gap: 5px;
+  padding: 10px 0px;
+  flex-wrap: wrap;
   max-width: fit-content;
   overflow-y: auto;
   max-height: 670px;
@@ -228,7 +241,7 @@ body.no-scroll {
 }
 
 .active-section {
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(189, 242, 98);
 }
 
 /*# sourceMappingURL=header-output.css.map */

@@ -52,8 +52,8 @@ export default function HeaderSlider() {
           </div>
         </div>
       </div>
-      <div className='items-vertical-wrapper'>
-        <section className='items-vertical-section'>
+      <div className='categories-and-brands-container'>
+        <section className='categories-wrapper'>
           <div
             className={`${
               activeSection === "mobile-phones"

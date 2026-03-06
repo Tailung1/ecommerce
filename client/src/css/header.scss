@@ -1,7 +1,10 @@
-@mixin display-shared($gap: 0px, $padding: 0px) {
+@mixin display-shared(
+  $gap: 0px,
+  $padding: 0px,
+  $justify-content: center
+) {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: $gap;
   padding: $padding;
 }
@@ -13,7 +16,11 @@
 }
 
 header {
-  @include display-shared($gap: 0, $padding: 10px 20px);
+  @include display-shared(
+    $gap: 0,
+    $padding: 10px 20px,
+    $justify-content: space-between
+  );
   background-color: rgb(113, 57, 57);
   opacity: 98%;
   position: sticky;
@@ -130,16 +137,16 @@ body.no-scroll {
   overflow: hidden;
 }
 
-.items-vertical-section {
+.categories-wrapper {
   @include display-shared($gap: 2px);
   flex-direction: column;
   background-color: rgb(240, 246, 239);
 }
-.items-vertical-section * img {
+.categories-wrapper * img {
   width: 20px;
   height: 20px;
 }
-.items-vertical-wrapper {
+.categories-and-brands-container {
   display: flex;
   align-items: flex-start;
   gap: 10px;
@@ -208,5 +215,5 @@ body.no-scroll {
   background-color: rgb(235, 235, 235);
 }
 .active-section {
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(189, 242, 98);
 }

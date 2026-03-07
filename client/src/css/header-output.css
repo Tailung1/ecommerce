@@ -168,7 +168,7 @@ body.no-scroll {
   height: 100%;
 }
 
-.section {
+.category {
   display: flex;
   align-items: center;
   gap: 5px;
@@ -179,7 +179,7 @@ body.no-scroll {
   color: rgb(120, 49, 49);
 }
 
-.section:hover {
+.category:hover {
   animation: scaleEffct 0.2s ease;
 }
 
@@ -208,7 +208,6 @@ body.no-scroll {
   padding: 10px 0px;
   flex-wrap: wrap;
   max-width: fit-content;
-  overflow-y: auto;
   max-height: 670px;
   background-color: red;
 }

@@ -17,6 +17,8 @@ export default function HeaderSlider() {
     setShowSideBar,
     setShowSearchBar,
   } = useMyContext();
+  const categories=["Mobile phones","Tabs","Laptops","Gaming","Smart home"]
+
   return (
     <motion.div
       initial={{ x: "-100vw" }}
@@ -54,12 +56,13 @@ export default function HeaderSlider() {
       </div>
       <div className='categories-and-brands-container'>
         <section className='categories-wrapper'>
-          <div
+            {/* {categories.map((category)=> <div></div>)} */}
+           <div
             className={`${
               activeSection === "mobile-phones"
                 ? "active-section"
                 : "offline-section"
-            } section`}
+            } category`}
             onClick={() => setActiveSection("mobile-phones")}
           >
             <img src={mobilePhone} alt='mobile-phones icon' />
@@ -74,7 +77,7 @@ export default function HeaderSlider() {
               activeSection === "tablets"
                 ? "active-section"
                 : "offline-section"
-            } section`}
+            } category`}
             onClick={() => setActiveSection("tablets")}
           >
             <img src={tablet} alt='tablet icon' />
@@ -86,7 +89,7 @@ export default function HeaderSlider() {
               activeSection === "laptops"
                 ? "active-section"
                 : "offline-section"
-            } section`}
+            } category`}
             onClick={() => setActiveSection("laptops")}
           >
             <img src={laptop} alt='laptop icon' />
@@ -98,7 +101,7 @@ export default function HeaderSlider() {
               activeSection === "consoles"
                 ? "active-section"
                 : "offline-section"
-            } section`}
+            } category`}
             onClick={() => setActiveSection("consoles")}
           >
             <img src={consoleIcon} alt='console icon' />
@@ -110,7 +113,7 @@ export default function HeaderSlider() {
               activeSection === "televisions"
                 ? "active-section"
                 : "offline-section"
-            } section`}
+            } category`}
             onClick={() => setActiveSection("televisions")}
           >
             <img src={television} alt='tv icon' />
@@ -122,7 +125,7 @@ export default function HeaderSlider() {
               activeSection === "smart-home"
                 ? "active-section"
                 : "offline-section"
-            } section`}
+            } category`}
             onClick={() => setActiveSection("smart-home")}
           >
             <img src={smartHome} alt='smart home icon' />
@@ -130,7 +133,7 @@ export default function HeaderSlider() {
               <span>Smart</span>
               <span>home</span>
             </div>
-          </div>
+          </div> 
         </section>
         <section className='brands-wrapper'>
           {" "}

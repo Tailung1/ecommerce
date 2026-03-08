@@ -17,8 +17,19 @@ export default function HeaderSlider() {
     setShowSideBar,
     setShowSearchBar,
   } = useMyContext();
-  const categories=["Mobile phones","Tabs","Laptops","Gaming","Smart home"]
 
+  const categories = [
+    {
+      id: "mobile-phones",
+      label: ["Mobile", "phones"],
+      icon: mobilePhone,
+    },
+    { id: "tablets", label: ["Tabs"], icon: tablet },
+    { id: "laptops", label: ["Laptops"], icon: laptop },
+    { id: "consoles", label: ["Gaming"], icon: consoleIcon },
+    { id: "televisions", label: ["TV"], icon: television },
+    { id: "smart-home", label: ["Smart", "home"], icon: smartHome },
+  ];
   return (
     <motion.div
       initial={{ x: "-100vw" }}
@@ -56,8 +67,7 @@ export default function HeaderSlider() {
       </div>
       <div className='categories-and-brands-container'>
         <section className='categories-wrapper'>
-            {/* {categories.map((category)=> <div></div>)} */}
-           <div
+          <div
             className={`${
               activeSection === "mobile-phones"
                 ? "active-section"
@@ -133,7 +143,7 @@ export default function HeaderSlider() {
               <span>Smart</span>
               <span>home</span>
             </div>
-          </div> 
+          </div>
         </section>
         <section className='brands-wrapper'>
           {" "}

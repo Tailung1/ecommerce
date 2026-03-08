@@ -67,83 +67,24 @@ export default function HeaderSlider() {
       </div>
       <div className='categories-and-brands-container'>
         <section className='categories-wrapper'>
-          <div
-            className={`${
-              activeSection === "mobile-phones"
-                ? "active-section"
-                : "offline-section"
-            } category`}
-            onClick={() => setActiveSection("mobile-phones")}
-          >
-            <img src={mobilePhone} alt='mobile-phones icon' />
-            <div className='mobile-phones'>
-              <p>Mobile</p>
-              <p>phones</p>
+          {categories.map((cat) => (
+            <div
+              key={cat.id}
+              className={`${
+                activeSection === cat.id
+                  ? "active-section"
+                  : "offline-section"
+              } category`}
+              onClick={() => setActiveSection(cat.id)}
+            >
+              <img src={cat.icon} alt={`${cat.id} icon`} />
+              <div className={`${cat.id}-label`}>
+                {cat.label.map((text) => (
+                  <p key={text}>{text}</p>
+                ))}
+              </div>
             </div>
-          </div>
-
-          <div
-            className={`${
-              activeSection === "tablets"
-                ? "active-section"
-                : "offline-section"
-            } category`}
-            onClick={() => setActiveSection("tablets")}
-          >
-            <img src={tablet} alt='tablet icon' />
-            <p>Tabs</p>
-          </div>
-
-          <div
-            className={`${
-              activeSection === "laptops"
-                ? "active-section"
-                : "offline-section"
-            } category`}
-            onClick={() => setActiveSection("laptops")}
-          >
-            <img src={laptop} alt='laptop icon' />
-            <p>Laptops</p>
-          </div>
-
-          <div
-            className={`${
-              activeSection === "consoles"
-                ? "active-section"
-                : "offline-section"
-            } category`}
-            onClick={() => setActiveSection("consoles")}
-          >
-            <img src={consoleIcon} alt='console icon' />
-            <p>Gaming</p>
-          </div>
-
-          <div
-            className={`${
-              activeSection === "televisions"
-                ? "active-section"
-                : "offline-section"
-            } category`}
-            onClick={() => setActiveSection("televisions")}
-          >
-            <img src={television} alt='tv icon' />
-            <p>TV</p>
-          </div>
-
-          <div
-            className={`${
-              activeSection === "smart-home"
-                ? "active-section"
-                : "offline-section"
-            } category`}
-            onClick={() => setActiveSection("smart-home")}
-          >
-            <img src={smartHome} alt='smart home icon' />
-            <div className='smart-home'>
-              <span>Smart</span>
-              <span>home</span>
-            </div>
-          </div>
+          ))}
         </section>
         <section className='brands-wrapper'>
           {" "}

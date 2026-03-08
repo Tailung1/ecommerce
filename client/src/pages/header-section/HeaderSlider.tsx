@@ -78,7 +78,7 @@ export default function HeaderSlider() {
               onClick={() => setActiveSection(cat.id)}
             >
               <img src={cat.icon} alt={`${cat.id} icon`} />
-              <div className={`${cat.id}-label`}>
+              <div className={`${cat.label.length>1 && cat.id}`}>
                 {cat.label.map((text) => (
                   <p key={text}>{text}</p>
                 ))}

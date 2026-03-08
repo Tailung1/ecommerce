@@ -7,6 +7,7 @@
   align-items: center;
   gap: $gap;
   padding: $padding;
+  justify-content: $justify-content;
 }
 
 @mixin display-col($gap: 0px) {
@@ -162,6 +163,7 @@ body.no-scroll {
 
 .category:hover {
   animation: scaleEffct 0.2s ease;
+  cursor: pointer;
 }
 
 @keyframes scaleEffct {
@@ -182,10 +184,14 @@ body.no-scroll {
 }
 
 .brands-wrapper {
-  @include display-shared(5px, 10px 0px);
+  @include display-shared(
+    5px,
+    10px 0px,
+    $justify-content: flex-start
+  );
   flex-wrap: wrap;
   max-width: fit-content;
-//   overflow-y: auto;
+  overflow-y: auto;
   max-height: 670px; //  max-height needed bcs of wider Y gap
   background-color: red;
 }

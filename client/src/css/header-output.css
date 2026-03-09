@@ -65,7 +65,7 @@ header > div {
   align-items: center;
   gap: 30px;
   padding: 10px 10px 10px 25px;
-  justify-content: center;
+  justify-content: flex-start;
   max-width: 100%;
   background-color: rgb(240, 246, 239);
 }

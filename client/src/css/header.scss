@@ -64,7 +64,7 @@ header > div {
 }
 
 .exit-input-container {
-  @include display-shared(30px, 10px 10px 10px 25px);
+  @include display-shared(30px, 10px 10px 10px 25px,flex-start);
   max-width: 100%;
   background-color: rgb(240, 246, 239);
 }
@@ -179,7 +179,7 @@ body.no-scroll {
 }
 
 .mobile-phones,
-.smart-home {
+.smart-home{
   @include display-col;
 }
 

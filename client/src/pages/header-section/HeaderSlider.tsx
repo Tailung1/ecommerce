@@ -48,7 +48,7 @@ export default function HeaderSlider() {
         <div className='serach-input-container'>
           <div
             onClick={() => {
-              setShowSideBar(false), setShowSearchBar(true);
+              setShowSideBar(false); setShowSearchBar(true);
             }}
             className='input-container'
           >

@@ -47,34 +47,30 @@ export default function AuthBar({
 
   return (
     <div className={`authBar ${isExiting && "exit"}`}>
-      <div className='w-full'>
-        <div className='flex flex-col gap-2 w-full'>
-          <div
-            className={`login-options ${
-              active === "register" && "pb-1"
-            }`}
+      <div className='flex flex-col gap-2 w-full relative'>
+        <div
+          className={`login-options ${
+            active === "register" && "pb-1"
+          }`}
+        >
+          <p onClick={handleExit} className='exit-btn'>
+            X
+          </p>
+          <p onClick={() => setActive("auth")}>Authentication</p>
+          <p
+            onClick={() => {
+              setActive("register");
+              setActiveAuthOption("number");
+            }}
           >
-            <p onClick={handleExit} className='exit-btn'>
-              X
-            </p>
-            <p onClick={() => setActive("auth")}>Authentication</p>
-            <p
-              onClick={() => {
-                setActive("register");
-                setActiveAuthOption("number");
-              }}
-            >
-              Register
-            </p>
-          </div>
-          <hr
-            className={`auth-hr ${
-              active === "auth"
-                ? "bg-auth"
-                : "bg-register more-bottom"
-            }`}
-          />
+            Register
+          </p>
         </div>
+        <hr
+          className={`auth-hr ${
+            active === "auth" ? "bg-auth" : "bg-register more-bottom"
+          }`}
+        />
       </div>
 
       {active === "auth" && (

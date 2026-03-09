@@ -64,7 +64,7 @@
 }
 
 .authBar {
-  @include display-col($gap: 5px,$padding:15px 15px);
+  @include display-col($gap: 5px, $padding: 15px 15px);
   align-items: start;
   position: absolute;
   bottom: 0;
@@ -104,23 +104,17 @@
   font-size: 20px;
   border: 10px red;
 }
-
 .auth-hr {
   height: 3px;
   margin-bottom: 6px;
   background: linear-gradient(
     to right,
     orange 25%,
-    rgb(255, 255, 255) 25%
+    rgb(227, 224, 224) 25%
   );
   background-size: 200% 100%;
   transition: background-position 0.2s ease;
-}
-.more-bottom {
-  margin-bottom: 20px;
-}
-.more-padding {
-  padding-bottom: 30px;
+  border: none;
 }
 
 .bg-auth {
@@ -132,6 +126,12 @@
 }
 .auth-options {
   padding: 10px 0 25px;
+}
+.more-bottom {
+  margin-bottom: 20px;
+}
+.more-padding {
+  padding-bottom: 30px;
 }
 
 .auth-options p {

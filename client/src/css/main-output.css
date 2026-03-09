@@ -100,7 +100,7 @@
   height: 2px;
   margin-bottom: 6px;
   background: linear-gradient(to right, orange 25%, rgb(227, 224, 224) 25%);
-  background-size: 200% 100%;
+  background-size: 200%;
   transition: background-position 0.2s ease;
   border: none;
 }

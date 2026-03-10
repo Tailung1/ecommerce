@@ -52,7 +52,7 @@ footer img {
 
 footer * img:hover {
   transform: scale(1.1);
-  background-color: rgb(235, 233, 186);
+  background-color: rgb(240, 159, 82);
   border-radius: 10px;
 }
 

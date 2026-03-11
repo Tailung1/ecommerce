@@ -113,7 +113,7 @@
     rgb(227, 224, 224) 25%
   );
   background-size: 200%;
-  transition: background 0.3s ease;
+  transition: 0.3s ease; // !!!!!!! not only background, but also padding!
   border: none;
 }
 
@@ -129,9 +129,6 @@
 }
 .more-bottom {
   margin-bottom: 20px;
-}
-.more-padding {
-  padding-bottom: 30px;
 }
 
 .auth-options p {
@@ -205,8 +202,8 @@
 .register-with-number-container .policy-container {
   @include display-row($gap: 15px);
   padding-bottom: 15px;
+  background-color: rgb(246, 255, 247);
 }
-
 // submit-section  !!!!!!!!!!!!!!!!
 .submit-section {
   @include display-col($gap: 15px);

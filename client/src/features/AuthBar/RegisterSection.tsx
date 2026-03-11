@@ -4,14 +4,13 @@ import checked from "../../assets/checked-rules.png";
 import unchecked from "../../assets/unchecked.png";
 
 export default function RegisterSection({
-  active,
   inputValues,
   handleValuesChange,
   isChecked,
   setIsChecked,
   countryCodes,
 }: {
-  active: string;
+
   inputValues: {
     email: string;
     password: string;
@@ -27,7 +26,6 @@ export default function RegisterSection({
     useState<boolean>(false);
   const [currentCode, setCurrentCode] = useState<string>("995");
   const checkIcon = isChecked ? checked : unchecked;
-
   return (
     <div className='register-with-number-container'>
       <div className='auth-and-register-with-number-container'>
@@ -65,11 +63,7 @@ export default function RegisterSection({
       </div>
       {}
       {}
-      <div
-        className={`policy-container ${
-          active === "register" && "more-padding"
-        }`}
-      >
+      <div className='policy-container '>
         <img
           onClick={() => setIsChecked((prev) => !prev)}
           className='w-8 max-h-5'

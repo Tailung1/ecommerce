@@ -20,12 +20,40 @@ export default function Footer() {
     <footer>
       {options.map((cat) => (
         <div
+          className={
+            cat.id === "Promotions" ? "promotions-wrapper" : ""
+          }
           key={cat.id}
           onClick={
             cat.id === "Main" ? () => setShowSideBar(true) : undefined
           }
         >
-          <img src={cat.icon} alt={cat.icon} />
+          {cat.id === "Promotions" ? (
+            <>
+              {" "}
+              <img
+                className='promotionsIcon'
+                src={cat.icon}
+                alt={cat.icon}
+              />
+              <img
+                className='promotionsIcon-block hover:rounded-[20px]'
+                src={cat.icon}
+                alt={cat.icon}
+              />
+            </>
+          ) : (
+            <img
+              className={
+                cat.id === "Promotions"
+                  ? "promotionsIcon-block promotionsIcon "
+                  : ""
+              }
+              src={cat.icon}
+              alt={cat.icon}
+            />
+          )}
+
           <span>{cat.id}</span>
         </div>
       ))}

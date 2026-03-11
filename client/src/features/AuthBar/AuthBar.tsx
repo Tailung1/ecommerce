@@ -135,7 +135,7 @@ export default function AuthBar({
           </div>
         ) : (
           <RegisterSection
-            active={active}
+      
             inputValues={inputValues}
             handleValuesChange={handleValuesChange}
             isChecked={isChecked}

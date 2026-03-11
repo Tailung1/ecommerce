@@ -101,7 +101,7 @@
   margin-bottom: 6px;
   background: linear-gradient(to right, red 25%, rgb(227, 224, 224) 25%);
   background-size: 200%;
-  transition: background 0.3s ease;
+  transition: 0.3s ease;
   border: none;
 }
 
@@ -119,10 +119,6 @@
 
 .more-bottom {
   margin-bottom: 20px;
-}
-
-.more-padding {
-  padding-bottom: 30px;
 }
 
 .auth-options p {
@@ -221,6 +217,7 @@
   align-items: center;
   gap: 15px;
   padding-bottom: 15px;
+  background-color: rgb(246, 255, 247);
 }
 
 .submit-section {

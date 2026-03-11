@@ -109,7 +109,7 @@
   margin-bottom: 6px;
   background: linear-gradient(
     to right,
-    red 25%,
+    #f2aa36 25%,
     rgb(227, 224, 224) 25%
   );
   background-size: 200%;
@@ -126,10 +126,10 @@
 }
 .auth-options {
   padding: 10px 0 10px;
-  transition: 0.3s ease;
+  transition: 0.5s ease;
 }
 .more-bottom {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .auth-options p {
@@ -150,7 +150,7 @@
 .auth-and-register-with-number-container {
   @include display-row($gap: 10px);
   width: 100%;
-  padding-bottom: 15px;
+  padding-bottom: 5px;
 }
 .country-codes-container {
   @include display-col($gap: 1px, $padding: 10px 15px);

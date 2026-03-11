@@ -65,40 +65,43 @@ export default function AuthBar({
         </div>
         <hr
           className={`auth-hr ${
-            active === "auth" ? "bg-auth" : "bg-register more-bottom"
+            active === "auth" ? "bg-auth" : "bg-register more-bottom "
           }`}
         />
       </div>
 
-      {active === "auth" && (
-        <div
-          style={{
-            paddingBottom: EmailAuthIsActive ? "20px" : "10px",
-          }}
-          className='auth-options flex gap-2'
+      <div
+        style={{
+          paddingBottom: EmailAuthIsActive ? "20px" : "10px",
+        }}
+        className='auth-options flex gap-2'
+      >
+        <p
+          className={`${
+            activeAuthOption === "number"
+              ? "active-auth-option"
+              : "non-active-auth-option "
+          }`}
+          onClick={() => setActiveAuthOption("number")}
         >
-          <p
-            className={`${
-              activeAuthOption === "number"
-                ? "active-auth-option"
-                : "non-active-auth-option "
-            }`}
-            onClick={() => setActiveAuthOption("number")}
-          >
-            Authenticate with Phone Number
-          </p>
-          <p
-            className={`${
-              activeAuthOption === "email"
-                ? "active-auth-option"
-                : "non-active-auth-option"
-            }`}
-            onClick={() => setActiveAuthOption("email")}
-          >
-            Authenticate with Email
-          </p>
-        </div>
-      )}
+          {`${
+            active === "auth" ? "Authenticate" : "Regiter"
+          } with Phone number`}
+        </p>
+        <p
+          className={`${
+            activeAuthOption === "email"
+              ? "active-auth-option"
+              : "non-active-auth-option"
+          }`}
+          onClick={() => setActiveAuthOption("email")}
+        >
+          {`${
+            active === "auth" ? "Authenticate" : "Regiter"
+          } with Email`}
+        </p>
+      </div>
+
       {activeAuthOption === "number" ? (
         active === "auth" ? (
           <div className='auth-and-register-with-number-container'>

@@ -115,7 +115,7 @@
 
 .auth-options {
   padding: 10px 0 10px;
-  transition: 0.5s ease;
+  transition: 0.3s ease;
 }
 
 .more-bottom {
@@ -143,7 +143,7 @@
   align-items: center;
   gap: 10px;
   width: 100%;
-  padding-bottom: 5px;
+  padding-bottom: 15px;
 }
 
 .country-codes-container {
@@ -203,16 +203,7 @@
   padding: 0px 0px 20px;
 }
 
-.register-with-number-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  padding: 0px;
-}
-
-.register-with-number-container .policy-container {
+.policy-container {
   display: flex;
   align-items: center;
   gap: 15px;

@@ -126,7 +126,7 @@
 }
 .auth-options {
   padding: 10px 0 10px;
-  transition: 0.5s ease;
+  transition: 0.3s ease;
 }
 .more-bottom {
   margin-bottom: 10px;
@@ -150,7 +150,7 @@
 .auth-and-register-with-number-container {
   @include display-row($gap: 10px);
   width: 100%;
-  padding-bottom: 5px;
+  padding-bottom: 15px;
 }
 .country-codes-container {
   @include display-col($gap: 1px, $padding: 10px 15px);
@@ -193,18 +193,14 @@
   width: 100%;
   padding: 0px 0px 20px;
 }
-// REGISTER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-.register-with-number-container {
-  @include display-col($gap: 10px);
-}
-
-.register-with-number-container .policy-container {
+.policy-container {
   @include display-row($gap: 15px);
   padding-bottom: 15px;
   background-color: rgb(246, 255, 247);
 }
-// submit-section  !!!!!!!!!!!!!!!!
+
+// submit-section  !!!!!!!!!!!!!!!!!!!!!
 .submit-section {
   @include display-col($gap: 15px);
   align-items: center;

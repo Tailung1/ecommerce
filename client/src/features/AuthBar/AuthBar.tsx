@@ -1,7 +1,8 @@
 import { useState } from "react";
 import icon from "../../assets/main-logo.png";
 import FloatingInput from "../../shared/FloatingInput";
-import RegisterSection from "./RegisterSection";
+import checked from "../../assets/checked-rules.png";
+import unchecked from "../../assets/unchecked.png";
 
 export default function AuthBar({
   isExiting,
@@ -40,18 +41,25 @@ export default function AuthBar({
     }, 800);
   };
   const handleValuesChange = (field: any, value: string) => {
+    console.log(field);
     if (field === "number") {
       if (/^[0-9]+$/.test(value)) {
         setInputValues((prev) => ({ ...prev, [field]: value }));
-        return
+        return;
       } else if (value !== "") {
         return;
       }
     }
     setInputValues((prev) => ({ ...prev, [field]: value }));
   };
+
+  const handleAuth = () => {
+    console.log(inputValues);
+  };
+
   const countryCodes = ["995", "242", "927", "315"];
   const EmailAuthIsActive = activeAuthOption !== "number";
+  const checkIcon = isChecked ? checked : unchecked;
 
   return (
     <div className={`authBar ${isExiting && "exit"}`}>
@@ -80,7 +88,7 @@ export default function AuthBar({
       <div
         onClick={resetValues}
         style={{
-          paddingBottom: EmailAuthIsActive ? "20px" : "10px",
+          paddingBottom: EmailAuthIsActive ? "20px" : "15px",
         }}
         className='auth-options flex gap-2'
       >
@@ -105,13 +113,13 @@ export default function AuthBar({
           onClick={() => setActiveAuthOption("email")}
         >
           {`${
-            active === "auth" ? "Authenticate" : "Regiter"
+            active === "auth" ? "Authenticate" : "Register"
           } with Email`}
         </p>
       </div>
 
-      {activeAuthOption === "number" ? (
-        active === "auth" ? (
+      <div>
+        {activeAuthOption === "number" ? (
           <div className='auth-and-register-with-number-container'>
             <div className='country-codes-container'>
               <div
@@ -147,41 +155,49 @@ export default function AuthBar({
             />
           </div>
         ) : (
-          <RegisterSection
-            inputValues={inputValues}
-            handleValuesChange={handleValuesChange}
-            isChecked={isChecked}
-            setIsChecked={setIsChecked}
-            countryCodes={countryCodes}
+          <div
+            style={{
+              paddingBottom: EmailAuthIsActive ? "10px" : "20px",
+            }}
+            className='auth-with-email-container'
+          >
+            <FloatingInput
+              type=''
+              label={"Email"}
+              propsedOnChange={(value: string) =>
+                handleValuesChange("email", value)
+              }
+              value={inputValues.email}
+            />
+            <FloatingInput
+              type=''
+              label={"Password"}
+              propsedOnChange={(value: string) =>
+                handleValuesChange("password", value)
+              }
+              value={inputValues.password}
+            />
+          </div>
+        )}
+        <div className='policy-container'>
+          <img
+            onClick={() => setIsChecked((prev) => !prev)}
+            className='w-8 h-6'
+            src={checkIcon}
+            alt='checked icon'
           />
-        )
-      ) : (
-        <div
-          style={{
-            paddingBottom: EmailAuthIsActive ? "10px" : "20px",
-          }}
-          className='auth-with-email-container'
-        >
-          <FloatingInput
-            type=''
-            label={"Email"}
-            propsedOnChange={(value: string) =>
-              handleValuesChange("email", value)
-            }
-            value={inputValues.email}
-          />
-          <FloatingInput
-            type=''
-            label={"Password"}
-            propsedOnChange={(value: string) =>
-              handleValuesChange("password", value)
-            }
-            value={inputValues.password}
-          />
+
+          <p className='text-[15px]'>
+            Read and agree to the{" "}
+            <span className='text-orange-500'>
+              rules, conditions and personal data protection policy
+            </span>
+          </p>
         </div>
-      )}
+      </div>
       <section className='submit-section'>
         <button
+          onClick={handleAuth}
           className={`submit-btn ${
             active === "register" && !isChecked && " opacity-60"
           }`}

@@ -25,7 +25,7 @@ export default function Footer() {
           }
           key={cat.id}
           onClick={
-            cat.id === "Main" ? () => setShowSideBar(true) : undefined
+            cat.id === "Categories" ? () => setShowSideBar(true) : undefined
           }
         >
           {cat.id === "Promotions" ? (

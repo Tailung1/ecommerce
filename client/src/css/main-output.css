@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .google-btn, .country-code {
   display: flex;
   align-items: center;
@@ -86,12 +87,12 @@
     transform: translateY(150%);
   }
 }
-.login-options {
+.acces-options {
   display: flex;
   justify-content: space-around;
 }
 
-.login-options p {
+.acces-options p {
   font-size: 20px;
   border: 10px red;
 }
@@ -99,7 +100,7 @@
 .auth-hr {
   height: 2px;
   margin-bottom: 6px;
-  background: linear-gradient(to right, red 25%, rgb(227, 224, 224) 25%);
+  background: linear-gradient(to right, Ì red 25%, rgb(227, 224, 224) 25%);
   background-size: 200%;
   transition: 0.3s ease;
   border: none;
@@ -114,7 +115,8 @@
 }
 
 .auth-options {
-  padding: 10px 0 25px;
+  padding: 10px 0 10px;
+  transition: 0.3s ease;
 }
 
 .more-bottom {
@@ -124,13 +126,12 @@
 .auth-options p {
   padding: 7px 10px;
   border-radius: 20px;
-  color: gray;
+  color: rgb(104, 152, 41);
   font-weight: 500;
 }
 
 .non-active-auth-option {
   background-color: #f2f2f2;
-  border: solid rgb(243, 239, 232);
 }
 
 .active-auth-option {
@@ -143,7 +144,7 @@
   align-items: center;
   gap: 10px;
   width: 100%;
-  padding-bottom: 20px;
+  padding-bottom: 15px;
 }
 
 .country-codes-container {

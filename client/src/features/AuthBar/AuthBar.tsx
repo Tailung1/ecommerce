@@ -44,15 +44,12 @@ export default function AuthBar({
     setInputValues((prev) => ({ ...prev, [field]: value }));
   };
   const countryCodes = ["995", "242", "927", "315"];
+  const EmailAuthIsActive = activeAuthOption !== "number";
 
   return (
     <div className={`authBar ${isExiting && "exit"}`}>
       <div className='flex flex-col gap-2 w-full relative'>
-        <div
-          className={`login-options ${
-            active === "register" && "pb-1"
-          }`}
-        >
+        <div className='acces-options'>
           <p onClick={handleExit} className='exit-btn'>
             X
           </p>
@@ -74,7 +71,12 @@ export default function AuthBar({
       </div>
 
       {active === "auth" && (
-        <div className='auth-options flex gap-2'>
+        <div
+          style={{
+            paddingBottom: EmailAuthIsActive ? "20px" : "10px",
+          }}
+          className='auth-options flex gap-2'
+        >
           <p
             className={`${
               activeAuthOption === "number"
@@ -135,7 +137,6 @@ export default function AuthBar({
           </div>
         ) : (
           <RegisterSection
-      
             inputValues={inputValues}
             handleValuesChange={handleValuesChange}
             isChecked={isChecked}
@@ -144,7 +145,12 @@ export default function AuthBar({
           />
         )
       ) : (
-        <div className='auth-with-email-container'>
+        <div
+          style={{
+            paddingBottom: EmailAuthIsActive ? "10px" : "20px",
+          }}
+          className='auth-with-email-container'
+        >
           <FloatingInput
             type=''
             label={"Email"}

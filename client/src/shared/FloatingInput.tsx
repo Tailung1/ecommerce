@@ -24,7 +24,7 @@ export default function FloatingInput({
 
   return (
     <div className='floating-container'>
-      <motion.label
+      <motion.label 
         className={`${isActive && "text-orange-500"}`}
         initial={{ x: 8, y: 15 }}
         animate={{
@@ -38,6 +38,7 @@ export default function FloatingInput({
         {label}
       </motion.label>
       <input
+      value={value}
         onChange={(e) => propsedOnChange(e.target.value)}
         onFocus={() =>
           setActivityTrack((prev) => ({ ...prev, isFocused: true }))

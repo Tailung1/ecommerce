@@ -10,12 +10,10 @@ export default function RegisterSection({
   setIsChecked,
   countryCodes,
 }: {
-
   inputValues: {
     email: string;
     password: string;
-    auth_number: string;
-    register_number: string;
+    number: string;
   };
   handleValuesChange: (arg1: string, arg2: string) => void;
   isChecked: boolean;
@@ -58,7 +56,7 @@ export default function RegisterSection({
           propsedOnChange={(value: string) =>
             handleValuesChange("register_number", value)
           }
-          value={inputValues.register_number}
+          value={inputValues.number}
         />
       </div>
       {}

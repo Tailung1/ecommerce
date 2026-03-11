@@ -23,9 +23,15 @@ export default function AuthBar({
   const [inputValues, setInputValues] = useState({
     email: "",
     password: "",
-    auth_number: "",
-    register_number: "",
+    number: "",
   });
+  const resetValues = () => {
+    setInputValues({
+      email: "",
+      password: "",
+      number: "",
+    });
+  };
   const handleExit = () => {
     setIsExiting(true);
     setTimeout(() => {
@@ -34,9 +40,10 @@ export default function AuthBar({
     }, 800);
   };
   const handleValuesChange = (field: any, value: string) => {
-    if (field === "auth_number" || field === "register_number") {
+    if (field === "number") {
       if (/^[0-9]+$/.test(value)) {
         setInputValues((prev) => ({ ...prev, [field]: value }));
+        return
       } else if (value !== "") {
         return;
       }
@@ -49,7 +56,7 @@ export default function AuthBar({
   return (
     <div className={`authBar ${isExiting && "exit"}`}>
       <div className='flex flex-col gap-2 w-full relative'>
-        <div className='acces-options'>
+        <div onClick={resetValues} className='acces-options'>
           <p onClick={handleExit} className='exit-btn'>
             X
           </p>
@@ -71,6 +78,7 @@ export default function AuthBar({
       </div>
 
       <div
+        onClick={resetValues}
         style={{
           paddingBottom: EmailAuthIsActive ? "20px" : "10px",
         }}
@@ -85,7 +93,7 @@ export default function AuthBar({
           onClick={() => setActiveAuthOption("number")}
         >
           {`${
-            active === "auth" ? "Authenticate" : "Regiter"
+            active === "auth" ? "Authenticate" : "Register"
           } with Phone number`}
         </p>
         <p
@@ -132,9 +140,9 @@ export default function AuthBar({
             <FloatingInput
               type='number'
               label={"Enter phone number"}
-              value={inputValues.auth_number}
+              value={inputValues.number}
               propsedOnChange={(value) =>
-                handleValuesChange("auth_number", value)
+                handleValuesChange("number", value)
               }
             />
           </div>

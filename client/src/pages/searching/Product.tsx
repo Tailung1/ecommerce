@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import AuthBar from "../../features/AuthBar/AuthBar";
+import { useMyContext } from "../../MyContext";
 
 export default function Product() {
   const { slug } = useParams();
+  const {showAuthBar,setShowAuthBar}=useMyContext()
 
   const productTitle = slug
     ?.split("-")
@@ -12,7 +14,6 @@ export default function Product() {
     .join(" ");
 
   const [product, setProduct] = useState<productType | null>(null);
-  const [showAuthBar, setShowAuthBar] = useState<boolean>(false);
   const [isExiting, setIsExiting] = useState<boolean>(false);
 
   useEffect(() => {

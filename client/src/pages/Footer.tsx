@@ -7,13 +7,13 @@ import { useMyContext } from "../MyContext";
 import { useNavigate } from "react-router-dom";
 
 export default function Footer() {
-  const { setShowSideBar, setShowSearchBar } = useMyContext();
+  const { setShowSideBar, setShowSearchBar, setShowAuthBar } =
+    useMyContext();
   const options = [
     { id: "Main", icon: MainIcon },
     { id: "Categories", icon: CategoriesIcon },
     { id: "Promotions", icon: PromotionsIcon },
     { id: "Compare", icon: CompareIcon },
-
     { id: "Login", icon: LoginIcon },
   ];
   const navigate = useNavigate();
@@ -33,6 +33,8 @@ export default function Footer() {
                 }
               : cat.id === "Categories"
               ? () => setShowSideBar(true)
+              : cat.id === "Login"
+              ? () => setShowAuthBar(true)
               : undefined
           }
         >

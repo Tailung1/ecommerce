@@ -32,6 +32,7 @@ export default function AuthBar({
       password: "",
       number: "",
     });
+    setShowCountryCodes(false);
   };
   const handleExit = () => {
     setIsExiting(true);
@@ -41,7 +42,6 @@ export default function AuthBar({
     }, 800);
   };
   const handleValuesChange = (field: any, value: string) => {
-    console.log(field);
     if (field === "number") {
       if (/^[0-9]+$/.test(value)) {
         setInputValues((prev) => ({ ...prev, [field]: value }));
@@ -118,7 +118,7 @@ export default function AuthBar({
         </p>
       </div>
 
-      <div>
+      <div className='w-full'>
         {activeAuthOption === "number" ? (
           <div className='auth-and-register-with-number-container'>
             <div className='country-codes-container'>
@@ -146,7 +146,6 @@ export default function AuthBar({
               )}
             </div>
             <FloatingInput
-              type='number'
               label={"Enter phone number"}
               value={inputValues.number}
               propsedOnChange={(value) =>
@@ -162,7 +161,6 @@ export default function AuthBar({
             className='auth-with-email-container'
           >
             <FloatingInput
-              type=''
               label={"Email"}
               propsedOnChange={(value: string) =>
                 handleValuesChange("email", value)
@@ -170,7 +168,6 @@ export default function AuthBar({
               value={inputValues.email}
             />
             <FloatingInput
-              type=''
               label={"Password"}
               propsedOnChange={(value: string) =>
                 handleValuesChange("password", value)
@@ -179,21 +176,23 @@ export default function AuthBar({
             />
           </div>
         )}
-        <div className='policy-container'>
-          <img
-            onClick={() => setIsChecked((prev) => !prev)}
-            className='w-8 h-6'
-            src={checkIcon}
-            alt='checked icon'
-          />
+        {active === "register" && (
+          <div className='policy-container'>
+            <img
+              onClick={() => setIsChecked((prev) => !prev)}
+              className='w-8 h-6'
+              src={checkIcon}
+              alt='checked icon'
+            />
 
-          <p className='text-[15px]'>
-            Read and agree to the{" "}
-            <span className='text-orange-500'>
-              rules, conditions and personal data protection policy
-            </span>
-          </p>
-        </div>
+            <p className='text-[15px]'>
+              Read and agree to the{" "}
+              <span className='text-orange-500'>
+                rules, conditions and personal data protection policy
+              </span>
+            </p>
+          </div>
+        )}
       </div>
       <section className='submit-section'>
         <button

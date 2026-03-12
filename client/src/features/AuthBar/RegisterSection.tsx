@@ -6,7 +6,7 @@
 // export default function RegisterSection({
 //   inputValues,
 //   handleValuesChange,
-//   isChecked,
+//   isChecked, -m ""
 //   setIsChecked,
 //   countryCodes,
 // }: {

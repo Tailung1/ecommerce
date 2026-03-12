@@ -4,9 +4,10 @@ import CompareIcon from "../assets/compare.png";
 import PromotionsIcon from "../assets/promotions.png";
 import LoginIcon from "../assets/login.png";
 import { useMyContext } from "../MyContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Footer() {
-  const { setShowSideBar } = useMyContext();
+  const { setShowSideBar, setShowSearchBar } = useMyContext();
   const options = [
     { id: "Main", icon: MainIcon },
     { id: "Categories", icon: CategoriesIcon },
@@ -15,7 +16,7 @@ export default function Footer() {
 
     { id: "Login", icon: LoginIcon },
   ];
-
+  const navigate = useNavigate();
   return (
     <footer>
       {options.map((cat) => (
@@ -25,7 +26,14 @@ export default function Footer() {
           }
           key={cat.id}
           onClick={
-            cat.id === "Categories" ? () => setShowSideBar(true) : undefined
+            cat.id === "Main"
+              ? () => {
+                  navigate("/");
+                  setShowSearchBar(false);
+                }
+              : cat.id === "Categories"
+              ? () => setShowSideBar(true)
+              : undefined
           }
         >
           {cat.id === "Promotions" ? (

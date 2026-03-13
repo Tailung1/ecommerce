@@ -4,7 +4,7 @@ import { AnimatePresence } from "framer-motion";
 import { useEffect } from "react";
 import router from "../routes";
 import { RouterProvider } from "react-router-dom";
-import AuthBar from "./features/AuthBar/AuthBar";
+import AuthBar from "./features/AuthBar";
 
 function App() {
   const { showSideBar, setPopularSearches, showAuthBar } =

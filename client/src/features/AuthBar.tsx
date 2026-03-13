@@ -1,9 +1,9 @@
 import { useState } from "react";
 import icon from "../../assets/main-logo.png";
-import FloatingInput from "../../shared/FloatingInput";
+import FloatingInput from "../shared/FloatingInput";
 import checked from "../../assets/checked-rules.png";
 import unchecked from "../../assets/unchecked.png";
-import { useMyContext } from "../../MyContext";
+import { useMyContext } from "../MyContext";
 
 export default function AuthBar() {
   const { isExitingAuthBar, setIsExitingAuthBar, setShowAuthBar } =

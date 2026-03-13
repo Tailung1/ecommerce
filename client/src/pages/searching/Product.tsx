@@ -5,7 +5,7 @@ import { useMyContext } from "../../MyContext";
 
 export default function Product() {
   const { slug } = useParams();
-  const { setShowAuthBar,showAuthBar } = useMyContext();
+  const { setShowAuthBar } = useMyContext();
 
   const productTitle = slug
     ?.split("-")
@@ -14,7 +14,6 @@ export default function Product() {
     .join(" ");
 
   const [product, setProduct] = useState<productType | null>(null);
-console.log(showAuthBar)
   useEffect(() => {
     const getProduct = async () => {
       const productResponse = await fetch(

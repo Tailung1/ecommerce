@@ -5,11 +5,14 @@ import { useEffect } from "react";
 import router from "../routes";
 import { RouterProvider } from "react-router-dom";
 import AuthBar from "./features/AuthBar";
-
+import CompareBar from "./features/CompareBar";
 function App() {
-  const { showSideBar, setPopularSearches, showAuthBar } =
-    useMyContext();
-
+  const {
+    showSideBar,
+    setPopularSearches,
+    showAuthBar,
+    showCompareBar,
+  } = useMyContext();
   useEffect(() => {
     const getPopularSearches = async () => {
       const items = await fetch(
@@ -22,12 +25,12 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (showSideBar) {
+    if (showSideBar || showCompareBar || showAuthBar) {
       document.body.classList.add("no-scroll");
     } else {
       document.body.classList.remove("no-scroll");
     }
-  }, [showSideBar]);
+  }, [showSideBar, showCompareBar, showAuthBar]);
   useEffect(() => {
     const header = document.querySelector("header");
     window.addEventListener("scroll", () => {
@@ -44,6 +47,7 @@ function App() {
       </AnimatePresence>
       <RouterProvider router={router} />
       {showAuthBar && <AuthBar />}
+      {showCompareBar && <CompareBar />}
     </div>
   );
 }

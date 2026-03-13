@@ -4,43 +4,8 @@
   justify-content: center;
 }
 
-.layer-backgroundIN {
-  animation: layer-animateIN 0.3s forwards;
-}
-
-.layer-backgroundOUT {
-  animation: layer-animateOUT 0.3s forwards;
-}
-
-@keyframes layer-animateOUT {
-  0% {
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-  30% {
-    background-color: rgba(0, 0, 0, 0.3);
-  }
-  50% {
-    background-color: rgba(0, 0, 0, 0.2);
-  }
-  100% {
-    background-color: rgba(0, 0, 0, 0);
-  }
-}
-@keyframes layer-animateIN {
-  0% {
-    background-color: rgba(0, 0, 0, 0);
-  }
-  30% {
-    background-color: rgba(0, 0, 0, 0.3);
-  }
-  50% {
-    background-color: rgba(0, 0, 0, 0.4);
-  }
-  100% {
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-}
-.exit-btn {
+.exit-btn,
+.exit-btn-compare {
   background-color: red;
   padding: 5px 13px;
   border-radius: 50%;
@@ -49,7 +14,11 @@
   right: 15px;
 }
 
-.authBar {
+.exit-btn-compare {
+  transform: translateY(-670%);
+}
+
+.Bar {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -60,13 +29,17 @@
   position: absolute;
   bottom: 0;
   width: 100%;
-  z-index: 10;
+  z-index: 1000;
   background-color: rgb(255, 255, 255);
-  animation: AuthBarIn 0.5s ease;
+  animation: BarIn 0.5s ease;
   border-radius: 20px 20px 0 0;
 }
 
-@keyframes AuthBarIn {
+.Bar-Modifed {
+  align-items: center;
+}
+
+@keyframes BarIn {
   0% {
     transform: translateY(150%);
   }
@@ -74,11 +47,11 @@
     transform: translateY(0);
   }
 }
-.exit {
-  animation: AuthBarOut 0.8s ease forwards;
+.ExitBar {
+  animation: BarOut 0.5s ease forwards;
 }
 
-@keyframes AuthBarOut {
+@keyframes BarOut {
   0% {
     transform: translateY(0);
   }

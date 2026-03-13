@@ -19,7 +19,8 @@
   padding: $padding;
 }
 
-.exit-btn {
+.exit-btn,
+.exit-btn-compare {
   background-color: red;
   padding: 5px 13px;
   border-radius: 50%;
@@ -27,8 +28,11 @@
   transform: translateY(-90%);
   right: 15px;
 }
+.exit-btn-compare {
+  transform: translateY(-670%);
+}
 
-.authBar {
+.Bar {
   @include display-col($gap: 5px, $padding: 15px 15px);
   align-items: start;
   position: absolute;
@@ -36,11 +40,14 @@
   width: 100%;
   z-index: 1000;
   background-color: rgb(255, 255, 255);
-  animation: AuthBarIn 0.5s ease;
+  animation: BarIn 0.5s ease;
   border-radius: 20px 20px 0 0;
 }
+.Bar-Modifed {
+  align-items: center;
+}
 
-@keyframes AuthBarIn {
+@keyframes BarIn {
   0% {
     transform: translateY(150%);
   }
@@ -48,11 +55,11 @@
     transform: translateY(0);
   }
 }
-.exit {
-  animation: AuthBarOut 0.8s ease forwards;
+.ExitBar {
+  animation: BarOut 0.5s ease forwards;
 }
 
-@keyframes AuthBarOut {
+@keyframes BarOut {
   0% {
     transform: translateY(0);
   }

@@ -6,7 +6,7 @@ import unchecked from "../assets/unchecked.png";
 import { useMyContext } from "../MyContext";
 
 export default function AuthBar() {
-  const { isExitingAuthBar, setIsExitingAuthBar, setShowAuthBar } =
+  const { isExitingBar, setIsExitingBar, setShowAuthBar } =
     useMyContext();
   const [active, setActive] = useState<string>("auth");
   const [activeAuthOption, setActiveAuthOption] =
@@ -30,11 +30,11 @@ export default function AuthBar() {
     setShowCountryCodes(false);
   };
   const handleExit = () => {
-    setIsExitingAuthBar(true);
+    setIsExitingBar(true);
     setTimeout(() => {
       setShowAuthBar(false);
-      setIsExitingAuthBar(false);
-    }, 800);
+      setIsExitingBar(false);
+    }, 600);
   };
   const handleValuesChange = (field: any, value: string) => {
     if (field === "number") {
@@ -57,7 +57,7 @@ export default function AuthBar() {
   const checkIcon = isChecked ? checked : unchecked;
 
   return (
-    <div className={`authBar ${isExitingAuthBar && "exit"}`}>
+    <div className={`Bar ${isExitingBar && "ExitBar"}`}>
       <div className='flex flex-col gap-2 w-full relative'>
         <div onClick={resetValues} className='acces-options'>
           <p onClick={handleExit} className='exit-btn'>

@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import "./css/header-output.css";
 import "./css/main-output.css";
-import "./css/footer.scss";
+import "./css/footer-output.css";
 import App from "./App.tsx";
 import ContextProvider from "./MyContext";
 

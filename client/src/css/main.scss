@@ -19,41 +19,6 @@
   padding: $padding;
 }
 
-.layer-backgroundIN {
-  animation: layer-animateIN 0.3s forwards;
-}
-.layer-backgroundOUT {
-  animation: layer-animateOUT 0.3s forwards;
-}
-@keyframes layer-animateOUT {
-  0% {
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-  30% {
-    background-color: rgba(0, 0, 0, 0.3);
-  }
-  50% {
-    background-color: rgba(0, 0, 0, 0.2);
-  }
-  100% {
-    background-color: rgba(0, 0, 0, 0);
-  }
-}
-
-@keyframes layer-animateIN {
-  0% {
-    background-color: rgba(0, 0, 0, 0);
-  }
-  30% {
-    background-color: rgba(0, 0, 0, 0.3);
-  }
-  50% {
-    background-color: rgba(0, 0, 0, 0.4);
-  }
-  100% {
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-}
 .exit-btn {
   background-color: red;
   padding: 5px 13px;
@@ -69,7 +34,7 @@
   position: absolute;
   bottom: 0;
   width: 100%;
-  z-index: 10;
+  z-index: 1000;
   background-color: rgb(255, 255, 255);
   animation: AuthBarIn 0.5s ease;
   border-radius: 20px 20px 0 0;

@@ -19,6 +19,10 @@ interface types {
   setLanguage: React.Dispatch<SetStateAction<string>>;
   cart: productType[];
   setCart: React.Dispatch<SetStateAction<productType[]>>;
+  showAuthBar: boolean;
+  setShowAuthBar: React.Dispatch<SetStateAction<boolean>>;
+  isExitingAuthBar: boolean;
+  setIsExitingAuthBar:React.Dispatch <SetStateAction<boolean>>
 }
 
 const MyContext = createContext({} as types);
@@ -28,6 +32,10 @@ export default function ContextProvider({
 }: {
   children: ReactNode;
 }) {
+      const [showAuthBar, setShowAuthBar] = useState<boolean>(false);
+        const [isExitingAuthBar, setIsExitingAuthBar] =
+          useState<boolean>(false);
+
   const [activeSection, setActiveSection] =
     useState<string>("mobile-phones");
   const [showSearchBar, setShowSearchBar] = useState<boolean>(false);
@@ -53,6 +61,10 @@ export default function ContextProvider({
         setLanguage,
         cart,
         setCart,
+        showAuthBar,
+        setShowAuthBar,
+        isExitingAuthBar,
+        setIsExitingAuthBar
       }}
     >
       {children}

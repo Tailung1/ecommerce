@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import AuthBar from "../../features/AuthBar/AuthBar";
+
 import { useMyContext } from "../../MyContext";
 
 export default function Product() {
   const { slug } = useParams();
-  const {showAuthBar,setShowAuthBar}=useMyContext()
+  const { setShowAuthBar,showAuthBar } = useMyContext();
 
   const productTitle = slug
     ?.split("-")
@@ -14,8 +14,7 @@ export default function Product() {
     .join(" ");
 
   const [product, setProduct] = useState<productType | null>(null);
-  const [isExiting, setIsExiting] = useState<boolean>(false);
-
+console.log(showAuthBar)
   useEffect(() => {
     const getProduct = async () => {
       const productResponse = await fetch(
@@ -34,19 +33,9 @@ export default function Product() {
   }, []);
 
   return (
-    <div
-      className={`flex-col flex-grow relative ${
-        showAuthBar && "layer-backgroundIN"
-      } ${isExiting && "layer-backgroundOUT"}`}
-    >
+    <div className='flex-col flex-grow relative'>
       <h1>{productTitle}</h1>
-      {showAuthBar && (
-        <AuthBar
-          setShowAuthBar={setShowAuthBar}
-          isExiting={isExiting}
-          setIsExiting={setIsExiting}
-        />
-      )}
+
       <div className='price-container flex items-center absolute w-full bottom-0 justify-between bg-orange-500 px-2 py-2'>
         <p className='text-white font-bold'>{product?.price} Gel</p>
         <button

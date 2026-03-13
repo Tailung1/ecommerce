@@ -7,8 +7,11 @@ import { useMyContext } from "../MyContext";
 import { useNavigate } from "react-router-dom";
 
 export default function Footer() {
-  const { setShowSideBar, setShowSearchBar, setShowAuthBar } =
-    useMyContext();
+  const {
+    setShowSideBar,
+    setShowSearchBar,
+    setShowAuthBar,
+  } = useMyContext();
   const options = [
     { id: "Main", icon: MainIcon },
     { id: "Categories", icon: CategoriesIcon },

@@ -11,5 +11,39 @@ img {
   height: 20px;
 }
 
+.layer-backgroundIN {
+  animation: layer-animateIN 0.3s forwards;
+}
+.layer-backgroundOUT {
+  animation: layer-animateOUT 0.3s forwards;
+}
+@keyframes layer-animateOUT {
+  0% {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  30% {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+  50% {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  100% {
+    background-color: rgba(0, 0, 0, 0);
+  }
+}
 
+@keyframes layer-animateIN {
+  0% {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  30% {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+  50% {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  100% {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}
 

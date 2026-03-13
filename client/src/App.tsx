@@ -4,9 +4,12 @@ import { AnimatePresence } from "framer-motion";
 import { useEffect } from "react";
 import router from "../routes";
 import { RouterProvider } from "react-router-dom";
+import AuthBar from "./features/AuthBar/AuthBar";
 
 function App() {
-  const { showSideBar, setPopularSearches } = useMyContext();
+  const { showSideBar, setPopularSearches, showAuthBar } =
+    useMyContext();
+
   useEffect(() => {
     const getPopularSearches = async () => {
       const items = await fetch(
@@ -35,11 +38,12 @@ function App() {
   }, []);
 
   return (
-    <div className='flex flex-col min-h-screen'>
+    <div className='flex  flex-col min-h-screen'>
       <AnimatePresence>
         {showSideBar && <HeaderSlider />}
       </AnimatePresence>
       <RouterProvider router={router} />
+      {showAuthBar && <AuthBar />}
     </div>
   );
 }

@@ -3,16 +3,11 @@ import icon from "../../assets/main-logo.png";
 import FloatingInput from "../../shared/FloatingInput";
 import checked from "../../assets/checked-rules.png";
 import unchecked from "../../assets/unchecked.png";
+import { useMyContext } from "../../MyContext";
 
-export default function AuthBar({
-  isExiting,
-  setIsExiting,
-  setShowAuthBar,
-}: {
-  isExiting: boolean;
-  setIsExiting: (value: boolean) => void;
-  setShowAuthBar: (value: boolean) => void;
-}) {
+export default function AuthBar() {
+  const { isExitingAuthBar, setIsExitingAuthBar, setShowAuthBar } =
+    useMyContext();
   const [active, setActive] = useState<string>("auth");
   const [activeAuthOption, setActiveAuthOption] =
     useState<string>("number");
@@ -35,10 +30,10 @@ export default function AuthBar({
     setShowCountryCodes(false);
   };
   const handleExit = () => {
-    setIsExiting(true);
+    setIsExitingAuthBar(true);
     setTimeout(() => {
       setShowAuthBar(false);
-      setIsExiting(false);
+      setIsExitingAuthBar(false);
     }, 800);
   };
   const handleValuesChange = (field: any, value: string) => {
@@ -62,7 +57,7 @@ export default function AuthBar({
   const checkIcon = isChecked ? checked : unchecked;
 
   return (
-    <div className={`authBar ${isExiting && "exit"}`}>
+    <div className={`authBar ${isExitingAuthBar && "exit"}`}>
       <div className='flex flex-col gap-2 w-full relative'>
         <div onClick={resetValues} className='acces-options'>
           <p onClick={handleExit} className='exit-btn'>

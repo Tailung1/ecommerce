@@ -118,6 +118,14 @@ footer * img:hover {
   border-radius: 10px;
 }
 
+.select-product-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+  width: 100%;
+}
+
 .select-product {
   display: flex;
   align-items: center;

@@ -5,3 +5,8 @@ interface productType {
   description: string;
   price: number;
 }
+type ProductType = {
+  id: string;
+  name: string;
+  brand: string;
+};

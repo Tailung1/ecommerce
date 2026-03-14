@@ -5,8 +5,11 @@ import binIcon from "../assets/bin.png";
 import searchIcon from "../assets/search-icon.png";
 
 export default function Compare() {
-  const { setShowCompareBar } = useMyContext();
-  const costumArray = new Array(4).fill("");
+  const {
+    setShowCompareBar,
+    selectedProductsToCompare,
+    setCompareIndex,
+  } = useMyContext();
 
   return (
     <div className='compare-container'>
@@ -24,16 +27,28 @@ export default function Compare() {
         <hr className='compare-hr' />
       </div>
       <section className='compare-products-parent'>
-        {costumArray.map(() => (
+        {selectedProductsToCompare.map((prod, index) => (
           <div
-            onClick={() => setShowCompareBar(true)}
+            key={Math.random() * 2372}
+            onClick={() => {
+              setShowCompareBar(true);
+              setCompareIndex(index);
+            }}
             className='product-container'
           >
-            <div className='select-product'>
-              <img src={plusIcon} alt='Plus icon' />
-              <span>Select product</span>
-            </div>
-            <img src={searchIcon} alt='Search icon' />
+            {!prod ? (
+              <div className='select-product-container'>
+                <div className='select-product'>
+                  <img src={plusIcon} alt='Plus icon' />
+                  <span>Select product</span>
+                </div>
+                <img src={searchIcon} alt='Search icon' />
+              </div>
+            ) : (
+              <div>
+                <h1>name:{prod.name}</h1> <h2>brand:{prod.brand}</h2>{" "}
+              </div>
+            )}
           </div>
         ))}
       </section>

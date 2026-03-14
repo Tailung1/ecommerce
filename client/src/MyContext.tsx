@@ -6,6 +6,7 @@ import React, {
   useContext,
 } from "react";
 
+
 interface types {
   activeSection: string;
   setActiveSection: React.Dispatch<SetStateAction<string>>;
@@ -23,12 +24,16 @@ interface types {
   setShowAuthBar: React.Dispatch<SetStateAction<boolean>>;
   showCompare: boolean;
   setShowCompare: React.Dispatch<SetStateAction<boolean>>;
-  selectedProductsToCompare: [];
-  setSelectedProductsToCompare: React.Dispatch<SetStateAction<[]>>;
+  selectedProductsToCompare: (null | ProductType)[];
+  setSelectedProductsToCompare: React.Dispatch<
+    SetStateAction<(null | ProductType)[]>
+  >;
   showCompareBar: boolean;
   setShowCompareBar: React.Dispatch<SetStateAction<boolean>>;
   isExitingBar: boolean;
   setIsExitingBar: React.Dispatch<SetStateAction<boolean>>;
+  compareIndex: number;
+  setCompareIndex: React.Dispatch<SetStateAction<number>>;
 }
 
 const MyContext = createContext({} as types);
@@ -38,10 +43,11 @@ export default function ContextProvider({
 }: {
   children: ReactNode;
 }) {
+     const [compareIndex, setCompareIndex] = useState<number>(0);
   const [showAuthBar, setShowAuthBar] = useState<boolean>(false);
   const [showCompare, setShowCompare] = useState<boolean>(false);
   const [selectedProductsToCompare, setSelectedProductsToCompare] =
-    useState<[]>([]);
+    useState<(ProductType | null)[]>([null, null, null, null]);
   const [showCompareBar, setShowCompareBar] =
     useState<boolean>(false);
   const [isExitingBar, setIsExitingBar] = useState<boolean>(false);
@@ -81,6 +87,8 @@ export default function ContextProvider({
         setShowCompareBar,
         showCompare,
         setShowCompare,
+        compareIndex,
+        setCompareIndex
       }}
     >
       {children}

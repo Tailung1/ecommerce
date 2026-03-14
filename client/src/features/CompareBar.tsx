@@ -2,15 +2,38 @@ import { useMyContext } from "../MyContext";
 import serachIcon from "../assets/search-icon.png";
 
 export default function CompareBar() {
-  const { isExitingBar, setIsExitingBar, setShowCompareBar } =
-    useMyContext();
-
+  const {
+    isExitingBar,
+    setIsExitingBar,
+    setShowCompareBar,
+    setSelectedProductsToCompare,
+    compareIndex,
+  } = useMyContext();
+  const testProducts = [
+    { id: "1", name: "Laptop X", brand: "TechCorp" },
+    { id: "2", name: "Smartphone Z", brand: "GizmoWorks" },
+    { id: "3", name: "Headphones Pro", brand: "SoundMax" },
+    { id: "4", name: "Smartwatch A1", brand: "TimeTech" },
+    { id: "5", name: "Tablet Q", brand: "ScreenMakers" },
+  ];
   const handleExit = () => {
+    console.log("hi");
     setIsExitingBar(true);
     setTimeout(() => {
       setShowCompareBar(false);
       setIsExitingBar(false);
     }, 500);
+  };
+  const findProduct = (id: string) => {
+    let product = testProducts.find((item) => item.id === id);
+    if (product) {
+      setSelectedProductsToCompare(
+        (prev) =>
+          prev.map((item, index) =>
+            index === compareIndex ? product : item
+          ) as (ProductType | null)[]
+      );
+    }
   };
   return (
     <div
@@ -32,6 +55,18 @@ export default function CompareBar() {
           type='text'
         />
       </div>
+      {testProducts.map((prod) => (
+        <div
+          key={prod.id}
+          onClick={() => {
+            findProduct(prod.id);
+            handleExit;
+          }}
+        >
+          {" "}
+          <h1>name:{prod.name}</h1> <h3>brand:{prod.brand}</h3>{" "}
+        </div>
+      ))}
     </div>
   );
 }

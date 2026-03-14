@@ -96,6 +96,10 @@ footer * img:hover {
   width: 100%;
   border-radius: 10px;
 }
+.select-product-container {
+  @include display(0, $justify-content: space-between);
+  width: 100%;
+}
 .select-product {
   @include display();
   gap: 15px;

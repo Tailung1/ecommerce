@@ -6,6 +6,7 @@ import router from "../routes";
 import { RouterProvider } from "react-router-dom";
 import AuthBar from "./features/AuthBar";
 import CompareBar from "./features/CompareBar";
+
 function App() {
   const {
     showSideBar,
@@ -13,6 +14,7 @@ function App() {
     showAuthBar,
     showCompareBar,
   } = useMyContext();
+
   useEffect(() => {
     const getPopularSearches = async () => {
       const items = await fetch(

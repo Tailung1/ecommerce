@@ -7,6 +7,7 @@ import searchIcon from "../assets/search-icon.png";
 export default function Compare() {
   const { setShowCompareBar } = useMyContext();
   const costumArray = new Array(4).fill("");
+
   return (
     <div className='compare-container'>
       <div className='compare-header'>
@@ -23,7 +24,7 @@ export default function Compare() {
         <hr className='compare-hr' />
       </div>
       <section className='compare-products-parent'>
-        {costumArray.map((prod) => (
+        {costumArray.map(() => (
           <div
             onClick={() => setShowCompareBar(true)}
             className='product-container'

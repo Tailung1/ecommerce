@@ -23,6 +23,8 @@ interface types {
   setShowAuthBar: React.Dispatch<SetStateAction<boolean>>;
   showCompare: boolean;
   setShowCompare: React.Dispatch<SetStateAction<boolean>>;
+  selectedProductsToCompare: [];
+  setSelectedProductsToCompare: React.Dispatch<SetStateAction<[]>>;
   showCompareBar: boolean;
   setShowCompareBar: React.Dispatch<SetStateAction<boolean>>;
   isExitingBar: boolean;
@@ -38,10 +40,11 @@ export default function ContextProvider({
 }) {
   const [showAuthBar, setShowAuthBar] = useState<boolean>(false);
   const [showCompare, setShowCompare] = useState<boolean>(false);
+  const [selectedProductsToCompare, setSelectedProductsToCompare] =
+    useState<[]>([]);
   const [showCompareBar, setShowCompareBar] =
     useState<boolean>(false);
-  const [isExitingBar, setIsExitingBar] =
-    useState<boolean>(false);
+  const [isExitingBar, setIsExitingBar] = useState<boolean>(false);
 
   const [activeSection, setActiveSection] =
     useState<string>("mobile-phones");
@@ -72,10 +75,12 @@ export default function ContextProvider({
         setShowAuthBar,
         isExitingBar,
         setIsExitingBar,
+        selectedProductsToCompare,
+        setSelectedProductsToCompare,
         showCompareBar,
         setShowCompareBar,
         showCompare,
-        setShowCompare
+        setShowCompare,
       }}
     >
       {children}

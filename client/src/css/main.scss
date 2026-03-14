@@ -29,7 +29,11 @@
   right: 15px;
 }
 .exit-btn-compare {
-  transform: translateY(-670%);
+  transform: translateY(-110%);
+}
+input::placeholder {
+    color: rgb(62, 46, 205);
+    font-size: 18px;
 }
 
 .Bar {
@@ -44,7 +48,8 @@
   border-radius: 20px 20px 0 0;
 }
 .Bar-Modifed {
-  align-items: center;
+  min-height: 640px;
+  justify-content: flex-start;
 }
 
 @keyframes BarIn {

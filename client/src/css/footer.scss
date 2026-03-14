@@ -1,8 +1,9 @@
-%display-col {
+@mixin display-col($gap: 0px) {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: $gap;
 }
 @mixin display($padding: 0px, $justify-content: center) {
   display: flex;
@@ -26,8 +27,7 @@ footer img {
 }
 
 footer > div {
-  @extend %display-col;
-  gap: 7px;
+  @include display-col($gap: 7px);
 }
 footer * img,
 p {
@@ -60,26 +60,43 @@ footer * img:hover {
   background-color: rgb(240, 159, 82);
   border-radius: 10px;
 }
-
+// COMPARE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 .compare-container {
-  @extend %display-col;
-  gap: 40px;
+  @include display-col($gap: 35px);
   padding: 10px;
-  background-color: green;
 }
 .compare-header {
-  @extend %display-col;
-  background-color: red;
+  @include display-col();
   width: 100%;
 }
 .compare-navigation {
-  @include display($padding: 0px, $justify-content: space-between);
+  @include display(
+    $padding: 7px 0px 13px,
+    $justify-content: space-between
+  );
   width: 100%;
 }
 .compare-navigation > div {
   @include display($padding: 5px);
   gap: 10px;
 }
-.compare-products {
-  @extend %display-col;
+.compare-hr {
+  background-color: rgb(195, 207, 214);
+  height: 1px;
+  width: 100%;
+  border: none;
+}
+.compare-products-parent {
+  @include display-col($gap: 15px);
+  width: 100%;
+}
+.product-container {
+  @include display(15px 20px, $justify-content: space-between);
+  background-color: aqua;
+  width: 100%;
+  border-radius: 10px;
+}
+.select-product {
+  @include display();
+  gap: 15px;
 }

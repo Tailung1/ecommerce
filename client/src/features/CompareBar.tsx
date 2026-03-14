@@ -14,20 +14,21 @@ export default function CompareBar() {
   };
   return (
     <div
-      className={`Bar Bar-Modifed ${
-        isExitingBar && "ExitBar"
-      } min-h-[650px]  `}
+      className={`Bar Bar-Modifed ${isExitingBar && "ExitBar"}   `}
     >
       <p onClick={handleExit} className='exit-btn exit-btn-compare'>
         X
       </p>
       <div className='relative w-full'>
-        <div className='absolute flex gap-3 top-3 pl-5'>
-          <img src={serachIcon} alt='Search Icon' />
-          <span>Search</span>
-        </div>
+        <img
+          className='absolute top-4 left-4'
+          src={serachIcon}
+          alt='Search Icon'
+        />
+
         <input
-          className='w-full border-solid bg-green-500'
+          placeholder='Search'
+          className='w-full border-solid bg-slate-200 p-3 pl-11'
           type='text'
         />
       </div>

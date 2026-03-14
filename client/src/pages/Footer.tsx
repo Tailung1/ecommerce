@@ -11,7 +11,7 @@ export default function Footer() {
     setShowSideBar,
     setShowSearchBar,
     setShowAuthBar,
-    setShowCompareBar,
+    setShowCompare
   } = useMyContext();
   const options = [
     { id: "Main", icon: MainIcon },
@@ -38,7 +38,7 @@ export default function Footer() {
               : cat.id === "Categories"
               ? () => setShowSideBar(true)
               : cat.id === "Compare"
-              ? () => setShowCompareBar(true)
+              ? () => {setShowCompare(true);navigate("/compare-products")}
               : cat.id === "Login"
               ? () => setShowAuthBar(true)
               : undefined

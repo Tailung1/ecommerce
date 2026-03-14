@@ -21,6 +21,8 @@ interface types {
   setCart: React.Dispatch<SetStateAction<productType[]>>;
   showAuthBar: boolean;
   setShowAuthBar: React.Dispatch<SetStateAction<boolean>>;
+  showCompare: boolean;
+  setShowCompare: React.Dispatch<SetStateAction<boolean>>;
   showCompareBar: boolean;
   setShowCompareBar: React.Dispatch<SetStateAction<boolean>>;
   isExitingBar: boolean;
@@ -35,6 +37,7 @@ export default function ContextProvider({
   children: ReactNode;
 }) {
   const [showAuthBar, setShowAuthBar] = useState<boolean>(false);
+  const [showCompare, setShowCompare] = useState<boolean>(false);
   const [showCompareBar, setShowCompareBar] =
     useState<boolean>(false);
   const [isExitingBar, setIsExitingBar] =
@@ -71,6 +74,8 @@ export default function ContextProvider({
         setIsExitingBar,
         showCompareBar,
         setShowCompareBar,
+        showCompare,
+        setShowCompare
       }}
     >
       {children}

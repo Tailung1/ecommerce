@@ -3,6 +3,7 @@ import Layout from "./Layout";
 import Main from "./src/pages/Main";
 import Product from "./src/pages/searching/Product";
 import Cart from "./src/pages/cart/Cart";
+import Compare from "./src/features/Compare";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
         path: "/cart",
         element: <Cart />,
       },
+      {
+        path:"/compare-products",
+        element:<Compare />
+      }
     ],
   },
 ]);

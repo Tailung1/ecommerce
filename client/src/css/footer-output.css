@@ -1,10 +1,18 @@
+.compare-products, .compare-header, .compare-container, footer > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 footer {
-  position: sticky;
-  bottom: 0;
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-around;
+  padding: 10px;
+  position: sticky;
+  bottom: 0;
+  width: 100%;
   background-color: rgb(219, 227, 219);
   overflow: hidden;
   padding: 10px;
@@ -16,9 +24,6 @@ footer img {
 }
 
 footer > div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   gap: 7px;
 }
 
@@ -54,6 +59,33 @@ footer * img:hover {
   transform: scale(1.1);
   background-color: rgb(240, 159, 82);
   border-radius: 10px;
+}
+
+.compare-container {
+  gap: 40px;
+  padding: 10px;
+  background-color: green;
+}
+
+.compare-header {
+  background-color: red;
+  width: 100%;
+}
+
+.compare-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px;
+  width: 100%;
+}
+
+.compare-navigation > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  gap: 10px;
 }
 
 /*# sourceMappingURL=footer-output.css.map */

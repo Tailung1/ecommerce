@@ -8,6 +8,7 @@ export default function CompareBar() {
     setShowCompareBar,
     setSelectedProductsToCompare,
     compareIndex,
+    setCompareIndex,
   } = useMyContext();
   const testProducts = [
     { id: "1", name: "Laptop X", brand: "TechCorp" },
@@ -17,7 +18,6 @@ export default function CompareBar() {
     { id: "5", name: "Tablet Q", brand: "ScreenMakers" },
   ];
   const handleExit = () => {
-    console.log("hi");
     setIsExitingBar(true);
     setTimeout(() => {
       setShowCompareBar(false);
@@ -25,14 +25,13 @@ export default function CompareBar() {
     }, 500);
   };
   const findProduct = (id: string) => {
-    let product = testProducts.find((item) => item.id === id);
+    let product = testProducts.find((item) => item.id === id) || null;
     if (product) {
-      setSelectedProductsToCompare(
-        (prev) =>
-          prev.map((item, index) =>
-            index === compareIndex ? product : item
-          ) as (ProductType | null)[]
-      );
+      setSelectedProductsToCompare((prev) => {
+        const newArr = [...prev];
+        newArr[compareIndex] = product;
+        return newArr;
+      });
     }
   };
   return (
@@ -61,6 +60,7 @@ export default function CompareBar() {
           onClick={() => {
             findProduct(prod.id);
             handleExit();
+            setCompareIndex((prev) => prev + 1);
           }}
         >
           {" "}

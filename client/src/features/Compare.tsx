@@ -4,21 +4,26 @@ import plusIcon from "../assets/plus.png";
 import binIcon from "../assets/bin.png";
 import searchIcon from "../assets/search-icon.png";
 
-
 export default function Compare() {
   const {
     setShowCompareBar,
     selectedProductsToCompare,
     setSelectedProductsToCompare,
     setCompareIndex,
+    compareIndex,
   } = useMyContext();
 
   const handleReset = () => {
     const hasAnyProduct = selectedProductsToCompare.some(
       (item) => item !== null
     );
-    if (hasAnyProduct) return;
+    if (!hasAnyProduct) return;
     setSelectedProductsToCompare([null, null, null, null]);
+    setCompareIndex(0);
+  };
+  const handleBarOpen = () => {
+    if (compareIndex === 4) return;
+    setShowCompareBar(true);
   };
 
   return (
@@ -29,11 +34,7 @@ export default function Compare() {
             <img src={leftArrowIcon} alt='Left arrow icon' />
             <p>Back</p>
           </div>
-          <div
-            onClick={() =>
-              setSelectedProductsToCompare([null, null, null, null])
-            }
-          >
+          <div onClick={handleReset}>
             <img src={binIcon} alt='bin icon' />
             <p>Clear</p>
           </div>
@@ -41,13 +42,10 @@ export default function Compare() {
         <hr className='compare-hr' />
       </div>
       <section className='compare-products-parent'>
-        {selectedProductsToCompare.map((prod, index) => (
+        {selectedProductsToCompare.map((prod) => (
           <div
             key={Math.random() * 2372}
-            onClick={() => {
-              setShowCompareBar(true);
-              setCompareIndex(index);
-            }}
+            onClick={handleBarOpen}
             className='product-container'
           >
             {!prod ? (
@@ -59,7 +57,7 @@ export default function Compare() {
                 <img src={searchIcon} alt='Search icon' />
               </div>
             ) : (
-              <div className=' flex gap-5'>
+              <div className='flex gap-5'>
                 <h1>name:{prod.name}</h1> <h2>brand:{prod.brand}</h2>{" "}
               </div>
             )}

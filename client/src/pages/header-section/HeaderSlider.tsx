@@ -9,6 +9,7 @@ import consoleIcon from "../../assets/console.png";
 import television from "../../assets/television.png";
 import smartHome from "../../assets/smart-home.png";
 import searchIcon from "../../assets/search-icon.png";
+import rejectIcon from "../../assets/reject.png";
 
 export default function HeaderSlider() {
   const {
@@ -39,16 +40,17 @@ export default function HeaderSlider() {
       className='slider-container'
     >
       <div className='exit-input-container'>
-        <p
+        <img
+          src={rejectIcon}
           className='cursor-pointer'
           onClick={() => setShowSideBar(false)}
-        >
-          X
-        </p>
+        />
+
         <div className='serach-input-container'>
           <div
             onClick={() => {
-              setShowSideBar(false); setShowSearchBar(true);
+              setShowSideBar(false);
+              setShowSearchBar(true);
             }}
             className='input-container'
           >
@@ -78,7 +80,7 @@ export default function HeaderSlider() {
               onClick={() => setActiveSection(cat.id)}
             >
               <img src={cat.icon} alt={`${cat.id} icon`} />
-              <div className={`${cat.label.length>1 && cat.id}`}>
+              <div className={`${cat.label.length > 1 && cat.id}`}>
                 {cat.label.map((text) => (
                   <p key={text}>{text}</p>
                 ))}

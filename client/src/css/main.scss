@@ -32,8 +32,8 @@
   transform: translateY(-110%);
 }
 input::placeholder {
-    color: rgb(62, 46, 205);
-    font-size: 18px;
+  color: rgb(62, 46, 205);
+  font-size: 18px;
 }
 
 .Bar {
@@ -48,7 +48,8 @@ input::placeholder {
   border-radius: 20px 20px 0 0;
 }
 .Bar-Modifed {
-  min-height: 640px;
+  height: 640px;
+  max-height: 640px;
   justify-content: flex-start;
 }
 

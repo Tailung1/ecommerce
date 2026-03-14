@@ -41,7 +41,8 @@ input::placeholder {
 }
 
 .Bar-Modifed {
-  min-height: 640px;
+  height: 640px;
+  max-height: 640px;
   justify-content: flex-start;
 }
 

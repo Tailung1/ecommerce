@@ -6,7 +6,7 @@ interface productType {
   price: number;
 }
 type ProductType = {
-  id: string;
+  id: number;
   name: string;
   brand: string;
 };

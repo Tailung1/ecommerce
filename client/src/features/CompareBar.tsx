@@ -60,7 +60,7 @@ export default function CompareBar() {
           key={prod.id}
           onClick={() => {
             findProduct(prod.id);
-            handleExit;
+            handleExit();
           }}
         >
           {" "}

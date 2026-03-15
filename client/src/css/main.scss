@@ -167,14 +167,14 @@ input::placeholder {
 }
 
 .auth-with-email-container {
-  @include display-col($gap: 10px, $padding: 0px 0px 20px);
+  @include display-col($gap: 22px, $padding: 0px 0px 200px);
   width: 100%;
-  padding: 0px 0px 20px;
+  margin-bottom: 15px;
 }
 
 .policy-container {
   @include display-row($gap: 15px);
-  padding-bottom: 15px;
+  padding-bottom: 10px;
   background-color: rgb(246, 255, 247);
 }
 
@@ -225,6 +225,11 @@ input {
 label {
   position: absolute;
   pointer-events: none;
+}
+.error-message {
+  position: absolute;
+  color: red;
+  font-size: 15px;
 }
 
 .price-container {

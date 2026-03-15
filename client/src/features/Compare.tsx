@@ -42,6 +42,9 @@ export default function Compare() {
     });
     setCompareIndex((prev) => prev - 1);
   };
+  const allowCompare =
+    selectedProductsToCompare.filter((item) => item !== null).length <
+    2;
 
   return (
     <div className='compare-container'>
@@ -85,6 +88,13 @@ export default function Compare() {
           </div>
         ))}
       </section>
+      <button
+        className={`${
+          allowCompare && "opacity-65 pointer-events-none"
+        } bg-orange-400 text-white p-3 rounded-lg w-full items-center`}
+      >
+        Compare
+      </button>
     </div>
   );
 }

@@ -3,6 +3,7 @@ import FloatingInput from "../shared/FloatingInput";
 import icon from "../assets/main-logo.png";
 import checked from "../assets/checked-rules.png";
 import unchecked from "../assets/unchecked.png";
+import exitBtn from "../assets/reject.png";
 import { useMyContext } from "../MyContext";
 
 export default function AuthBar() {
@@ -21,12 +22,20 @@ export default function AuthBar() {
     password: "",
     number: "",
   });
+
+  const [errors, setErrors] = useState({
+    emailError: "",
+    passwordError: "",
+    numberError: "",
+  });
+
   const resetValues = () => {
     setInputValues({
       email: "",
       password: "",
       number: "",
     });
+    setErrors({ emailError: "", passwordError: "", numberError: "" });
     setShowCountryCodes(false);
   };
   const handleExit = () => {
@@ -36,6 +45,7 @@ export default function AuthBar() {
       setIsExitingBar(false);
     }, 600);
   };
+
   const handleValuesChange = (field: any, value: string) => {
     if (field === "number") {
       if (/^[0-9]+$/.test(value)) {
@@ -46,23 +56,45 @@ export default function AuthBar() {
       }
     }
     setInputValues((prev) => ({ ...prev, [field]: value }));
+    setErrors((prev) => ({ ...prev, [`${field}Error`]: "" }));
   };
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const handleAuth = () => {
-    console.log(inputValues);
+    if (active === "auth" && activeAuthOption === "email") {
+      setErrors((prev) => ({
+        ...prev,
+        emailError:
+          inputValues.email.length < 1
+            ? "Can't be empty"
+            : !emailRegex.test(inputValues.email)
+            ? "Invalid email format"
+            : "",
+        passwordError:
+          inputValues.password.length < 1 ? "Can't be empty" : "",
+      }));
+      return;
+    }
+    setErrors((prev) => ({
+      ...prev,
+      numberError:
+        inputValues.number.length < 1 ? "Can't be empty" : "",
+    }));
   };
 
   const countryCodes = ["995", "242", "927", "315"];
   const EmailAuthIsActive = activeAuthOption !== "number";
   const checkIcon = isChecked ? checked : unchecked;
-
   return (
     <div className={`Bar ${isExitingBar && "ExitBar"}`}>
       <div className='flex flex-col gap-2 w-full relative'>
         <div onClick={resetValues} className='acces-options'>
-          <p onClick={handleExit} className='exit-btn'>
-            X
-          </p>
+          <img
+            src={exitBtn}
+            onClick={handleExit}
+            className='exit-btn w-10 h-8'
+            alt='Exit icon'
+          />
           <p onClick={() => setActive("auth")}>Authentication</p>
           <p
             onClick={() => {
@@ -113,7 +145,7 @@ export default function AuthBar() {
         </p>
       </div>
 
-      <div className='w-full'>
+      <div className='w-full relative'>
         {activeAuthOption === "number" ? (
           <div className='auth-and-register-with-number-container'>
             <div className='country-codes-container'>
@@ -146,6 +178,7 @@ export default function AuthBar() {
               propsedOnChange={(value) =>
                 handleValuesChange("number", value)
               }
+              errorMessage={errors.numberError}
             />
           </div>
         ) : (
@@ -161,13 +194,16 @@ export default function AuthBar() {
                 handleValuesChange("email", value)
               }
               value={inputValues.email}
+              errorMessage={errors.emailError}
             />
+
             <FloatingInput
               label={"Password"}
               propsedOnChange={(value: string) =>
                 handleValuesChange("password", value)
               }
               value={inputValues.password}
+              errorMessage={errors.passwordError}
             />
           </div>
         )}
@@ -195,7 +231,7 @@ export default function AuthBar() {
           className={`submit-btn ${
             active === "register" && !isChecked && " opacity-60"
           }`}
-          disabled={!isChecked}
+          disabled={active === "register" && !isChecked}
         >
           {active === "register"
             ? "REGISTRATION"
@@ -206,7 +242,7 @@ export default function AuthBar() {
         <hr />
         <p className='font-bold'>Or log in with other method</p>
         <button className='google-btn'>
-          <img className='google-icon ' src={icon} />
+          <img className='google-icon' src={icon} />
         </button>
       </section>
     </div>

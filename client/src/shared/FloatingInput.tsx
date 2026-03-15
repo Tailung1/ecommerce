@@ -5,18 +5,20 @@ interface propsTypes {
   label: string;
   value: string;
   propsedOnChange: (value: string) => void;
+  errorMessage: string;
 }
 
 export default function FloatingInput({
   label,
   value,
   propsedOnChange,
+  errorMessage,
 }: propsTypes) {
   const [activityTrack, setActivityTrack] = useState({
     isFocused: false,
     // hasValue: false,  not Necessary YET.
   });
-
+  const hasError = errorMessage !== "";
   const isActive = activityTrack.isFocused || value;
   const inputId = `${label.toLowerCase().replace(" ", "-")}-input`;
 
@@ -36,6 +38,9 @@ export default function FloatingInput({
         {label}
       </motion.label>
       <input
+        className={
+          hasError ? "border border-red-500" : "border border-white"
+        }
         value={value}
         onChange={(e) => propsedOnChange(e.target.value)}
         onFocus={() =>
@@ -44,8 +49,9 @@ export default function FloatingInput({
         onBlur={() =>
           setActivityTrack((prev) => ({ ...prev, isFocused: false }))
         }
-        type="text"
+        type='text'
       />
+      <p className='error-message'>{hasError ? errorMessage : ""}</p>
     </div>
   );
 }

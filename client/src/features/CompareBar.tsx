@@ -10,6 +10,7 @@ export default function CompareBar() {
     compareIndex,
     setCompareIndex,
   } = useMyContext();
+
   const testProducts = [
     { id: 1, name: "Laptop X", brand: "TechCorp" },
     { id: 2, name: "Smartphone Z", brand: "GizmoWorks" },
@@ -35,9 +36,7 @@ export default function CompareBar() {
     }
   };
   return (
-    <div
-      className={`Bar Bar-Modifed ${isExitingBar && "ExitBar"}   `}
-    >
+    <div className={`Bar Bar-Modifed ${isExitingBar && "ExitBar"}`}>
       <p onClick={handleExit} className='exit-btn exit-btn-compare'>
         X
       </p>

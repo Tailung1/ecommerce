@@ -155,7 +155,7 @@ input::placeholder {
   padding: 10px 10px;
   width: fit-content;
   height: fit-content;
-  background-color: #ac27b9;
+  background-color: #dd3f3f;
   border-radius: 10px;
   position: absolute;
   left: 0;
@@ -168,7 +168,7 @@ input::placeholder {
 }
 
 .codes-wrapper *:hover {
-  color: rgb(34, 20, 235);
+  color: rgb(79, 67, 238);
   cursor: pointer;
 }
 

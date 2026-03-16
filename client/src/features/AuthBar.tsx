@@ -1,43 +1,25 @@
-import { useState } from "react";
 import FloatingInput from "../shared/FloatingInput";
 import icon from "../assets/main-logo.png";
 import checked from "../assets/checked-rules.png";
 import unchecked from "../assets/unchecked.png";
 import exitBtn from "../assets/reject.png";
 import { useMyContext } from "../MyContext";
+import useAuthReducer from "../MyReducer";
 
 export default function AuthBar() {
+  const { state, dispatch } = useAuthReducer();
   const { isExitingBar, setIsExitingBar, setShowAuthBar } =
     useMyContext();
-  const [active, setActive] = useState<string>("auth");
-  const [activeAuthOption, setActiveAuthOption] =
-    useState<string>("number");
-  const [isChecked, setIsChecked] = useState<boolean>(false);
-  const [showCountryCodes, setShowCountryCodes] =
-    useState<boolean>(false);
-  const [currentCode, setCurrentCode] = useState<string>("995");
 
-  const [inputValues, setInputValues] = useState({
-    email: "",
-    password: "",
-    number: "",
-  });
-
-  const [errors, setErrors] = useState({
-    emailError: "",
-    passwordError: "",
-    numberError: "",
-  });
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const countryCodes = ["995", "242", "927", "315"];
+  const EmailAuthIsActive = state.activeAuthOption !== "number";
+  const checkIcon = state.isChecked ? checked : unchecked;
 
   const resetValues = () => {
-    setInputValues({
-      email: "",
-      password: "",
-      number: "",
-    });
-    setErrors({ emailError: "", passwordError: "", numberError: "" });
-    setShowCountryCodes(false);
+    dispatch({ type: "RESET_FORM" });
   };
+
   const handleExit = () => {
     setIsExitingBar(true);
     setTimeout(() => {
@@ -46,125 +28,137 @@ export default function AuthBar() {
     }, 600);
   };
 
-  const handleValuesChange = (field: any, value: string) => {
-    if (field === "number") {
-      if (/^[0-9]+$/.test(value)) {
-        setInputValues((prev) => ({ ...prev, [field]: value }));
-        return;
-      } else if (value !== "") {
-        return;
-      }
-    }
-    setInputValues((prev) => ({ ...prev, [field]: value }));
-    setErrors((prev) => ({ ...prev, [`${field}Error`]: "" }));
+  const handleValuesChange = (
+    field: "email" | "password" | "number",
+    value: string
+  ) => {
+    if (field === "number" && value !== "" && !/^[0-9]+$/.test(value))
+      return;
+    dispatch({ type: "SET_INPUT", field, value });
   };
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const handleAuth = () => {
-    if (active === "auth" && activeAuthOption === "email") {
-      setErrors((prev) => ({
-        ...prev,
-        emailError:
-          inputValues.email.length < 1
-            ? "Can't be empty"
-            : !emailRegex.test(inputValues.email)
-            ? "Invalid email format"
-            : "",
-        passwordError:
-          inputValues.password.length < 1 ? "Can't be empty" : "",
-      }));
+    if (
+      state.active === "auth" &&
+      state.activeAuthOption === "email"
+    ) {
+      const emailError = !state.inputValues.email
+        ? "Can't be empty"
+        : !emailRegex.test(state.inputValues.email)
+        ? "Invalid email format"
+        : "";
+      const passwordError = !state.inputValues.password
+        ? "Can't be empty"
+        : "";
+
+      dispatch({
+        type: "SET_ERRORS",
+        payload: { emailError, passwordError },
+      });
       return;
     }
-    setErrors((prev) => ({
-      ...prev,
-      numberError:
-        inputValues.number.length < 1 ? "Can't be empty" : "",
-    }));
+
+    if (state.activeAuthOption === "number") {
+      const numberError = !state.inputValues.number
+        ? "Can't be empty"
+        : "";
+      dispatch({ type: "SET_ERRORS", payload: { numberError } });
+    }
   };
 
-  const countryCodes = ["995", "242", "927", "315"];
-  const EmailAuthIsActive = activeAuthOption !== "number";
-  const checkIcon = isChecked ? checked : unchecked;
   return (
     <div className={`Bar ${isExitingBar && "ExitBar"}`}>
       <div className='flex flex-col gap-2 w-full relative'>
-        <div onClick={resetValues} className='acces-options'>
+        <div className='acces-options'>
           <img
             src={exitBtn}
             onClick={handleExit}
             className='exit-btn w-10 h-8'
             alt='Exit icon'
           />
-          <p onClick={() => setActive("auth")}>Authentication</p>
           <p
-            onClick={() => {
-              setActive("register");
-              setActiveAuthOption("number");
-            }}
+            onClick={() =>
+              dispatch({ type: "SET_ACTIVE", payload: "auth" })
+            }
+          >
+            Authentication
+          </p>
+          <p
+            onClick={() =>
+              dispatch({ type: "SET_ACTIVE", payload: "register" })
+            }
           >
             Register
           </p>
         </div>
         <hr
           className={`auth-hr ${
-            active === "auth" ? "bg-auth" : "bg-register more-bottom "
+            state.active === "auth"
+              ? "bg-auth"
+              : "bg-register more-bottom"
           }`}
         />
       </div>
 
       <div
         onClick={resetValues}
-        style={{
-          paddingBottom: EmailAuthIsActive ? "20px" : "15px",
-        }}
+        style={{ paddingBottom: EmailAuthIsActive ? "20px" : "15px" }}
         className='auth-options flex gap-2'
       >
         <p
-          className={`${
-            activeAuthOption === "number"
+          className={
+            state.activeAuthOption === "number"
               ? "active-auth-option"
-              : "non-active-auth-option "
-          }`}
-          onClick={() => setActiveAuthOption("number")}
+              : "non-active-auth-option"
+          }
+          onClick={() =>
+            dispatch({ type: "SET_AUTH_OPTION", payload: "number" })
+          }
         >
           {`${
-            active === "auth" ? "Authenticate" : "Register"
+            state.active === "auth" ? "Authenticate" : "Register"
           } with Phone number`}
         </p>
         <p
-          className={`${
-            activeAuthOption === "email"
+          className={
+            state.activeAuthOption === "email"
               ? "active-auth-option"
               : "non-active-auth-option"
-          }`}
-          onClick={() => setActiveAuthOption("email")}
+          }
+          onClick={() =>
+            dispatch({ type: "SET_AUTH_OPTION", payload: "email" })
+          }
         >
           {`${
-            active === "auth" ? "Authenticate" : "Register"
+            state.active === "auth" ? "Authenticate" : "Register"
           } with Email`}
         </p>
       </div>
 
       <div className='w-full relative'>
-        {activeAuthOption === "number" ? (
+        {state.activeAuthOption === "number" ? (
           <div className='auth-and-register-with-number-container'>
             <div className='country-codes-container'>
               <div
-                onClick={() => setShowCountryCodes((prev) => !prev)}
+                onClick={() =>
+                  dispatch({ type: "TOGGLE_COUNTRY_CODES" })
+                }
                 className='country-code'
               >
-                +{currentCode}
+                +{state.currentCode}
               </div>
 
-              {showCountryCodes && (
+              {state.showCountryCodes && (
                 <div className='codes-wrapper'>
                   {countryCodes.map((code) => (
                     <span
-                      onClick={() => {
-                        setShowCountryCodes(false);
-                        setCurrentCode(code);
-                      }}
                       key={code}
+                      onClick={() =>
+                        dispatch({
+                          type: "SET_COUNTRY_CODE",
+                          payload: code,
+                        })
+                      }
                     >
                       +{code}
                     </span>
@@ -174,11 +168,11 @@ export default function AuthBar() {
             </div>
             <FloatingInput
               label={"Enter phone number"}
-              value={inputValues.number}
+              value={state.inputValues.number}
               propsedOnChange={(value) =>
                 handleValuesChange("number", value)
               }
-              errorMessage={errors.numberError}
+              errorMessage={state.errors.numberError}
             />
           </div>
         ) : (
@@ -190,32 +184,36 @@ export default function AuthBar() {
           >
             <FloatingInput
               label={"Email"}
-              propsedOnChange={(value: string) =>
+              value={state.inputValues.email}
+              propsedOnChange={(value) =>
                 handleValuesChange("email", value)
               }
-              value={inputValues.email}
-              errorMessage={errors.emailError}
+              errorMessage={state.errors.emailError}
             />
-
             <FloatingInput
               label={"Password"}
-              propsedOnChange={(value: string) =>
+              value={state.inputValues.password}
+              propsedOnChange={(value) =>
                 handleValuesChange("password", value)
               }
-              value={inputValues.password}
-              errorMessage={errors.passwordError}
+              errorMessage={state.errors.passwordError}
             />
           </div>
         )}
-        {active === "register" && (
+
+        {state.active === "register" && (
           <div className='policy-container'>
             <img
-              onClick={() => setIsChecked((prev) => !prev)}
+              onClick={() =>
+                dispatch({
+                  type: "SET_CHECKED",
+                  payload: !state.isChecked,
+                })
+              }
               className='w-8 h-6'
               src={checkIcon}
               alt='checked icon'
             />
-
             <p className='text-[15px]'>
               Read and agree to the{" "}
               <span className='text-orange-500'>
@@ -225,17 +223,20 @@ export default function AuthBar() {
           </div>
         )}
       </div>
+
       <section className='submit-section'>
         <button
           onClick={handleAuth}
           className={`submit-btn ${
-            active === "register" && !isChecked && " opacity-60"
+            state.active === "register" &&
+            !state.isChecked &&
+            "opacity-60"
           }`}
-          disabled={active === "register" && !isChecked}
+          disabled={state.active === "register" && !state.isChecked}
         >
-          {active === "register"
+          {state.active === "register"
             ? "REGISTRATION"
-            : activeAuthOption === "number"
+            : state.activeAuthOption === "number"
             ? "SEND CODE"
             : "LOG IN"}
         </button>

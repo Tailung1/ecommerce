@@ -35,7 +35,7 @@ type ActionTypes =
       value: string;
     }
   | {
-      type: "SET_ERROR";
+      type: "SET_ERRORS";
       field: "emailError" | "passwordError" | "numberError";
       value: string;
     }

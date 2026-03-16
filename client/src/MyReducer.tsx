@@ -28,7 +28,7 @@ const useAuthReducer = () => {
           },
           errors: { ...state.errors, [`${action.field}Error`]: "" }, // clear error on input
         };
-      case "SET_ERROR":
+      case "SET_ERRORS":
         return {
           ...state,
           errors: { ...state.errors, [action.field]: action.value },

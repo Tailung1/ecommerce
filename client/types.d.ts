@@ -25,6 +25,12 @@ type StateTypes = {
   };
 };
 
+type Errors = {
+  emailError: string;
+  passwordError: string;
+  numberError: string;
+};
+
 type ActionTypes =
   | { type: "SET_ACTIVE"; payload: "auth" | "register" }
   | { type: "SET_AUTH_OPTION"; payload: "email" | "number" }
@@ -36,8 +42,7 @@ type ActionTypes =
     }
   | {
       type: "SET_ERRORS";
-      field: "emailError" | "passwordError" | "numberError";
-      value: string;
+      payload: Partial<Errors>;
     }
   | { type: "RESET_FORM" }
   | { type: "TOGGLE_COUNTRY_CODES" }

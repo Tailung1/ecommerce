@@ -26,12 +26,12 @@ const useAuthReducer = () => {
             ...state.inputValues,
             [action.field]: action.value,
           },
-          errors: { ...state.errors, [`${action.field}Error`]: "" }, // clear error on input
+          errors: { ...state.errors, [`${action.field}Error`]: "" },
         };
       case "SET_ERRORS":
         return {
           ...state,
-          errors: { ...state.errors, [action.field]: action.value },
+          errors: { ...state.errors, ...action.payload },
         };
       case "RESET_FORM":
         return {

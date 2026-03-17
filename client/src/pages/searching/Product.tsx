@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
+import { Helmet } from "react-helmet";
 import { useMyContext } from "../../MyContext";
 
 export default function Product() {
@@ -14,6 +14,7 @@ export default function Product() {
     .join(" ");
 
   const [product, setProduct] = useState<productType | null>(null);
+
   useEffect(() => {
     const getProduct = async () => {
       const productResponse = await fetch(
@@ -29,10 +30,23 @@ export default function Product() {
       setProduct(product);
     };
     getProduct();
-  }, []);
+  }, [slug]);
 
   return (
     <div className='flex-col flex-grow relative'>
+      <Helmet>
+        <title>{productTitle}</title>
+        <meta
+          name='description'
+          content={`Buy ${productTitle} at the best price for ${product?.price}`}
+        />
+        <meta property='og:title' content={productTitle} />
+        <meta
+          property='og:description'
+          content={`Get ${productTitle} now at the best price.`}
+        />
+      </Helmet>
+
       <h1>{productTitle}</h1>
 
       <div className='price-container flex items-center absolute w-full bottom-0 justify-between bg-orange-500 px-2 py-2'>

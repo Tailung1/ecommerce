@@ -19,11 +19,7 @@ export default function SearchBar() {
     color: string,
     id: number
   ) => {
-    console.log(name);
     const destName = name.replace(/\s+/g, "-");
-    // const destName = name.replace(" ", "-");
-
-    console.log(destName);
 
     const slug = `${destName}-${color}-${id}`.toLowerCase();
     navigate(`/${slug}`);

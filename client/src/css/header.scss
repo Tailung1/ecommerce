@@ -22,23 +22,11 @@ header {
     $padding: 10px 20px,
     $justify-content: space-between
   );
-  background-color: rgb(234, 217, 217);
-  opacity: 98%;
+  background-color: rgb(234, 217, 217,0.5);
+  backdrop-filter: blur(8px);
   position: sticky;
-  width: 100%;
-}
-.scrolled {
   top: 0;
-  animation: headerYscroll 0.5s ease;
-}
-
-@keyframes headerYscroll {
-  0% {
-    transform: translateY(-100%);
-  }
-  100% {
-    transform: translateY(100);
-  }
+  width: 100%;
 }
 
 header > div {
@@ -64,7 +52,7 @@ header > div {
 }
 
 .exit-input-container {
-  @include display-shared(30px, 10px 10px 10px 25px,flex-start);
+  @include display-shared(30px, 10px 10px 10px 25px, flex-start);
   max-width: 100%;
   background-color: rgb(240, 246, 239);
 }
@@ -179,7 +167,7 @@ body.no-scroll {
 }
 
 .mobile-phones,
-.smart-home{
+.smart-home {
   @include display-col;
 }
 

@@ -33,14 +33,6 @@ function App() {
       document.body.classList.remove("no-scroll");
     }
   }, [showSideBar, showCompareBar, showAuthBar]);
-  useEffect(() => {
-    const header = document.querySelector("header");
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 70) {
-        header?.classList.add("scrolled");
-      }
-    });
-  }, []);
 
   return (
     <div className='flex  flex-col min-h-screen'>

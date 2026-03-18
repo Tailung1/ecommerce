@@ -167,7 +167,7 @@ export default function AuthBar() {
               )}
             </div>
             <FloatingInput
-              label={"Enter phone number"}
+              label={"Phone number"}
               value={state.inputValues.number}
               propsedOnChange={(value) =>
                 handleValuesChange("number", value)

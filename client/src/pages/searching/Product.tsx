@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Helmet } from "react-helmet";
+// import { Helmet } from "react-helmet";
 import { useMyContext } from "../../MyContext";
 
 export default function Product() {
@@ -9,7 +9,7 @@ export default function Product() {
 
   const productTitle = slug
     ?.split("-")
-    .slice(0, -1)
+    .slice(0, -3) // to remove  elements  from right to left
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
 
@@ -34,21 +34,8 @@ export default function Product() {
 
   return (
     <div className='flex-col flex-grow relative'>
-      <Helmet>
-        <title>{productTitle}</title>
-        <meta
-          name='description'
-          content={`Buy ${productTitle} at the best price for ${product?.price}`}
-        />
-        <meta property='og:title' content={productTitle} />
-        <meta
-          property='og:description'
-          content={`Get ${productTitle} now at the best price.`}
-        />
-      </Helmet>
-
+   
       <h1>{productTitle}</h1>
-
       <div className='price-container flex items-center absolute w-full bottom-0 justify-between bg-orange-500 px-2 py-2'>
         <p className='text-white font-bold'>{product?.price} Gel</p>
         <button

@@ -6,7 +6,6 @@ import React, {
   useContext,
 } from "react";
 
-
 interface types {
   activeSection: string;
   setActiveSection: React.Dispatch<SetStateAction<string>>;
@@ -43,7 +42,7 @@ export default function ContextProvider({
 }: {
   children: ReactNode;
 }) {
-     const [compareIndex, setCompareIndex] = useState<number>(0);
+  const [compareIndex, setCompareIndex] = useState<number>(0);
   const [showAuthBar, setShowAuthBar] = useState<boolean>(false);
   const [showCompare, setShowCompare] = useState<boolean>(false);
   const [selectedProductsToCompare, setSelectedProductsToCompare] =
@@ -88,7 +87,7 @@ export default function ContextProvider({
         showCompare,
         setShowCompare,
         compareIndex,
-        setCompareIndex
+        setCompareIndex,
       }}
     >
       {children}

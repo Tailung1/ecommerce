@@ -38,6 +38,7 @@ export default function FloatingInput({
         {label}
       </motion.label>
       <input
+        id={inputId}
         className={
           hasError ? "border border-red-500" : "border border-white"
         }

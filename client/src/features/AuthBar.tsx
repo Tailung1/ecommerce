@@ -10,7 +10,6 @@ export default function AuthBar() {
   const { state, dispatch } = useAuthReducer();
   const { isExitingBar, setIsExitingBar, setShowAuthBar } =
     useMyContext();
-
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const countryCodes = ["995", "242", "927", "315"];
   const EmailAuthIsActive = state.activeAuthOption !== "number";
@@ -39,10 +38,7 @@ export default function AuthBar() {
   };
 
   const handleAuth = () => {
-    if (
-      state.active === "auth" &&
-      state.activeAuthOption === "email"
-    ) {
+    if (state.activeAuthOption === "email") {
       const emailError = !state.inputValues.email
         ? "Can't be empty"
         : !emailRegex.test(state.inputValues.email)
@@ -69,7 +65,10 @@ export default function AuthBar() {
 
   return (
     <div className={`Bar ${isExitingBar && "ExitBar"}`}>
-      <div className='flex flex-col gap-2 w-full relative'>
+      <div
+        onClick={resetValues}
+        className='flex flex-col gap-2 w-full relative'
+      >
         <div className='acces-options'>
           <img
             src={exitBtn}

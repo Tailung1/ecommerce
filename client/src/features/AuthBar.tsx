@@ -15,6 +15,7 @@ export default function AuthBar() {
   const countryCodes = ["995", "242", "927", "315"];
   const EmailAuthIsActive = state.activeAuthOption !== "number";
   const checkIcon = state.isChecked ? checked : unchecked;
+  const isEmailError = state.errors.emailError !== "";
 
   const resetValues = () => {
     dispatch({ type: "RESET_FORM" });
@@ -177,10 +178,9 @@ export default function AuthBar() {
           </div>
         ) : (
           <div
-            style={{
-              paddingBottom: EmailAuthIsActive ? "10px" : "20px",
-            }}
-            className='auth-with-email-container'
+            className={`auth-with-email-container ${
+              isEmailError ? "emailInputExtraPaddingIN" : ""
+            }`}
           >
             <FloatingInput
               label={"Email"}

@@ -132,6 +132,8 @@ input::placeholder {
 }
 .country-codes-container {
   @include display-col($gap: 1px, $padding: 10px 15px);
+  justify-content: center;
+  align-items: center;
   max-width: 70px;
   border-radius: 10px;
   position: relative;
@@ -153,8 +155,8 @@ input::placeholder {
   background-color: #dd3f3f;
   border-radius: 10px;
   position: absolute;
-  left: 0;
-  bottom: -210%;
+  left: 50;
+  top: 87%;
   z-index: 1;
 }
 .codes-wrapper * {
@@ -167,9 +169,13 @@ input::placeholder {
 }
 
 .auth-with-email-container {
-  @include display-col($gap: 22px, $padding: 0px 0px 200px);
+  @include display-col($gap: 10px, $padding: 0px 0px 27px);
   width: 100%;
-  margin-bottom: 15px;
+  transition: 0.4s ease;
+}
+
+.emailInputExtraPaddingIN {
+  gap: 28px;
 }
 
 .policy-container {

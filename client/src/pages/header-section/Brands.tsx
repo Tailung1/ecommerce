@@ -69,9 +69,8 @@ export default function Brands({
   const navigate = useNavigate();
 
   const handleNavigate = (category: string, brand: string) => {
-    const url = `${category}/${brand
-      .charAt(0)
-      .toLowerCase()}${brand.slice(1)}`;
+    const brandSlug = brand.toLowerCase().replace(/\s+/g, "-");
+    const url = `${category}/${brandSlug}`;
     navigate(url);
     setShowSideBar(false);
   };

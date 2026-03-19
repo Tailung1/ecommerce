@@ -65,8 +65,17 @@ footer * img:hover {
   justify-content: center;
   gap: 35px;
   padding: 10px;
+  animation: moveContainer 0.5s ease forwards;
 }
 
+@keyframes moveContainer {
+  0% {
+    transform: translateY(10%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
 .compare-header {
   display: flex;
   flex-direction: column;

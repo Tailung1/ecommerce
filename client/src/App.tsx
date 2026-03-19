@@ -1,6 +1,4 @@
 import { useMyContext } from "./MyContext";
-import HeaderSlider from "./pages/header-section/HeaderSlider";
-import { AnimatePresence } from "framer-motion";
 import { useEffect } from "react";
 import router from "../routes";
 import { RouterProvider } from "react-router-dom";
@@ -35,10 +33,8 @@ function App() {
   }, [showSideBar, showCompareBar, showAuthBar]);
 
   return (
-    <div className='flex  flex-col min-h-screen'>
-      <AnimatePresence>
-        {showSideBar && <HeaderSlider />}
-      </AnimatePresence>
+    <div className='flex flex-col min-h-screen'>
+      
       <RouterProvider router={router} />
       {showAuthBar && <AuthBar />}
       {showCompareBar && <CompareBar />}

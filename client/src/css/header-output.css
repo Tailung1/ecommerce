@@ -175,7 +175,7 @@ body.no-scroll {
   color: rgb(120, 49, 49);
 }
 
-.category:hover {
+.category-animate {
   animation: scaleEffct 0.2s ease;
   cursor: pointer;
 }
@@ -201,7 +201,7 @@ body.no-scroll {
 .brands-wrapper {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 10px;
   padding: 10px 0px;
   justify-content: flex-start;
   flex-wrap: wrap;
@@ -234,11 +234,11 @@ body.no-scroll {
   bottom: -20%;
 }
 
-.offline-section {
+.offline-category {
   background-color: rgb(235, 235, 235);
 }
 
-.active-section {
+.active-category {
   background-color: rgb(189, 242, 98);
 }
 

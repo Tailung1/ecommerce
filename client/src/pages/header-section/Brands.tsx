@@ -1,7 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import { useMyContext } from "../../MyContext";
 import phoneImage from "../../assets/iphone.png";
 
-type BrandsData = {
+type brandsDataTypes = {
   "mobile-phones": { name: string; image: string }[];
   tablets: { name: string; image: string }[];
   laptops: { name: string; image: string }[];
@@ -10,7 +11,7 @@ type BrandsData = {
   "smart-home": { name: string; image: string }[];
 };
 
-const brandsData: BrandsData = {
+const brandsData: brandsDataTypes = {
   "mobile-phones": [
     { name: "Apple", image: "/images/apple-phone.png" },
     { name: "Samsung", image: "/images/samsung-phone.png" },
@@ -57,16 +58,32 @@ const brandsData: BrandsData = {
   ],
 };
 
-export default function Brands() {
-  const { activeSection } = useMyContext();
+export default function Brands({
+  activeCategory,
+}: {
+  activeCategory: string;
+}) {
+  const { setShowSideBar } = useMyContext();
   const brandList =
-    brandsData[activeSection as keyof BrandsData] || [];
+    brandsData[activeCategory as keyof brandsDataTypes] || [];
+  const navigate = useNavigate();
 
+  const handleNavigate = (category: string, brand: string) => {
+    const url = `${category}/${brand
+      .charAt(0)
+      .toLowerCase()}${brand.slice(1)}`;
+    navigate(url);
+    setShowSideBar(false);
+  };
   return (
     <>
       {brandList.length > 0 ? (
         brandList.map((brand, index) => (
-          <div key={index} className='brand-item'>
+          <div
+            onClick={() => handleNavigate(activeCategory, brand.name)}
+            key={index}
+            className='brand-item'
+          >
             <img
               src={phoneImage}
               alt={brand.name}

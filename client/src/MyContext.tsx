@@ -7,8 +7,8 @@ import React, {
 } from "react";
 
 interface types {
-  activeSection: string;
-  setActiveSection: React.Dispatch<SetStateAction<string>>;
+  activeCategory: string;
+  setActiveCategory: React.Dispatch<SetStateAction<string>>;
   showSearchBar: boolean;
   setShowSearchBar: React.Dispatch<SetStateAction<boolean>>;
   showSideBar: boolean;
@@ -51,7 +51,7 @@ export default function ContextProvider({
     useState<boolean>(false);
   const [isExitingBar, setIsExitingBar] = useState<boolean>(false);
 
-  const [activeSection, setActiveSection] =
+  const [activeCategory, setActiveCategory] =
     useState<string>("mobile-phones");
   const [showSearchBar, setShowSearchBar] = useState<boolean>(false);
   const [showSideBar, setShowSideBar] = useState<boolean>(false);
@@ -64,8 +64,8 @@ export default function ContextProvider({
   return (
     <MyContext.Provider
       value={{
-        activeSection,
-        setActiveSection,
+        activeCategory,
+        setActiveCategory,
         showSearchBar,
         setShowSearchBar,
         showSideBar,

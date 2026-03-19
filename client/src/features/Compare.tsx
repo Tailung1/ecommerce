@@ -12,6 +12,7 @@ export default function Compare() {
     setSelectedProductsToCompare,
     setCompareIndex,
     compareIndex,
+    showCompare,
   } = useMyContext();
 
   const handleReset = () => {
@@ -47,7 +48,11 @@ export default function Compare() {
     2;
 
   return (
-    <div className='compare-container'>
+    <div
+      className={`compare-container ${
+        showCompare && "animate-compare-container"
+      }`}
+    >
       <div className='compare-header'>
         <div className='compare-navigation'>
           <div>

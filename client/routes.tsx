@@ -4,6 +4,7 @@ import Main from "./src/pages/Main";
 import Product from "./src/pages/searching/Product";
 import Cart from "./src/pages/cart/Cart";
 import Compare from "./src/features/Compare";
+import BrandItems from "./src/pages/header-section/BrandItems";
 
 const router = createBrowserRouter([
   {
@@ -18,13 +19,17 @@ const router = createBrowserRouter([
         element: <Product />,
       },
       {
+        path: "/:slug/:slug",
+        element: <BrandItems />,
+      },
+      {
         path: "/cart",
         element: <Cart />,
       },
       {
-        path:"/compare-products",
-        element:<Compare />
-      }
+        path: "/compare-products",
+        element: <Compare />,
+      },
     ],
   },
 ]);

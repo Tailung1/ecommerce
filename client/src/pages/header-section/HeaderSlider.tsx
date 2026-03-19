@@ -13,24 +13,24 @@ import rejectIcon from "../../assets/reject.png";
 
 export default function HeaderSlider() {
   const {
-    activeSection,
-    setActiveSection,
+    activeCategory,
+    setActiveCategory,
     setShowSideBar,
     setShowSearchBar,
   } = useMyContext();
-
   const categories = [
     {
       id: "mobile-phones",
-      label: ["Mobile", "phones"],
+      label: ["Mobile", "Phones"],
       icon: mobilePhone,
     },
     { id: "tablets", label: ["Tabs"], icon: tablet },
     { id: "laptops", label: ["Laptops"], icon: laptop },
     { id: "consoles", label: ["Gaming"], icon: consoleIcon },
     { id: "televisions", label: ["TV"], icon: television },
-    { id: "smart-home", label: ["Smart", "home"], icon: smartHome },
+    { id: "smart-home", label: ["Smart", "Home"], icon: smartHome },
   ];
+
   return (
     <motion.div
       initial={{ x: "-100vw" }}
@@ -73,11 +73,11 @@ export default function HeaderSlider() {
             <div
               key={cat.id}
               className={`${
-                activeSection === cat.id
-                  ? "active-section"
-                  : "offline-section"
+                activeCategory === cat.id
+                  ? "active-category category-animate"
+                  : "offline-category"
               } category`}
-              onClick={() => setActiveSection(cat.id)}
+              onClick={() => setActiveCategory(cat.id)}
             >
               <img src={cat.icon} alt={`${cat.id} icon`} />
               <div className={`${cat.label.length > 1 && cat.id}`}>
@@ -90,7 +90,7 @@ export default function HeaderSlider() {
         </section>
         <section className='brands-wrapper'>
           {" "}
-          <Brands />
+          <Brands activeCategory={activeCategory} />
         </section>
       </div>
     </motion.div>

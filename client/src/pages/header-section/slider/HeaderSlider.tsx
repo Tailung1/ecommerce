@@ -1,15 +1,15 @@
 import { easeOut, motion } from "framer-motion";
-import Brands from "./Brands";
-import { useMyContext } from "../../MyContext";
+import BrandList from "./BrandList";
+import { useMyContext } from "../../../MyContext";
 
-import mobilePhone from "../../assets/mobile-phone.png";
-import tablet from "../../assets/tablet.png";
-import laptop from "../../assets/laptop.png";
-import consoleIcon from "../../assets/console.png";
-import television from "../../assets/television.png";
-import smartHome from "../../assets/smart-home.png";
-import searchIcon from "../../assets/search-icon.png";
-import rejectIcon from "../../assets/reject.png";
+import mobilePhone from "../../../assets/mobile-phone.png";
+import tablet from "../../../assets/tablet.png";
+import laptop from "../../../assets/laptop.png";
+import consoleIcon from "../../../assets/console.png";
+import television from "../../../assets/television.png";
+import smartHome from "../../../assets/smart-home.png";
+import searchIcon from "../../../assets/search-icon.png";
+import rejectIcon from "../../../assets/reject.png";
 
 export default function HeaderSlider() {
   const {
@@ -88,9 +88,9 @@ export default function HeaderSlider() {
             </div>
           ))}
         </section>
-        <section className='brands-wrapper'>
+        <section className='brands-container'>
           {" "}
-          <Brands activeCategory={activeCategory} />
+          <BrandList />
         </section>
       </div>
     </motion.div>

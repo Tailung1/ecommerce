@@ -4,9 +4,10 @@ import { useParams } from "react-router-dom";
 import { useMyContext } from "../../MyContext";
 
 export default function Product() {
-  const { slug } = useParams();
+  const { slug, brandANDid } = useParams();
   const { setShowAuthBar } = useMyContext();
 
+  console.log(brandANDid?.split("-").slice(-1).join(""));
   const productTitle = slug
     ?.split("-")
     .slice(0, -3) // to remove  elements  from right to left
@@ -34,7 +35,6 @@ export default function Product() {
 
   return (
     <div className='flex-col flex-grow relative'>
-   
       <h1>{productTitle}</h1>
       <div className='price-container flex items-center absolute w-full bottom-0 justify-between bg-orange-500 px-2 py-2'>
         <p className='text-white font-bold'>{product?.price} Gel</p>

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { useMyContext } from "../../MyContext";
-import phoneImage from "../../assets/iphone.png";
+import { useMyContext } from "../../../MyContext";
+import phoneImage from "../../../assets/iphone.png";
 
 type brandsDataTypes = {
   "mobile-phones": { name: string; image: string }[];
@@ -58,43 +58,44 @@ const brandsData: brandsDataTypes = {
   ],
 };
 
-export default function Brands({
-  activeCategory,
-}: {
-  activeCategory: string;
-}) {
-  const { setShowSideBar } = useMyContext();
+export default function BrandList() {
+  const { setShowSideBar, activeCategory } = useMyContext();
   const brandList =
     brandsData[activeCategory as keyof brandsDataTypes] || [];
   const navigate = useNavigate();
 
   const handleNavigate = (category: string, brand: string) => {
     const brandSlug = brand.toLowerCase().replace(/\s+/g, "-");
-    const url = `${category}/${brandSlug}`;
+    const url = `${category}-${brandSlug}`;
     navigate(url);
     setShowSideBar(false);
   };
   return (
-    <>
-      {brandList.length > 0 ? (
-        brandList.map((brand, index) => (
-          <div
-            onClick={() => handleNavigate(activeCategory, brand.name)}
-            key={index}
-            className='brand-item'
-          >
-            <img
-              src={phoneImage}
-              alt={brand.name}
-              className='brand-image'
-              loading='lazy'
-            />
-            <p className='brand-name'>{brand.name}</p>
-          </div>
-        ))
-      ) : (
-        <p>No brands available in this section.</p>
-      )}
-    </>
+    <section className='brands-section'>
+      <div className='brands-wrapper'>
+        {brandList.length > 0 ? (
+          brandList.map((brand, index) => (
+            <div
+              onClick={() =>
+                handleNavigate(activeCategory, brand.name)
+              }
+              key={index}
+              className='brand-item'
+            >
+              <img
+                src={phoneImage}
+                alt={brand.name}
+                className='brand-image'
+                loading='lazy'
+              />
+              <p className='brand-paragraph'>{brand.name}</p>
+            </div>
+          ))
+        ) : (
+          <p>No brands available in this section.</p>
+        )}
+      </div>
+      {activeCategory === "mobile-phones" && <button>See all</button>}
+    </section>
   );
 }

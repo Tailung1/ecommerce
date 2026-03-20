@@ -2,9 +2,9 @@ import { createBrowserRouter } from "react-router-dom";
 import Layout from "./Layout";
 import Main from "./src/pages/Main";
 import Product from "./src/pages/searching/Product";
+import Products from "./src/pages/searching/Products";
 import Cart from "./src/pages/cart/Cart";
 import Compare from "./src/features/Compare";
-import BrandItems from "./src/pages/header-section/BrandItems";
 
 const router = createBrowserRouter([
   {
@@ -15,13 +15,14 @@ const router = createBrowserRouter([
         element: <Main />,
       },
       {
-        path: "/:slug",
+        path: "/slug",
         element: <Product />,
       },
       {
-        path: "/:slug/:slug",
-        element: <BrandItems />,
+        path: "/:category/:id",
+        element: <Products />,
       },
+
       {
         path: "/cart",
         element: <Cart />,

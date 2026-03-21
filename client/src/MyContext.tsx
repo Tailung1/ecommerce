@@ -31,8 +31,6 @@ interface types {
   setShowCompareBar: React.Dispatch<SetStateAction<boolean>>;
   isExitingBar: boolean;
   setIsExitingBar: React.Dispatch<SetStateAction<boolean>>;
-  compareIndex: number;
-  setCompareIndex: React.Dispatch<SetStateAction<number>>;
 }
 
 const MyContext = createContext({} as types);
@@ -42,7 +40,6 @@ export default function ContextProvider({
 }: {
   children: ReactNode;
 }) {
-  const [compareIndex, setCompareIndex] = useState<number>(0);
   const [showAuthBar, setShowAuthBar] = useState<boolean>(false);
   const [showCompare, setShowCompare] = useState<boolean>(false);
   const [selectedProductsToCompare, setSelectedProductsToCompare] =
@@ -86,8 +83,6 @@ export default function ContextProvider({
         setShowCompareBar,
         showCompare,
         setShowCompare,
-        compareIndex,
-        setCompareIndex,
       }}
     >
       {children}

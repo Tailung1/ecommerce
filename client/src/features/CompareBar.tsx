@@ -7,8 +7,6 @@ export default function CompareBar() {
     setIsExitingBar,
     setShowCompareBar,
     setSelectedProductsToCompare,
-    compareIndex,
-    setCompareIndex,
   } = useMyContext();
 
   const testProducts = [
@@ -30,7 +28,8 @@ export default function CompareBar() {
     if (product) {
       setSelectedProductsToCompare((prev) => {
         const newArr = [...prev];
-        newArr[compareIndex] = product;
+        const index = newArr.indexOf(null);
+        newArr[index] = product;
         return newArr;
       });
     }
@@ -59,7 +58,6 @@ export default function CompareBar() {
           onClick={() => {
             insertProductInCompareList(prod.id);
             handleExit();
-            setCompareIndex((prev) => prev + 1);
           }}
         >
           {" "}

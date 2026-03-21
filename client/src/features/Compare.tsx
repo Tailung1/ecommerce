@@ -10,8 +10,7 @@ export default function Compare() {
     setShowCompareBar,
     selectedProductsToCompare,
     setSelectedProductsToCompare,
-    setCompareIndex,
-    compareIndex,
+
     showCompare,
   } = useMyContext();
 
@@ -21,14 +20,14 @@ export default function Compare() {
     );
     if (!hasAnyProduct) return;
     setSelectedProductsToCompare([null, null, null, null]);
-    setCompareIndex(0);
   };
 
   const handleBarOpen = (id: number) => {
-    if (compareIndex === 4) return;
-    if (selectedProductsToCompare.find((item) => item?.id === id))
+    if (
+      !selectedProductsToCompare.includes(null) ||
+      selectedProductsToCompare.find((item) => item?.id === id)
+    )
       return;
-
     setShowCompareBar(true);
   };
   const handleReject = (id: number) => {
@@ -41,7 +40,6 @@ export default function Compare() {
       }
       return filtred;
     });
-    setCompareIndex((prev) => prev - 1);
   };
   const allowCompare =
     selectedProductsToCompare.filter((item) => item !== null).length <

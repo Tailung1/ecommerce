@@ -66,7 +66,7 @@ export default function BrandList() {
 
   const handleNavigate = (category: string, brand: string) => {
     const brandSlug = brand.toLowerCase().replace(/\s+/g, "-");
-    const url = `${category}-${brandSlug}`;
+    const url = `${category}/${brandSlug}-c346`;
     navigate(url);
     setShowSideBar(false);
   };

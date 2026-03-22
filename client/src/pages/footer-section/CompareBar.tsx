@@ -1,5 +1,5 @@
-import { useMyContext } from "../MyContext";
-import serachIcon from "../assets/search-icon.png";
+import { useMyContext } from "../../MyContext";
+import serachIcon from "../../assets/search-icon.png";
 
 export default function CompareBar() {
   const {

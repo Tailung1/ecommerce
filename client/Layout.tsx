@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Header from "../client/src/pages/header-section/Header";
-import Footer from "../client/src/pages/Footer";
+import Footer from "./src/pages/footer-section/Footer";
 import { useMyContext } from "./src/MyContext";
 import HeaderSlider from "./src/pages/header-section/slider/HeaderSlider";
 import { AnimatePresence } from "framer-motion";

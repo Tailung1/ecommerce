@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import router from "../routes";
 import { RouterProvider } from "react-router-dom";
 import AuthBar from "./features/AuthBar";
-import CompareBar from "./features/CompareBar";
+import CompareBar from "./pages/footer-section/CompareBar";
 
 function App() {
   const {

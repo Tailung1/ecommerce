@@ -1,9 +1,9 @@
-import MainIcon from "../assets/home.png";
-import CategoriesIcon from "../assets/categories.png";
-import CompareIcon from "../assets/compare.png";
-import PromotionsIcon from "../assets/promotions.png";
-import LoginIcon from "../assets/login.png";
-import { useMyContext } from "../MyContext";
+import MainIcon from "../../assets/home.png";
+import CategoriesIcon from "../../assets/categories.png";
+import CompareIcon from "../../assets/compare.png";
+import PromotionsIcon from "../../assets/promotions.png";
+import LoginIcon from "../../assets/login.png";
+import { useMyContext } from "../../MyContext";
 import { useNavigate } from "react-router-dom";
 
 export default function Footer() {
@@ -11,7 +11,7 @@ export default function Footer() {
     setShowSideBar,
     setShowSearchBar,
     setShowAuthBar,
-    setShowCompare
+    setShowCompare,
   } = useMyContext();
   const options = [
     { id: "Main", icon: MainIcon },
@@ -37,8 +37,13 @@ export default function Footer() {
                 }
               : cat.id === "Categories"
               ? () => setShowSideBar(true)
+              : cat.id === "Promotions"
+              ? () => navigate("/promotions")
               : cat.id === "Compare"
-              ? () => {setShowCompare(true);navigate("/compare-products")}
+              ? () => {
+                  setShowCompare(true);
+                  navigate("/compare-products");
+                }
               : cat.id === "Login"
               ? () => setShowAuthBar(true)
               : undefined

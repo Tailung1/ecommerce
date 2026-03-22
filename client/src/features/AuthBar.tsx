@@ -1,4 +1,4 @@
-import FloatingInput from "../shared/FloatingInput";
+import FloatingInput from "../FloatingInput";
 import icon from "../assets/main-logo.png";
 import checked from "../assets/checked-rules.png";
 import unchecked from "../assets/unchecked.png";

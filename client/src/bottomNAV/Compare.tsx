@@ -1,9 +1,9 @@
-import { useMyContext } from "../../MyContext";
-import leftArrowIcon from "../../assets/left.png";
-import plusIcon from "../../assets/plus.png";
-import binIcon from "../../assets/bin.png";
-import searchIcon from "../../assets/search-icon.png";
-import rejectIcon from "../../assets/reject.png";
+import { useMyContext } from "../MyContext";
+import leftArrowIcon from "../assets/left.png";
+import plusIcon from "../assets/plus.png";
+import binIcon from "../assets/bin.png";
+import searchIcon from "../assets/search-icon.png";
+import rejectIcon from "../assets/reject.png";
 
 export default function Compare() {
   const {

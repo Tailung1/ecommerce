@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import router from "../routes";
 import { RouterProvider } from "react-router-dom";
 import AuthBar from "./features/AuthBar";
-import CompareBar from "./pages/footer-section/CompareBar";
+import CompareBar from "./bottomNAV/CompareBar";
 
 function App() {
   const {
@@ -34,7 +34,6 @@ function App() {
 
   return (
     <div className='flex flex-col min-h-screen'>
-      
       <RouterProvider router={router} />
       {showAuthBar && <AuthBar />}
       {showCompareBar && <CompareBar />}

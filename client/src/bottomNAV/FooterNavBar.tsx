@@ -1,12 +1,12 @@
-import MainIcon from "../../assets/home.png";
-import CategoriesIcon from "../../assets/categories.png";
-import CompareIcon from "../../assets/compare.png";
-import PromotionsIcon from "../../assets/promotions.png";
-import LoginIcon from "../../assets/login.png";
-import { useMyContext } from "../../MyContext";
+import MainIcon from "../assets/home.png";
+import CategoriesIcon from "../assets/categories.png";
+import CompareIcon from "../assets/compare.png";
+import PromotionsIcon from "../assets/promotions.png";
+import LoginIcon from "../assets/login.png";
+import { useMyContext } from "../MyContext";
 import { useNavigate } from "react-router-dom";
 
-export default function Footer() {
+export default function FooterNavBar() {
   const {
     setShowSideBar,
     setShowSearchBar,
@@ -75,7 +75,7 @@ export default function Footer() {
             />
           )}
 
-          <span>{cat.id}</span>
+          <span className=''>{cat.id}</span>
         </div>
       ))}
     </footer>

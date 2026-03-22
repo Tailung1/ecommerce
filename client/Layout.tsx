@@ -1,14 +1,14 @@
 import { Outlet } from "react-router-dom";
 import Header from "../client/src/pages/header-section/Header";
-import Footer from "./src/pages/footer-section/Footer";
-import { useMyContext } from "./src/MyContext";
 import HeaderSlider from "./src/pages/header-section/slider/HeaderSlider";
 import { AnimatePresence } from "framer-motion";
+import Footer from "./src/pages/Footer";
+import FooterNavBar from "./src/bottomNAV/FooterNavBar";
+import { useMyContext } from "./src/MyContext";
 
 export default function Layout() {
-  const { showSideBar, showAuthBar, showCompareBar, isExitingBar } =
+  const {showSideBar, showAuthBar, showCompareBar, isExitingBar } =
     useMyContext();
-
   return (
     <div className='flex flex-col  flex-grow'>
       <Header />
@@ -16,13 +16,14 @@ export default function Layout() {
         {showSideBar && <HeaderSlider />}
       </AnimatePresence>
       <main
-        className={`flex-grow flex flex-col bg-white hh ${
+        className={`flex-grow flex flex-col bg-white  ${
           (showAuthBar || showCompareBar) && "layer-backgroundIN"
         } ${isExitingBar && "layer-backgroundOUT"} `}
       >
         <Outlet />
       </main>
       <Footer />
+      <FooterNavBar />
     </div>
   );
 }

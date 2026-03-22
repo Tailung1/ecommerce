@@ -4,8 +4,8 @@ import Main from "./src/pages/Main";
 import Product from "./src/pages/searching/Product";
 import Products from "./src/pages/searching/Products";
 import Cart from "./src/pages/cart/Cart";
-import Compare from "./src/pages/footer-section/Compare";
-import Promotions from "./src/pages/footer-section/Promotions";
+import Compare from "./src/bottomNAV/Compare";
+import Promotions from "./src/bottomNAV/Promotions";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +18,7 @@ const router = createBrowserRouter([
       {
         path: "/:slug",
         element: <Products />,
+        
       },
       {
         path: "/:category/:id",

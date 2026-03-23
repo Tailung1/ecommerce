@@ -73,10 +73,10 @@ export default function Compare() {
           >
             {!prod ? (
               <div className='select-product-container'>
-                <div className='select-product'>
+            
                   <img src={plusIcon} alt='Plus icon' />
                   <span>Select product</span>
-                </div>
+             
               </div>
             ) : (
               <div className='flex gap-5'>

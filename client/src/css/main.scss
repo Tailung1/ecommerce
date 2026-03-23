@@ -1,3 +1,5 @@
+$primary-color: #ec5e2a;
+
 %display-shared {
   display: flex;
   align-items: center;
@@ -192,7 +194,7 @@ input::placeholder {
 }
 
 .submit-btn {
-  background-color: #ec5e2a;
+  background-color: $primary-color;
   padding: 15px 0;
   border-radius: 10px;
   color: rgb(255, 255, 255);
@@ -204,6 +206,7 @@ input::placeholder {
   border: 1px solid rgb(237, 230, 230);
   width: 100%;
 }
+
 .google-btn {
   @extend %display-shared;
   background-color: #f2f2f2;

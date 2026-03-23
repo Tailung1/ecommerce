@@ -5,8 +5,10 @@ import PromotionsIcon from "../assets/promotions.png";
 import LoginIcon from "../assets/login.png";
 import { useMyContext } from "../MyContext";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export default function FooterNavBar() {
+  const [index, setIndex] = useState(1);
   const {
     setShowSideBar,
     setShowSearchBar,
@@ -14,15 +16,16 @@ export default function FooterNavBar() {
     setShowCompare,
   } = useMyContext();
   const options = [
-    { id: "Main", icon: MainIcon },
-    { id: "Categories", icon: CategoriesIcon },
-    { id: "Promotions", icon: PromotionsIcon },
-    { id: "Compare", icon: CompareIcon },
-    { id: "Login", icon: LoginIcon },
+    { id: "Main", icon: MainIcon, index: 1 },
+    { id: "Categories", icon: CategoriesIcon, index: 2 },
+    { id: "Promotions", icon: PromotionsIcon, index: 3 },
+    { id: "Compare", icon: CompareIcon, index: 4 },
+    { id: "Login", icon: LoginIcon, index: 6 },
   ];
   const navigate = useNavigate();
+
   return (
-    <footer>
+    <nav className='bottom-nav-bar'>
       {options.map((cat) => (
         <div
           className={
@@ -34,18 +37,25 @@ export default function FooterNavBar() {
               ? () => {
                   navigate("/");
                   setShowSearchBar(false);
+
+                  setIndex(cat.index);
                 }
               : cat.id === "Categories"
               ? () => setShowSideBar(true)
               : cat.id === "Promotions"
-              ? () => navigate("/promotions")
+              ? () => {
+                  navigate("/promotions"), setIndex(cat.index);
+                }
               : cat.id === "Compare"
               ? () => {
                   setShowCompare(true);
                   navigate("/compare-products");
+                  setIndex(cat.index);
                 }
               : cat.id === "Login"
-              ? () => setShowAuthBar(true)
+              ? () => {
+                  setShowAuthBar(true);
+                }
               : undefined
           }
         >
@@ -75,9 +85,13 @@ export default function FooterNavBar() {
             />
           )}
 
-          <span className=''>{cat.id}</span>
+          <span
+            className={`${index === cat.index ? "text-red-500" : ""}`}
+          >
+            {cat.id}
+          </span>
         </div>
       ))}
-    </footer>
+    </nav>
   );
 }

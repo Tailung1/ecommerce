@@ -75,7 +75,7 @@ export default function Layout() {
       {showAuthBar && <AuthBar />}
       {showCompareBar && <CompareBar />}
       <main
-        className={`flex-grow flex-col bg-white  ${
+        className={` ${
           (showAuthBar || showCompareBar) && "layer-backgroundIN"
         } ${isExitingBar && "layer-backgroundOUT"} `}
       >

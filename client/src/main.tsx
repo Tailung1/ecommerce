@@ -4,7 +4,7 @@ import "./index.css";
 import "./css/header-output.css";
 import "./css/main-output.css";
 import "./css/footer-output.css";
-import "./css/nav.css"
+import "./css/nav-output.css"
 import App from "./App.tsx";
 import ContextProvider from "./MyContext";
 

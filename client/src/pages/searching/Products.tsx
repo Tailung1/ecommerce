@@ -1,10 +1,9 @@
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 
 export default function Products() {
-  const { slug } = useParams();
+//   const { slug } = useParams();
   //   const costumSlug = id?.split("-").slice(-1).join("").replace(/\D/g, "");
-  const costumSlug = slug?.split("-").slice(-1);
-  console.log(costumSlug)
+//   const costumSlug = slug?.split("-").slice(-1);
 
   return (
     <div>

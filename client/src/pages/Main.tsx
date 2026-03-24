@@ -4,9 +4,9 @@ import SearchBar from "./searching/SearchBar";
 export default function Main() {
   const { showSearchBar } = useMyContext();
   return (
-    <div className='flex flex-col px-6'>
+    <div>
       {!showSearchBar ? (
-        <div className=' flex flex-col '>
+        <div>
           {" "}
           <p className='w-full'>1</p>
           <p className='w-full'>last</p>{" "}

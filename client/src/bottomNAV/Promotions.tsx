@@ -1,6 +1,6 @@
 export default function Promotions() {
   return (
-    <section className='promotions-container'>
+    <div className='promotions-container'>
       <section className='p-breathles'>
         <h3>Breathles in zoomer</h3>
         <p>Discover Breathless Zoomer</p>
@@ -15,6 +15,6 @@ export default function Promotions() {
         <h3>New Models</h3>
         <p>See the Latest Models</p>
       </section>
-    </section>
+    </div>
   );
 }

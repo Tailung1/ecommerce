@@ -1,4 +1,13 @@
-.google-btn, .country-code {
+main {
+  background-color: green;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.google-btn,
+.country-code {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -79,7 +88,11 @@ input::placeholder {
 .auth-hr {
   height: 2px;
   margin-bottom: 6px;
-  background: linear-gradient(to right, #f2aa36 25%, rgb(227, 224, 224) 25%);
+  background: linear-gradient(
+    to right,
+    #f2aa36 25%,
+    rgb(227, 224, 224) 25%
+  );
   background-size: 200%;
   transition: 0.3s ease;
   border: none;

@@ -77,7 +77,7 @@ export default function Layout() {
       <main
         className={` ${
           (showAuthBar || showCompareBar) && "layer-backgroundIN"
-        } ${isExitingBar && "layer-backgroundOUT"} `}
+        } ${isExitingBar && "layer-backgroundOUT"}  `}
       >
         <Outlet />
       </main>

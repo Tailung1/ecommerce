@@ -27,23 +27,23 @@ img {
   animation: layer-animateIN 0.4s forwards;
 }
 .layer-backgroundOUT {
-  animation: layer-animateOUT 0.4s forwards;
+  animation: layer-animateOUT 0.4s ;
 }
 @keyframes layer-animateOUT {
   0% {
     background-color: rgba(0, 0, 0, 0.5);
   }
-  20% {
+  10% {
     background-color: rgba(0, 0, 0, 0.4);
   }
 
-  30% {
+  20% {
     background-color: rgba(0, 0, 0, 0.3);
   }
-  50% {
+  40% {
     background-color: rgba(0, 0, 0, 0.2);
   }
-  70% {
+  60% {
     background-color: rgba(0, 0, 0, 0.1);
   }
   100% {

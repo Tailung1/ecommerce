@@ -21,6 +21,12 @@ $primary-color: #ec5e2a;
   padding: $padding;
 }
 
+main {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  padding: 10px;
+}
 .exit-btn,
 .exit-btn-compare {
   background-color: red;

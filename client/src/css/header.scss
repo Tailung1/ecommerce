@@ -1,25 +1,8 @@
+@use "mixins";
 @use "Partial-slider";
 
-@mixin display-shared(
-  $gap: 0px,
-  $padding: 0px,
-  $justify-content: center
-) {
-  display: flex;
-  align-items: center;
-  gap: $gap;
-  padding: $padding;
-  justify-content: $justify-content;
-}
-
-@mixin display-col($gap: 0px) {
-  display: flex;
-  flex-direction: column;
-  gap: $gap;
-}
-
 header {
-  @include display-shared(
+  @include mixins.display-shared(
     $gap: 0,
     $padding: 10px 20px,
     $justify-content: space-between
@@ -32,18 +15,18 @@ header {
 }
 
 header > div {
-  @include display-shared($gap: 5px);
+  @include mixins.display-shared($gap: 5px);
   cursor: pointer;
 }
 .main-logo-div {
-  @include display-shared;
+  @include mixins.display-shared;
 }
 .balisha {
   width: 50px;
   height: 50px;
 }
 .header-right-side-items {
-  @include display-shared($gap: 10px);
+  @include mixins.display-shared($gap: 10px);
 }
 
 .languages-wrapper {
@@ -54,7 +37,7 @@ header > div {
 }
 
 .exit-input-container {
-  @include display-shared(30px, 10px 10px 10px 25px, flex-start);
+  @include mixins.display-shared(30px, 10px 10px 10px 25px, flex-start);
   max-width: 100%;
   background-color: rgb(240, 246, 239);
 }
@@ -63,7 +46,7 @@ header > div {
 }
 .searach-input-container {
   width: 100%;
-  @include display-col($gap: 10px);
+  @include mixins.display-col($gap: 10px);
   background-color: rgb(68, 0, 128);
 }
 .input-container {
@@ -87,10 +70,10 @@ header > div {
 }
 
 .popular-searches-container {
-  @include display-col($gap: 15px);
+  @include mixins.display-col($gap: 15px);
 }
 .popular-searches-wrapper {
-  @include display-shared($gap: 15px, $padding: 0px);
+  @include mixins.display-shared($gap: 15px, $padding: 0px);
   flex-wrap: wrap;
   font-size: 13px;
   border-radius: 10px;

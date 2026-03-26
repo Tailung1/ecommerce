@@ -1,3 +1,6 @@
+@use "mixins";
+
+
 .slider-container {
   position: fixed;
   display: flex;
@@ -14,7 +17,7 @@ body.no-scroll {
 }
 
 .categories-wrapper {
-  @include display-shared($gap: 2px);
+  @include mixins.display-shared($gap: 2px);
   flex-direction: column;
   background-color: rgb(240, 246, 239);
 }
@@ -29,7 +32,7 @@ body.no-scroll {
   height: 100%;
 }
 .category {
-  @include display-shared($gap: 5px, $padding: 10px 5px);
+  @include mixins.display-shared($gap: 5px, $padding: 10px 5px);
   flex-direction: column;
   width: 100%;
   font-size: 15px;
@@ -55,7 +58,7 @@ body.no-scroll {
 
 .mobile-phones,
 .smart-home {
-  @include display-col;
+  @include mixins.display-col;
 }
 .brands-container,
 .brands-section,

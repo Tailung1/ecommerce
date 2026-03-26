@@ -85,9 +85,9 @@ body.no-scroll {
 }
 
 .brands-wrapper {
-  display: flex;
-  min-width: 100px;
-  grid-template-columns: auto auto auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding-right: 5px;
   grid-gap: 10px;
 }
 
@@ -108,7 +108,7 @@ body.no-scroll {
 .brand-image {
   position: absolute;
   height: 80%;
-  right: -15px;
+  right: -19px;
   bottom: -20%;
 }
 

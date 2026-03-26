@@ -4,8 +4,8 @@ import Header from "../client/src/pages/header-section/Header";
 import HeaderSlider from "./src/pages/header-section/slider/HeaderSlider";
 import { AnimatePresence } from "framer-motion";
 import Footer from "./src/pages/Footer";
-import FooterNavBar from "./src/bottomNAV/BottomNavBar";
-import AuthBar from "./src/features/AuthBar";
+import MainBar from "./src/bottomNAV/MainBar";
+import AuthBar from "./src/bottomNAV/AuthBar";
 import CompareBar from "./src/bottomNAV/CompareBar";
 import { useMyContext } from "./src/MyContext";
 
@@ -82,7 +82,7 @@ export default function Layout() {
         <Outlet />
       </main>
       <Footer />
-      <FooterNavBar />
+      <MainBar />
     </div>
   );
 }

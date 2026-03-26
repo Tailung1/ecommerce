@@ -7,7 +7,7 @@ import { useMyContext } from "../MyContext";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-export default function FooterNavBar() {
+export default function MainBar() {
   const [index, setIndex] = useState(1);
   const {
     setShowSideBar,

@@ -1,22 +1,104 @@
 main {
-  display: flex;
   flex-grow: 1;
-  flex-direction: column;
   padding: 10px;
-  overflow: hidden;
+  padding-right: 0px;
+  min-height: 100%;
 }
 
-.price-container {
-  animation: animate-price-container 0.5s ease;
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
 
-@keyframes animate-price-container {
-  0% {
-    transform: translateY(100%);
-  }
-  100% {
-    transform: translateY(0);
-  }
+.hightlights-wrapper,
+.breathles-wrapper {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.hightlights-wrapper > div {
+  border: 1px solid green;
+  min-width: 291px;
+  min-height: 100px;
+  border-radius: 15px;
+}
+
+.breathles-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.breathles-wrapper {
+  gap: 25px;
+}
+
+.breathles-wrapper > div {
+  display: flex;
+  flex-direction: column;
+  min-width: 170px;
+  gap: 20px;
+  align-items: flex-start;
+  border-radius: 15px;
+  position: relative;
+}
+
+.item-image {
+  width: 200px;
+  height: 200px;
+}
+
+.item-info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-bottom: 60px;
+}
+
+.price {
+  color: #ec5e2a;
+  font-size: 20px;
+}
+
+.installment-price {
+  color: #ec5e2a;
+}
+
+.item-name {
+  font-weight: 600;
+}
+
+.features {
+  display: flex;
+  gap: 10px;
+  position: absolute;
+  bottom: 0;
+}
+
+.features > div {
+  align-items: center;
+  padding: 11px 20px;
+  border-radius: 10px;
+}
+
+.features img {
+  width: 24px;
+  height: 24px;
+}
+
+.compare-box {
+  background-color: rgb(234, 234, 234);
+  padding: 14px;
+  width: 60px;
+}
+
+.cart-container {
+  display: flex;
+  gap: 5px;
+  background-color: #f68861;
 }
 
 /*# sourceMappingURL=main-output.css.map */

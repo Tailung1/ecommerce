@@ -7,8 +7,13 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 export default function Header() {
-  const { setShowSideBar, setShowSearchBar, language, setLanguage } =
-    useMyContext();
+  const {
+    cart,
+    setShowSideBar,
+    setShowSearchBar,
+    language,
+    setLanguage,
+  } = useMyContext();
   const [showLanguages, setShowLanguages] = useState<boolean>(false);
   const navigate = useNavigate();
   const languages = ["EN", "GE"];
@@ -45,11 +50,19 @@ export default function Header() {
           src={searchIcon}
           alt='search-logo'
         />
-        <img
-          onClick={() => navigate("/cart")}
-          src={cartIcon}
-          alt='cart-logo'
-        />
+        <div className='shipping-cart-container'>
+          {cart.length !== 0 && (
+            <div className='cart-amount'>
+              <span>{cart.length}</span>
+            </div>
+          )}
+
+          <img
+            onClick={() => navigate("/cart")}
+            src={cartIcon}
+            alt='cart-logo'
+          />
+        </div>
         <div
           onClick={() => setShowLanguages(!showLanguages)}
           className='languages-wrapper'

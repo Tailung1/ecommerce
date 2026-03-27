@@ -1,0 +1,22 @@
+main {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  padding: 10px;
+  overflow: hidden;
+}
+
+.price-container {
+  animation: animate-price-container 0.5s ease;
+}
+
+@keyframes animate-price-container {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/*# sourceMappingURL=main-output.css.map */

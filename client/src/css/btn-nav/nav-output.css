@@ -6,7 +6,7 @@
   position: sticky;
   bottom: 0;
   width: 100%;
-  background-color: rgb(221, 227, 219);
+  background-color: rgb(220, 219, 227);
   overflow: hidden;
   padding: 10px;
 }
@@ -127,4 +127,4 @@
   gap: 15px;
 }
 
-/*# sourceMappingURL=nav.css.map */
+/*# sourceMappingURL=nav-output.css.map */

@@ -1,0 +1,13 @@
+@mixin display($padding: 0px, $justify-content: center) {
+  display: flex;
+  align-items: center;
+  justify-content: $justify-content;
+  padding: $padding;
+}
+@mixin display-col($gap: 0px) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $gap;
+}

@@ -33,10 +33,10 @@ interface types {
   setIsExitingBar: React.Dispatch<SetStateAction<boolean>>;
   showWarningBar: boolean;
   setShowWarningBar: React.Dispatch<SetStateAction<boolean>>;
-  warningMessage: string;
-  setWarningMessage: React.Dispatch<SetStateAction<string>>;
-  isChosen:boolean;
+  isChosen: boolean;
   setIsChosen: React.Dispatch<SetStateAction<boolean>>;
+  isFull: boolean;
+  setIsFull: React.Dispatch<SetStateAction<boolean>>;
 }
 
 const MyContext = createContext({} as types);
@@ -48,10 +48,8 @@ export default function ContextProvider({
 }) {
   const [showWarningBar, setShowWarningBar] =
     useState<boolean>(false);
-  const [warningMessage, setWarningMessage] = useState(
-    "Product is already chosen"
-  );
   const [isChosen, setIsChosen] = useState<boolean>(false);
+  const [isFull, setIsFull] = useState<boolean>(false);
 
   const [showAuthBar, setShowAuthBar] = useState<boolean>(false);
   const [showCompare, setShowCompare] = useState<boolean>(false);
@@ -98,10 +96,10 @@ export default function ContextProvider({
         setShowCompare,
         showWarningBar,
         setShowWarningBar,
-        warningMessage,
-        setWarningMessage,
         isChosen,
         setIsChosen,
+        isFull,
+        setIsFull,
       }}
     >
       {children}

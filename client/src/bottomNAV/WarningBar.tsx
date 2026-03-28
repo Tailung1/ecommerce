@@ -1,18 +1,19 @@
 import { useMyContext } from "../MyContext";
+import { useNavigate } from "react-router-dom";
 import exitBtn from "../assets/reject.png";
 import rejectIcon from "../assets/reject.png";
 import phoneImage from "../assets/iphone.png";
 
 export default function WarningBar() {
+  const navigate = useNavigate();
   const {
     isExitingBar,
     isChosen,
+    isFull,
     setIsChosen,
     setIsExitingBar,
     setShowWarningBar,
-    warningMessage,
     selectedProductsToCompare,
-    setSelectedProductsToCompare,
   } = useMyContext();
 
   const handleExit = () => {
@@ -24,23 +25,10 @@ export default function WarningBar() {
     }, 600);
   };
 
-  const handleReject = (id: any) => {
-    if (selectedProductsToCompare[1] == null) {
-      setIsExitingBar(true);
-      setTimeout(() => {
-        setShowWarningBar(false);
-        setIsExitingBar(false);
-      }, 6000);
-    }
-
-    setSelectedProductsToCompare((prev) => {
-      let newArr = [...prev];
-      let filtred = newArr.filter((item) => item?.id !== id);
-      while (filtred.length < newArr.length) {
-        filtred.push(null);
-      }
-      return filtred;
-    });
+  const handleReject = () => {
+    setShowWarningBar(false);
+    navigate("/compare-products");
+    return;
   };
 
   return (
@@ -60,15 +48,20 @@ export default function WarningBar() {
         <hr />
       </div>
       {isChosen ? (
-        <p className='warning-reason-text'>{warningMessage}</p>
+        <p className='warning-reason-text'>
+          Product is already chosen
+        </p>
       ) : (
-        <div className='flex flex-col  items-center gap-2'>
-          <p className='text-red-600 text-[20px]'>
-            Product adding is impossible
+        <div className='flex flex-col  items-center  gap-5 w-full'>
+          <p className='text-red-600 text-[22px]'>
+            {isFull
+              ? "You already have 4 products"
+              : "Product adding is impossible"}
           </p>
-          <p className='text-gray-500'>
-            Please choose another product from a different category or
-            remove it
+          <p className='text-gray-500 text-[20px] text-center'>
+            {isFull
+              ? "To add a new product, or remove one of them"
+              : "Please choose another product from a different category or remove it"}
           </p>
           <section className='compare-products-parent'>
             {selectedProductsToCompare
@@ -83,7 +76,7 @@ export default function WarningBar() {
                     <p>{prod?.name}</p>
                   </div>
                   <img
-                    onClick={() => handleReject(prod?.id)}
+                    onClick={handleReject}
                     src={rejectIcon}
                     alt='Reject icon'
                   />

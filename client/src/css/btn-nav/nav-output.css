@@ -9,10 +9,6 @@
   font-weight: 500;
 }
 
-.warning-container hr {
-  width: 100%;
-}
-
 .warning-reason-text {
   font-size: 18px;
   color: rgba(0, 0, 0, 0.6);

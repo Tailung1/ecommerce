@@ -6,15 +6,37 @@ export default function CompareBar() {
     isExitingBar,
     setIsExitingBar,
     setShowCompareBar,
+    selectedProductsToCompare,
     setSelectedProductsToCompare,
+    setActiveCompareCategory,
   } = useMyContext();
 
   const testProducts = [
-    { id: 1, name: "Laptop X", brand: "TechCorp" },
-    { id: 2, name: "Smartphone Z", brand: "GizmoWorks" },
-    { id: 3, name: "Headphones Pro", brand: "SoundMax" },
-    { id: 4, name: "Smartwatch A1", brand: "TimeTech" },
-    { id: 5, name: "Tablet Q", brand: "ScreenMakers" },
+    { id: 1, name: "Laptop X", brand: "TechCorp", category: "phone" },
+    {
+      id: 2,
+      name: "samsung tv-hd",
+      brand: "GizmoWorks",
+      category: "tv",
+    },
+    {
+      id: 3,
+      name: "lenovo laptop",
+      brand: "SoundMax",
+      category: "laptop",
+    },
+    {
+      id: 4,
+      name: "Smartwatch A1",
+      brand: "TimeTech",
+      category: "phone",
+    },
+    {
+      id: 5,
+      name: "Tablet Q",
+      brand: "ScreenMakers",
+      category: "tablet",
+    },
   ];
   const handleExit = () => {
     setIsExitingBar(true);
@@ -23,8 +45,12 @@ export default function CompareBar() {
       setIsExitingBar(false);
     }, 500);
   };
-  const insertProductInCompareList = (id: number) => {
-    let product = testProducts.find((item) => item.id === id) || null;
+  const insertProductInCompareList = (item: any) => {
+    // category check doesnot work here well.. testing phase !!!
+    if (selectedProductsToCompare.every((item) => item === null)) {
+      setActiveCompareCategory(item.category);
+    }
+    let product = testProducts.find((i) => i.id === item.id) || null;
     if (product) {
       setSelectedProductsToCompare((prev) => {
         const newArr = [...prev];
@@ -35,7 +61,11 @@ export default function CompareBar() {
     }
   };
   return (
-    <div className={`Bar bar-modifed-compare ${isExitingBar && "ExitBar"}`}>
+    <div
+      className={`Bar bar-modifed-compare ${
+        isExitingBar && "ExitBar"
+      }`}
+    >
       <p onClick={handleExit} className='exit-btn exit-btn-compare'>
         X
       </p>
@@ -56,7 +86,7 @@ export default function CompareBar() {
         <div
           key={prod.id}
           onClick={() => {
-            insertProductInCompareList(prod.id);
+            insertProductInCompareList(prod);
             handleExit();
           }}
         >

@@ -10,11 +10,11 @@ export default function Main() {
     { name: "Samsung 21s" },
   ]);
   const [breathles, setBreathles] = useState([
-    { id: 1, name: "iPhone 17 Pro | Pro Max" },
-    { id: 2, name: "Computers" },
-    { id: 3, name: "ONEPLUS 15R" },
-    { id: 4, name: "Samsung 21s" },
-    { id: 5, name: "xiaomi 21s" },
+    { id: 1, name: "iPhone 17 Pro | Pro Max", category: "phone" },
+    { id: 2, name: "acer laptop", category: "laptop" },
+    { id: 3, name: "samsung tv", category: "tv" },
+    { id: 4, name: "Samsung 21s", category: "phone" },
+    { id: 5, name: "xiaomi 21s", category: "phone" },
   ]);
   const [gifts, setGifts] = useState([
     { name: "iPhone 17 Pro | Pro Max" },

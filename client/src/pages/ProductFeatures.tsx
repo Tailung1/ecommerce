@@ -11,10 +11,21 @@ export default function ProductFeatures({ item }: { item: any }) {
     setIsFull,
     selectedProductsToCompare,
     setSelectedProductsToCompare,
+    activeCompareCategory,
+    setActiveCompareCategory,
   } = useMyContext();
 
   const handleOperation = (task: "cart" | "compare", item: any) => {
     if (task === "compare") {
+      if (selectedProductsToCompare.every((item) => item === null)) {
+        setActiveCompareCategory(item.category);
+      }
+      if (activeCompareCategory) {
+        if (activeCompareCategory !== item.category) {
+          setShowWarningBar(true);
+          return;
+        }
+      }
       const isProduct = selectedProductsToCompare.find(
         (i) => i?.id === item.id
       );

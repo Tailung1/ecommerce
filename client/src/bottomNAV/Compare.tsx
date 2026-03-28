@@ -1,4 +1,5 @@
 import { useMyContext } from "../MyContext";
+import { useNavigate } from "react-router-dom";
 import leftArrowIcon from "../assets/left.png";
 import plusIcon from "../assets/plus.png";
 import binIcon from "../assets/bin.png";
@@ -6,11 +7,12 @@ import searchIcon from "../assets/search-icon.png";
 import rejectIcon from "../assets/reject.png";
 
 export default function Compare() {
+  const navigate = useNavigate();
   const {
+    setActiveCompareCategory,
     setShowCompareBar,
     selectedProductsToCompare,
     setSelectedProductsToCompare,
-
     showCompare,
   } = useMyContext();
 
@@ -20,6 +22,7 @@ export default function Compare() {
     );
     if (!hasAnyProduct) return;
     setSelectedProductsToCompare([null, null, null, null]);
+    setActiveCompareCategory("");
   };
 
   const handleBarOpen = (id: number) => {
@@ -35,6 +38,9 @@ export default function Compare() {
       const filtred = selectedProductsToCompare.filter(
         (_, index) => index !== Number(id)
       );
+      if (filtred.every((item) => item === null)) {
+        setActiveCompareCategory("");
+      }
       while (filtred.length < prev.length) {
         filtred.push(null);
       }
@@ -53,7 +59,7 @@ export default function Compare() {
     >
       <div className='compare-header'>
         <div className='compare-navigation'>
-          <div>
+          <div onClick={() => navigate("/")}>
             <img src={leftArrowIcon} alt='Left arrow icon' />
             <p>Back</p>
           </div>

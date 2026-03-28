@@ -45,7 +45,7 @@ export default function Header() {
         <img
           onClick={() => {
             setShowSearchBar(true);
-            navigate("/");
+            navigate("/search");
           }}
           src={searchIcon}
           alt='search-logo'

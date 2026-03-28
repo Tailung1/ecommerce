@@ -14,6 +14,7 @@ export default function MainBar() {
     setShowSearchBar,
     setShowAuthBar,
     setShowCompare,
+    selectedProductsToCompare,
   } = useMyContext();
   const options = [
     { id: "Main", icon: MainIcon, index: 1 },
@@ -92,6 +93,17 @@ export default function MainBar() {
           </span>
         </div>
       ))}
+      {selectedProductsToCompare.some((item) => item !== null) && (
+        <div className='compare-amount'>
+          <span>
+            {
+              selectedProductsToCompare.filter(
+                (item) => item !== null
+              ).length
+            }
+          </span>
+        </div>
+      )}
     </nav>
   );
 }

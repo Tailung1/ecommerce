@@ -1,3 +1,5 @@
+
+
 main {
   flex-grow: 1;
   padding: 10px;
@@ -9,6 +11,7 @@ main {
   display: flex;
   flex-direction: column;
   gap: 40px;
+  position: relative;
 }
 
 .hightlights-wrapper,
@@ -76,12 +79,14 @@ main {
   gap: 10px;
   position: absolute;
   bottom: 0;
+  max-height: 40px;
 }
 
 .features > div {
   align-items: center;
   padding: 11px 20px;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 .features img {
@@ -97,8 +102,10 @@ main {
 
 .cart-container {
   display: flex;
+  justify-content: center;
   gap: 5px;
   background-color: #f68861;
+  min-width: 100px;
 }
 
 /*# sourceMappingURL=main-output.css.map */

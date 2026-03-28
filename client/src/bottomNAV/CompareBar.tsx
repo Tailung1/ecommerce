@@ -35,7 +35,7 @@ export default function CompareBar() {
     }
   };
   return (
-    <div className={`Bar Bar-Modifed ${isExitingBar && "ExitBar"}`}>
+    <div className={`Bar bar-modifed-compare ${isExitingBar && "ExitBar"}`}>
       <p onClick={handleExit} className='exit-btn exit-btn-compare'>
         X
       </p>

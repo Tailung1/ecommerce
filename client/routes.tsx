@@ -6,6 +6,7 @@ import Products from "./src/pages/searching/Products";
 import Cart from "./src/pages/cart/Cart";
 import Compare from "./src/bottomNAV/Compare";
 import Promotions from "./src/bottomNAV/Promotions";
+import SearchBar from "./src/pages/SearchBar";
 
 const router = createBrowserRouter([
   {
@@ -16,9 +17,12 @@ const router = createBrowserRouter([
         element: <Main />,
       },
       {
+        path: "/search",
+        element: <SearchBar />,
+      },
+      {
         path: "/:slug",
         element: <Products />,
-        
       },
       {
         path: "/:category/:id",

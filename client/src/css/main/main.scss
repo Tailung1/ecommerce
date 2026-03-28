@@ -1,4 +1,5 @@
 @use "mixins";
+@use "warning";
 $primary-color: #f68861;
 
 main {
@@ -11,6 +12,7 @@ main {
   display: flex;
   flex-direction: column;
   gap: 40px;
+  position: relative;
 }
 
 .hightlights-wrapper,
@@ -71,11 +73,13 @@ main {
   gap: 10px;
   position: absolute;
   bottom: 0;
+  max-height: 40px;
 }
 .features > div {
   align-items: center;
   padding: 11px 20px;
   border-radius: 10px;
+  cursor: pointer;
 }
 .features img {
   width: 24px;
@@ -88,6 +92,8 @@ main {
 }
 .cart-container {
   display: flex;
+  justify-content: center;
   gap: 5px;
   background-color: $primary-color;
+  min-width: 100px;
 }

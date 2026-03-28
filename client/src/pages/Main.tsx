@@ -1,32 +1,19 @@
-import { useState } from "react";
+import data from "../data.json";
 import ProductFeatures from "./ProductFeatures";
 import mobilePhone from "../assets/iphone.png";
 
 export default function Main() {
-  const [highlights, setHighlights] = useState([
-    { name: "iPhone 17 Pro | Pro Max" },
-    { name: "Computers" },
-    { name: "ONEPLUS 15R" },
-    { name: "Samsung 21s" },
-  ]);
-  const [breathles, setBreathles] = useState([
-    { id: 1, name: "iPhone 17 Pro | Pro Max", category: "phone" },
-    { id: 2, name: "acer laptop", category: "laptop" },
-    { id: 3, name: "samsung tv", category: "tv" },
-    { id: 4, name: "Samsung 21s", category: "phone" },
-    { id: 5, name: "xiaomi 21s", category: "phone" },
-  ]);
-  const [gifts, setGifts] = useState([
-    { name: "iPhone 17 Pro | Pro Max" },
-    { name: "Computers" },
-    { name: "ONEPLUS 15R" },
-    { name: "Samsung 21s" },
-  ]);
-
   return (
     <div className='main-content'>
       <section className='hightlights-wrapper'>
-        {highlights.map((h, index) => (
+        {data.highlights.map((h, index) => (
+          <div key={index}>
+            <p>{h.name}</p>
+          </div>
+        ))}
+      </section>
+      <section className='hightlights-wrapper'>
+        {data.highlights.map((h, index) => (
           <div key={index}>
             <p>{h.name}</p>
           </div>
@@ -36,7 +23,7 @@ export default function Main() {
       <section className='breathles-container'>
         <p>Breathles in zommer</p>
         <div className='breathles-wrapper'>
-          {breathles.map((item) => (
+          {data.breathles.map((item) => (
             <div key={item.id}>
               <img
                 className='item-image'

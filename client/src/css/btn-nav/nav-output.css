@@ -36,7 +36,6 @@
   overflow: hidden;
   padding: 10px;
   z-index: 99;
-  position: relative;
 }
 
 .bottom-nav-bar > div {

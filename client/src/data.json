@@ -1,0 +1,25 @@
+{
+  "highlights": [
+    { "name": "iPhone 17 Pro | Pro Max" },
+    { "name": "Computers" },
+    { "name": "ONEPLUS 15R" },
+    { "name": "Samsung 21s" }
+  ],
+  "breathles": [
+    {
+      "id": 1,
+      "name": "iPhone 17 Pro | Pro Max",
+      "category": "phone"
+    },
+    { "id": 2, "name": "acer laptop", "category": "laptop" },
+    { "id": 3, "name": "samsung tv", "category": "tv" },
+    { "id": 4, "name": "Samsung 21s", "category": "phone" },
+    { "id": 5, "name": "xiaomi 21s", "category": "phone" }
+  ],
+  "gifts": [
+    { "name": "iPhone 17 Pro | Pro Max" },
+    { "name": "Computers" },
+    { "name": "ONEPLUS 15R" },
+    { "name": "Samsung 21s" }
+  ]
+}

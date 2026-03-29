@@ -1,7 +1,7 @@
-import data from "../data.json";
-import mobilePhone from "../assets/iphone.png";
-import tv from "../assets/television.png"
-import ProductFeatures from "./ProductFeatures";
+import data from "../../data.json";
+import mobilePhone from "../../assets/iphone.png";
+import tv from "../../assets/television.png";
+import ProductFeatures from "./shared-products";
 
 export default function Main() {
   return (
@@ -20,10 +20,7 @@ export default function Main() {
       </section>
       <section className='gift-container'>
         <h3>Discover Gifts Awaiting You</h3>
-        <ProductFeatures
-          data={data.gifts}
-          img={tv}
-        />
+        <ProductFeatures data={data.gifts} img={tv} />
       </section>
     </div>
   );

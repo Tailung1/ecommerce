@@ -7,7 +7,7 @@ import Footer from "./src/pages/Footer";
 import MainBar from "./src/bottomNAV/MainBar";
 import AuthBar from "./src/bottomNAV/AuthBar";
 import CompareBar from "./src/bottomNAV/CompareBar";
-import WarningBar from "./src/bottomNAV/WarningBar";
+import WarningBar from "./src/pages/main-section/WarningBar";
 import { useMyContext } from "./src/MyContext";
 
 export default function Layout() {

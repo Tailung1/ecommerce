@@ -9,7 +9,7 @@ import rejectIcon from "../assets/reject.png";
 export default function Compare() {
   const navigate = useNavigate();
   const {
-    setActiveCompareCategory,
+    setActiveProductCategory,
     setShowCompareBar,
     compareCart,
     setCompareCart,
@@ -20,7 +20,7 @@ export default function Compare() {
     const hasAnyProduct = compareCart.some((item) => item !== null);
     if (!hasAnyProduct) return;
     setCompareCart([null, null, null, null]);
-    setActiveCompareCategory("");
+    setActiveProductCategory("");
   };
 
   const handleBarOpen = (id: number) => {
@@ -36,7 +36,7 @@ export default function Compare() {
     setCompareCart((prev) => {
       const filtred = prev.filter((_, index) => index !== Number(id));
       if (filtred.every((item) => item === null)) {
-        setActiveCompareCategory("");
+        setActiveProductCategory("");
       }
       //   while (filtred.length < prev.length) {
       //     filtred.push(null);

@@ -37,8 +37,8 @@ interface types {
   setIsChosen: React.Dispatch<SetStateAction<boolean>>;
   isFull: boolean;
   setIsFull: React.Dispatch<SetStateAction<boolean>>;
-  activeCompareCategory: string;
-  setActiveCompareCategory: React.Dispatch<SetStateAction<string>>;
+  activeProductCategory: string;
+  setActiveProductCategory: React.Dispatch<SetStateAction<string>>;
 }
 
 const MyContext = createContext({} as types);
@@ -52,7 +52,7 @@ export default function ContextProvider({
     useState<boolean>(false);
   const [isChosen, setIsChosen] = useState<boolean>(false);
   const [isFull, setIsFull] = useState<boolean>(false);
-  const [activeCompareCategory, setActiveCompareCategory] =
+  const [activeProductCategory, setActiveProductCategory] =
     useState<string>("");
 
   const [showAuthBar, setShowAuthBar] = useState<boolean>(false);
@@ -105,8 +105,8 @@ export default function ContextProvider({
         setIsChosen,
         isFull,
         setIsFull,
-        activeCompareCategory,
-        setActiveCompareCategory,
+        activeProductCategory,
+        setActiveProductCategory,
       }}
     >
       {children}

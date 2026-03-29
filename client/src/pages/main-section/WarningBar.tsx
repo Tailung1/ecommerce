@@ -1,8 +1,8 @@
-import { useMyContext } from "../MyContext";
+import { useMyContext } from "../../MyContext";
 import { useNavigate } from "react-router-dom";
-import exitBtn from "../assets/reject.png";
-import rejectIcon from "../assets/reject.png";
-import phoneImage from "../assets/iphone.png";
+import exitBtn from "../../assets/reject.png";
+import rejectIcon from "../../assets/reject.png";
+import phoneImage from "../../assets/iphone.png";
 
 export default function WarningBar() {
   const navigate = useNavigate();
@@ -10,6 +10,7 @@ export default function WarningBar() {
     isExitingBar,
     isChosen,
     isFull,
+    setIsFull,
     setIsChosen,
     setIsExitingBar,
     setShowWarningBar,
@@ -18,6 +19,7 @@ export default function WarningBar() {
 
   const handleExit = () => {
     setIsExitingBar(true);
+    setIsFull(false)
     setTimeout(() => {
       setShowWarningBar(false);
       setIsExitingBar(false);

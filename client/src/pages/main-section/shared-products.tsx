@@ -1,7 +1,6 @@
-import { useMyContext } from "../MyContext";
-import compareIcon from "../assets/compare.png";
-import cartIcon from "../assets/shopping-cart.png";
-
+import { useMyContext } from "../../MyContext";
+import compareIcon from "../../assets/compare.png";
+import cartIcon from "../../assets/shopping-cart.png";
 
 export default function ProductFeatures({
   data,
@@ -21,24 +20,37 @@ export default function ProductFeatures({
     setShowWarningBar,
     setIsChosen,
     setIsFull,
+    activeProductCategory,
+    setActiveProductCategory,
     compareCart,
     setCompareCart,
   } = useMyContext();
 
   const handleOperation = (task: "cart" | "compare", item: any) => {
-    const isCategory = compareCart.find((i) => i !== null)?.category;
-    if (isCategory && isCategory !== item.category) {
-      setShowWarningBar(true);
-      return;
-    }
     if (task === "compare") {
+      if (
+        activeProductCategory &&
+        activeProductCategory !== item.category
+      ) {
+        setShowWarningBar(true);
+        return;
+      }
+
+      // great solution for category check if no useState is used to track it !!!!!
+
+      //   const isCategory = compareCart.find(
+      //     (i) => i !== null
+      //   )?.category;
+      //   if (isCategory && isCategory !== item.category) {
+      //     setShowWarningBar(true);
+      //     return;
+      //   }
+
       if (compareCart.some((i) => i?.id == item.id)) {
         setShowWarningBar(true);
         setIsChosen(true);
         return;
       }
-
-      
 
       const emptyIndex = compareCart.findIndex((i) => i === null);
       if (emptyIndex == -1) {
@@ -49,10 +61,12 @@ export default function ProductFeatures({
       setCompareCart((prev) => {
         const newArr = [...prev];
         newArr[emptyIndex] = item;
+        if (emptyIndex === 0) {
+          setActiveProductCategory(item.category);
+        }
         return newArr;
       });
     }
-
     if (task == "cart") {
       if (cart.some((i) => i.id === item.id)) {
         setShowWarningBar(true);

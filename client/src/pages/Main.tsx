@@ -12,13 +12,6 @@ export default function Main() {
           </div>
         ))}
       </section>
-      <section className='hightlights-wrapper'>
-        {data.highlights.map((h, index) => (
-          <div key={index}>
-            <p>{h.name}</p>
-          </div>
-        ))}
-      </section>
 
       <section className='breathles-container'>
         <p>Breathles in zommer</p>

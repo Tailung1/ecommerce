@@ -14,7 +14,9 @@
     { "id": 2, "name": "acer laptop", "category": "laptop" },
     { "id": 3, "name": "samsung tv", "category": "tv" },
     { "id": 4, "name": "Samsung 21s", "category": "phone" },
-    { "id": 5, "name": "xiaomi 21s", "category": "phone" }
+    { "id": 5, "name": "xiaomi 21s", "category": "phone" },
+     { "id": 6, "name": "nokia 21s", "category": "phone" },
+    { "id": 7, "name": "onePlus", "category": "phone" }
   ],
   "gifts": [
     { "name": "iPhone 17 Pro | Pro Max" },

@@ -11,45 +11,45 @@ export default function Compare() {
   const {
     setActiveCompareCategory,
     setShowCompareBar,
-    selectedProductsToCompare,
-    setSelectedProductsToCompare,
+    compareCart,
+    setCompareCart,
     showCompare,
   } = useMyContext();
 
   const handleReset = () => {
-    const hasAnyProduct = selectedProductsToCompare.some(
-      (item) => item !== null
-    );
+    const hasAnyProduct = compareCart.some((item) => item !== null);
     if (!hasAnyProduct) return;
-    setSelectedProductsToCompare([null, null, null, null]);
+    setCompareCart([null, null, null, null]);
     setActiveCompareCategory("");
   };
 
   const handleBarOpen = (id: number) => {
     if (
-      !selectedProductsToCompare.includes(null) ||
-      selectedProductsToCompare.find((item) => item?.id === id)
+      !compareCart.includes(null) ||
+      compareCart.some((item) => item?.id === id)
     )
       return;
     setShowCompareBar(true);
   };
+
   const handleReject = (id: number) => {
-    setSelectedProductsToCompare((prev) => {
-      const filtred = selectedProductsToCompare.filter(
-        (_, index) => index !== Number(id)
-      );
+    setCompareCart((prev) => {
+      const filtred = prev.filter((_, index) => index !== Number(id));
       if (filtred.every((item) => item === null)) {
         setActiveCompareCategory("");
       }
-      while (filtred.length < prev.length) {
-        filtred.push(null);
-      }
-      return filtred;
+      //   while (filtred.length < prev.length) {
+      //     filtred.push(null);
+      //   }
+      return [
+        ...filtred,
+        ...Array(prev.length - filtred.length).fill(null),
+      ];
     });
   };
+
   const allowCompare =
-    selectedProductsToCompare.filter((item) => item !== null).length <
-    2;
+    compareCart.filter((item) => item !== null).length < 2;
 
   return (
     <div
@@ -71,7 +71,7 @@ export default function Compare() {
         <hr className='compare-hr' />
       </div>
       <section className='compare-products-parent'>
-        {selectedProductsToCompare.map((prod, index) => (
+        {compareCart.map((prod, index) => (
           <div
             key={Math.random() * 2372}
             onClick={() => handleBarOpen(prod?.id as number)}

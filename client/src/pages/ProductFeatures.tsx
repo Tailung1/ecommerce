@@ -9,55 +9,47 @@ export default function ProductFeatures({ item }: { item: any }) {
     setShowWarningBar,
     setIsChosen,
     setIsFull,
-    selectedProductsToCompare,
-    setSelectedProductsToCompare,
-    activeCompareCategory,
-    setActiveCompareCategory,
+    compareCart,
+    setCompareCart,
   } = useMyContext();
 
   const handleOperation = (task: "cart" | "compare", item: any) => {
     if (task === "compare") {
-      if (selectedProductsToCompare.every((item) => item === null)) {
-        setActiveCompareCategory(item.category);
-      }
-      if (activeCompareCategory) {
-        if (activeCompareCategory !== item.category) {
-          setShowWarningBar(true);
-          return;
-        }
-      }
-      const isProduct = selectedProductsToCompare.find(
-        (i) => i?.id === item.id
-      );
-
-      if (isProduct) {
+      if (compareCart.some((i) => i?.id == item.id)) {
         setShowWarningBar(true);
         setIsChosen(true);
         return;
       }
-      // if there is still place in array for new prodcut
-      if (selectedProductsToCompare.some((item) => item == null)) {
-        setSelectedProductsToCompare((prev) => {
-          const newArr = [...prev];
-          const index = newArr.indexOf(null);
-          newArr[index] = item;
-          return newArr;
-        });
+
+      const isCategory = compareCart.find(
+        (i) => i !== null
+      )?.category;
+      if (isCategory && isCategory !== item.category) {
+        setShowWarningBar(true);
         return;
-      } else {
-        // no more free space in array..
+      }
+
+      const emptyIndex = compareCart.findIndex((i) => i === null);
+      if (emptyIndex == -1) {
         setShowWarningBar(true);
         setIsFull(true);
+        return;
       }
+      setCompareCart((prev) => {
+        const newArr = [...prev];
+        newArr[emptyIndex] = item;
+        return newArr;
+      });
     }
-    if (task === "cart") {
-      const findItem = cart.find((i) => i.id === item.id);
-      if (findItem) {
+
+    if (task == "cart") {
+      if (cart.some((i) => i.id === item.id)) {
         setShowWarningBar(true);
         setIsChosen(true);
         return;
+      } else {
+        setCart((prev) => [...prev, item]);
       }
-      setCart((prev) => [...prev, item]);
     }
   };
 

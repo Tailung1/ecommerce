@@ -13,7 +13,7 @@ export default function WarningBar() {
     setIsChosen,
     setIsExitingBar,
     setShowWarningBar,
-    selectedProductsToCompare,
+    compareCart,
   } = useMyContext();
 
   const handleExit = () => {
@@ -64,7 +64,7 @@ export default function WarningBar() {
               : "Please choose another product from a different category or remove it"}
           </p>
           <section className='compare-products-parent'>
-            {selectedProductsToCompare
+            {compareCart
               .filter((item) => item !== null)
               .map((prod) => (
                 <div

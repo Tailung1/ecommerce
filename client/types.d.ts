@@ -9,6 +9,7 @@ type ProductType = {
   id: number;
   name: string;
   brand: string;
+  category:string
 };
 
 type StateTypes = {

@@ -6,12 +6,7 @@ export default function ProductFeatures({
   data,
   img,
 }: {
-  data: {
-    id: number;
-    name: string;
-    category: string;
-    gifts?: boolean;
-  }[];
+  data: any;
   img: string;
 }) {
   const {
@@ -68,7 +63,11 @@ export default function ProductFeatures({
       });
     }
     if (task == "cart") {
-      if (cart.some((i) => i.id === item.id)) {
+      if (
+        cart.some(
+          (i) => i.id === item.id && i.category === item.category
+        )
+      ) {
         setShowWarningBar(true);
         setIsChosen(true);
         return;
@@ -78,14 +77,16 @@ export default function ProductFeatures({
     }
   };
 
-  const handleProductCheckInCart = (id: Number) => {
-    const inCart = cart.find((item) => item.id === id);
+  const handleProductCheckInCart = (item: any) => {
+    const inCart = cart.find(
+      (i) => i.id === item.id && i.category === item.category
+    );
     return inCart;
   };
 
   return (
     <div className='breathles-wrapper'>
-      {data.map((item) => (
+      {data.map((item: any) => (
         <div key={item.id}>
           <img className='item-image' src={img} alt='Item icon' />
           <div className='item-info-container'>
@@ -104,7 +105,7 @@ export default function ProductFeatures({
             >
               <img src={compareIcon} alt='Compare icon' />
             </div>
-            {handleProductCheckInCart(item.id) ? (
+            {handleProductCheckInCart(item) ? (
               <div
                 onClick={() => handleOperation("cart", item)}
                 className='cart-container'

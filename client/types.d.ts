@@ -4,13 +4,9 @@ interface productType {
   color: string;
   description: string;
   price: number;
+  category: string;
 }
-type ProductType = {
-  id: number;
-  name: string;
-  brand: string;
-  category:string
-};
+
 
 type StateTypes = {
   active: "auth" | "register";

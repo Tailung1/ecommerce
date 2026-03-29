@@ -13,7 +13,7 @@ export default function WarningBar() {
     setIsFull,
     setIsChosen,
     setIsExitingBar,
-    setShowWarningBar,
+    setShowAlert,
     compareCart,
   } = useMyContext();
 
@@ -21,14 +21,14 @@ export default function WarningBar() {
     setIsExitingBar(true);
     setIsFull(false)
     setTimeout(() => {
-      setShowWarningBar(false);
+      setShowAlert(false);
       setIsExitingBar(false);
       setIsChosen(false);
     }, 600);
   };
 
   const handleReject = () => {
-    setShowWarningBar(false);
+    setShowAlert(false);
     navigate("/compare-products");
     return;
   };

@@ -12,27 +12,27 @@ interface types {
   showSearchBar: boolean;
   setShowSearchBar: React.Dispatch<SetStateAction<boolean>>;
   showSideBar: boolean;
-  popularSearches: productType[];
+  popularSearches: any[];
   setPopularSearches: React.Dispatch<SetStateAction<productType[]>>;
   setShowSideBar: React.Dispatch<SetStateAction<boolean>>;
   language: string;
   setLanguage: React.Dispatch<SetStateAction<string>>;
-  cart: productType[];
+  cart: any[];
   setCart: React.Dispatch<SetStateAction<productType[]>>;
   showAuthBar: boolean;
   setShowAuthBar: React.Dispatch<SetStateAction<boolean>>;
   showCompare: boolean;
   setShowCompare: React.Dispatch<SetStateAction<boolean>>;
-  compareCart: (null | ProductType)[];
+  compareCart: (null | any)[];
   setCompareCart: React.Dispatch<
-    SetStateAction<(null | ProductType)[]>
+    SetStateAction<(null | any)[]>
   >;
   showCompareBar: boolean;
   setShowCompareBar: React.Dispatch<SetStateAction<boolean>>;
   isExitingBar: boolean;
   setIsExitingBar: React.Dispatch<SetStateAction<boolean>>;
-  showWarningBar: boolean;
-  setShowWarningBar: React.Dispatch<SetStateAction<boolean>>;
+  showAlert: boolean;
+  setShowAlert: React.Dispatch<SetStateAction<boolean>>;
   isChosen: boolean;
   setIsChosen: React.Dispatch<SetStateAction<boolean>>;
   isFull: boolean;
@@ -48,7 +48,7 @@ export default function ContextProvider({
 }: {
   children: ReactNode;
 }) {
-  const [showWarningBar, setShowWarningBar] =
+  const [showAlert, setShowAlert] =
     useState<boolean>(false);
   const [isChosen, setIsChosen] = useState<boolean>(false);
   const [isFull, setIsFull] = useState<boolean>(false);
@@ -58,7 +58,7 @@ export default function ContextProvider({
   const [showAuthBar, setShowAuthBar] = useState<boolean>(false);
   const [showCompare, setShowCompare] = useState<boolean>(false);
   const [compareCart, setCompareCart] = useState<
-    (ProductType | null)[]
+    (productType | null)[]
   >([null, null, null, null]);
   const [showCompareBar, setShowCompareBar] =
     useState<boolean>(false);
@@ -99,8 +99,8 @@ export default function ContextProvider({
         setShowCompareBar,
         showCompare,
         setShowCompare,
-        showWarningBar,
-        setShowWarningBar,
+        showAlert,
+        setShowAlert,
         isChosen,
         setIsChosen,
         isFull,

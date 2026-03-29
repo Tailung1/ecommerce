@@ -7,7 +7,7 @@ import Footer from "./src/pages/Footer";
 import MainBar from "./src/bottomNAV/MainBar";
 import AuthBar from "./src/bottomNAV/AuthBar";
 import CompareBar from "./src/bottomNAV/CompareBar";
-import WarningBar from "./src/pages/main-section/WarningBar";
+import WarningBar from "./src/pages/main-section/Alert";
 import { useMyContext } from "./src/MyContext";
 
 export default function Layout() {
@@ -17,7 +17,7 @@ export default function Layout() {
     showCompareBar,
     isExitingBar,
     setPopularSearches,
-    showWarningBar
+    showAlert
   } = useMyContext();
 
   const barRef = useRef<HTMLDivElement>(null);
@@ -76,10 +76,10 @@ export default function Layout() {
       </AnimatePresence>
       {showAuthBar && <AuthBar />}
       {showCompareBar && <CompareBar />}
-      {showWarningBar && <WarningBar />}
+      {showAlert && <WarningBar />}
       <main
         className={` ${
-          (showAuthBar || showCompareBar || showWarningBar) &&
+          (showAuthBar || showCompareBar || showAlert) &&
           "layer-backgroundIN"
         } ${isExitingBar && "layer-backgroundOUT"}  `}
       >

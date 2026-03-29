@@ -12,7 +12,7 @@ export default function ProductFeatures({
   const {
     cart,
     setCart,
-    setShowWarningBar,
+    setShowAlert,
     setIsChosen,
     setIsFull,
     activeProductCategory,
@@ -21,13 +21,23 @@ export default function ProductFeatures({
     setCompareCart,
   } = useMyContext();
 
+  const showAlert = (options: {
+    isFull?: boolean;
+    isChosen?: boolean;
+  }) => {
+    setShowAlert(true);
+    if (options.isFull) setIsFull(true);
+    if (options.isChosen) setIsChosen(true);
+    return;
+  };
+
   const handleOperation = (task: "cart" | "compare", item: any) => {
     if (task === "compare") {
       if (
         activeProductCategory &&
         activeProductCategory !== item.category
       ) {
-        setShowWarningBar(true);
+        setShowAlert(true);
         return;
       }
 
@@ -37,22 +47,20 @@ export default function ProductFeatures({
       //     (i) => i !== null
       //   )?.category;
       //   if (isCategory && isCategory !== item.category) {
-      //     setShowWarningBar(true);
+      //     setShowAlert(true);
       //     return;
       //   }
 
       if (compareCart.some((i) => i?.id == item.id)) {
-        setShowWarningBar(true);
-        setIsChosen(true);
-        return;
+        showAlert({ isChosen: true });
       }
 
       const emptyIndex = compareCart.findIndex((i) => i === null);
+
       if (emptyIndex == -1) {
-        setShowWarningBar(true);
-        setIsFull(true);
-        return;
+        showAlert({ isFull: true });
       }
+
       setCompareCart((prev) => {
         const newArr = [...prev];
         newArr[emptyIndex] = item;
@@ -63,14 +71,8 @@ export default function ProductFeatures({
       });
     }
     if (task == "cart") {
-      if (
-        cart.some(
-          (i) => i.id === item.id && i.category === item.category
-        )
-      ) {
-        setShowWarningBar(true);
-        setIsChosen(true);
-        return;
+      if (cart.some((i) => i.id === item.id)) {
+        showAlert({ isChosen: true });
       } else {
         setCart((prev) => [...prev, item]);
       }

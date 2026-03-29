@@ -6,8 +6,8 @@ export default function CompareBar() {
     isExitingBar,
     setIsExitingBar,
     setShowCompareBar,
-    selectedProductsToCompare,
-    setSelectedProductsToCompare,
+    compareCart,
+    setCompareCart,
     setActiveCompareCategory,
   } = useMyContext();
 
@@ -47,12 +47,12 @@ export default function CompareBar() {
   };
   const insertProductInCompareList = (item: any) => {
     // category check doesnot work here well.. testing phase !!!
-    if (selectedProductsToCompare.every((item) => item === null)) {
+    if (compareCart.every((item) => item === null)) {
       setActiveCompareCategory(item.category);
     }
     let product = testProducts.find((i) => i.id === item.id) || null;
     if (product) {
-      setSelectedProductsToCompare((prev) => {
+      setCompareCart((prev) => {
         const newArr = [...prev];
         const index = newArr.indexOf(null);
         newArr[index] = product;

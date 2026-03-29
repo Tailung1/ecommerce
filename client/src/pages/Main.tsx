@@ -1,6 +1,7 @@
 import data from "../data.json";
-import ProductFeatures from "./ProductFeatures";
 import mobilePhone from "../assets/iphone.png";
+import tv from "../assets/television.png"
+import ProductFeatures from "./ProductFeatures";
 
 export default function Main() {
   return (
@@ -15,30 +16,14 @@ export default function Main() {
 
       <section className='breathles-container'>
         <p>Breathles in zommer</p>
-        <div className='breathles-wrapper'>
-          {data.breathles.map((item) => (
-            <div key={item.id}>
-              <img
-                className='item-image'
-                src={mobilePhone}
-                alt='Item icon'
-              />
-              <div className='item-info-container'>
-                <span className='price'>2000$</span>
-                <p>
-                  Per month from{" "}
-                  <span className='installment-price'>74 $</span>
-                </p>
-
-                <span className='item-name'>{item.name}</span>
-              </div>
-              <ProductFeatures item={item} />
-            </div>
-          ))}
-        </div>
+        <ProductFeatures data={data.breathles} img={mobilePhone} />
       </section>
       <section className='gift-container'>
         <h3>Discover Gifts Awaiting You</h3>
+        <ProductFeatures
+          data={data.gifts}
+          img={tv}
+        />
       </section>
     </div>
   );

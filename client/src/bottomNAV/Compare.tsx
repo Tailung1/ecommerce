@@ -24,11 +24,11 @@ export default function Compare() {
   };
 
   const handleBarOpen = (id: number) => {
-    if (
-      !compareCart.includes(null) ||
-      compareCart.some((item) => item?.id === id)
-    )
+    if (!compareCart.includes(null)) {
       return;
+    }
+    if (id && compareCart.some((item) => item?.id === id)) return;
+
     setShowCompareBar(true);
   };
 

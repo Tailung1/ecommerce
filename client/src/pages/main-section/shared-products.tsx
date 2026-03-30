@@ -53,12 +53,14 @@ export default function ProductFeatures({
 
       if (compareCart.some((i) => i?.id == item.id)) {
         enableAlertShow({ isChosen: true });
+        return;
       }
 
       const emptyIndex = compareCart.findIndex((i) => i === null);
 
       if (emptyIndex == -1) {
         enableAlertShow({ isFull: true });
+        return;
       }
 
       setCompareCart((prev) => {
@@ -73,6 +75,7 @@ export default function ProductFeatures({
     if (task == "cart") {
       if (cart.some((i) => i.id === item.id)) {
         enableAlertShow({ isChosen: true });
+        return;
       } else {
         setCart((prev) => [...prev, item]);
       }
@@ -92,11 +95,15 @@ export default function ProductFeatures({
         <div key={item.id}>
           <img className='item-image' src={img} alt='Item icon' />
           <div className='item-info-container'>
-            {item.gifts && <span className='gift'>Gifts</span>}
+            {item.gifts ? (
+              <span className='gift'>GIFTS</span>
+            ) : (
+              item.new && <span className='new'>NEW</span>
+            )}
+
             <span className='price'>2000$</span>
-            <p>
-              Per month from{" "}
-              <span className='installment-price'>74 $</span>
+            <p className='installment'>
+              Per month from <span>74 $</span>
             </p>
 
             <span className='item-name'>{item.name}</span>

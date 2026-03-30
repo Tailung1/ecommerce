@@ -74,8 +74,8 @@ main {
 }
 
 .item-image {
-  width: 200px;
-  height: 200px;
+  height: 140px;
+  width: 140px;
 }
 
 .item-info-container {
@@ -85,12 +85,15 @@ main {
   padding-bottom: 60px;
 }
 
-.gift {
+.gift,
+.new {
   text-align: center;
   max-width: 50px;
   background-color: orange;
-  padding: 3px;
+  padding: 5px;
   border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
   color: white;
 }
 
@@ -99,7 +102,11 @@ main {
   font-size: 20px;
 }
 
-.installment-price {
+.installment {
+  font-size: 12px;
+}
+
+.installment span {
   color: #ec5e2a;
 }
 
@@ -119,6 +126,7 @@ main {
   display: flex;
   gap: 7px;
   align-items: center;
+  justify-content: center;
   padding: 15px;
   border-radius: 10px;
   cursor: pointer;
@@ -129,12 +137,17 @@ main {
   max-height: 20px;
 }
 
+.product-actions-container span {
+  font-size: 13px;
+}
+
 .compare-box {
-  background-color: rgb(234, 217, 217);
+  background-color: rgb(240, 237, 237);
 }
 
 .cart-container {
   background-color: #f68861;
+  width: 80px;
 }
 
 /*# sourceMappingURL=main-output.css.map */

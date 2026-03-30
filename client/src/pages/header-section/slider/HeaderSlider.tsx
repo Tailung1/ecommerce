@@ -1,4 +1,5 @@
 import { easeOut, motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import BrandList from "./BrandList";
 import { useMyContext } from "../../../MyContext";
 
@@ -18,6 +19,7 @@ export default function HeaderSlider() {
     setShowSideBar,
     setShowSearchBar,
   } = useMyContext();
+  const navigate = useNavigate();
   const categories = [
     {
       id: "mobile-phones",
@@ -46,7 +48,10 @@ export default function HeaderSlider() {
           onClick={() => setShowSideBar(false)}
         />
 
-        <div className='serach-input-container'>
+        <div
+          onClick={() => navigate("/search")}
+          className='serach-input-container'
+        >
           <div
             onClick={() => {
               setShowSideBar(false);

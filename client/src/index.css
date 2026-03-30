@@ -27,25 +27,13 @@ img {
   animation: layer-animateIN 0.4s forwards;
 }
 .layer-backgroundOUT {
-  animation: layer-animateOUT 0.4s ;
+  animation: layer-animateOUT 0.4s;
 }
 @keyframes layer-animateOUT {
   0% {
     background-color: rgba(0, 0, 0, 0.5);
   }
-  10% {
-    background-color: rgba(0, 0, 0, 0.4);
-  }
 
-  20% {
-    background-color: rgba(0, 0, 0, 0.3);
-  }
-  40% {
-    background-color: rgba(0, 0, 0, 0.2);
-  }
-  60% {
-    background-color: rgba(0, 0, 0, 0.1);
-  }
   100% {
     background-color: rgba(0, 0, 0, 0);
   }
@@ -55,19 +43,7 @@ img {
   0% {
     background-color: rgba(0, 0, 0, 0);
   }
-  20% {
-    background-color: rgba(0, 0, 0, 0.1);
-  }
 
-  30% {
-    background-color: rgba(0, 0, 0, 0.2);
-  }
-  50% {
-    background-color: rgba(0, 0, 0, 0.3);
-  }
-  80% {
-    background-color: rgba(0, 0, 0, 0.4);
-  }
   100% {
     background-color: rgba(0, 0, 0, 0.5);
   }

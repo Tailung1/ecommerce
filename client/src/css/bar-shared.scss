@@ -39,16 +39,16 @@ input::placeholder {
   @include display-col($gap: 20px, $padding: 15px 15px);
   display: flex;
   flex-direction: column;
-  gap: 10p;
-  align-items: start;
+  gap: 10px;
+  text-align: center;
   position: fixed;
   bottom: 0;
   width: 100%;
   z-index: 1;
   background-color: rgb(255, 255, 255);
-  animation: BarIn 0.5s ease;
   border-radius: 20px 20px 0 0;
   padding-bottom: 100px;
+  animation: BarIn 0.5s ease;
 }
 .Bar-Modifed {
   height: 640px;
@@ -56,9 +56,8 @@ input::placeholder {
   justify-content: flex-start;
 }
 .bar-modifed-warning {
-    align-items: center;
+  align-items: center;
 }
-
 
 @keyframes BarIn {
   0% {

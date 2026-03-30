@@ -21,7 +21,7 @@ export default function ProductFeatures({
     setCompareCart,
   } = useMyContext();
 
-  const showAlert = (options: {
+  const enableAlertShow = (options: {
     isFull?: boolean;
     isChosen?: boolean;
   }) => {
@@ -52,13 +52,13 @@ export default function ProductFeatures({
       //   }
 
       if (compareCart.some((i) => i?.id == item.id)) {
-        showAlert({ isChosen: true });
+        enableAlertShow({ isChosen: true });
       }
 
       const emptyIndex = compareCart.findIndex((i) => i === null);
 
       if (emptyIndex == -1) {
-        showAlert({ isFull: true });
+        enableAlertShow({ isFull: true });
       }
 
       setCompareCart((prev) => {
@@ -72,7 +72,7 @@ export default function ProductFeatures({
     }
     if (task == "cart") {
       if (cart.some((i) => i.id === item.id)) {
-        showAlert({ isChosen: true });
+        enableAlertShow({ isChosen: true });
       } else {
         setCart((prev) => [...prev, item]);
       }
@@ -87,11 +87,12 @@ export default function ProductFeatures({
   };
 
   return (
-    <div className='breathles-wrapper'>
+    <div className='products-shared-wrapper'>
       {data.map((item: any) => (
         <div key={item.id}>
           <img className='item-image' src={img} alt='Item icon' />
           <div className='item-info-container'>
+            {item.gifts && <span className='gift'>Gifts</span>}
             <span className='price'>2000$</span>
             <p>
               Per month from{" "}
@@ -100,7 +101,7 @@ export default function ProductFeatures({
 
             <span className='item-name'>{item.name}</span>
           </div>
-          <div className='features'>
+          <div className='product-actions-container'>
             <div
               onClick={() => handleOperation("compare", item)}
               className='compare-box'

@@ -1,4 +1,31 @@
+.warning-container {
+  width: 100%;
+  text-align: center;
+}
 
+.warning-container h2 {
+  padding-bottom: 10px;
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.warning-container hr {
+  width: 100%;
+}
+
+.bar-modifed-warning button {
+  background-color: #ec5e2a;
+  color: white;
+  border-radius: 15px;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.warning-reason-text {
+  font-size: 18px;
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: 700;
+}
 
 main {
   flex-grow: 1;
@@ -15,9 +42,9 @@ main {
 }
 
 .hightlights-wrapper,
-.breathles-wrapper {
+.products-shared-wrapper {
   display: flex;
-  gap: 10px;
+  gap: 50px;
   overflow-x: auto;
   scrollbar-width: none;
 }
@@ -29,21 +56,18 @@ main {
   border-radius: 15px;
 }
 
-.breathles-container {
+.products-shared-container {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.breathles-wrapper {
-  gap: 25px;
-}
-
-.breathles-wrapper > div {
+.products-shared-wrapper > div {
   display: flex;
   flex-direction: column;
-  min-width: 170px;
-  gap: 20px;
+  min-width: 130px;
+  max-width: 110px;
+  gap: 10px;
   align-items: flex-start;
   border-radius: 15px;
   position: relative;
@@ -61,6 +85,15 @@ main {
   padding-bottom: 60px;
 }
 
+.gift {
+  text-align: center;
+  max-width: 50px;
+  background-color: orange;
+  padding: 3px;
+  border-radius: 20px;
+  color: white;
+}
+
 .price {
   color: #ec5e2a;
   font-size: 20px;
@@ -74,7 +107,7 @@ main {
   font-weight: 600;
 }
 
-.features {
+.product-actions-container {
   display: flex;
   gap: 10px;
   position: absolute;
@@ -82,30 +115,26 @@ main {
   max-height: 40px;
 }
 
-.features > div {
+.product-actions-container > div {
+  display: flex;
+  gap: 7px;
   align-items: center;
-  padding: 11px 20px;
+  padding: 15px;
   border-radius: 10px;
   cursor: pointer;
 }
 
-.features img {
-  width: 24px;
-  height: 24px;
+.product-actions-container img {
+  max-width: 20px;
+  max-height: 20px;
 }
 
 .compare-box {
-  background-color: rgb(234, 234, 234);
-  padding: 14px;
-  width: 60px;
+  background-color: rgb(234, 217, 217);
 }
 
 .cart-container {
-  display: flex;
-  justify-content: center;
-  gap: 5px;
   background-color: #f68861;
-  min-width: 100px;
 }
 
 /*# sourceMappingURL=main-output.css.map */

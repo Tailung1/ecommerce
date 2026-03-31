@@ -17,7 +17,7 @@ export default function Layout() {
     showCompareBar,
     isExitingBar,
     setPopularSearches,
-    showAlert
+    showAlert,
   } = useMyContext();
 
   const barRef = useRef<HTMLDivElement>(null);

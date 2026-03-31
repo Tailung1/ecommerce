@@ -1,5 +1,5 @@
-import { useMyContext } from "../MyContext";
-import searchIcon from "../assets/search-icon.png";
+import { useMyContext } from "../../MyContext";
+import searchIcon from "../../assets/search-icon.png";
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -20,7 +20,6 @@ export default function SearchBar() {
     id: number
   ) => {
     const destName = name.replace(/\s+/g, "-");
-
     const slug = `${destName}-${color}-${id}`.toLowerCase();
     navigate(`/${slug}`);
   };

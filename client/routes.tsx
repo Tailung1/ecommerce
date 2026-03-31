@@ -6,7 +6,7 @@ import Products from "./src/pages/searching/Products";
 import Cart from "./src/pages/cart/Cart";
 import Compare from "./src/bottomNAV/Compare";
 import Promotions from "./src/bottomNAV/Promotions";
-import SearchBar from "./src/pages/SearchBar";
+import SearchBar from "./src/pages/searching/SearchBar";
 
 const router = createBrowserRouter([
   {

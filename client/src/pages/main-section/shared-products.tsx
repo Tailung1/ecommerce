@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useMyContext } from "../../MyContext";
 import compareIcon from "../../assets/compare.png";
 import cartIcon from "../../assets/shopping-cart.png";
@@ -20,6 +21,18 @@ export default function ProductFeatures({
     compareCart,
     setCompareCart,
   } = useMyContext();
+
+  const navigate = useNavigate();
+
+  const generateSlug = async (
+    name: string,
+    category: string,
+    id: number
+  ) => {
+    const destName = name.replace(/\s+/g, "-");
+    const slug = `${category}/${destName}-${id}`.toLowerCase();
+    navigate(`/${slug}`);
+  };
 
   const enableAlertShow = (options: {
     isFull?: boolean;
@@ -93,7 +106,14 @@ export default function ProductFeatures({
     <div className='products-shared-wrapper'>
       {data.map((item: any) => (
         <div key={item.id}>
-          <img className='item-image' src={img} alt='Item icon' />
+          <img
+            onClick={() =>
+              generateSlug(item.name, item.category, item.id)
+            }
+            className='item-image'
+            src={img}
+            alt='Item icon'
+          />
           <div className='item-info-container'>
             {item.gifts ? (
               <span className='gift'>GIFTS</span>

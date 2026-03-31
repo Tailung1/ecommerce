@@ -16,6 +16,7 @@ export default function Product() {
 
   const [product, setProduct] = useState<productType | null>(null);
 
+
   useEffect(() => {
     const getProduct = async () => {
       const productResponse = await fetch(
@@ -34,9 +35,33 @@ export default function Product() {
   }, [slug]);
 
   return (
-    <div className='flex-col flex-grow relative'>
+    <div className='flex flex-col   flex-grow bg-green-700 '>
       <h1>{productTitle}</h1>
-      <div className='price-container flex items-center absolute w-full bottom-0 justify-between bg-orange-500 px-2 py-2'>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>{" "}
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>{" "}
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>{" "}
+      <div className='price-container flex items-center  fixed w-full bottom-0 justify-between bg-orange-500 p-2'>
         <p className='text-white font-bold'>{product?.price} Gel</p>
         <button
           onClick={() => setShowAuthBar(true)}

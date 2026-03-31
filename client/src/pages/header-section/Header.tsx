@@ -28,16 +28,14 @@ export default function Header() {
           src={slideIcon}
           alt='slide-icon'
         />
-        <div className='main-logo-div'>
-          <img
-            onClick={() => {
-              navigate("/");
-              setShowSearchBar(false);
-            }}
-            className='balisha'
-            src={mainLogo}
-            alt='main-logo'
-          />
+        <div
+          onClick={() => {
+            navigate("/");
+            setShowSearchBar(false);
+          }}
+          className='main-logo-div'
+        >
+          <img className='balisha' src={mainLogo} alt='main logo' />
           <p>Balisha</p>
         </div>
       </div>

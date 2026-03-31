@@ -9,6 +9,7 @@ import AuthBar from "./src/bottomNAV/AuthBar";
 import CompareBar from "./src/bottomNAV/CompareBar";
 import WarningBar from "./src/pages/main-section/Alert";
 import { useMyContext } from "./src/MyContext";
+import FirstSection from "./src/pages/header-section/FirstSection";
 
 export default function Layout() {
   const {
@@ -70,6 +71,7 @@ export default function Layout() {
   return (
     <div className='flex flex-col  flex-grow'>
       <div className='ddd' ref={barRef}></div>
+      <FirstSection />
       <Header />
       <AnimatePresence>
         {showSideBar && <HeaderSlider />}

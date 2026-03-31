@@ -8,7 +8,7 @@ header {
     $justify-content: space-between
   );
   background-color: rgb(234, 217, 217, 0.5);
-  backdrop-filter: blur(40px);
+  backdrop-filter: blur(30px);
   position: sticky;
   top: 0;
   width: 100%;
@@ -18,7 +18,7 @@ header > div {
   @include mixins.display-shared($gap: 5px);
   cursor: pointer;
 }
-.main-logo-div {
+.main-logo-container {
   @include mixins.display-shared;
 }
 .balisha {
@@ -28,7 +28,7 @@ header > div {
 .header-right-side-items {
   @include mixins.display-shared($gap: 15px);
 }
-.shipping-cart-container {
+.shopping-cart-container {
   position: relative;
 }
 .cart-amount {
@@ -77,8 +77,8 @@ header > div {
   position: absolute;
   left: 20px;
   top: 10px;
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
 }
 .input {
   width: 100%;
@@ -114,4 +114,105 @@ header > div {
     transform: translateY(0);
   }
 }
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+////////////////////////////////////////////////////////////////
+
+.pc-first-section {
+  display: none;
+}
+.pc-header {
+  display: none;
+}
+
+@media (min-width: 500px) {
+  .header {
+    display: none;
+  }
+  .pc-first-section {
+    @include mixins.display-shared(
+      $gap: 0px,
+      $padding: 8px 120px,
+      $justify-content: space-between
+    );
+    background-color: rgb(235, 101, 57);
+  }
+  .info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 14px;
+    font-weight: 500;
+    color: #d7d2ad;
+  }
+  .info * {
+    cursor: pointer;
+  }
+  .info *:hover {
+    color: white;
+    transform: scale(1.01);
+  }
+
+  header {
+    padding: 10px 0px;
+    position: static;
+    width: 100%;
+  }
+
+  .pc-header input {
+    min-width: 400px;
+  }
+
+  .pc-header {
+    @include mixins.display-shared(
+      $gap: 0px,
+      $padding: 0px 30px 0px 50px,
+      $justify-content: space-around
+    );
+    // padding-left: 50px;
+    width: 100%;
+  }
+
+  .header-right-side-items {
+    gap: 20px;
+  }
+  .header-right-side-items > * {
+    border-radius: 10px;
+  }
+
+  .header-right-side-items > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-width: fit-content;
+  }
+
+  .orange-btn {
+    background-color: rgb(243, 194, 96);
+    padding: 7px 18px;
+  }
+  .white-btn {
+    background-color: rgb(233, 210, 210);
+    padding: 8px 28px;
+  }
+  .white-btn:hover {
+    background-color: white;
+  }
+  .white-btn span {
+    font-weight: 500;
+  }
+}
+
+.animate-header {
+  animation: header-animation 0.7s ease;
+  position: sticky;
+}
+
+@keyframes header-animation {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

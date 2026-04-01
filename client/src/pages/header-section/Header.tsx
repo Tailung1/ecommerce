@@ -8,7 +8,6 @@ import loginIcon from "../../assets/login.png";
 import { useNavigate } from "react-router-dom";
 import Logo from "../shared-components/Logo";
 
-
 export default function Header() {
   const { cart, setShowSideBar, setShowSearchBar } = useMyContext();
 
@@ -73,13 +72,14 @@ export default function Header() {
               alt='search icon'
             />
           </div>
-          <div className='white-btn cart-container'>
+          <div className='cart-container-header'>
             <img src={cartIcon} alt='Shopping cart icon' />
             <span>Cart</span>
+            <div className='invisible-div'></div>
             <ShoppingCartPop />
           </div>
 
-          <div className='white-btn'>
+          <div className='login-container-header'>
             <img src={loginIcon} alt='Login icon' />
             <span>Log In</span>
           </div>

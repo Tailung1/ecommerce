@@ -1,5 +1,6 @@
 @use "mixins";
 @use "Partial-slider";
+@use "cart-pop";
 
 header {
   @include mixins.display-shared(
@@ -12,7 +13,7 @@ header {
   position: sticky;
   top: 0;
   width: 100%;
-  z-index: 9999;
+  z-index: 1;
 }
 
 header > div {
@@ -29,7 +30,7 @@ header > div {
 .header-right-side-items {
   @include mixins.display-shared($gap: 15px);
 }
-.shopping-cart-container {
+.shopping-cart-container-header {
   position: relative;
 }
 .cart-amount {
@@ -193,45 +194,49 @@ header > div {
     background-color: rgb(243, 194, 96);
     padding: 7px 18px;
   }
-  .white-btn {
-    background-color: rgb(233, 210, 210);
+  .animate-header {
+    animation: header-animation 0.7s ease;
+    position: sticky;
+  }
+
+  @keyframes header-animation {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  .cart-container-header,
+  .login-container-header {
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
     padding: 8px 28px;
   }
-  .white-btn:hover {
-    background-color: white;
+  .cart-container-header:hover,
+  .login-container-header:hover {
+    background-color: #f7c8b7;
   }
-  .white-btn span {
+  .cart-container-header:hover .invisible-div {
+    display: block;
+  }
+
+  .cart-container-header:hover .cart-pop {
+    display: block;
+  }
+  .invisible-div {
+    display: none;
+    position: absolute;
+    width: 120px;
+    height: 19px;
+    top: 46px;
+    cursor: default;
+  }
+
+  .cart-container-header span {
     font-weight: 500;
-  }
-}
-.cart-container {
-  position: relative;
-}
-.cart-pop {
-  position: absolute;
-  top: 60px;
-  width: 100%;
-  display: none;
-  height: 200px;
-  background-color: rgb(0, 255, 98);
-  z-index: 999999;
-}
-.cart-container:hover  .cart-pop {
-  display: block;
-  margin-top: 30px;
-  background-color: rgb(0, 255, 98);
-}
-
-.animate-header {
-  animation: header-animation 0.7s ease;
-  position: sticky;
-}
-
-@keyframes header-animation {
-  0% {
-    transform: translateY(-100%);
-  }
-  100% {
-    transform: translateY(0);
   }
 }

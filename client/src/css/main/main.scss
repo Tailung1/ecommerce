@@ -6,13 +6,16 @@ main {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  padding: 10px 0 10px 10px;
 }
 .main-content {
   display: flex;
   flex-direction: column;
   gap: 40px;
   position: relative;
-  padding: 10px 0 10px 10px;
+}
+.pc-main-content {
+  display: none;
 }
 
 .hightlights-wrapper,
@@ -113,6 +116,15 @@ main {
 }
 
 @media (min-width: 500px) {
+  .hightlights-wrapper {
+    display: none;
+  }
+  .pc-main-content {
+    display: block;
+  }
+  main {
+    padding: 20px 100px 20px;
+  }
   .main-content {
   }
 }

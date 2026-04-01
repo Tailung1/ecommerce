@@ -1,4 +1,5 @@
 import data from "../../data.json";
+import PC from "./PC";
 import mobilePhone from "../../assets/iphone.png";
 import tv from "../../assets/television.png";
 import laptops from "../../assets/laptop.png";
@@ -14,6 +15,7 @@ export default function Main() {
           </div>
         ))}
       </section>
+      <PC />
 
       <section className='products-shared-container'>
         <p>Breathles in zommer</p>

@@ -9,130 +9,177 @@
     {
       "id": 1,
       "name": "iPhone 17 Pro | Pro Max",
-      "category": "phone"
+      "category": "phone",
+      "quantity": 2
     },
-    { "id": 4, "name": "Samsung 2s", "category": "phone" },
-    { "id": 5, "name": "xiaomi 21s", "category": "phone" },
-    { "id": 6, "name": "nokia 21s", "category": "phone" },
-    { "id": 3, "name": "samsung tv", "category": "tv" },
-    { "id": 7, "name": "onePlus", "category": "phone" },
-    { "id": 2, "name": "acer laptop", "category": "laptop" }
+    {
+      "id": 4,
+      "name": "Samsung 2s",
+      "category": "phone",
+      "quantity": 1
+    },
+    {
+      "id": 5,
+      "name": "xiaomi 21s",
+      "category": "phone",
+      "quantity": 1
+    },
+    {
+      "id": 6,
+      "name": "nokia 21s",
+      "category": "phone",
+      "quantity": 1
+    },
+    {
+      "id": 3,
+      "name": "samsung tv",
+      "category": "tv",
+      "quantity": 1
+    },
+    {
+      "id": 7,
+      "name": "onePlus",
+      "category": "phone",
+      "quantity": 1
+    },
+    {
+      "id": 2,
+      "name": "acer laptop",
+      "category": "laptop",
+      "quantity": 1
+    }
   ],
   "gifts": [
     {
       "id": 1,
       "name": "Samsung QLED 65\"",
       "category": "tv",
-      "gifts": true
+      "gifts": true,
+      "quantity": 1
     },
     {
       "id": 2,
       "name": "LG OLED 55\"",
       "category": "tv",
-      "gifts": true
+      "gifts": true,
+      "quantity": 1
     },
     {
       "id": 3,
       "name": "Sony Bravia 50\"",
       "category": "tv",
-      "gifts": true
+      "gifts": true,
+      "quantity": 1
     },
     {
       "id": 4,
       "name": "TCL 43\" Smart TV",
       "category": "tv",
-      "gifts": true
+      "gifts": true,
+      "quantity": 1
     },
     {
       "id": 5,
       "name": "Panasonic 60\" LED",
       "category": "tv",
-      "gifts": true
+      "gifts": true,
+      "quantity": 1
     },
     {
       "id": 6,
       "name": "Hisense 55\" ULED",
       "category": "tv",
-      "gifts": true
+      "gifts": true,
+      "quantity": 1
     },
     {
       "id": 7,
       "name": "Philips 50\" Ambilight",
       "category": "tv",
-      "gifts": true
+      "gifts": true,
+      "quantity": 1
     }
   ],
-
   "new-models": [
     {
       "id": 1,
       "name": "Samsung QLED 65\"",
       "category": "tv",
       "gifts": false,
-      "new": true
+      "new": true,
+      "quantity": 1
     },
     {
       "id": 2,
       "name": "LG OLED 55\"",
       "category": "tv",
       "gifts": false,
-      "new": true
+      "new": true,
+      "quantity": 1
     },
     {
       "id": 3,
       "name": "Sony Bravia 50\"",
       "category": "tv",
       "gifts": false,
-      "new": true
+      "new": true,
+      "quantity": 1
     },
     {
       "id": 4,
       "name": "MacBook Pro 16\"",
       "category": "laptop",
       "gifts": false,
-      "new": true
+      "new": true,
+      "quantity": 1
     },
     {
       "id": 5,
       "name": "Dell XPS 13",
       "category": "laptop",
       "gifts": false,
-      "new": true
+      "new": true,
+      "quantity": 1
     },
     {
       "id": 6,
       "name": "iPhone 15 Pro",
       "category": "phone",
       "gifts": false,
-      "new": true
+      "new": true,
+      "quantity": 1
     },
     {
       "id": 7,
       "name": "Samsung Galaxy S23",
       "category": "phone",
       "gifts": false,
-      "new": true
+      "new": true,
+      "quantity": 1
     },
     {
       "id": 8,
       "name": "iPad Air 10.9\"",
       "category": "tablet",
       "gifts": false,
-      "new": true
+      "new": true,
+      "quantity": 1
     },
     {
       "id": 9,
       "name": "Samsung Galaxy Tab S8",
       "category": "tablet",
       "gifts": false,
-      "new": true
+      "new": true,
+      "quantity": 1
     },
     {
       "id": 10,
       "name": "Apple Watch Series 9",
       "category": "smartwatch",
       "gifts": false,
-      "new": true
+      "new": true,
+      "quantity": 1
     }
   ]
 }

@@ -1,4 +1,4 @@
-import usFlag from "../../assets/eng.png";
+import LanguageSelector from "../shared-components/LanguageSelector";
 import teleCall from "../../assets/telephone-call.png";
 
 export default function FirstSection() {
@@ -12,15 +12,15 @@ export default function FirstSection() {
         />
         <span>*7007</span>
       </div>
-      <div className='info'>
-        <span>Trade Politics</span>
-        <span>Installment</span>
-        <span>Carrer</span>
-        <span>Trade In</span>
-        <span>Branches</span>
-        <div className='bg-white p-2 px-3  rounded-[15px]'>
-          <img src={usFlag} alt='Usa flag icon' />
-        </div>
+      <div className='info-container'>
+        <nav>
+          <span>Trade Politics</span>
+          <span>Installment</span>
+          <span>Carrer</span>
+          <span>Trade In</span>
+          <span>Branches</span>
+        </nav>
+        <LanguageSelector />
       </div>
     </div>
   );

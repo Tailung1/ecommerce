@@ -2,7 +2,7 @@ import data from "../../data.json";
 import mobilePhone from "../../assets/iphone.png";
 import tv from "../../assets/television.png";
 import laptops from "../../assets/laptop.png";
-import ProductFeatures from "./shared-products";
+import ProductFeatures from "./productsContainer";
 
 export default function Main() {
   return (

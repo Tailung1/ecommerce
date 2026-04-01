@@ -111,3 +111,8 @@ main {
   background-color: $primary-color;
   width: 80px;
 }
+
+@media (min-width: 500px) {
+  .main-content {
+  }
+}

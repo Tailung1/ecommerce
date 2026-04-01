@@ -35,8 +35,10 @@ export default function Product() {
   }, [slug]);
 
   return (
-    <div className='flex flex-col   flex-grow bg-green-700 '>
+    <div className='flex flex-col flex-grow bg-green-700 '>
       <h1>{productTitle}</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
       <h1>hikjhwelkjhwlekdjwedlwed</h1>
       <h1>hikjhwelkjhwlekdjwedlwed</h1>
       <h1>hikjhwelkjhwlekdjwedlwed</h1>

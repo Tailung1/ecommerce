@@ -25,7 +25,6 @@ export default function Categories() {
     },
   ];
   return (
-    <div>
       <section className='categories-wrapper'>
         {categories.map((cat) => (
           <div
@@ -46,6 +45,5 @@ export default function Categories() {
           </div>
         ))}
       </section>
-    </div>
   );
 }

@@ -1,0 +1,9 @@
+@media (min-width: 500px) {
+  .categories-wrapper > div:hover {
+    background-color: #efe1dd;
+    cursor: pointer;
+  }
+  .categories-and-brands-parent:hover .categories-wrapper {
+    border-right: 1px solid #daccc3;
+  }
+}

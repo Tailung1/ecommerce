@@ -27,6 +27,15 @@
   font-weight: 700;
 }
 
+@media (min-width: 500px) {
+  .categories-wrapper > div:hover {
+    background-color: #efe1dd;
+    cursor: pointer;
+  }
+  .categories-and-brands-parent:hover .categories-wrapper {
+    border-right: 1px solid #daccc3;
+  }
+}
 main {
   display: flex;
   flex-direction: column;
@@ -41,7 +50,7 @@ main {
   position: relative;
 }
 
-.pc-main-content {
+.pc-main-first-section {
   display: none;
 }
 
@@ -155,14 +164,54 @@ main {
 }
 
 @media (min-width: 500px) {
+  main {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 20px 60px;
+  }
   .hightlights-wrapper {
     display: none;
   }
-  .pc-main-content {
-    display: block;
+  .pc-main-first-section {
+    display: flex;
+    width: 100%;
   }
-  main {
-    padding: 20px 100px 20px;
+  .categories-and-brands-parent {
+    position: relative;
+    height: 213px;
+    width: 300px;
+  }
+  .pc-categories-and-brands-container {
+    position: absolute;
+    display: flex;
+    gap: 10px;
+    height: 213px;
+    width: 200px;
+    overflow: hidden;
+    transition: all 0.2s ease;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgb(193, 181, 181);
+    background-color: rgb(255, 255, 255);
+    z-index: 999;
+  }
+  .categories-wrapper {
+    min-width: 200px;
+    min-height: 500px;
+  }
+  .pc-categories-and-brands-container:hover {
+    height: 500px;
+    width: 1200px;
+  }
+  .pc-brands-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: red;
+  }
+  .sliderc {
+    width: 100%;
+    background-color: red;
   }
 }
 

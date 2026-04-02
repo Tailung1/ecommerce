@@ -14,22 +14,25 @@
 body.no-scroll {
   overflow: hidden;
 }
-
+.categories-and-brands-container {
+  display: flex;
+  gap: 5px;
+}
 .categories-wrapper {
-  @include mixins.display-shared($gap: 2px);
+  align-items: center;
+  display: flex;
   flex-direction: column;
-  background-color: rgb(240, 246, 239);
+  width: 100px;
+  background-color: rgb(235, 235, 235);
+}
+.categories-wrapper > div {
+  border-bottom: 0.5px solid rgb(200, 187, 187);
 }
 .categories-wrapper * img {
   width: 20px;
   height: 20px;
 }
-.categories-and-brands-container {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  height: 100%;
-}
+
 .category {
   @include mixins.display-shared($gap: 5px, $padding: 10px 5px);
   flex-direction: column;
@@ -40,7 +43,6 @@ body.no-scroll {
 
 .category-animate {
   animation: scaleEffct 0.2s ease;
-  cursor: pointer;
 }
 
 @keyframes scaleEffct {
@@ -77,11 +79,10 @@ body.no-scroll {
   grid-template-columns: repeat(3, 1fr);
   padding-right: 5px;
   grid-gap: 10px;
-
 }
 .brand-item {
   height: 100px;
-  background-color: rgb(226, 225, 217);
+  background-color: rgb(217, 218, 226);
   border-radius: 10px;
   padding: 2px;
   overflow: hidden;
@@ -98,9 +99,28 @@ body.no-scroll {
   bottom: -20%;
 }
 
-.offline-category {
-  background-color: rgb(235, 235, 235);
-}
 .active-category {
-  background-color: rgb(189, 242, 98);
+  background-color: rgb(210, 234, 169);
+}
+
+@media (min-width: 500px) {
+  .category-animate {
+    animation: none;
+  }
+  .category {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 20px;
+    padding: 10px;
+  }
+
+  .active-category {
+    background-color: rgb(235, 235, 235);
+  }
+
+  .mobile-phones,
+  .smart-home {
+    flex-direction: row;
+    gap: 5px;
+  }
 }

@@ -169,4 +169,10 @@
   color: white;
 }
 
+@media (min-width: 500px) {
+  .bottom-nav-bar {
+    display: none;
+  }
+}
+
 /*# sourceMappingURL=nav-output.css.map */

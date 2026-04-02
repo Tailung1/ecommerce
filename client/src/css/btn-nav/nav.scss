@@ -116,3 +116,9 @@
   background-color: rgb(234, 128, 23);
   color: white;
 }
+
+@media (min-width: 500px) {
+  .bottom-nav-bar {
+    display: none;
+  }
+}

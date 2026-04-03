@@ -7,10 +7,10 @@ export default function PC() {
         <div className='pc-categories-and-brands-container'>
           <Categories />
           <div className='pc-brands-container'>
-            1uoduwqpoiquwdpoiqdoiqwupoiqu
-            1uoduwqpoiquwdpoiqdoiqwupoiqu
-            1uoduwqpoiquwdpoiqdoiqwupoiqu
-            1uoduwqpoiquwdpoiqdoiqwupoiqu
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
           </div>
         </div>
       </div>

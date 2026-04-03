@@ -8,6 +8,9 @@ import smartHome from "../../assets/smart-home.png";
 
 export default function Categories() {
   const { activeCategory, setActiveCategory } = useMyContext();
+
+
+
   const categories = [
     {
       id: "mobile-phones",
@@ -25,25 +28,25 @@ export default function Categories() {
     },
   ];
   return (
-      <section className='categories-wrapper'>
-        {categories.map((cat) => (
-          <div
-            key={cat.id}
-            className={`${
-              activeCategory === cat.id
-                ? "active-category category-animate"
-                : "offline-category"
-            } category`}
-            onClick={() => setActiveCategory(cat.id)}
-          >
-            <img src={cat.icon} alt={`${cat.id} icon`} />
-            <div className={`${cat.label.length > 1 && cat.id}`}>
-              {cat.label.map((text) => (
-                <p key={text}>{text}</p>
-              ))}
-            </div>
+    <section className='categories-wrapper'>
+      {categories.map((cat) => (
+        <div
+          key={cat.id}
+          className={`${
+            activeCategory === cat.id
+              ? "active-category category-animate"
+              : "offline-category"
+          } category`}
+          onClick={() => setActiveCategory(cat.id)}
+        >
+          <img src={cat.icon} alt={`${cat.id} icon`} />
+          <div className={`${cat.label.length > 1 && cat.id}`}>
+            {cat.label.map((text) => (
+              <p key={text}>{text}</p>
+            ))}
           </div>
-        ))}
-      </section>
+        </div>
+      ))}
+    </section>
   );
 }

@@ -128,19 +128,21 @@ main {
   }
   .pc-main-first-section {
     display: flex;
+
     width: 100%;
   }
   .categories-and-brands-parent {
     position: relative;
     height: 213px;
-    width: 300px;
+    min-width: 200px;
+    background-color: green;
   }
   .pc-categories-and-brands-container {
     position: absolute;
     display: flex;
     gap: 10px;
     height: 213px;
-    width: 200px;
+    width: 100%;
     overflow: hidden;
     transition: all 0.2s ease;
     border-radius: 10px;
@@ -151,7 +153,6 @@ main {
 
   .categories-wrapper {
     min-width: 200px;
-    min-height: 500px;
   }
 
   .pc-categories-and-brands-container:hover {
@@ -161,8 +162,6 @@ main {
   .pc-brands-container {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    color: red;
   }
 
   .sliderc {

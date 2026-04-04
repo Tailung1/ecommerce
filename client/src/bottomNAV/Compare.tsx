@@ -1,6 +1,6 @@
 import { useMyContext } from "../MyContext";
 import { useNavigate } from "react-router-dom";
-import leftArrowIcon from "../assets/left.png";
+import leftArrowIcon from "../assets/left-arrow.png";
 import plusIcon from "../assets/plus.png";
 import binIcon from "../assets/bin.png";
 import searchIcon from "../assets/search-icon.png";

@@ -8,22 +8,42 @@ import tv from "../../assets/television.png";
 
 export default function PC() {
   const [isHovered, setIsHovered] = useState<boolean>(false);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  console.log(containerRef)
+  console.log(containerRef.current);
   const arr = [iphone, consoleIcon, tv];
   let timeoutRef = useRef<null | number>(null);
   let intervalRef = useRef<null | number>(null);
 
   useEffect(() => {
-    const el = document.querySelector(".pc-slider-container");
-    el?.addEventListener("mouseenter", () => setIsHovered(true));
-    el?.addEventListener("mouseleave", () => setIsHovered(false));
+    const handleMouseEnter = () => setIsHovered(true);
+    const handleMouseLeave = () => setIsHovered(false);
+
+    containerRef.current?.addEventListener(
+      "mouseenter",
+      handleMouseEnter
+    );
+    containerRef.current?.addEventListener(
+      "mouseleave",
+      handleMouseLeave
+    );
+
     return () => {
-      if (timeoutRef.current) clearInterval(timeoutRef.current);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
       if (intervalRef.current) clearInterval(intervalRef.current);
+      containerRef.current?.removeEventListener(
+        "mouseenter",
+        handleMouseEnter
+      );
+      containerRef.current?.removeEventListener(
+        "mouseleave",
+        handleMouseLeave
+      );
     };
   }, []);
 
   useEffect(() => {
-    if (timeoutRef.current) clearInterval(timeoutRef.current);
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
     if (intervalRef.current) clearInterval(intervalRef.current);
     if (isHovered) return;
 
@@ -71,7 +91,7 @@ export default function PC() {
           </div>
         </div>
       </div>
-      <div className='pc-slider-container'>
+      <div ref={containerRef} className='pc-slider-container'>
         <div
           onClick={() => setIsHovered((prev) => !prev)}
           className='pc-slider-wrapper'

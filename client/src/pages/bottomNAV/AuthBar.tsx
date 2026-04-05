@@ -1,3 +1,4 @@
+import "../../css/reusable-css/bar.scss"
 import "../../css/main-css/authBar.scss"
 import FloatingInput from "../../FloatingInput";
 import icon from "../../assets/main-logo.png";

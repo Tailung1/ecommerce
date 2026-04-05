@@ -1,3 +1,4 @@
+import "../../css/reusable-css/bar.scss"
 import "../../css/main-css/warning.scss"
 import { useMyContext } from "../../MyContext";
 import { useNavigate } from "react-router-dom";

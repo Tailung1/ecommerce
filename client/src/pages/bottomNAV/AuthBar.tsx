@@ -1,3 +1,4 @@
+import "../../css/main-css/authBar.scss"
 import FloatingInput from "../../FloatingInput";
 import icon from "../../assets/main-logo.png";
 import checked from "../../assets/checked-rules.png";

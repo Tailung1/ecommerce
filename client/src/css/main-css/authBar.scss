@@ -15,69 +15,6 @@ $primary-color: #ec5e2a;
   gap: $gap;
 }
 
-.exit-btn {
-  transform: translateY(-90%);
-}
-.exit-btn,
-.exit-btn-compare {
-  background-color: red;
-  padding: 5px 13px;
-  border-radius: 50%;
-  position: absolute;
-  right: 15px;
-}
-.exit-btn-compare {
-  transform: translateY(-110%);
-}
-
-input::placeholder {
-  color: rgb(62, 46, 205);
-  font-size: 18px;
-}
-
-.Bar {
-  @include display-col($gap: 20px, $padding: 15px 15px);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  text-align: center;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  z-index: 1;
-  background-color: rgb(255, 255, 255);
-  border-radius: 20px 20px 0 0;
-  padding-bottom: 100px;
-  animation: BarIn 0.5s ease;
-}
-.Bar-Modifed {
-  height: 640px;
-  max-height: 640px;
-  justify-content: flex-start;
-}
-
-
-@keyframes BarIn {
-  0% {
-    transform: translateY(150%);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-.ExitBar {
-  animation: BarOut 0.5s ease forwards;
-}
-
-@keyframes BarOut {
-  0% {
-    transform: translateY(0);
-  }
-
-  100% {
-    transform: translateY(150%);
-  }
-}
 .acces-options {
   display: flex;
   justify-content: space-around;
@@ -226,6 +163,10 @@ input {
   border-radius: 10px;
   background-color: #f2f2f2;
   padding: 20px 17px 5px;
+}
+input::placeholder {
+  color: rgb(62, 46, 205);
+  font-size: 18px;
 }
 // FLOATING !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 .floating-container {

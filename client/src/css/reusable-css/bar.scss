@@ -1,0 +1,49 @@
+.exit-btn {
+  transform: translateY(-90%);
+}
+.exit-btn,
+.exit-btn-compare {
+  background-color: red;
+  padding: 5px 13px;
+  border-radius: 50%;
+  position: absolute;
+  right: 15px;
+}
+
+.Bar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 1;
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px 20px 0 0;
+  padding: 15px;
+  padding-bottom: 100px;
+  animation: BarIn 0.5s ease;
+}
+
+@keyframes BarIn {
+  0% {
+    transform: translateY(150%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.ExitBar {
+  animation: BarOut 0.5s ease forwards;
+}
+
+@keyframes BarOut {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(150%);
+  }
+}

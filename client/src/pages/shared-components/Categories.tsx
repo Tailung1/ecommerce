@@ -7,9 +7,8 @@ import television from "../../assets/television.png";
 import smartHome from "../../assets/smart-home.png";
 
 export default function Categories() {
-  const { activeCategory, setActiveCategory } = useMyContext();
-
-
+  const { activeCategory, setActiveCategory, enablePC } =
+    useMyContext();
 
   const categories = [
     {
@@ -38,6 +37,9 @@ export default function Categories() {
               : "offline-category"
           } category`}
           onClick={() => setActiveCategory(cat.id)}
+          onMouseEnter={
+            enablePC ? () => setActiveCategory(cat.id) : undefined
+          }
         >
           <img src={cat.icon} alt={`${cat.id} icon`} />
           <div className={`${cat.label.length > 1 && cat.id}`}>

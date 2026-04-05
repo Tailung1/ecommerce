@@ -7,6 +7,7 @@ import cartIcon from "../../assets/shopping-cart.png";
 import loginIcon from "../../assets/login.png";
 import { useNavigate } from "react-router-dom";
 import Logo from "../shared-components/Logo";
+import "../../css/header/header.scss"
 
 export default function Header() {
   const { cart, setShowSideBar, setShowSearchBar } = useMyContext();
@@ -34,7 +35,7 @@ export default function Header() {
           src={searchIcon}
           alt='search-logo'
         />
-        <div className='shopping-cart-container'>
+        <div className='shopping-cart-container-header'>
           {cart.length !== 0 && (
             <div className='cart-amount'>
               <span>{cart.length}</span>

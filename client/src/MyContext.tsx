@@ -39,6 +39,8 @@ interface types {
   setShowLanguages: React.Dispatch<SetStateAction<boolean>>;
   currentLanguage: string;
   setCurrentLanguage: React.Dispatch<SetStateAction<string>>;
+  enablePC: boolean;
+  setEnablePC: React.Dispatch<SetStateAction<boolean>>;
 }
 
 const MyContext = createContext({} as types);
@@ -48,6 +50,8 @@ export default function ContextProvider({
 }: {
   children: ReactNode;
 }) {
+  const [enablePC, setEnablePC] = useState<boolean>(false);
+
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const [isChosen, setIsChosen] = useState<boolean>(false);
   const [isFull, setIsFull] = useState<boolean>(false);
@@ -108,7 +112,9 @@ export default function ContextProvider({
         showLanguages,
         setShowLanguages,
         currentLanguage,
-        setCurrentLanguage
+        setCurrentLanguage,
+        enablePC,
+        setEnablePC
       }}
     >
       {children}

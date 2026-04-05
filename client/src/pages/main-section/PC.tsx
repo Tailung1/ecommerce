@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import Categories from "../header-section/Categories";
+import { useMyContext } from "../../MyContext";
+import Categories from "../shared-components/Categories";
 import leftArrowIcon from "../../assets/left-arrow.png";
 import rightArrowIcon from "../../assets/right-arrow.png";
 import iphone from "../../assets/iphone.png";
@@ -7,10 +8,10 @@ import consoleIcon from "../../assets/console.png";
 import tv from "../../assets/television.png";
 
 export default function PC() {
+  const { setEnablePC, activeCategory } = useMyContext();
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
-  console.log(containerRef)
-  console.log(containerRef.current);
+
   const arr = [iphone, consoleIcon, tv];
   let timeoutRef = useRef<null | number>(null);
   let intervalRef = useRef<null | number>(null);
@@ -45,10 +46,10 @@ export default function PC() {
   useEffect(() => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     if (intervalRef.current) clearInterval(intervalRef.current);
+
     if (isHovered) return;
-
+    
     const container = document.querySelector(".pc-slider-wrapper")!;
-
     timeoutRef.current = setTimeout(() => {
       intervalRef.current = setInterval(() => {
         const leftSpace =
@@ -62,6 +63,11 @@ export default function PC() {
       }, 2000);
     }, 3000);
   }, [isHovered]);
+
+  useEffect(() => {
+    setEnablePC(true);
+    return () => setEnablePC(false);
+  }, []);
 
   const handleScroll = (dir: "left" | "right") => {
     setIsHovered(true);
@@ -83,12 +89,7 @@ export default function PC() {
       <div className='categories-and-brands-parent'>
         <div className='pc-categories-and-brands-container'>
           <Categories />
-          <div className='pc-brands-container'>
-            <div>1</div>
-            <div>2</div>
-            <div>3</div>
-            <div>4</div>
-          </div>
+          <div className='pc-brands-container'>{activeCategory}</div>
         </div>
       </div>
       <div ref={containerRef} className='pc-slider-container'>

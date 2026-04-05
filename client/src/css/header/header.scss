@@ -131,28 +131,7 @@ header > div {
   .header {
     display: none;
   }
-  .pc-first-section {
-    @include mixins.display-shared(
-      $gap: 0px,
-      $padding: 15px 120px,
-      $justify-content: space-between
-    );
-    background-color: rgb(235, 101, 57);
-  }
-  .info-container,
-  .info-container nav {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    font-size: 14px;
-    font-weight: 500;
-    color: #d7d2ad;
-  }
-  .info-container nav *:hover {
-    color: white;
-    transform: scale(1.01);
-    cursor: pointer;
-  }
+
 
   header {
     padding: 10px 0px;

@@ -3,7 +3,7 @@ import { useMyContext } from "../../MyContext";
 import compareIcon from "../../assets/compare.png";
 import cartIcon from "../../assets/shopping-cart.png";
 
-export default function ProductFeatures({
+export default function ProductsContainer({
   data,
   img,
 }: {

@@ -1,5 +1,5 @@
 import { easeOut, motion } from "framer-motion";
-import Categories from "../Categories";
+import Categories from "../../shared-components/Categories";
 import { useNavigate } from "react-router-dom";
 import BrandList from "./BrandList";
 import { useMyContext } from "../../../MyContext";

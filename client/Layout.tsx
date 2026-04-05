@@ -9,7 +9,7 @@ import AuthBar from "./src/bottomNAV/AuthBar";
 import CompareBar from "./src/bottomNAV/CompareBar";
 import WarningBar from "./src/pages/main-section/Alert";
 import { useMyContext } from "./src/MyContext";
-import FirstSection from "./src/pages/header-section/FirstSection";
+import FirstSection from "./src/pages/components/FirstSection";
 
 export default function Layout() {
   const {

@@ -1,4 +1,5 @@
 import { useMyContext } from "../../MyContext";
+import "../../css/header-css/cart-pop.scss"
 import emptyCart from "../../assets/cartImage.png";
 import bin from "../../assets/bin.png";
 import iphone from "../../assets/iphone.png";

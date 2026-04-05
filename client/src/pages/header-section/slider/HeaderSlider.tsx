@@ -1,5 +1,6 @@
+import "../../../css/header-css/header-slider.scss"
 import { easeOut, motion } from "framer-motion";
-import Categories from "../../shared-components/Categories";
+import Categories from "../../reusable/Categories";
 import { useNavigate } from "react-router-dom";
 import BrandList from "./BrandList";
 import { useMyContext } from "../../../MyContext";

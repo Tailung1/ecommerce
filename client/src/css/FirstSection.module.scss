@@ -1,6 +1,6 @@
-@use "./header/mixins";
+@use "./header-css/mixins";
 
-%flex-center-gap {
+@mixin flex-center-gap() {
   display: flex;
   gap: 1rem;
   align-items: center;
@@ -11,39 +11,41 @@
   display: none;
 }
 
-.pc-first-section {
-  @include mixins.display-shared(
-    $gap: 0px,
-    $padding: 15px 120px,
-    $justify-content: space-between
-  );
-  background-color: rgb(235, 101, 57);
+@media (min-width: 500px) {
+  .pc-first-section {
+    @include mixins.display-gap-padding-justify(
+      $gap: 0px,
+      $padding: 15px 120px,
+      $justify-content: space-between
+    );
+    background-color: rgb(235, 101, 57);
 
-  .contact-info {
-    @extend %flex-center-gap;
+    .contact-info {
+      @include flex-center-gap;
+    }
+
+    img {
+      padding-top: 0.25rem;
+    }
   }
 
-  img {
-    padding-top: 0.25rem;
-  }
-}
+  .info-container {
+    @include flex-center-gap;
+    font-weight: 500;
+    color: #d7d2ad;
 
-.info-container {
-  @extend %flex-center-gap;
-  font-weight: 500;
-  color: #d7d2ad;
+    nav {
+      display: flex;
+      gap: 1rem;
 
-  nav {
-    display: flex;
-    gap: 1rem;
+      span {
+        cursor: pointer;
+        transition: transform 0.2s;
 
-    span {
-      cursor: pointer;
-      transition: transform 0.2s;
-
-      &:hover {
-        color: #fff;
-        transform: scale(1.02);
+        &:hover {
+          color: #fff;
+          transform: scale(1.02);
+        }
       }
     }
   }

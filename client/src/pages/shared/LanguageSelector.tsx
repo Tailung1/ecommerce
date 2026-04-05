@@ -1,5 +1,5 @@
 import { useMyContext } from "../../MyContext";
-import useFlag from "../../assets/eng.png";
+import usaFlag from "../../assets/eng.png";
 import geoFlag from "../../assets/georgia.png";
 
 export default function LanguageSelector() {
@@ -10,7 +10,7 @@ export default function LanguageSelector() {
     setCurrentLanguage,
   } = useMyContext();
 
-  let languageFlag = currentLanguage === "EN" ? useFlag : geoFlag;
+  let languageFlag = currentLanguage === "EN" ? usaFlag : geoFlag;
 
   const handleToggleLanguges = () => {
     setShowLanguages((prev) => !prev);

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useMyContext } from "../../MyContext";
-import Categories from "../shared-components/Categories";
+import Categories from "../reusable/Categories";
 import leftArrowIcon from "../../assets/left-arrow.png";
 import rightArrowIcon from "../../assets/right-arrow.png";
 import iphone from "../../assets/iphone.png";

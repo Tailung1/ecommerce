@@ -1,9 +1,10 @@
-import MainIcon from "../assets/home.png";
-import CategoriesIcon from "../assets/categories.png";
-import CompareIcon from "../assets/compare.png";
-import PromotionsIcon from "../assets/promotions.png";
-import LoginIcon from "../assets/login.png";
-import { useMyContext } from "../MyContext";
+import "../../css/btn-nav-css/nav.scss"
+import MainIcon from "../../assets/home.png";
+import CategoriesIcon from "../../assets/categories.png";
+import CompareIcon from "../../assets/compare.png";
+import PromotionsIcon from "../../assets/promotions.png";
+import LoginIcon from "../../assets/login.png";
+import { useMyContext } from "../../MyContext";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 

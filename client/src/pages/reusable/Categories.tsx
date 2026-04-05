@@ -1,4 +1,5 @@
 import { useMyContext } from "../../MyContext";
+import "../../css/reusable-css/categories.scss"
 import mobilePhone from "../../assets/mobile-phone.png";
 import tablet from "../../assets/tablet.png";
 import laptop from "../../assets/laptop.png";
@@ -34,7 +35,7 @@ export default function Categories() {
           className={`${
             activeCategory === cat.id
               ? "active-category category-animate"
-              : "offline-category"
+              : ""
           } category`}
           onClick={() => setActiveCategory(cat.id)}
           onMouseEnter={

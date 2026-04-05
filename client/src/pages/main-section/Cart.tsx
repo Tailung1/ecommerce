@@ -12,6 +12,7 @@ export default function Cart() {
           src={cartImage}
           alt='shopping cart icon'
         />
+        
       ) : (
         <div>
           {cart.map((item: productType) => (

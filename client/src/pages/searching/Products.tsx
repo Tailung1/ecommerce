@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import Sort from "../shared-components/Sort";
+import Sort from "../reusable/Sort";
 
 export default function Products() {
   const { slug } = useParams();

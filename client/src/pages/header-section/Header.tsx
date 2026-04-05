@@ -1,13 +1,13 @@
 import { useMyContext } from "../../MyContext";
-import LanguageSelector from "../shared-components/LanguageSelector";
+import LanguageSelector from "../shared/LanguageSelector";
 import ShoppingCartPop from "./ShoppingCartPop";
 import slideIcon from "../../assets/slide-icon.png";
 import searchIcon from "../../assets/search-icon.png";
 import cartIcon from "../../assets/shopping-cart.png";
 import loginIcon from "../../assets/login.png";
 import { useNavigate } from "react-router-dom";
-import Logo from "../shared-components/Logo";
-import "../../css/header/header.scss"
+import Logo from "../shared/Logo";
+import "../../css/header-css/header.scss"
 
 export default function Header() {
   const { cart, setShowSideBar, setShowSearchBar } = useMyContext();

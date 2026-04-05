@@ -37,7 +37,7 @@ $primary-color: #ec5e2a;
 }
 .cart-pop > div:first-child,
 .total-price-container {
-  @include mixins.display-shared(
+  @include mixins.display-gap-padding-justify(
     $gap: 0,
     $padding: 5px,
     $justify-content: space-between

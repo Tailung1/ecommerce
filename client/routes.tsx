@@ -4,8 +4,8 @@ import Main from "./src/pages/main-section/Main";
 import Product from "./src/pages/searching/Product";
 import Products from "./src/pages/searching/Products";
 import Cart from "./src/pages/main-section/Cart";
-import Compare from "./src/bottomNAV/Compare";
-import Promotions from "./src/bottomNAV/Promotions";
+import Compare from "./src/pages/main-section/compare/Compare";
+import Promotions from "./src/pages/bottomNAV/Promotions";
 import SearchBar from "./src/pages/searching/SearchBar";
 
 const router = createBrowserRouter([

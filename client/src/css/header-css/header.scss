@@ -1,9 +1,7 @@
 @use "mixins";
-@use "Partial-slider";
-@use "cart-pop";
 
 header {
-  @include mixins.display-shared(
+  @include mixins.display-gap-padding-justify(
     $gap: 0,
     $padding: 5px 20px,
     $justify-content: space-between
@@ -17,10 +15,10 @@ header {
 }
 
 header > div {
-  @include mixins.display-shared($gap: 5px);
+  @include mixins.display-gap-padding-justify($gap: 5px);
 }
 .main-logo-container {
-  @include mixins.display-shared;
+  @include mixins.display-gap-padding-justify;
   cursor: pointer;
 }
 .balisha {
@@ -28,7 +26,7 @@ header > div {
   height: 50px;
 }
 .header-right-side-items {
-  @include mixins.display-shared($gap: 15px);
+  @include mixins.display-gap-padding-justify($gap: 15px);
 }
 .shopping-cart-container-header {
   position: relative;
@@ -56,7 +54,7 @@ header > div {
 }
 
 .exit-input-container {
-  @include mixins.display-shared(
+  @include mixins.display-gap-padding-justify(
     30px,
     10px 10px 10px 25px,
     flex-start
@@ -96,7 +94,7 @@ header > div {
   @include mixins.display-col($gap: 15px);
 }
 .popular-searches-wrapper {
-  @include mixins.display-shared($gap: 15px, $padding: 0px);
+  @include mixins.display-gap-padding-justify($gap: 15px, $padding: 0px);
   flex-wrap: wrap;
   font-size: 13px;
   border-radius: 10px;
@@ -144,7 +142,7 @@ header > div {
   }
 
   .pc-header {
-    @include mixins.display-shared(
+    @include mixins.display-gap-padding-justify(
       $gap: 0px,
       $padding: 0px 30px 0px 50px,
       $justify-content: space-around

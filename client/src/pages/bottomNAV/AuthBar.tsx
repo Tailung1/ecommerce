@@ -1,10 +1,10 @@
-import FloatingInput from "../FloatingInput";
-import icon from "../assets/main-logo.png";
-import checked from "../assets/checked-rules.png";
-import unchecked from "../assets/unchecked.png";
-import exitBtn from "../assets/reject.png";
-import { useMyContext } from "../MyContext";
-import useAuthReducer from "../MyReducer";
+import FloatingInput from "../../FloatingInput";
+import icon from "../../assets/main-logo.png";
+import checked from "../../assets/checked-rules.png";
+import unchecked from "../../assets/unchecked.png";
+import exitBtn from "../../assets/reject.png";
+import { useMyContext } from "../../MyContext";
+import useAuthReducer from "../../MyReducer";
 
 export default function AuthBar() {
   const { state, dispatch } = useAuthReducer();

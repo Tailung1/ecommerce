@@ -15,21 +15,21 @@ $primary-color: #ec5e2a;
   gap: $gap;
 }
 
+.exit-btn {
+  transform: translateY(-90%);
+}
 .exit-btn,
 .exit-btn-compare {
   background-color: red;
   padding: 5px 13px;
   border-radius: 50%;
   position: absolute;
-  transform: translateY(-90%);
   right: 15px;
 }
 .exit-btn-compare {
   transform: translateY(-110%);
 }
-.exit-btn-warning {
-  transform: translateY(-730%);
-}
+
 input::placeholder {
   color: rgb(62, 46, 205);
   font-size: 18px;
@@ -55,9 +55,7 @@ input::placeholder {
   max-height: 640px;
   justify-content: flex-start;
 }
-.bar-modifed-warning {
-  align-items: center;
-}
+
 
 @keyframes BarIn {
   0% {

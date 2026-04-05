@@ -1,13 +1,17 @@
-@mixin display($padding: 0px, $justify-content: center) {
+@mixin display-gap-padding-justify(
+  $gap: 0px,
+  $padding: 0px,
+  $justify-content: center
+) {
   display: flex;
   align-items: center;
-  justify-content: $justify-content;
+  gap: $gap;
   padding: $padding;
+  justify-content: $justify-content;
 }
+
 @mixin display-col($gap: 0px) {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   gap: $gap;
 }

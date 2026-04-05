@@ -1,4 +1,4 @@
-import LanguageSelector from "../shared-components/LanguageSelector";
+import LanguageSelector from "../shared/LanguageSelector";
 import teleCall from "../../assets/telephone-call.png";
 import styles from "../../css/FirstSection.module.scss";
 

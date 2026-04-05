@@ -1,10 +1,11 @@
-import { useMyContext } from "../MyContext";
+import { useMyContext } from "../../../MyContext";
+import "../../../css/main-css/compare.scss"
 import { useNavigate } from "react-router-dom";
-import leftArrowIcon from "../assets/left-arrow.png";
-import plusIcon from "../assets/plus.png";
-import binIcon from "../assets/bin.png";
-import searchIcon from "../assets/search-icon.png";
-import rejectIcon from "../assets/reject.png";
+import leftArrowIcon from "../../../assets/left-arrow.png";
+import plusIcon from "../../../assets/plus.png";
+import binIcon from "../../../assets/bin.png";
+import searchIcon from "../../../assets/search-icon.png";
+import rejectIcon from "../../../assets/reject.png";
 
 export default function Compare() {
   const navigate = useNavigate();
@@ -75,10 +76,10 @@ export default function Compare() {
           <div
             key={Math.random() * 2372}
             onClick={() => handleBarOpen(prod?.id as number)}
-            className='product-container'
+            className='selected-to-compare-product-container'
           >
             {!prod ? (
-              <div className='select-product-container'>
+              <div className='select-to-compare-product-container'>
                 <img src={plusIcon} alt='Plus icon' />
                 <span>Select product</span>
               </div>

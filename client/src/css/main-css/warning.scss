@@ -18,9 +18,18 @@ $primary-color: #ec5e2a;
   border-radius: 15px;
   width: 100%;
   padding: 10px 0;
+    font-size: 20px;
 }
 .warning-reason-text {
   font-size: 18px;
   color: #00000099;
   font-weight: 700;
+}
+
+
+.exit-btn-warning {
+  transform: translateY(-730%);
+}
+.bar-modifed-warning {
+  align-items: center;
 }

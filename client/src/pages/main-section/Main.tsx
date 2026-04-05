@@ -1,3 +1,4 @@
+import "../../css/main-css/main.scss"
 import data from "../../data.json";
 import PC from "./PC";
 import mobilePhone from "../../assets/iphone.png";
@@ -6,7 +7,6 @@ import laptops from "../../assets/laptop.png";
 import ProductsContainer from "./productsContainer";
 
 export default function Main() {
-
   return (
     <div className='main-content'>
       <section className='hightlights-wrapper'>

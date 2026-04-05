@@ -4,9 +4,9 @@ import Header from "../client/src/pages/header-section/Header";
 import HeaderSlider from "./src/pages/header-section/slider/HeaderSlider";
 import { AnimatePresence } from "framer-motion";
 import Footer from "./src/pages/Footer";
-import MainBar from "./src/bottomNAV/MainBar";
-import AuthBar from "./src/bottomNAV/AuthBar";
-import CompareBar from "./src/bottomNAV/CompareBar";
+import MainBar from "./src/pages/bottomNAV/MainBar";
+import AuthBar from "./src/pages/bottomNAV/AuthBar";
+import CompareBar from "./src/pages/main-section/compare/CompareBar";
 import WarningBar from "./src/pages/main-section/Alert";
 import { useMyContext } from "./src/MyContext";
 import FirstSection from "./src/pages/components/FirstSection";
@@ -70,7 +70,7 @@ export default function Layout() {
 
   return (
     <div className='flex flex-col  flex-grow'>
-      <div className='ddd' ref={barRef}></div>
+      <div ref={barRef}></div>
       <FirstSection />
       <Header />
       <AnimatePresence>

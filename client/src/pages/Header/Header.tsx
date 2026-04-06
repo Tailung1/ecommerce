@@ -11,7 +11,7 @@ import Logo from "../../components/shared/Logo/Logo";
 
 
 export default function Header() {
-  const { cart, setShowSideBar, setShowSearchBar } = useMyContext();
+  const { cart, setShowSideBar, setShowSearchBar,setShowAuthBar } = useMyContext();
 
   const navigate = useNavigate();
   return (
@@ -81,7 +81,7 @@ export default function Header() {
             <ShoppingCartPop />
           </div>
 
-          <div className='login-container-header'>
+          <div onClick={()=>setShowAuthBar(true)} className='login-container-header'>
             <img src={loginIcon} alt='Login icon' />
             <span>Log In</span>
           </div>

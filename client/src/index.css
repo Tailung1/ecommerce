@@ -6,16 +6,6 @@
   margin: 0;
   padding: 0;
 }
-/* .ddd {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 7px;
-  width: 0%;
-  background-color: rgb(221, 90, 34);
-  z-index: 9999;
-  transition: width 0.2s ease;
-} */
 
 img {
   width: 25px;
@@ -23,42 +13,13 @@ img {
   cursor: pointer;
 }
 
-.layer-backgroundIN {
-  animation: layer-animateIN 0.4s forwards;
-}
-.layer-backgroundOUT {
-  animation: layer-animateOUT 0.4s;
-}
-@keyframes layer-animateOUT {
-  0% {
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-
-  100% {
-    background-color: rgba(0, 0, 0, 0);
-  }
-}
-
-@keyframes layer-animateIN {
-  0% {
-    background-color: rgba(0, 0, 0, 0);
-  }
-
-  100% {
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-}
-
-
-
-.price-container {
-  animation: animate-price-container 0.5s ease forwards;
-}
-@keyframes animate-price-container {
-  0% {
-    transform: translateY(100%);
-  }
-  100% {
-    transform: translateY(-157%);
+@media (min-width: 1024px) {
+  .dd {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    min-width: 100vw;
   }
 }

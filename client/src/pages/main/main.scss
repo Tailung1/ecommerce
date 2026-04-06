@@ -5,6 +5,32 @@ main {
   padding: 10px 0 10px 10px;
 }
 
+.layer-backgroundIN {
+  animation: layer-animateIN 0.4s forwards;
+}
+.layer-backgroundOUT {
+  animation: layer-animateOUT 0.5s forwards;
+}
+@keyframes layer-animateOUT {
+  0% {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  100% {
+    background-color: rgba(0, 0, 0, 0);
+  }
+}
+
+@keyframes layer-animateIN {
+  0% {
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+  100% {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}
+
 @media (min-width: 500px) {
   main {
     display: flex;

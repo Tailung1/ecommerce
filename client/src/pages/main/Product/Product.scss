@@ -1,3 +1,15 @@
+.price-container {
+  animation: animate-price-container 0.5s ease forwards;
+}
+@keyframes animate-price-container {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(-157%);
+  }
+}
+
 @media (min-width: 500px) {
   .price-container {
     display: none;

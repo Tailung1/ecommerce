@@ -22,7 +22,7 @@
   background-color: rgb(255, 255, 255);
   border-radius: 20px 20px 0 0;
   padding: 15px;
-  padding-bottom: 100px;
+  //   padding-bottom: 30px;
   animation: BarIn 0.5s ease;
 }
 
@@ -35,7 +35,7 @@
   }
 }
 .ExitBar {
-  animation: BarOut 0.5s ease forwards;
+  animation: BarOut 0.5s ease ;
 }
 
 @keyframes BarOut {
@@ -46,4 +46,40 @@
   100% {
     transform: translateY(150%);
   }
+}
+
+@media (min-width: 500px) {
+  .Bar {
+    max-width: 400px;
+    border-radius: 20px;
+    bottom:  10%;
+    left: 40%;
+  }
+
+  @keyframes BarIn {
+    0% {
+      transform: translateY(10%);
+    }
+    50% {
+      transform: translateY(-2%);
+
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  .ExitBar {
+  animation: BarOut 0.3s ease forwards ;
+}
+  @keyframes BarOut {
+  0% {
+    transform: translateY(0);
+  }
+
+
+  100% {
+    transform: translateY(0%);
+    opacity: 0%;
+  }
+}
 }

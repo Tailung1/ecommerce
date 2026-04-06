@@ -27,7 +27,7 @@ export default function AuthBar() {
     setTimeout(() => {
       setShowAuthBar(false);
       setIsExitingBar(false);
-    }, 600);
+    }, 500);
   };
 
   const handleValuesChange = (

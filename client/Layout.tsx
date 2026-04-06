@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import Header from "./src/pages/Header/Header";
 import HeaderSlider from "./src/pages/Header/HeaderSlider/HeaderSlider";
@@ -21,33 +21,33 @@ export default function Layout() {
     showAlert,
   } = useMyContext();
 
-  const barRef = useRef<HTMLDivElement>(null);
-  const progressRef = useRef(0);
+//   const barRef = useRef<HTMLDivElement>(null);
+//   const progressRef = useRef(0);
 
-  useEffect(() => {
-    const bar = barRef.current!;
-    if (!bar) return;
-    function trickle() {
-      if (progressRef.current < 30) {
-        progressRef.current += 30;
-        bar.style.width = progressRef.current + "%";
-      }
-    }
+//   useEffect(() => {
+//     const bar = barRef.current!;
+//     if (!bar) return;
+//     function trickle() {
+//       if (progressRef.current < 30) {
+//         progressRef.current += 30;
+//         bar.style.width = progressRef.current + "%";
+//       }
+//     }
 
-    trickle();
+//     trickle();
 
-    const timeout = setTimeout(() => {
-      progressRef.current = 100;
-      bar.style.width = "100%";
-      setTimeout(() => {
-        bar.style.display = "none";
-      }, 200);
-    }, 300);
+//     const timeout = setTimeout(() => {
+//       progressRef.current = 100;
+//       bar.style.width = "100%";
+//       setTimeout(() => {
+//         bar.style.display = "none";
+//       }, 200);
+//     }, 300);
 
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [showAuthBar]);
+//     return () => {
+//       clearTimeout(timeout);
+//     };
+//   }, [showAuthBar]);
 
   useEffect(() => {
     const getPopularSearches = async () => {
@@ -66,11 +66,11 @@ export default function Layout() {
     } else {
       document.body.classList.remove("no-scroll");
     }
-  }, [showSideBar, showCompareBar, showAuthBar]);
+  }, [showSideBar, showCompareBar]);
 
   return (
     <div className='flex flex-col  flex-grow'>
-      <div ref={barRef}></div>
+      {/* <div ref={barRef}></div> */}
       <FirstSection />
       <Header />
       <AnimatePresence>

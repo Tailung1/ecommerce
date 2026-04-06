@@ -1,5 +1,11 @@
 $primary-color: #f68861;
 
+.products-shared-wrapper {
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+  gap: 50px;
+}
 
 .products-shared-wrapper > div {
   display: flex;

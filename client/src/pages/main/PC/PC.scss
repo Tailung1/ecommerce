@@ -1,0 +1,85 @@
+.pc-main-first-section  {
+    display: none;
+}
+@media (min-width: 500px) {
+  .hightlights-wrapper {
+    display: none;
+  }
+  .pc-main-first-section {
+    display: flex;
+    gap: 20px;
+    padding-right: 300px;
+    width: 100%;
+    max-height: 220px;
+  }
+  .categories-and-brands-parent {
+    position: relative;
+    height: 213px;
+    min-width: 200px;
+  }
+  .pc-categories-and-brands-container {
+    position: absolute;
+    display: flex;
+    gap: 10px;
+    height: 213px;
+    width: 100%;
+    overflow: hidden;
+    transition: all 0.2s ease;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgb(193, 181, 181);
+    background-color: rgb(255, 255, 255);
+    z-index: 999;
+  }
+
+  .categories-wrapper {
+    min-width: 200px;
+  }
+
+  .pc-categories-and-brands-container:hover {
+    height: 500px;
+    width: 1200px;
+  }
+  .pc-brands-container {
+    display: flex;
+    flex-direction: column;
+  }
+  // slider-container !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  .pc-slider-container {
+    position: relative;
+    border-radius: 10px;
+    min-width: 500px;
+    max-width: 500px;
+    border-radius: 10px;
+    min-height: 210px;
+    max-height: 210px;
+    overflow: hidden;
+  }
+
+  .pc-slider-wrapper {
+    display: flex;
+    height: 100%;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    background-color: rgb(63, 214, 138);
+  }
+  .pc-slider-container > div:first-child > img {
+    min-width: 500px;
+    max-width: 500px;
+    height: 100%;
+  }
+  .arrows-container {
+    position: absolute;
+    width: 100%;
+    top: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .pc-slider-container > div:nth-child(2) > img {
+    background-color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+}

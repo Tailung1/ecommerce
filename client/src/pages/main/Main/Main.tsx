@@ -1,7 +1,7 @@
 import "../main.scss"; // had to import there.. maybe temporarily
 import "./Main.scss";
 import data from "../../../data.json";
-import PC from "../PC";
+import PC from "../PC/PC";
 import mobilePhone from "../../../assets/iphone.png";
 import tv from "../../../assets/television.png";
 import laptops from "../../../assets/laptop.png";

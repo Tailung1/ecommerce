@@ -1,11 +1,12 @@
+import "./PC.scss";
 import { useEffect, useRef, useState } from "react";
-import { useMyContext } from "../../MyContext";
-import Categories from "../../components/reusable/Categories/Categories";
-import leftArrowIcon from "../../assets/left-arrow.png";
-import rightArrowIcon from "../../assets/right-arrow.png";
-import iphone from "../../assets/iphone.png";
-import consoleIcon from "../../assets/console.png";
-import tv from "../../assets/television.png";
+import { useMyContext } from "../../../MyContext";
+import Categories from "../../../components/reusable/Categories/Categories";
+import leftArrowIcon from "../../../assets/left-arrow.png";
+import rightArrowIcon from "../../../assets/right-arrow.png";
+import iphone from "../../../assets/iphone.png";
+import consoleIcon from "../../../assets/console.png";
+import tv from "../../../assets/television.png";
 
 export default function PC() {
   const { setEnablePC, activeCategory } = useMyContext();
@@ -48,7 +49,7 @@ export default function PC() {
     if (intervalRef.current) clearInterval(intervalRef.current);
 
     if (isHovered) return;
-    
+
     const container = document.querySelector(".pc-slider-wrapper")!;
     timeoutRef.current = setTimeout(() => {
       intervalRef.current = setInterval(() => {

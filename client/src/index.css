@@ -49,9 +49,7 @@ img {
   }
 }
 
-.promotions-container {
-  background-color: red;
-}
+
 
 .price-container {
   animation: animate-price-container 0.5s ease forwards;

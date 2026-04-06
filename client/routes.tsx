@@ -1,12 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "./Layout";
-import Main from "./src/pages/main-section/Main";
-import Product from "./src/pages/searching/Product";
-import Products from "./src/pages/searching/Products";
-import Cart from "./src/pages/main-section/Cart";
-import Compare from "./src/pages/main-section/compare/Compare";
-import Promotions from "./src/pages/bottomNAV/Promotions";
-import SearchBar from "./src/pages/searching/SearchBar";
+import Main from "./src/pages/main/Main/Main";
+import Product from "./src/pages/main/Product/Product";
+import Products from "./src/pages/main/Products/Products";
+import Cart from "./src/pages/main/ShoppingCart/ShoppingCart";
+import Compare from "./src/features/Compare/Compare";
+import Promotions from "./src/pages/main/Promotions/Promotions";
+import Search from "./src/pages/main/Search/Search";
 
 const router = createBrowserRouter([
   {
@@ -18,7 +18,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/search",
-        element: <SearchBar />,
+        element: <Search />,
       },
       {
         path: "/:slug",

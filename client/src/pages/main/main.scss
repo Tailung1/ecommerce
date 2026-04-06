@@ -1,0 +1,15 @@
+main {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 10px 0 10px 10px;
+}
+
+@media (min-width: 500px) {
+  main {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 20px 60px;
+  }
+}

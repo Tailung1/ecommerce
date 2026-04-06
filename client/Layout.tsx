@@ -1,15 +1,15 @@
 import { useEffect, useRef } from "react";
 import { Outlet } from "react-router-dom";
-import Header from "../client/src/pages/header-section/Header";
-import HeaderSlider from "./src/pages/header-section/slider/HeaderSlider";
+import Header from "./src/pages/Header/Header";
+import HeaderSlider from "./src/pages/Header/HeaderSlider/HeaderSlider";
 import { AnimatePresence } from "framer-motion";
-import Footer from "./src/pages/Footer";
-import MainBar from "./src/pages/bottomNAV/MainBar";
-import AuthBar from "./src/pages/bottomNAV/AuthBar";
-import CompareBar from "./src/pages/main-section/compare/CompareBar";
-import WarningBar from "./src/pages/main-section/Alert";
+import Footer from "./src/pages/Footer/Footer";
+import MainBar from "./src/components/shared/BottomNavBar/BottomNavBar";
+import AuthBar from "./src/features/AuthBar/AuthBar";
+import CompareBar from "./src/features/Compare/CompareBar";
+import WarningBar from "./src/features/AlertBar/AlertBar";
 import { useMyContext } from "./src/MyContext";
-import FirstSection from "./src/pages/components/FirstSection";
+import FirstSection from "./src/components/shared/TopBar/TopBar";
 
 export default function Layout() {
   const {

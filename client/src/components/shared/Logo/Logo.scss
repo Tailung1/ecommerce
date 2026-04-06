@@ -1,0 +1,21 @@
+@mixin display-gap-padding-justify(
+  $gap: 0px,
+  $padding: 0px,
+  $justify-content: center
+) {
+  display: flex;
+  align-items: center;
+  gap: $gap;
+  padding: $padding;
+  justify-content: $justify-content;
+}
+
+.main-logo-container {
+  @include display-gap-padding-justify;
+  cursor: pointer;
+}
+
+.balisha {
+  width: 50px;
+  height: 50px;
+}

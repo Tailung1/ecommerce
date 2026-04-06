@@ -1,0 +1,83 @@
+$primary-color: #f68861;
+
+
+.products-shared-wrapper > div {
+  display: flex;
+  flex-direction: column;
+  min-width: 130px;
+  max-width: 110px;
+  gap: 10px;
+  align-items: flex-start;
+  border-radius: 15px;
+  position: relative;
+}
+
+.item-image {
+  height: 140px;
+  width: 140px;
+}
+
+.item-info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-bottom: 60px;
+}
+
+
+.gift,
+.new {
+  text-align: center;
+  max-width: 50px;
+  background-color: orange;
+  padding: 5px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  color: white;
+}
+.price {
+  color: #ec5e2a;
+  font-size: 20px;
+}
+.installment {
+  font-size: 12px;
+}
+
+.installment span {
+  color: #ec5e2a;
+}
+.item-name {
+  font-weight: 600;
+}
+.product-actions-container {
+  display: flex;
+  gap: 10px;
+  position: absolute;
+  bottom: 0;
+  max-height: 40px;
+}
+.product-actions-container > div {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.product-actions-container img {
+  max-width: 20px;
+  max-height: 20px;
+}
+.product-actions-container span {
+  font-size: 13px;
+}
+
+.cart-container {
+  background-color: $primary-color;
+  width: 80px;
+}
+.compare-box {
+  background-color: rgb(240, 237, 237);
+}

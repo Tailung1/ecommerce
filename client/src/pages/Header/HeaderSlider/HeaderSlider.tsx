@@ -22,7 +22,7 @@ export default function HeaderSlider() {
       transition={{ duration: 0.5, ease: easeOut }}
       className='slider-container'
     >
-      <div className='exit-input-container'>
+      <div className='header-slider-exit-input-container'>
         <img
           src={rejectIcon}
           className='cursor-pointer'

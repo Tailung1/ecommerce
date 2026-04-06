@@ -6,7 +6,7 @@ import Products from "./src/pages/main/Products/Products";
 import Cart from "./src/pages/main/ShoppingCart/ShoppingCart";
 import Compare from "./src/features/Compare/Compare";
 import Promotions from "./src/pages/main/Promotions/Promotions";
-import Search from "./src/pages/main/Search/Search";
+import Search from "./src/pages/main/SearchBar/SearchBar";
 
 const router = createBrowserRouter([
   {

@@ -1,3 +1,15 @@
+@mixin display-gap-padding-justify(
+  $gap: 0px,
+  $padding: 0px,
+  $justify-content: center
+) {
+  display: flex;
+  align-items: center;
+  gap: $gap;
+  padding: $padding;
+  justify-content: $justify-content;
+}
+
 
 
 .slider-container {
@@ -10,10 +22,16 @@
   z-index: 1000;
   background-color: rgb(18, 16, 130);
 }
-
-body.no-scroll {
-  overflow: hidden;
+.header-slider-exit-input-container {
+  @include display-gap-padding-justify(
+    30px,
+    10px 10px 10px 25px,
+    flex-start
+  );
+  max-width: 100%;
+  background-color: rgb(240, 246, 239);
 }
+
 .categories-and-brands-container {
   display: flex;
   gap: 5px;

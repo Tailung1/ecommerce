@@ -19,6 +19,7 @@ export default function Layout() {
     isExitingBar,
     setPopularSearches,
     showAlert,
+    showSearchBar
   } = useMyContext();
 
 //   const barRef = useRef<HTMLDivElement>(null);
@@ -61,12 +62,17 @@ export default function Layout() {
   }, []);
 
   useEffect(() => {
-    if (showSideBar || showCompareBar || showAuthBar) {
+    if (
+      showSideBar ||
+      showCompareBar ||
+      showAuthBar ||
+      showSearchBar
+    ) {
       document.body.classList.add("no-scroll");
     } else {
       document.body.classList.remove("no-scroll");
     }
-  }, [showSideBar, showCompareBar]);
+  }, [showSideBar,showAuthBar, showCompareBar, showSearchBar]);
 
   return (
     <div className='flex flex-col  flex-grow'>

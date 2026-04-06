@@ -8,10 +8,16 @@ import cartIcon from "../../assets/shopping-cart.png";
 import loginIcon from "../../assets/login.png";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../components/shared/Logo/Logo";
-
+import SearchBar from "../main/SearchBar/SearchBar";
 
 export default function Header() {
-  const { cart, setShowSideBar, setShowSearchBar,setShowAuthBar } = useMyContext();
+  const {
+    cart,
+    setShowSideBar,
+    showSearchBar,
+    setShowSearchBar,
+    setShowAuthBar,
+  } = useMyContext();
 
   const navigate = useNavigate();
   return (
@@ -30,7 +36,6 @@ export default function Header() {
       <div className='header header-right-side-items'>
         <img
           onClick={() => {
-            setShowSearchBar(true);
             navigate("/search");
           }}
           src={searchIcon}
@@ -56,24 +61,26 @@ export default function Header() {
         <Logo />
         <div className='header-right-side-items'>
           <button className='orange-btn'>Navigation</button>
-          <div
-            onClick={() => {
-              setShowSideBar(false);
-              setShowSearchBar(true);
-            }}
-            className='input-container'
-          >
-            <input
-              className='input'
-              placeholder='Search'
-              type='text'
-            />
-            <img
-              className='search-icon'
-              src={searchIcon}
-              alt='search icon'
-            />
-          </div>
+          {showSearchBar ? (
+            <SearchBar />
+          ) : (
+            <div
+              onClick={() => setShowSearchBar(true)}
+              className='input-container'
+            >
+              <input
+                className='input'
+                placeholder='Search'
+                type='text'
+              />
+              <img
+                className='search-icon'
+                src={searchIcon}
+                alt='search icon'
+              />
+            </div>
+          )}
+
           <div className='cart-container-header'>
             <img src={cartIcon} alt='Shopping cart icon' />
             <span>Cart</span>
@@ -81,7 +88,10 @@ export default function Header() {
             <ShoppingCartPop />
           </div>
 
-          <div onClick={()=>setShowAuthBar(true)} className='login-container-header'>
+          <div
+            onClick={() => setShowAuthBar(true)}
+            className='login-container-header'
+          >
             <img src={loginIcon} alt='Login icon' />
             <span>Log In</span>
           </div>

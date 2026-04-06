@@ -1,10 +1,12 @@
+import "./SearchBar.scss";
 import { useMyContext } from "../../../MyContext";
 import searchIcon from "../../../assets/search-icon.png";
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function SearchBar() {
-  const { showSearchBar, popularSearches } = useMyContext();
+  const { showSearchBar, popularSearches, setShowSearchBar } =
+    useMyContext();
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
@@ -25,7 +27,7 @@ export default function SearchBar() {
   };
 
   return (
-    <div className=''>
+    <div className='searchBar-container'>
       <div className='input-container'>
         <input
           className='input'
@@ -47,6 +49,7 @@ export default function SearchBar() {
             <p
               onClick={() => {
                 generateSlug(item.name, item.color, item.id);
+                setShowSearchBar(false);
               }}
               key={item.id}
             >

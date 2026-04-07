@@ -122,7 +122,6 @@ $primary-color: #ec5e2a;
 .policy-container {
   @include display-row($gap: 15px);
   padding-bottom: 10px;
-  background-color: rgb(246, 255, 247);
 }
 
 // submit-section  !!!!!!!!!!!!!!!!!!!!!
@@ -182,4 +181,10 @@ label {
   position: absolute;
   color: red;
   font-size: 15px;
+}
+
+@media (min-width: 1024px) {
+  .policy-container {
+    padding-top: 10px;
+  }
 }

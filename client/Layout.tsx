@@ -11,6 +11,7 @@ import WarningBar from "./src/features/AlertBar/AlertBar";
 import { useMyContext } from "./src/MyContext";
 import FirstSection from "./src/components/shared/TopBar/TopBar";
 
+
 export default function Layout() {
   const {
     showSideBar,
@@ -80,34 +81,39 @@ export default function Layout() {
   }, [showSideBar, showAuthBar, showCompareBar, showSearchBar]);
 
   return (
-    <div
-      className={`flex flex-col  flex-grow ${
-        showAuthBar && isPc && "layer-backgroundIN"
-      } ${isExitingBar && isPc && "layer-backgroundOUT"}`}
-    >
-      {/* <div ref={barRef}></div> */}
-      <FirstSection />
-      <Header />
-      <AnimatePresence>
-        {showSideBar && <HeaderSlider />}
-      </AnimatePresence>
-      {showAuthBar && <AuthBar />}
-      {showCompareBar && <CompareBar />}
+    <div>
+      {" "}
+      {showAuthBar && <AuthBar />} {showCompareBar && <CompareBar />}
       {showAlert && <WarningBar />}
-      <main
-        className={` ${
-          (showAuthBar ||
-            showCompareBar ||
-            showAlert ||
-            showSearchBar) &&
-          !isPc &&
+      <div
+        className={`flex flex-col  flex-grow ${
+          (showAuthBar || showCompareBar || showAlert) &&
+          isPc &&
           "layer-backgroundIN"
-        } ${isExitingBar && !isPc && "layer-backgroundOUT"}  `}
+        } ${isExitingBar && isPc && "layer-backgroundOUT"}`}
       >
-        <Outlet />
-      </main>
-      <Footer />
-      <MainBar />
+        {/* <div ref={barRef}></div> */}
+        <FirstSection />
+        <Header />
+        <AnimatePresence>
+          {showSideBar && <HeaderSlider />}
+        </AnimatePresence>
+
+        <main
+          className={` ${
+            (showAuthBar ||
+              showCompareBar ||
+              showAlert ||
+              showSearchBar) &&
+            !isPc &&
+            "layer-backgroundIN"
+          } ${isExitingBar && !isPc && "layer-backgroundOUT"}  `}
+        >
+          <Outlet />
+        </main>
+        <Footer />
+        <MainBar />
+      </div>
     </div>
   );
 }

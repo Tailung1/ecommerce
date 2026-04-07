@@ -8,30 +8,6 @@ main {
 
 
 
-.layer-backgroundIN {
-  animation: layer-animateIN 0.4s forwards;
-}
-.layer-backgroundOUT {
-  animation: layer-animateOUT 0.5s forwards;
-}
-@keyframes layer-animateIN {
-  0% {
-    filter: brightness(100%);
-  }
-  100% {
-    filter: brightness(50%);
-  }
-}
-
-@keyframes layer-animateOUT {
-  0% {
-    filter: brightness(50%);
-  }
-  100% {
-    filter: brightness(100%);
-  }
-}
-
 @media (min-width: 1024px) {
   main {
     padding: 20px 60px;

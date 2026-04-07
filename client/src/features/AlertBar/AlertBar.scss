@@ -17,8 +17,8 @@ $primary-color: #ec5e2a;
   color: white;
   border-radius: 15px;
   width: 100%;
-  padding: 10px 0;
-    font-size: 20px;
+  padding: 7px 0;
+  font-size: 20px;
 }
 .warning-reason-text {
   font-size: 18px;
@@ -26,10 +26,6 @@ $primary-color: #ec5e2a;
   font-weight: 700;
 }
 
-
-.exit-btn-warning {
-  transform: translateY(-730%);
-}
 .bar-modifed-warning {
   align-items: center;
 }

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import Header from "./src/pages/Header/Header";
 import HeaderSlider from "./src/pages/Header/HeaderSlider/HeaderSlider";
@@ -61,7 +61,12 @@ export default function Layout() {
     getPopularSearches();
   }, []);
 
+  const [isPc, setIsPc] = useState<boolean>(false);
+
   useEffect(() => {
+    if (window.innerWidth >= 1024) {
+      setIsPc(true);
+    }
     if (
       showSideBar ||
       showCompareBar ||
@@ -75,7 +80,11 @@ export default function Layout() {
   }, [showSideBar, showAuthBar, showCompareBar, showSearchBar]);
 
   return (
-    <div className='flex flex-col  flex-grow'>
+    <div
+      className={`flex flex-col  flex-grow ${
+        showAuthBar && isPc && "layer-backgroundIN"
+      } ${isExitingBar && isPc && "layer-backgroundOUT"}`}
+    >
       {/* <div ref={barRef}></div> */}
       <FirstSection />
       <Header />
@@ -91,8 +100,9 @@ export default function Layout() {
             showCompareBar ||
             showAlert ||
             showSearchBar) &&
+          !isPc &&
           "layer-backgroundIN"
-        } ${isExitingBar && "layer-backgroundOUT"}  `}
+        } ${isExitingBar && !isPc && "layer-backgroundOUT"}  `}
       >
         <Outlet />
       </main>

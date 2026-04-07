@@ -1,28 +1,26 @@
 .exit-btn {
-  transform: translateY(-90%);
-}
-.exit-btn,
-.exit-btn-compare {
   background-color: red;
   padding: 5px 13px;
   border-radius: 50%;
   position: absolute;
-  right: 15px;
+  right: -6px;
+  top: -20px;
+  z-index: 1;
 }
 
 .Bar {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 5px;
   text-align: center;
   position: fixed;
-  bottom: 0;
+  bottom: 0; // needed, beacse when height changes, it doesnot pushes container under user viewport
   width: 100%;
   z-index: 1;
   background-color: rgb(255, 255, 255);
   border-radius: 20px 20px 0 0;
-  padding: 15px;
-  //   padding-bottom: 30px;
+  padding: 5px 15px;
+    padding-bottom: 90px;
   animation: BarIn 0.5s ease;
 }
 
@@ -35,7 +33,7 @@
   }
 }
 .ExitBar {
-  animation: BarOut 0.5s ease ;
+  animation: BarOut 0.5s ease forwards ;
 }
 
 @keyframes BarOut {
@@ -48,12 +46,12 @@
   }
 }
 
-@media (min-width: 500px) {
+@media (min-width: 1024px) {
   .Bar {
     max-width: 400px;
     border-radius: 20px;
-    bottom:  10%;
-    left: 40%;
+    top:  15%;
+    left: 37%;
   }
 
   @keyframes BarIn {
@@ -68,9 +66,7 @@
       transform: translateY(0);
     }
   }
-  .ExitBar {
-  animation: BarOut 0.3s ease forwards ;
-}
+  
   @keyframes BarOut {
   0% {
     transform: translateY(0);

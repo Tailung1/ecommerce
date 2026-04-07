@@ -32,11 +32,8 @@ main {
   }
 }
 
-@media (min-width: 500px) {
+@media (min-width: 1024px) {
   main {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
     padding: 20px 60px;
   }
 }

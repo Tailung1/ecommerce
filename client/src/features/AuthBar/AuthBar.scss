@@ -127,14 +127,14 @@ $primary-color: #ec5e2a;
 
 // submit-section  !!!!!!!!!!!!!!!!!!!!!
 .submit-section {
-  @include display-col($gap: 15px);
+  @include display-col($gap: 10px);
   align-items: center;
   width: 100%;
 }
 
 .submit-btn {
   background-color: $primary-color;
-  padding: 15px 0;
+  padding: 10px 0;
   border-radius: 10px;
   color: rgb(255, 255, 255);
   font-weight: 600;

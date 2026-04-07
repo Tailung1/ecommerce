@@ -1,4 +1,4 @@
-import "./PC.scss";
+import "./CategoriesCarousel.scss";
 import { useEffect, useRef, useState } from "react";
 import { useMyContext } from "../../../MyContext";
 import Categories from "../../../components/reusable/Categories/Categories";

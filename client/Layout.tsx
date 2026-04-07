@@ -19,36 +19,36 @@ export default function Layout() {
     isExitingBar,
     setPopularSearches,
     showAlert,
-    showSearchBar
+    showSearchBar,
   } = useMyContext();
 
-//   const barRef = useRef<HTMLDivElement>(null);
-//   const progressRef = useRef(0);
+  //   const barRef = useRef<HTMLDivElement>(null);
+  //   const progressRef = useRef(0);
 
-//   useEffect(() => {
-//     const bar = barRef.current!;
-//     if (!bar) return;
-//     function trickle() {
-//       if (progressRef.current < 30) {
-//         progressRef.current += 30;
-//         bar.style.width = progressRef.current + "%";
-//       }
-//     }
+  //   useEffect(() => {
+  //     const bar = barRef.current!;
+  //     if (!bar) return;
+  //     function trickle() {
+  //       if (progressRef.current < 30) {
+  //         progressRef.current += 30;
+  //         bar.style.width = progressRef.current + "%";
+  //       }
+  //     }
 
-//     trickle();
+  //     trickle();
 
-//     const timeout = setTimeout(() => {
-//       progressRef.current = 100;
-//       bar.style.width = "100%";
-//       setTimeout(() => {
-//         bar.style.display = "none";
-//       }, 200);
-//     }, 300);
+  //     const timeout = setTimeout(() => {
+  //       progressRef.current = 100;
+  //       bar.style.width = "100%";
+  //       setTimeout(() => {
+  //         bar.style.display = "none";
+  //       }, 200);
+  //     }, 300);
 
-//     return () => {
-//       clearTimeout(timeout);
-//     };
-//   }, [showAuthBar]);
+  //     return () => {
+  //       clearTimeout(timeout);
+  //     };
+  //   }, [showAuthBar]);
 
   useEffect(() => {
     const getPopularSearches = async () => {
@@ -72,7 +72,7 @@ export default function Layout() {
     } else {
       document.body.classList.remove("no-scroll");
     }
-  }, [showSideBar,showAuthBar, showCompareBar, showSearchBar]);
+  }, [showSideBar, showAuthBar, showCompareBar, showSearchBar]);
 
   return (
     <div className='flex flex-col  flex-grow'>
@@ -87,7 +87,10 @@ export default function Layout() {
       {showAlert && <WarningBar />}
       <main
         className={` ${
-          (showAuthBar || showCompareBar || showAlert) &&
+          (showAuthBar ||
+            showCompareBar ||
+            showAlert ||
+            showSearchBar) &&
           "layer-backgroundIN"
         } ${isExitingBar && "layer-backgroundOUT"}  `}
       >

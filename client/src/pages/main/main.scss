@@ -3,7 +3,10 @@ main {
   flex-direction: column;
   flex-grow: 1;
   padding: 10px 0 10px 10px;
+  background-color: white; //needed any background to let filter work..
 }
+
+
 
 .layer-backgroundIN {
   animation: layer-animateIN 0.4s forwards;
@@ -11,23 +14,21 @@ main {
 .layer-backgroundOUT {
   animation: layer-animateOUT 0.5s forwards;
 }
-@keyframes layer-animateOUT {
+@keyframes layer-animateIN {
   0% {
-    background-color: rgba(0, 0, 0, 0.5);
+    filter: brightness(100%);
   }
-
   100% {
-    background-color: rgba(0, 0, 0, 0);
+    filter: brightness(50%);
   }
 }
 
-@keyframes layer-animateIN {
+@keyframes layer-animateOUT {
   0% {
-    background-color: rgba(0, 0, 0, 0);
+    filter: brightness(50%);
   }
-
   100% {
-    background-color: rgba(0, 0, 0, 0.5);
+    filter: brightness(100%);
   }
 }
 

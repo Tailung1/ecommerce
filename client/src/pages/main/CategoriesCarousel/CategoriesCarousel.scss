@@ -1,5 +1,5 @@
-.pc-main-first-section  {
-    display: none;
+.pc-main-first-section {
+  display: none;
 }
 @media (min-width: 500px) {
   .hightlights-wrapper {
@@ -27,8 +27,8 @@
     transition: all 0.2s ease;
     border-radius: 10px;
     box-shadow: 0 0 10px rgb(193, 181, 181);
-    background-color: rgb(255, 255, 255);
-    z-index: 999;
+    background-color: white;
+    z-index: 1;
   }
 
   .categories-wrapper {

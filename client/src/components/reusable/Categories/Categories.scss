@@ -39,9 +39,9 @@
   color: rgb(120, 49, 49);
 }
 
-.active-category {
-  background-color: rgb(210, 234, 169);
-}
+  .active-category {
+    background-color: rgb(235, 235, 235);
+  }
 
 .category-animate {
   animation: scaleEffct 0.2s ease;
@@ -77,9 +77,7 @@
     gap: 20px;
     padding: 10px;
   }
-  .active-category {
-    background-color: rgb(235, 235, 235);
-  }
+
   .category-animate {
     animation: none;
   }

@@ -26,7 +26,7 @@ export default function ShoppingCartPop() {
       ) : (
         <div className='items-container'>
           {cart.map((item) => (
-            <div className='item-container'>
+            <div key={Math.random()*982} className='item-container'>
               <div className='flex justify-center items-center'>
                 <img src={iphone} alt={item.name} />
                 <div className='flex flex-col'>

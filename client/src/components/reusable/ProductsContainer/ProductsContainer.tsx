@@ -26,6 +26,16 @@ export default function ProductsContainer({
 
   const navigate = useNavigate();
 
+  //   great solution for category check if no useState is used to track it !!!!!
+
+  //   const isCategory = compareCart.find(
+  //     (i) => i !== null
+  //   )?.category;
+  //   if (isCategory && isCategory !== item.category) {
+  //     setShowAlert(true);
+  //     return;
+  //   }
+
   const generateSlug = async (
     name: string,
     category: string,
@@ -48,54 +58,47 @@ export default function ProductsContainer({
     setIsFull(isFull);
   };
 
+  const getCompareActionStatus = (item: any) => {
+    if (compareCart.some((i) => i && i.id === item.id))
+      return "chosen";
+    if (
+      activeProductCategory &&
+      activeProductCategory !== item.category
+    )
+      return "wrongCategory";
+    if (
+      compareCart.every(Boolean) &&
+      activeProductCategory === item.category
+    )
+      return "isFull";
+
+    return "ok";
+  };
+
   const handleAction = (task: "cart" | "compare", item: any) => {
     if (task === "compare") {
-      if (compareCart.every((i) => i !== null)) {
-        if (
-          activeProductCategory &&
-          activeProductCategory !== item.category
-        ) {
+      const status = getCompareActionStatus(item);
+      switch (status) {
+        case "chosen":
+          enableAlertShow({ isChosen: true });
+          return;
+        case "wrongCategory":
           enableAlertShow({});
           return;
-        }
-
-        enableAlertShow({ isFull: true });
+        case "isFull":
+          enableAlertShow({ isFull: true });
+          return;
       }
-      if (
-        activeProductCategory &&
-        activeProductCategory !== item.category
-      ) {
-        enableAlertShow({});
-        return;
-      } else if (compareCart.length === 4) {
-      }
-
-      // great solution for category check if no useState is used to track it !!!!!
-
-      //   const isCategory = compareCart.find(
-      //     (i) => i !== null
-      //   )?.category;
-      //   if (isCategory && isCategory !== item.category) {
-      //     setShowAlert(true);
-      //     return;
-      //   }
-
-      if (compareCart.some((i) => i?.id == item.id)) {
-        enableAlertShow({ isChosen: true });
-        return;
-      }
-
-      const emptyIndex = compareCart.findIndex((i) => i === null);
-
       setCompareCart((prev) => {
         const newArr = [...prev];
-        newArr[emptyIndex] = item;
-        if (emptyIndex === 0) {
+        const index = prev.findIndex((i) => i === null);
+        newArr[index] = item;
+        if (!activeProductCategory)
           setActiveProductCategory(item.category);
-        }
         return newArr;
       });
     }
+
     if (task == "cart") {
       if (cart.some((i) => i.id === item.id)) {
         enableAlertShow({ isChosen: true });

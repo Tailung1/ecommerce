@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import Header from "./src/pages/Header/Header";
 import HeaderSlider from "./src/pages/Header/HeaderSlider/HeaderSlider";
@@ -10,7 +10,6 @@ import CompareBar from "./src/features/Compare/CompareBar";
 import WarningBar from "./src/features/AlertBar/AlertBar";
 import { useMyContext } from "./src/MyContext";
 import FirstSection from "./src/components/shared/TopBar/TopBar";
-
 
 export default function Layout() {
   const {
@@ -62,36 +61,48 @@ export default function Layout() {
     getPopularSearches();
   }, []);
 
-  const [isPc, setIsPc] = useState<boolean>(false);
-
   useEffect(() => {
+    let isPc = false;
+    let isOpening =
+      !isExitingBar &&
+      (showSideBar || showCompareBar || showAuthBar || showAlert);
     if (window.innerWidth >= 1024) {
-      setIsPc(true);
+      isPc = true;
     }
-    if (
-      showSideBar ||
-      showCompareBar ||
-      showAuthBar ||
-      showSearchBar
-    ) {
+    const layer = document.querySelector(".layer");
+    const main = document.querySelector("main");
+    if ((!isPc && isOpening) || (isPc && showSearchBar)) {
+      main?.classList.add("layer-backgroundIN");
       document.body.classList.add("no-scroll");
-    } else {
+    } else if (isPc && isOpening) {
+      layer?.classList.add("layer-backgroundIN");
+      main?.classList.add("layer-backgroundIN");
+      document.body.classList.add("no-scroll");
+    } else if (isExitingBar) {
+      layer?.classList.remove("layer-backgroundIN");
+      main?.classList.remove("layer-backgroundIN");
       document.body.classList.remove("no-scroll");
+      layer?.classList.add("layer-backgroundOUT");
+      main?.classList.add("layer-backgroundOUT");
+    } else if (!isExitingBar && !isOpening) {
+      layer?.classList.remove("layer-backgroundOUT");
+      main?.classList.remove("layer-backgroundOUT");
     }
-  }, [showSideBar, showAuthBar, showCompareBar, showSearchBar]);
+  }, [
+    showSideBar,
+    showAuthBar,
+    showCompareBar,
+    showSearchBar,
+    showAlert,
+    isExitingBar,
+  ]);
 
   return (
-    <div>
+    <div className='bg-green-500 flex flex-col  flex-grow '>
       {" "}
       {showAuthBar && <AuthBar />} {showCompareBar && <CompareBar />}
       {showAlert && <WarningBar />}
-      <div
-        className={`flex flex-col  flex-grow ${
-          (showAuthBar || showCompareBar || showAlert) &&
-          isPc &&
-          "layer-backgroundIN"
-        } ${isExitingBar && isPc && "layer-backgroundOUT"}`}
-      >
+      <div className='layer flex flex-col  flex-grow  '>
         {/* <div ref={barRef}></div> */}
         <FirstSection />
         <Header />
@@ -99,16 +110,7 @@ export default function Layout() {
           {showSideBar && <HeaderSlider />}
         </AnimatePresence>
 
-        <main
-          className={` ${
-            (showAuthBar ||
-              showCompareBar ||
-              showAlert ||
-              showSearchBar) &&
-            !isPc &&
-            "layer-backgroundIN"
-          } ${isExitingBar && !isPc && "layer-backgroundOUT"}  `}
-        >
+        <main>
           <Outlet />
         </main>
         <Footer />

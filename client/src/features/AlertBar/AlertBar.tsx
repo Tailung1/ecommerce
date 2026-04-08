@@ -1,4 +1,4 @@
-import "./AlertBar.scss"
+import "./AlertBar.scss";
 import { useMyContext } from "../../MyContext";
 import { useNavigate } from "react-router-dom";
 import exitBtn from "../../assets/reject.png";
@@ -11,8 +11,6 @@ export default function WarningBar() {
     isExitingBar,
     isChosen,
     isFull,
-    setIsFull,
-    setIsChosen,
     setIsExitingBar,
     setShowAlert,
     compareCart,
@@ -20,11 +18,9 @@ export default function WarningBar() {
 
   const handleExit = () => {
     setIsExitingBar(true);
-    setIsFull(false)
     setTimeout(() => {
       setShowAlert(false);
       setIsExitingBar(false);
-      setIsChosen(false);
     }, 600);
   };
 

@@ -17,6 +17,7 @@ export default function ProductsContainer({
     setShowAlert,
     setIsChosen,
     setIsFull,
+
     activeProductCategory,
     setActiveProductCategory,
     compareCart,
@@ -35,24 +36,38 @@ export default function ProductsContainer({
     navigate(`/${slug}`);
   };
 
-  const enableAlertShow = (options: {
+  const enableAlertShow = ({
+    isFull = false,
+    isChosen = false,
+  }: {
     isFull?: boolean;
     isChosen?: boolean;
   }) => {
     setShowAlert(true);
-    if (options.isFull) setIsFull(true);
-    if (options.isChosen) setIsChosen(true);
-    return;
+    setIsChosen(isChosen);
+    setIsFull(isFull);
   };
 
-  const handleOperation = (task: "cart" | "compare", item: any) => {
+  const handleAction = (task: "cart" | "compare", item: any) => {
     if (task === "compare") {
+      if (compareCart.every((i) => i !== null)) {
+        if (
+          activeProductCategory &&
+          activeProductCategory !== item.category
+        ) {
+          enableAlertShow({});
+          return;
+        }
+
+        enableAlertShow({ isFull: true });
+      }
       if (
         activeProductCategory &&
         activeProductCategory !== item.category
       ) {
-        setShowAlert(true);
+        enableAlertShow({});
         return;
+      } else if (compareCart.length === 4) {
       }
 
       // great solution for category check if no useState is used to track it !!!!!
@@ -71,11 +86,6 @@ export default function ProductsContainer({
       }
 
       const emptyIndex = compareCart.findIndex((i) => i === null);
-
-      if (emptyIndex == -1) {
-        enableAlertShow({ isFull: true });
-        return;
-      }
 
       setCompareCart((prev) => {
         const newArr = [...prev];
@@ -131,21 +141,21 @@ export default function ProductsContainer({
           </div>
           <div className='product-actions-container'>
             <div
-              onClick={() => handleOperation("compare", item)}
+              onClick={() => handleAction("compare", item)}
               className='compare-box'
             >
               <img src={compareIcon} alt='Compare icon' />
             </div>
             {handleProductCheckInCart(item) ? (
               <div
-                onClick={() => handleOperation("cart", item)}
+                onClick={() => handleAction("cart", item)}
                 className='cart-container'
               >
                 <span>In cart </span>
               </div>
             ) : (
               <div
-                onClick={() => handleOperation("cart", item)}
+                onClick={() => handleAction("cart", item)}
                 className='cart-container'
               >
                 <img src={cartIcon} alt='Cart icon' />

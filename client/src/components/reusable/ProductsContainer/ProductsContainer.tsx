@@ -110,7 +110,7 @@ export default function ProductsContainer({
   };
 
   const handleProductCheckInCart = (item: any) => {
-    const inCart = cart.find(
+    const inCart = cart.some(
       (i) => i.id === item.id && i.category === item.category
     );
     return inCart;

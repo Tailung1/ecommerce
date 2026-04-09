@@ -21,7 +21,7 @@
   border-radius: 20px 20px 0 0;
   padding: 5px 15px;
   padding-bottom: 90px;
-  animation: BarIn 0.5s ease;
+  animation: BarIn 0.4s ease;
 }
 
 @keyframes BarIn {
@@ -33,7 +33,7 @@
   }
 }
 .ExitBar {
-  animation: BarOut 0.5s ease forwards;
+  animation: BarOut 0.4s ease forwards;
 }
 
 @keyframes BarOut {
@@ -52,7 +52,7 @@
     max-width: 500px;
     border-radius: 20px;
     padding-bottom: 10px;
-    bottom: 5px;
+    bottom: 200px;
     left: 34%;
   }
 

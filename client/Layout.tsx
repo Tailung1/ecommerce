@@ -72,13 +72,18 @@ export default function Layout() {
 
     if (isVisible) {
       if (!isExitingBar) {
-        target.classList.add("layer-IN");
+        target.classList.add("layer-IN", "noPointerEvents");
       } else if (isExitingBar) {
         target.classList.remove("layer-IN");
-        target.classList.add("layer-OUT");
+        target.classList.add("layer-OUT", "noPointerEvents");
+        setTimeout(() => {
+          target.classList.remove(
+            "layer-IN",
+            "layer-OUT",
+            "noPointerEvents"
+          );
+        }, 400);
       }
-    } else {
-      target.classList.remove("layer-IN", "layer-OUT");
     }
   }, [
     showAuthBar,

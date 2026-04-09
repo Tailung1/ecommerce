@@ -1,27 +1,24 @@
 import "./SearchBar.scss";
 import { useMyContext } from "../../../MyContext";
 import searchIcon from "../../../assets/search-icon.png";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function SearchBar() {
   const {
-    showSearchBar,
     popularSearches,
     setShowSearchBar,
     setIsExitingBar,
+    isExitingBar,
   } = useMyContext();
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
-  const [showCard, setShowCard] = useState(false);
 
   useEffect(() => {
-    console.log("yess")
-    if (showSearchBar && inputRef.current) {
+    if (inputRef.current) {
       inputRef.current.focus();
     }
-    if (showSearchBar) setShowCard(true);
-  }, [showSearchBar]);
+  }, []);
 
   const generateSlug = async (
     name: string,
@@ -34,7 +31,6 @@ export default function SearchBar() {
   };
   const handleExit = () => {
     setIsExitingBar(true);
-    setShowCard(false);
     setTimeout(() => {
       setShowSearchBar(false);
       setIsExitingBar(false);
@@ -59,7 +55,7 @@ export default function SearchBar() {
           alt='search icon'
         />
       </div>
-      {showCard && (
+      {!isExitingBar && (
         <div
           onClick={handleExit}
           className='popular-searches-container'

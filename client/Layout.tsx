@@ -62,47 +62,44 @@ export default function Layout() {
   }, []);
 
   useEffect(() => {
-    let isPc = false;
-    let isOpening =
-      !isExitingBar &&
-      (showSideBar || showCompareBar || showAuthBar || showAlert);
-    if (window.innerWidth >= 1024) {
-      isPc = true;
-    }
-    const layer = document.querySelector(".layer");
-    const main = document.querySelector("main");
-    if ((!isPc && isOpening) || (isPc && showSearchBar)) {
-      main?.classList.add("layer-backgroundIN");
-      document.body.classList.add("no-scroll");
-    } else if (isPc && isOpening) {
-      layer?.classList.add("layer-backgroundIN");
-      main?.classList.add("layer-backgroundIN");
-      document.body.classList.add("no-scroll");
-    } else if (isExitingBar) {
-      layer?.classList.remove("layer-backgroundIN");
-      main?.classList.remove("layer-backgroundIN");
-      document.body.classList.remove("no-scroll");
-      layer?.classList.add("layer-backgroundOUT");
-      main?.classList.add("layer-backgroundOUT");
-    } else if (!isExitingBar && !isOpening) {
-      layer?.classList.remove("layer-backgroundOUT");
-      main?.classList.remove("layer-backgroundOUT");
+    let isPc = window.innerWidth >= 1024;
+    let isVisible =
+      showCompareBar || showAuthBar || showAlert || showSearchBar;
+    const layer = document.querySelector(".layer")!;
+    const main = document.querySelector("main")!;
+
+    const target = !isPc ? main : showSearchBar ? main : layer;
+
+    if (isVisible) {
+      if (!isExitingBar) {
+        target.classList.add("layer-IN");
+      } else if (isExitingBar) {
+        target.classList.remove("layer-IN");
+        target.classList.add("layer-OUT");
+      }
+    } else {
+      target.classList.remove("layer-IN", "layer-OUT");
     }
   }, [
-    showSideBar,
     showAuthBar,
     showCompareBar,
     showSearchBar,
     showAlert,
     isExitingBar,
   ]);
-
+  useEffect(() => {
+    if (showSideBar) {
+      document.body.classList.add("no-scroll");
+    } else {
+      document.body.classList.remove("no-scroll");
+    }
+  }, [showSideBar]);
   return (
-    <div className='bg-green-500 flex flex-col  flex-grow '>
+    <div className=' flex flex-col min-h-screen '>
       {" "}
       {showAuthBar && <AuthBar />} {showCompareBar && <CompareBar />}
       {showAlert && <WarningBar />}
-      <div className='layer flex flex-col  flex-grow  '>
+      <div className='layer flex flex-col flex-grow'>
         {/* <div ref={barRef}></div> */}
         <FirstSection />
         <Header />

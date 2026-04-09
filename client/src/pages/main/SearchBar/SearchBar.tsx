@@ -1,19 +1,26 @@
 import "./SearchBar.scss";
 import { useMyContext } from "../../../MyContext";
 import searchIcon from "../../../assets/search-icon.png";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function SearchBar() {
-  const { showSearchBar, popularSearches, setShowSearchBar } =
-    useMyContext();
+  const {
+    showSearchBar,
+    popularSearches,
+    setShowSearchBar,
+    setIsExitingBar,
+  } = useMyContext();
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
+  const [showCard, setShowCard] = useState(false);
 
   useEffect(() => {
+    console.log("yess")
     if (showSearchBar && inputRef.current) {
       inputRef.current.focus();
     }
+    if (showSearchBar) setShowCard(true);
   }, [showSearchBar]);
 
   const generateSlug = async (
@@ -25,9 +32,20 @@ export default function SearchBar() {
     const slug = `${destName}-${color}-${id}`.toLowerCase();
     navigate(`/${slug}`);
   };
+  const handleExit = () => {
+    setIsExitingBar(true);
+    setShowCard(false);
+    setTimeout(() => {
+      setShowSearchBar(false);
+      setIsExitingBar(false);
+    }, 600);
+  };
 
   return (
-    <div className='searchBar-container'>
+    <div
+      onClick={() => setShowSearchBar(true)}
+      className='searchBar-container'
+    >
       <div className='input-container'>
         <input
           className='input'
@@ -41,23 +59,28 @@ export default function SearchBar() {
           alt='search icon'
         />
       </div>
-      <div className='popular-searches-container'>
-        <p>Popular Searches:</p>
+      {showCard && (
+        <div
+          onClick={handleExit}
+          className='popular-searches-container'
+        >
+          <p>Popular Searches:</p>
 
-        <section className='popular-searches-wrapper'>
-          {popularSearches.map((item) => (
-            <p
-              onClick={() => {
-                generateSlug(item.name, item.color, item.id);
-                setShowSearchBar(false);
-              }}
-              key={item.id}
-            >
-              {item.name}
-            </p>
-          ))}
-        </section>
-      </div>
+          <section className='popular-searches-wrapper'>
+            {popularSearches.map((item) => (
+              <p
+                onClick={() => {
+                  generateSlug(item.name, item.color, item.id);
+                  setShowSearchBar(false);
+                }}
+                key={item.id}
+              >
+                {item.name}
+              </p>
+            ))}
+          </section>
+        </div>
+      )}
     </div>
   );
 }

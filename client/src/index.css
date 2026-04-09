@@ -10,17 +10,17 @@ body.no-scroll {
   overflow: hidden;
 }
 
-
 img {
   width: 25px;
   height: 25px;
   cursor: pointer;
 }
 
-.layer-backgroundIN {
+
+.layer-IN {
   animation: layer-animateIN 0.4s forwards;
 }
-.layer-backgroundOUT {
+.layer-OUT {
   animation: layer-animateOUT 0.5s forwards;
 }
 @keyframes layer-animateIN {
@@ -40,4 +40,3 @@ img {
     filter: brightness(100%);
   }
 }
-

@@ -9,6 +9,7 @@ import loginIcon from "../../assets/login.png";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../components/shared/Logo/Logo";
 import SearchBar from "../main/SearchBar/SearchBar";
+import { useEffect } from "react";
 
 export default function Header() {
   const {
@@ -18,6 +19,24 @@ export default function Header() {
     setShowSearchBar,
     setShowAuthBar,
   } = useMyContext();
+
+useEffect(() => {
+  const handleScroll = () => {
+    const header = document.querySelector("header");
+    console.log(window.scrollY)
+    
+    if (!header) return;
+
+    if (window.scrollY > 127) {
+      header.classList.add("header-sticky");
+    } else {
+      header.classList.remove("header-sticky");
+    }
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll);
+}, []);
 
   const navigate = useNavigate();
   return (

@@ -93,12 +93,25 @@ export default function Layout() {
     isExitingBar,
   ]);
   useEffect(() => {
-    if (showSideBar) {
+    if (
+      showSideBar ||
+      showAuthBar ||
+      showCompareBar ||
+      showSearchBar ||
+      showAlert
+    ) {
       document.body.classList.add("no-scroll");
     } else {
       document.body.classList.remove("no-scroll");
     }
-  }, [showSideBar]);
+  }, [
+    showSideBar,
+    showAuthBar,
+    showCompareBar,
+    showSearchBar,
+    showAlert,
+  ]);
+
   return (
     <div className=' flex flex-col min-h-screen '>
       {" "}

@@ -22,12 +22,12 @@ header {
     $padding: 5px 20px,
     $justify-content: space-between
   );
-  background-color: rgb(235, 235, 235,0.5);
+  background-color: rgb(235, 235, 235, 0.5);
   backdrop-filter: blur(15px);
   position: sticky;
   top: 0;
   width: 100%;
-  z-index: 1;
+  z-index: 10;
 }
 
 header > div {
@@ -72,6 +72,19 @@ header > div {
 }
 
 @media (min-width: 1024px) {
+  .header-sticky {
+    position: sticky;
+    top: 0;
+    animation: animateHeader 0.5s ease;
+  }
+  @keyframes animateHeader {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
   .header {
     display: none;
   }

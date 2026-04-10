@@ -20,23 +20,33 @@ export default function Header() {
     setShowAuthBar,
   } = useMyContext();
 
-useEffect(() => {
-  const handleScroll = () => {
-    const header = document.querySelector("header");
-    console.log(window.scrollY)
-    
-    if (!header) return;
+  useEffect(() => {
+    let reached = false;
+    const handleScroll = () => {
+      const header = document.querySelector("header");
+      if (!header) return;
 
-    if (window.scrollY > 127) {
-      header.classList.add("header-sticky");
-    } else {
-      header.classList.remove("header-sticky");
-    }
-  };
+      if (window.scrollY > 127) {
+        reached = true;
 
-  window.addEventListener("scroll", handleScroll);
-  return () => window.removeEventListener("scroll", handleScroll);
-}, []);
+        header.classList.add("header-sticky");
+      } else {
+        header.classList.remove("header-sticky");
+        if (reached && window.scrollY > 57) {
+          header.classList.add("h");
+        } else {
+          reached = false;
+
+          header.classList.remove("h");
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  
 
   const navigate = useNavigate();
   return (

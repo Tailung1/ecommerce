@@ -175,6 +175,7 @@ export default function AuthBar() {
                 handleValuesChange("number", value)
               }
               errorMessage={state.errors.numberError}
+              active={state.active}
             />
           </div>
         ) : (
@@ -190,6 +191,7 @@ export default function AuthBar() {
                 handleValuesChange("email", value)
               }
               errorMessage={state.errors.emailError}
+              active={state.active}
             />
             <FloatingInput
               label={"Password"}
@@ -198,6 +200,7 @@ export default function AuthBar() {
                 handleValuesChange("password", value)
               }
               errorMessage={state.errors.passwordError}
+              active={state.active}
             />
           </div>
         )}

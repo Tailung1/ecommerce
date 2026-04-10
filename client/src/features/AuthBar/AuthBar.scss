@@ -22,6 +22,7 @@ $primary-color: #ec5e2a;
 .acces-options p {
   font-size: 20px;
   border: 10px red;
+  cursor: pointer;
 }
 .auth-hr {
   height: 2px;
@@ -56,6 +57,7 @@ $primary-color: #ec5e2a;
   border-radius: 20px;
   color: rgb(104, 152, 41);
   font-weight: 500;
+  cursor: pointer;
 }
 .non-active-auth-option {
   background-color: #f2f2f2;
@@ -177,14 +179,34 @@ label {
   position: absolute;
   pointer-events: none;
 }
-.error-message {
+.input-feedback {
   position: absolute;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  bottom: -30px;
+  font-size: 18px;
+}
+.input-feedback span:nth-child(1) {
   color: red;
-  font-size: 15px;
+}
+.input-feedback span:nth-child(2) {
+  cursor: pointer;
+  color: #dc4813;
+}
+.input-feedback span:nth-child(2):hover {
+  color: #df8463;
 }
 
 @media (min-width: 1024px) {
   .policy-container {
     padding-top: 10px;
   }
+  .submit-section {
+    padding-top: 10px;
+  }
+  .emailInputExtraPaddingIN {
+    gap: 35px;
+  }
+  // gap: 35px;
 }

@@ -3,7 +3,7 @@ import { RouterProvider } from "react-router-dom";
 
 function App() {
   return (
-    <div className='flex flex-col min-h-screen '>
+    <div className='flex flex-col min-h-screen  '>
       <RouterProvider router={router} />
     </div>
   );

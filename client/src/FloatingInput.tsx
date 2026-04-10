@@ -6,6 +6,7 @@ interface propsTypes {
   value: string;
   propsedOnChange: (value: string) => void;
   errorMessage: string;
+  active: "auth" | "register";
 }
 
 export default function FloatingInput({
@@ -13,15 +14,16 @@ export default function FloatingInput({
   value,
   propsedOnChange,
   errorMessage,
+  active,
 }: propsTypes) {
   const [activityTrack, setActivityTrack] = useState({
     isFocused: false,
     // hasValue: false,  not Necessary YET.
   });
+
   const hasError = errorMessage !== "";
   const isActive = activityTrack.isFocused || value;
   const inputId = `${label.toLowerCase().replace(" ", "-")}-input`;
-
   return (
     <div className='floating-container'>
       <motion.label
@@ -52,7 +54,14 @@ export default function FloatingInput({
         }
         type='text'
       />
-      <p className='error-message'>{hasError ? errorMessage : ""}</p>
+      <div className='input-feedback'>
+        <span>{hasError ? errorMessage : ""}</span>
+        <span>
+          {label === "Password" && active === "auth"
+            ? "Forgot Password"
+            : ""}
+        </span>
+      </div>
     </div>
   );
 }

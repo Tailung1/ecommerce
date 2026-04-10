@@ -77,6 +77,10 @@ header > div {
     top: 0;
     animation: animateHeader 0.5s ease;
   }
+  .h {
+    position: sticky;
+    top: 0;
+  }
   @keyframes animateHeader {
     0% {
       transform: translateY(-100%);
@@ -150,6 +154,7 @@ header > div {
     align-items: center;
     justify-content: center;
     padding: 8px 28px;
+    position: relative;
   }
   .cart-container-header:hover,
   .login-container-header:hover {

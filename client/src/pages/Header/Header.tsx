@@ -21,32 +21,22 @@ export default function Header() {
   } = useMyContext();
 
   useEffect(() => {
-    let reached = false;
     const handleScroll = () => {
+      const Y = window.scrollY;
       const header = document.querySelector("header");
       if (!header) return;
 
-      if (window.scrollY > 127) {
-        reached = true;
-
+      if (Y > 127) {
         header.classList.add("header-sticky");
-      } else {
+      }
+      if (header.classList.contains("header-sticky") && Y < 57) {
         header.classList.remove("header-sticky");
-        if (reached && window.scrollY > 57) {
-          header.classList.add("h");
-        } else {
-          reached = false;
-
-          header.classList.remove("h");
-        }
       }
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  
 
   const navigate = useNavigate();
   return (

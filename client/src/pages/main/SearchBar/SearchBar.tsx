@@ -39,7 +39,7 @@ export default function SearchBar() {
 
   return (
     <div
-      onClick={() => setShowSearchBar(true)}
+      //   onClick={() => setShowSearchBar(true)}
       className='searchBar-container'
     >
       <div className='input-container'>

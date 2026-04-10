@@ -9,7 +9,7 @@ import AuthBar from "./src/features/AuthBar/AuthBar";
 import CompareBar from "./src/features/Compare/CompareBar";
 import WarningBar from "./src/features/AlertBar/AlertBar";
 import { useMyContext } from "./src/MyContext";
-import FirstSection from "./src/components/shared/TopBar/TopBar";
+import TopBar from "./src/components/shared/TopBar/TopBar";
 
 export default function Layout() {
   const {
@@ -69,6 +69,7 @@ export default function Layout() {
     const main = document.querySelector("main")!;
 
     const target = !isPc ? main : showSearchBar ? main : layer;
+    let timeOut = null;
 
     if (isVisible) {
       if (!isExitingBar) {
@@ -76,7 +77,7 @@ export default function Layout() {
       } else if (isExitingBar) {
         target.classList.remove("layer-IN");
         target.classList.add("layer-OUT", "noPointerEvents");
-        setTimeout(() => {
+        timeOut = setTimeout(() => {
           target.classList.remove(
             "layer-IN",
             "layer-OUT",
@@ -85,6 +86,7 @@ export default function Layout() {
         }, 400);
       }
     }
+    return () => clearTimeout(timeOut!);
   }, [
     showAuthBar,
     showCompareBar,
@@ -119,7 +121,7 @@ export default function Layout() {
       {showAlert && <WarningBar />}
       <div className='layer flex flex-col flex-grow'>
         {/* <div ref={barRef}></div> */}
-        <FirstSection />
+        <TopBar />
         <Header />
         <AnimatePresence>
           {showSideBar && <HeaderSlider />}

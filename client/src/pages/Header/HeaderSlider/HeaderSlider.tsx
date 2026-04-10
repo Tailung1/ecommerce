@@ -8,10 +8,7 @@ import searchIcon from "../../../assets/search-icon.png";
 import rejectIcon from "../../../assets/reject.png";
 
 export default function HeaderSlider() {
-  const {
-    setShowSideBar,
-    setShowSearchBar,
-  } = useMyContext();
+  const { setShowSideBar } = useMyContext();
   const navigate = useNavigate();
 
   return (
@@ -30,16 +27,13 @@ export default function HeaderSlider() {
         />
 
         <div
-          onClick={() => navigate("/search")}
+          onClick={() => {
+            navigate("/search");
+            setShowSideBar(false);
+          }}
           className='serach-input-container'
         >
-          <div
-            onClick={() => {
-              setShowSideBar(false);
-              setShowSearchBar(true);
-            }}
-            className='input-container'
-          >
+          <div className='input-container'>
             <input
               className='input'
               placeholder='Search'

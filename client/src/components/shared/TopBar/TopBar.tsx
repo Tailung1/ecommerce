@@ -3,7 +3,7 @@ import LanguageSelector from "../LanguageSelector/LanguageSelector";
 import teleCall from "../../../assets/telephone-call.png";
 
 
-export default function FirstSection() {
+export default function TopBar() {
   return (
     <div className={styles["pc-first-section"]}>
       <div className={styles["contact-info"]}>

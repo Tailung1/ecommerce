@@ -21,7 +21,7 @@
   display: none;
 }
 
-@media (min-width: 500px) {
+@media (min-width: 1024px) {
   .pc-first-section {
     @include display-gap-padding-justify(
       $gap: 0px,

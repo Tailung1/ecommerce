@@ -46,9 +46,12 @@
 
 .popular-searches-container {
   @include display-col($gap: 15px);
+  border-radius: 20px;
+  padding: 5px;
   width: 100%;
   position: absolute;
   top: 53px;
+  background-color: rgb(255, 255, 255);
 }
 
 .popular-searches-wrapper {

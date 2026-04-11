@@ -60,17 +60,13 @@ export default function ProductsContainer({
 
   const getCompareActionStatus = (item: any) => {
     if (compareCart.some((i) => i && i.id === item.id))
-      return "chosen";
+      return "isChosen";
     if (
       activeProductCategory &&
       activeProductCategory !== item.category
     )
       return "wrongCategory";
-    if (
-      compareCart.every(Boolean) &&
-      activeProductCategory === item.category
-    )
-      return "isFull";
+    if (compareCart.every(Boolean)) return "isFull";
 
     return "ok";
   };
@@ -78,25 +74,16 @@ export default function ProductsContainer({
   const handleAction = (task: "cart" | "compare", item: any) => {
     if (task === "compare") {
       const status = getCompareActionStatus(item);
-      switch (status) {
-        case "chosen":
-          enableAlertShow({ isChosen: true });
-          return;
-        case "wrongCategory":
-          enableAlertShow({});
-          return;
-        case "isFull":
-          enableAlertShow({ isFull: true });
-          return;
+      if (status !== "ok") {
+        enableAlertShow({ [status]: true });
       }
-      setCompareCart((prev) => {
-        const newArr = [...prev];
-        const index = prev.findIndex((i) => i === null);
-        newArr[index] = item;
-        if (!activeProductCategory)
-          setActiveProductCategory(item.category);
-        return newArr;
-      });
+      const newArr = [...compareCart];
+      const index = newArr.findIndex((i) => i === null);
+      newArr[index] = item;
+      setCompareCart(newArr);
+
+      if (!activeProductCategory)
+        setActiveProductCategory(item.category);
     }
 
     if (task == "cart") {

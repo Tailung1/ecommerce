@@ -70,20 +70,20 @@ export default function PC() {
     return () => setEnablePC(false);
   }, []);
 
-  const handleScroll = (dir: "left" | "right") => {
-    setIsHovered(true);
-    const container = document.querySelector(".pc-slider-wrapper")!;
-    const leftSpace = container.scrollWidth - container.scrollLeft;
-    if (dir === "right") {
-      if (leftSpace > container.clientWidth)
-        container.scrollLeft += 500;
-      else return;
-    } else {
-      container.scrollLeft -= 500;
-      if (container.scrollLeft < 0) container.scrollLeft = 0;
-      return;
-    }
-  };
+//   const handleScroll = (dir: "left" | "right") => {
+//     setIsHovered(true);
+//     const container = document.querySelector(".pc-slider-wrapper")!;
+//     const leftSpace = container.scrollWidth - container.scrollLeft;
+//     if (dir === "right") {
+//       if (leftSpace > container.clientWidth)
+//         container.scrollLeft += 500;
+//       else return;
+//     } else {
+//       container.scrollLeft -= 500;
+//       if (container.scrollLeft < 0) container.scrollLeft = 0;
+//       return;
+//     }
+//   };
 
   return (
     <div className='pc-main-first-section'>
@@ -104,12 +104,12 @@ export default function PC() {
         </div>
         <div className='arrows-container'>
           <img
-            onClick={() => handleScroll("left")}
+            // onClick={() => handleScroll("left")}
             src={leftArrowIcon}
             alt='Left Arrow'
           />
           <img
-            onClick={() => handleScroll("right")}
+            // onClick={() => handleScroll("right")}
             className='rightArrow'
             src={rightArrowIcon}
             alt='Right Arrow'

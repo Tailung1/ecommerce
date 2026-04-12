@@ -1,0 +1,28 @@
+.filterBar {
+  position: fixed;
+  z-index: 999;
+  height: 100%;
+  width: 100%;
+  animation: animate-FilterBar 0.3s ease forwards;
+  background-color: red;
+}
+.reject-FilterBar {
+  animation: reject-FilterBar 0.3s ease forwards;
+}
+
+@keyframes animate-FilterBar {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(20%);
+  }
+}
+@keyframes reject-FilterBar {
+  0% {
+    transform: translateX(20%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}

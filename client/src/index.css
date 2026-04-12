@@ -17,7 +17,7 @@ img {
 }
 
 .noPointerEvents {
-  pointer-events: none;
+  /* pointer-events: none; */
 }
 
 .layer-IN {

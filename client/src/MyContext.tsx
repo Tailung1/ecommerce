@@ -41,6 +41,8 @@ interface types {
   setCurrentLanguage: React.Dispatch<SetStateAction<string>>;
   enablePC: boolean;
   setEnablePC: React.Dispatch<SetStateAction<boolean>>;
+  showFilterBar: boolean;
+  setShowFilterBar: React.Dispatch<SetStateAction<boolean>>;
 }
 
 const MyContext = createContext({} as types);
@@ -50,6 +52,8 @@ export default function ContextProvider({
 }: {
   children: ReactNode;
 }) {
+  const [showFilterBar, setShowFilterBar] = useState<boolean>(false);
+
   const [enablePC, setEnablePC] = useState<boolean>(false);
 
   const [showAlert, setShowAlert] = useState<boolean>(false);
@@ -114,7 +118,9 @@ export default function ContextProvider({
         currentLanguage,
         setCurrentLanguage,
         enablePC,
-        setEnablePC
+        setEnablePC,
+        showFilterBar,
+        setShowFilterBar,
       }}
     >
       {children}

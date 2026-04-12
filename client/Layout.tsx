@@ -10,6 +10,8 @@ import CompareBar from "./src/features/Compare/CompareBar";
 import WarningBar from "./src/features/AlertBar/AlertBar";
 import { useMyContext } from "./src/MyContext";
 import TopBar from "./src/components/shared/TopBar/TopBar";
+import FilterBar from "./src/features/FilterBar/FilterBar";
+import useWindowWidth from "./src/CosutmHooks/useWindowWidth";
 
 export default function Layout() {
   const {
@@ -20,35 +22,10 @@ export default function Layout() {
     setPopularSearches,
     showAlert,
     showSearchBar,
+    showFilterBar,
   } = useMyContext();
 
-  //   const barRef = useRef<HTMLDivElement>(null);
-  //   const progressRef = useRef(0);
-
-  //   useEffect(() => {
-  //     const bar = barRef.current!;
-  //     if (!bar) return;
-  //     function trickle() {
-  //       if (progressRef.current < 30) {
-  //         progressRef.current += 30;
-  //         bar.style.width = progressRef.current + "%";
-  //       }
-  //     }
-
-  //     trickle();
-
-  //     const timeout = setTimeout(() => {
-  //       progressRef.current = 100;
-  //       bar.style.width = "100%";
-  //       setTimeout(() => {
-  //         bar.style.display = "none";
-  //       }, 200);
-  //     }, 300);
-
-  //     return () => {
-  //       clearTimeout(timeout);
-  //     };
-  //   }, [showAuthBar]);
+  const width = useWindowWidth();
 
   useEffect(() => {
     const getPopularSearches = async () => {
@@ -61,73 +38,59 @@ export default function Layout() {
     getPopularSearches();
   }, []);
 
-  useEffect(() => {
-    let isPc = window.innerWidth >= 1024;
-    let isVisible =
-      showCompareBar || showAuthBar || showAlert || showSearchBar;
-    const layer = document.querySelector(".layer")!;
-    const main = document.querySelector("main")!;
+  let isVisible =
+    showCompareBar ||
+    showAuthBar ||
+    showAlert ||
+    showSearchBar ||
+    showFilterBar;
 
-    const target = !isPc ? main : showSearchBar ? main : layer;
-    let timeOut = null;
-
-    if (isVisible) {
-      if (!isExitingBar) {
-        target.classList.add("layer-IN", "noPointerEvents");
-      } else if (isExitingBar) {
-        target.classList.remove("layer-IN");
-        target.classList.add("layer-OUT", "noPointerEvents");
-        timeOut = setTimeout(() => {
-          target.classList.remove(
-            "layer-IN",
-            "layer-OUT",
-            "noPointerEvents"
-          );
-        }, 400);
-      }
-    }
-    return () => clearTimeout(timeOut!);
-  }, [
-    showAuthBar,
-    showCompareBar,
-    showSearchBar,
-    showAlert,
-    isExitingBar,
-  ]);
+  //   useEffect(() => {
+  //     document.body.classList.toggle("no-scroll", isVisible);
+  //   }, [isVisible]);
   useEffect(() => {
-    if (
-      showSideBar ||
-      showAuthBar ||
-      showCompareBar ||
-      showSearchBar ||
-      showAlert
-    ) {
-      document.body.classList.add("no-scroll");
-    } else {
-      document.body.classList.remove("no-scroll");
+    document.body.classList.toggle("no-scroll", true);
+  }, []);
+
+  const getLayerClass = (targetType: "layer" | "main") => {
+    // let isPc = window.innerWidth >= 1024;
+    let isPc = width >= 1024;
+    const target = !isPc
+      ? showFilterBar
+        ? "layer"
+        : !showSearchBar
+        ? "main"
+        : ""
+      : showSearchBar || !isVisible
+      ? "main"
+      : "layer";
+
+    if (isExitingBar && targetType === target) {
+      return "layer-OUT noPointerEvents";
     }
-  }, [
-    showSideBar,
-    showAuthBar,
-    showCompareBar,
-    showSearchBar,
-    showAlert,
-  ]);
+
+    if (isVisible && targetType === target)
+      return "layer-IN noPointerEvents";
+  };
 
   return (
     <div className=' flex flex-col min-h-screen '>
       {" "}
       {showAuthBar && <AuthBar />} {showCompareBar && <CompareBar />}
       {showAlert && <WarningBar />}
-      <div className='layer flex flex-col flex-grow'>
-        {/* <div ref={barRef}></div> */}
+      {showFilterBar && <FilterBar />}
+      <div
+        className={`layer1 flex flex-col flex-grow ${getLayerClass(
+          "layer"
+        )} `}
+      >
         <TopBar />
         <Header />
         <AnimatePresence>
           {showSideBar && <HeaderSlider />}
         </AnimatePresence>
 
-        <main>
+        <main className={getLayerClass("main")}>
           <Outlet />
         </main>
         <Footer />

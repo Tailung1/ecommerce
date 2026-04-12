@@ -5,10 +5,8 @@ import { useParams } from "react-router-dom";
 import { useMyContext } from "../../../MyContext";
 
 export default function Product() {
-  const { slug, brandANDid } = useParams();
+  const { slug } = useParams();
   const { setShowAuthBar } = useMyContext();
-
-  console.log(brandANDid?.split("-").slice(-1).join(""));
   const productTitle = slug
     ?.split("-")
     .slice(0, -3) // to remove  elements  from right to left

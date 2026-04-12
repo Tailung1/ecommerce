@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ArrowIocn from "../../assets/left-arrow.png";
+import ArrowIocn from "../../../assets/left-arrow.png";
 export default function Sort() {
   const [rotate, setRotate] = useState<boolean>(false);
 

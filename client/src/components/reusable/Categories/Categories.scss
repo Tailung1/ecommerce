@@ -22,7 +22,7 @@
   flex-direction: column;
   width: 100px;
   background-color: rgb(235, 235, 235);
- min-height: 100%;
+  min-height: 100%;
 }
 .categories-wrapper > div {
   border-bottom: 0.5px solid rgb(200, 187, 187);
@@ -40,9 +40,9 @@
   color: rgb(120, 49, 49);
 }
 
-  .active-category {
-    background-color: rgb(235, 235, 235);
-  }
+.active-category {
+  background-color: rgb(235, 235, 235);
+}
 
 .category-animate {
   animation: scaleEffct 0.2s ease;
@@ -63,7 +63,7 @@
   @include display-col;
 }
 
-@media (min-width: 500px) {
+@media (min-width: 1024px) {
   .categories-wrapper {
     border-right: 1px solid #daccc3;
   }

@@ -43,27 +43,28 @@ export default function PC() {
       );
     };
   }, []);
+  const sliderWrapperRef = useRef<HTMLDivElement | null>(null);
+//   useEffect(() => {
+//     if (timeoutRef.current) clearTimeout(timeoutRef.current);
+//     if (intervalRef.current) clearInterval(intervalRef.current);
 
-  useEffect(() => {
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    if (intervalRef.current) clearInterval(intervalRef.current);
+//     if (isHovered) return;
 
-    if (isHovered) return;
+//     timeoutRef.current = setTimeout(() => {
+//       intervalRef.current = setInterval(() => {
+//         const leftSpace =
+//           sliderWrapperRef.current!.scrollWidth -
+//           sliderWrapperRef.current!.scrollLeft;
 
-    const container = document.querySelector(".pc-slider-wrapper")!;
-    timeoutRef.current = setTimeout(() => {
-      intervalRef.current = setInterval(() => {
-        const leftSpace =
-          container.scrollWidth - container.scrollLeft;
-
-        if (leftSpace > container.clientWidth) {
-          container.scrollLeft += 500;
-          return;
-        }
-        container.scrollLeft -= container.scrollWidth;
-      }, 2000);
-    }, 3000);
-  }, [isHovered]);
+//         if (leftSpace > sliderWrapperRef.current!.clientWidth) {
+//           sliderWrapperRef.current!.scrollLeft += 500;
+//           return;
+//         }
+//         sliderWrapperRef.current!.scrollLeft -=
+//           sliderWrapperRef.current!.scrollWidth;
+//       }, 2000);
+//     }, 3000);
+//   }, [isHovered]);
 
   useEffect(() => {
     setEnablePC(true);
@@ -72,15 +73,17 @@ export default function PC() {
 
 //   const handleScroll = (dir: "left" | "right") => {
 //     setIsHovered(true);
-//     const container = document.querySelector(".pc-slider-wrapper")!;
-//     const leftSpace = container.scrollWidth - container.scrollLeft;
+//     const leftSpace =
+//       sliderWrapperRef.current!.scrollWidth -
+//       sliderWrapperRef.current!.scrollLeft;
 //     if (dir === "right") {
-//       if (leftSpace > container.clientWidth)
-//         container.scrollLeft += 500;
+//       if (leftSpace > sliderWrapperRef.current!.clientWidth)
+//         sliderWrapperRef.current!.scrollLeft += 500;
 //       else return;
 //     } else {
-//       container.scrollLeft -= 500;
-//       if (container.scrollLeft < 0) container.scrollLeft = 0;
+//       sliderWrapperRef.current!.scrollLeft -= 500;
+//       if (sliderWrapperRef.current!.scrollLeft < 0)
+//         sliderWrapperRef.current!.scrollLeft = 0;
 //       return;
 //     }
 //   };
@@ -95,11 +98,12 @@ export default function PC() {
       </div>
       <div ref={containerRef} className='pc-slider-container'>
         <div
+          ref={sliderWrapperRef}
           onClick={() => setIsHovered((prev) => !prev)}
           className='pc-slider-wrapper'
         >
           {arr.map((i, index) => (
-            <img key={index} className='s' src={i} />
+            <img key={index} src={i} />
           ))}
         </div>
         <div className='arrows-container'>

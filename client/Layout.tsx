@@ -27,43 +27,35 @@ export default function Layout() {
 
   const width = useWindowWidth();
 
-  useEffect(() => {
-    const getPopularSearches = async () => {
-      const items = await fetch(
-        "http://localhost:3000/api/products/popularSearches"
-      );
-      const response = await items.json();
-      setPopularSearches(response);
-    };
-    getPopularSearches();
-  }, []);
+   useEffect(() => {
+     const getPopularSearches = async () => {
+       const items = await fetch(
+         "http://localhost:3000/api/products/popularSearches"
+       );
+       const response = await items.json();
+       setPopularSearches(response);
+     };
+     getPopularSearches();
+   }, []);
 
-  let isVisible =
-    showCompareBar ||
-    showAuthBar ||
-    showAlert ||
-    showSearchBar ||
-    showFilterBar;
+  const bars = [
+    showCompareBar,
+    showAuthBar,
+    showAlert,
+    showSearchBar,
+    showFilterBar,
+  ];
+  let isVisible = bars.some(Boolean);
 
-  //   useEffect(() => {
-  //     document.body.classList.toggle("no-scroll", isVisible);
-  //   }, [isVisible]);
   useEffect(() => {
-    document.body.classList.toggle("no-scroll", true);
-  }, []);
+    document.body.classList.toggle("no-scroll", isVisible);
+  }, [isVisible]);
+
+  let isPc = width >= 1024;
 
   const getLayerClass = (targetType: "layer" | "main") => {
-    // let isPc = window.innerWidth >= 1024;
-    let isPc = width >= 1024;
-    const target = !isPc
-      ? showFilterBar
-        ? "layer"
-        : !showSearchBar
-        ? "main"
-        : ""
-      : showSearchBar || !isVisible
-      ? "main"
-      : "layer";
+    const target =
+      showFilterBar || (isPc && !showSearchBar) ? "layer" : "main";
 
     if (isExitingBar && targetType === target) {
       return "layer-OUT noPointerEvents";
@@ -71,10 +63,12 @@ export default function Layout() {
 
     if (isVisible && targetType === target)
       return "layer-IN noPointerEvents";
+
+    return "";
   };
 
   return (
-    <div className=' flex flex-col min-h-screen '>
+    <div className='flex flex-col min-h-screen '>
       {" "}
       {showAuthBar && <AuthBar />} {showCompareBar && <CompareBar />}
       {showAlert && <WarningBar />}

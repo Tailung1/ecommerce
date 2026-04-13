@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { Outlet } from "react-router-dom";
 import Header from "./src/pages/Header/Header";
 import HeaderSlider from "./src/pages/Header/HeaderSlider/HeaderSlider";
@@ -19,7 +19,6 @@ export default function Layout() {
     showAuthBar,
     showCompareBar,
     isExitingBar,
-    setPopularSearches,
     showAlert,
     showSearchBar,
     showFilterBar,
@@ -27,25 +26,10 @@ export default function Layout() {
 
   const width = useWindowWidth();
 
-   useEffect(() => {
-     const getPopularSearches = async () => {
-       const items = await fetch(
-         "http://localhost:3000/api/products/popularSearches"
-       );
-       const response = await items.json();
-       setPopularSearches(response);
-     };
-     getPopularSearches();
-   }, []);
-
-  const bars = [
-    showCompareBar,
-    showAuthBar,
-    showAlert,
-    showSearchBar,
-    showFilterBar,
-  ];
-  let isVisible = bars.some(Boolean);
+  let isVisible = useMemo(
+    () => [showCompareBar, showAuthBar, showAlert, showSearchBar, showFilterBar].some(Boolean),
+    [showCompareBar, showAuthBar, showAlert, showSearchBar, showFilterBar]
+  );
 
   useEffect(() => {
     document.body.classList.toggle("no-scroll", isVisible);
@@ -54,16 +38,12 @@ export default function Layout() {
   let isPc = width >= 1024;
 
   const getLayerClass = (targetType: "layer" | "main") => {
-    const target =
-      showFilterBar || (isPc && !showSearchBar) ? "layer" : "main";
+    const target = showFilterBar || (isPc && !showSearchBar) ? "layer" : "main";
 
     if (isExitingBar && targetType === target) {
       return "layer-OUT noPointerEvents";
     }
-
-    if (isVisible && targetType === target)
-      return "layer-IN noPointerEvents";
-
+    if (isVisible && targetType === target) return "layer-IN noPointerEvents";
     return "";
   };
 
@@ -73,16 +53,10 @@ export default function Layout() {
       {showAuthBar && <AuthBar />} {showCompareBar && <CompareBar />}
       {showAlert && <WarningBar />}
       {showFilterBar && <FilterBar />}
-      <div
-        className={`layer1 flex flex-col flex-grow ${getLayerClass(
-          "layer"
-        )} `}
-      >
+      <div className={`layer1 flex flex-col flex-grow ${getLayerClass("layer")} `}>
         <TopBar />
         <Header />
-        <AnimatePresence>
-          {showSideBar && <HeaderSlider />}
-        </AnimatePresence>
+        <AnimatePresence>{showSideBar && <HeaderSlider />}</AnimatePresence>
 
         <main className={getLayerClass("main")}>
           <Outlet />

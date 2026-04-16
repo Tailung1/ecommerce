@@ -76,7 +76,9 @@ export default function ProductsContainer({
       const status = getCompareActionStatus(item);
       if (status !== "ok") {
         enableAlertShow({ [status]: true });
+        return
       }
+ 
       const newArr = [...compareCart];
       const index = newArr.findIndex((i) => i === null);
       newArr[index] = item;

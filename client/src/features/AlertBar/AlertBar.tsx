@@ -7,14 +7,9 @@ import phoneImage from "../../assets/iphone.png";
 
 export default function WarningBar() {
   const navigate = useNavigate();
-  const {
-    isExitingBar,
-    isChosen,
-    isFull,
-    setIsExitingBar,
-    setShowAlert,
-    compareCart,
-  } = useMyContext();
+
+  const { isExitingBar, isChosen, isFull, setIsExitingBar, setShowAlert, compareCart } =
+    useMyContext();
 
   const handleExit = () => {
     setIsExitingBar(true);
@@ -31,11 +26,7 @@ export default function WarningBar() {
   };
 
   return (
-    <div
-      className={`Bar bar-modifed-warning ${
-        isExitingBar && "ExitBar"
-      }`}
-    >
+    <div className={`Bar bar-modifed-warning ${isExitingBar && "ExitBar"}`}>
       <img
         src={exitBtn}
         onClick={handleExit}
@@ -47,15 +38,11 @@ export default function WarningBar() {
         <hr />
       </div>
       {isChosen ? (
-        <p className='warning-reason-text'>
-          Product is already chosen
-        </p>
+        <p className='warning-reason-text'>Product is already chosen</p>
       ) : (
         <div className='flex flex-col  items-center  gap-5 w-full'>
           <p className='text-red-600 text-[22px]'>
-            {isFull
-              ? "You already have 4 products"
-              : "Product adding is impossible"}
+            {isFull ? "You already have 4 products" : "Product adding is impossible"}
           </p>
           <p className='text-gray-500 text-[20px] text-center'>
             {isFull
@@ -66,19 +53,12 @@ export default function WarningBar() {
             {compareCart
               .filter((item) => item !== null)
               .map((prod) => (
-                <div
-                  key={Math.random() * 2372}
-                  className='product-container'
-                >
+                <div key={Math.random() * 2372} className='product-container'>
                   <div>
                     <img src={phoneImage} alt='phone image' />
                     <p>{prod?.name}</p>
                   </div>
-                  <img
-                    onClick={handleReject}
-                    src={rejectIcon}
-                    alt='Reject icon'
-                  />
+                  <img onClick={handleReject} src={rejectIcon} alt='Reject icon' />
                 </div>
               ))}
           </section>{" "}

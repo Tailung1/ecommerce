@@ -44,49 +44,49 @@ export default function PC() {
     };
   }, []);
   const sliderWrapperRef = useRef<HTMLDivElement | null>(null);
-//   useEffect(() => {
-//     if (timeoutRef.current) clearTimeout(timeoutRef.current);
-//     if (intervalRef.current) clearInterval(intervalRef.current);
+  useEffect(() => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    if (intervalRef.current) clearInterval(intervalRef.current);
 
-//     if (isHovered) return;
+    if (isHovered) return;
 
-//     timeoutRef.current = setTimeout(() => {
-//       intervalRef.current = setInterval(() => {
-//         const leftSpace =
-//           sliderWrapperRef.current!.scrollWidth -
-//           sliderWrapperRef.current!.scrollLeft;
+    timeoutRef.current = setTimeout(() => {
+      intervalRef.current = setInterval(() => {
+        const leftSpace =
+          sliderWrapperRef.current!.scrollWidth -
+          sliderWrapperRef.current!.scrollLeft;
 
-//         if (leftSpace > sliderWrapperRef.current!.clientWidth) {
-//           sliderWrapperRef.current!.scrollLeft += 500;
-//           return;
-//         }
-//         sliderWrapperRef.current!.scrollLeft -=
-//           sliderWrapperRef.current!.scrollWidth;
-//       }, 2000);
-//     }, 3000);
-//   }, [isHovered]);
+        if (leftSpace > sliderWrapperRef.current!.clientWidth) {
+          sliderWrapperRef.current!.scrollLeft += 500;
+          return;
+        }
+        sliderWrapperRef.current!.scrollLeft -=
+          sliderWrapperRef.current!.scrollWidth;
+      }, 2000);
+    }, 3000);
+  }, [isHovered]);
 
   useEffect(() => {
     setEnablePC(true);
     return () => setEnablePC(false);
   }, []);
 
-//   const handleScroll = (dir: "left" | "right") => {
-//     setIsHovered(true);
-//     const leftSpace =
-//       sliderWrapperRef.current!.scrollWidth -
-//       sliderWrapperRef.current!.scrollLeft;
-//     if (dir === "right") {
-//       if (leftSpace > sliderWrapperRef.current!.clientWidth)
-//         sliderWrapperRef.current!.scrollLeft += 500;
-//       else return;
-//     } else {
-//       sliderWrapperRef.current!.scrollLeft -= 500;
-//       if (sliderWrapperRef.current!.scrollLeft < 0)
-//         sliderWrapperRef.current!.scrollLeft = 0;
-//       return;
-//     }
-//   };
+  const handleScroll = (dir: "left" | "right") => {
+    setIsHovered(true);
+    const leftSpace =
+      sliderWrapperRef.current!.scrollWidth -
+      sliderWrapperRef.current!.scrollLeft;
+    if (dir === "right") {
+      if (leftSpace > sliderWrapperRef.current!.clientWidth)
+        sliderWrapperRef.current!.scrollLeft += 500;
+      else return;
+    } else {
+      sliderWrapperRef.current!.scrollLeft -= 500;
+      if (sliderWrapperRef.current!.scrollLeft < 0)
+        sliderWrapperRef.current!.scrollLeft = 0;
+      return;
+    }
+  };
 
   return (
     <div className='pc-main-first-section'>
@@ -108,12 +108,12 @@ export default function PC() {
         </div>
         <div className='arrows-container'>
           <img
-            // onClick={() => handleScroll("left")}
+            onClick={() => handleScroll("left")}
             src={leftArrowIcon}
             alt='Left Arrow'
           />
           <img
-            // onClick={() => handleScroll("right")}
+            onClick={() => handleScroll("right")}
             className='rightArrow'
             src={rightArrowIcon}
             alt='Right Arrow'

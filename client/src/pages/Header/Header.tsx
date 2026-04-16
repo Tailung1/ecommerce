@@ -12,13 +12,7 @@ import SearchBar from "../main/SearchBar/SearchBar";
 import { useEffect } from "react";
 
 export default function Header() {
-  const {
-    cart,
-    setShowSideBar,
-    showSearchBar,
-    setShowSearchBar,
-    setShowAuthBar,
-  } = useMyContext();
+  const { cart, setShowSideBar, showSearchBar, setShowSearchBar, setShowAuthBar } = useMyContext();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -67,11 +61,7 @@ export default function Header() {
             </div>
           )}
 
-          <img
-            onClick={() => navigate("/cart")}
-            src={cartIcon}
-            alt='cart-logo'
-          />
+          <img onClick={() => navigate("/cart")} src={cartIcon} alt='cart-logo' />
         </div>
         <LanguageSelector />
       </div>
@@ -83,20 +73,9 @@ export default function Header() {
           {showSearchBar ? (
             <SearchBar />
           ) : (
-            <div
-              onClick={() => setShowSearchBar(true)}
-              className='input-container'
-            >
-              <input
-                className='input'
-                placeholder='Search'
-                type='text'
-              />
-              <img
-                className='search-icon'
-                src={searchIcon}
-                alt='search icon'
-              />
+            <div onClick={() => setShowSearchBar(true)} className='input-container'>
+              <input className='input' placeholder='Search' type='text' />
+              <img className='search-icon' src={searchIcon} alt='search icon' />
             </div>
           )}
 
@@ -107,10 +86,7 @@ export default function Header() {
             <ShoppingCartPop />
           </div>
 
-          <div
-            onClick={() => setShowAuthBar(true)}
-            className='login-container-header'
-          >
+          <div onClick={() => setShowAuthBar(true)} className='login-container-header'>
             <img src={loginIcon} alt='Login icon' />
             <span>Log In</span>
           </div>

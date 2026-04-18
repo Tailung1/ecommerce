@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer, type ReactNode } from "react";
+import React, { createContext, useContext, useReducer, type ReactNode } from "react";
 
 const initialState = {
   showAuthBar: false,
@@ -6,55 +6,46 @@ const initialState = {
   showFilterBar: false,
   isExiting: false,
 };
-
-interface BarStateTypes {
+interface barStateTypes {
   showAuthBar: boolean;
   showCompareBar: boolean;
   showFilterBar: boolean;
   isExiting: boolean;
 }
-
-interface BarActionTypes {
+interface barActionTypes {
   type: "SET";
-  key: keyof BarStateTypes;
+  key: keyof barStateTypes;
   value: boolean;
 }
 
-// ✅ Ensure reducer **always returns a state**
-function reducer(state: BarStateTypes, action: BarActionTypes): BarStateTypes {
+function reducer(state: barStateTypes, action: barActionTypes) {
   const { key, value } = action;
   switch (action.type) {
-    case "SET":
+    case "SET": {
       return { ...state, [key]: value };
-    default:
-      return state; // Important: always return current state for unknown actions
+    }
   }
 }
 
-// ✅ Default value matches the structure consumers expect
 const barContext = createContext<{
-  state: BarStateTypes;
-  dispatch: React.Dispatch<BarActionTypes>;
-}>({
-  state: initialState,
-  dispatch: () => {}, // placeholder function
-});
+  state: barStateTypes;
+  dispatch: React.Dispatch<barActionTypes>;
+}>({ state: initialState, dispatch: () => null });
 
 export const BarProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   return <barContext.Provider value={{ state, dispatch }}>{children}</barContext.Provider>;
 };
 
-// ✅ Hook to read state
 export const useBarContext = () => {
   const context = useContext(barContext);
   if (!context) throw new Error("Bar context provider not found");
-  return context.state; // return full state object
+  const { state } = context;
+  return state;
 };
-
-// ✅ Hook to dispatch actions
 export const useUpdateBarContext = () => {
   const context = useContext(barContext);
   if (!context) throw new Error("Bar context provider not found");
-  return context.dispatch; // return dispatch directly
+  const { dispatch } = context;
+  return dispatch;
 };

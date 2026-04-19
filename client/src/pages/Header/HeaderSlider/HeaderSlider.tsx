@@ -3,12 +3,11 @@ import { easeOut, motion } from "framer-motion";
 import Categories from "../../../components/reusable/Categories/Categories";
 import { useNavigate } from "react-router-dom";
 import BrandList from "./BrandList";
-import { useMyContext } from "../../../MyContext";
 import searchIcon from "../../../assets/search-icon.png";
 import rejectIcon from "../../../assets/reject.png";
+import { useBarUpdater } from "../../../contexts/BarContext";
 
 export default function HeaderSlider() {
-  const { setShowSideBar } = useMyContext();
   const navigate = useNavigate();
 
   return (
@@ -23,27 +22,19 @@ export default function HeaderSlider() {
         <img
           src={rejectIcon}
           className='cursor-pointer'
-          onClick={() => setShowSideBar(false)}
+          onClick={() => useBarUpdater("showSideBar", false)}
         />
 
         <div
           onClick={() => {
             navigate("/search");
-            setShowSideBar(false);
+            useBarUpdater("showSideBar", false);
           }}
           className='serach-input-container'
         >
           <div className='input-container'>
-            <input
-              className='input'
-              placeholder='Search'
-              type='text'
-            />
-            <img
-              className='search-icon'
-              src={searchIcon}
-              alt='search icon'
-            />
+            <input className='input' placeholder='Search' type='text' />
+            <img className='search-icon' src={searchIcon} alt='search icon' />
           </div>
         </div>
       </div>

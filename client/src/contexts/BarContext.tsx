@@ -4,13 +4,19 @@ const initialState = {
   showAuthBar: false,
   showCompareBar: false,
   showFilterBar: false,
-  isExiting: false,
+  isExitingBar: false,
+  showAlert: false,
+  showSearchBar: false,
+  showSideBar: false,
 };
 interface barStateTypes {
   showAuthBar: boolean;
   showCompareBar: boolean;
   showFilterBar: boolean;
-  isExiting: boolean;
+  isExitingBar: boolean;
+  showAlert: boolean;
+  showSearchBar: boolean;
+  showSideBar: boolean;
 }
 interface barActionTypes {
   type: "SET";
@@ -24,28 +30,36 @@ function reducer(state: barStateTypes, action: barActionTypes) {
     case "SET": {
       return { ...state, [key]: value };
     }
+    default:
+      return state;
   }
 }
 
-const barContext = createContext<{
-  state: barStateTypes;
-  dispatch: React.Dispatch<barActionTypes>;
-}>({ state: initialState, dispatch: () => null });
+const BarContext = createContext<{
+  BarState: barStateTypes;
+  BarDispatch: React.Dispatch<barActionTypes>;
+}>({ BarState: initialState, BarDispatch: () => {} });
 
 export const BarProvider = ({ children }: { children: ReactNode }) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  return <barContext.Provider value={{ state, dispatch }}>{children}</barContext.Provider>;
+  const [BarState, BarDispatch] = useReducer(reducer, initialState);
+  return <BarContext.Provider value={{ BarState, BarDispatch }}>{children}</BarContext.Provider>;
 };
 
-export const useBarContext = () => {
-  const context = useContext(barContext);
+export const BarContextCotent = () => {
+  const context = useContext(BarContext);
   if (!context) throw new Error("Bar context provider not found");
-  const { state } = context;
-  return state;
+  return context;
 };
-export const useUpdateBarContext = () => {
-  const context = useContext(barContext);
+
+export const UseBarContext = () => {
+  const context = useContext(BarContext);
   if (!context) throw new Error("Bar context provider not found");
-  const { dispatch } = context;
-  return dispatch;
+  const { BarState } = context;
+  return BarState;
+};
+export const useBarUpdater = (key: keyof barStateTypes, value: boolean) => {
+  const context = useContext(BarContext);
+  if (!context) throw new Error("Bar context provider not found");
+  const { BarDispatch } = context;
+  return BarDispatch({ type: "SET", key, value });
 };

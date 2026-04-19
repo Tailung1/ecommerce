@@ -1,17 +1,17 @@
-import "./AuthBar.scss"
-import "../../css/reusable/bar.scss"
+import "./AuthBar.scss";
+import "../../css/reusable/bar.scss";
 import FloatingInput from "../../components/reusable/FloatingInput";
 import icon from "../../assets/main-logo.png";
 import checked from "../../assets/checked-rules.png";
 import unchecked from "../../assets/unchecked.png";
 import exitBtn from "../../assets/reject.png";
-import { useMyContext } from "../../MyContext";
 import useAuthReducer from "../../MyReducer";
+import { BarContextCotent } from "../../contexts/BarContext";
+import { useBarUpdater } from "../../contexts/BarContext";
 
 export default function AuthBar() {
   const { state, dispatch } = useAuthReducer();
-  const { isExitingBar, setIsExitingBar, setShowAuthBar } =
-    useMyContext();
+  const { BarState } = BarContextCotent();
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const countryCodes = ["995", "242", "927", "315"];
   const EmailAuthIsActive = state.activeAuthOption !== "number";
@@ -23,19 +23,15 @@ export default function AuthBar() {
   };
 
   const handleExit = () => {
-    setIsExitingBar(true);
+    useBarUpdater("isExitingBar", true);
     setTimeout(() => {
-      setShowAuthBar(false);
-      setIsExitingBar(false);
+      useBarUpdater("showAuthBar", false);
+      useBarUpdater("isExitingBar", false);
     }, 500);
   };
 
-  const handleValuesChange = (
-    field: "email" | "password" | "number",
-    value: string
-  ) => {
-    if (field === "number" && value !== "" && !/^[0-9]+$/.test(value))
-      return;
+  const handleValuesChange = (field: "email" | "password" | "number", value: string) => {
+    if (field === "number" && value !== "" && !/^[0-9]+$/.test(value)) return;
     dispatch({ type: "SET_INPUT", field, value });
   };
 
@@ -46,9 +42,7 @@ export default function AuthBar() {
         : !emailRegex.test(state.inputValues.email)
         ? "Invalid email format"
         : "";
-      const passwordError = !state.inputValues.password
-        ? "Can't be empty"
-        : "";
+      const passwordError = !state.inputValues.password ? "Can't be empty" : "";
 
       dispatch({
         type: "SET_ERRORS",
@@ -58,47 +52,21 @@ export default function AuthBar() {
     }
 
     if (state.activeAuthOption === "number") {
-      const numberError = !state.inputValues.number
-        ? "Can't be empty"
-        : "";
+      const numberError = !state.inputValues.number ? "Can't be empty" : "";
       dispatch({ type: "SET_ERRORS", payload: { numberError } });
     }
   };
 
   return (
-    <div className={`Bar ${isExitingBar && "ExitBar"}`}>
-      <div
-        onClick={resetValues}
-        className='flex flex-col gap-2 w-full relative'
-      >
+    <div className={`Bar ${BarState.isExitingBar && "ExitBar"}`}>
+      <div onClick={resetValues} className='flex flex-col gap-2 w-full relative'>
         <div className='acces-options'>
-          <img
-            src={exitBtn}
-            onClick={handleExit}
-            className='exit-btn w-10 h-8'
-            alt='Exit icon'
-          />
-          <p
-            onClick={() =>
-              dispatch({ type: "SET_ACTIVE", payload: "auth" })
-            }
-          >
-            Authentication
-          </p>
-          <p
-            onClick={() =>
-              dispatch({ type: "SET_ACTIVE", payload: "register" })
-            }
-          >
-            Register
-          </p>
+          <img src={exitBtn} onClick={handleExit} className='exit-btn w-10 h-8' alt='Exit icon' />
+          <p onClick={() => dispatch({ type: "SET_ACTIVE", payload: "auth" })}>Authentication</p>
+          <p onClick={() => dispatch({ type: "SET_ACTIVE", payload: "register" })}>Register</p>
         </div>
         <hr
-          className={`auth-hr ${
-            state.active === "auth"
-              ? "bg-auth"
-              : "bg-register more-bottom"
-          }`}
+          className={`auth-hr ${state.active === "auth" ? "bg-auth" : "bg-register more-bottom"}`}
         />
       </div>
 
@@ -109,31 +77,19 @@ export default function AuthBar() {
       >
         <p
           className={
-            state.activeAuthOption === "number"
-              ? "active-auth-option"
-              : "non-active-auth-option"
+            state.activeAuthOption === "number" ? "active-auth-option" : "non-active-auth-option"
           }
-          onClick={() =>
-            dispatch({ type: "SET_AUTH_OPTION", payload: "number" })
-          }
+          onClick={() => dispatch({ type: "SET_AUTH_OPTION", payload: "number" })}
         >
-          {`${
-            state.active === "auth" ? "Authenticate" : "Register"
-          } with Phone number`}
+          {`${state.active === "auth" ? "Authenticate" : "Register"} with Phone number`}
         </p>
         <p
           className={
-            state.activeAuthOption === "email"
-              ? "active-auth-option"
-              : "non-active-auth-option"
+            state.activeAuthOption === "email" ? "active-auth-option" : "non-active-auth-option"
           }
-          onClick={() =>
-            dispatch({ type: "SET_AUTH_OPTION", payload: "email" })
-          }
+          onClick={() => dispatch({ type: "SET_AUTH_OPTION", payload: "email" })}
         >
-          {`${
-            state.active === "auth" ? "Authenticate" : "Register"
-          } with Email`}
+          {`${state.active === "auth" ? "Authenticate" : "Register"} with Email`}
         </p>
       </div>
 
@@ -142,9 +98,7 @@ export default function AuthBar() {
           <div className='auth-and-register-with-number-container'>
             <div className='country-codes-container'>
               <div
-                onClick={() =>
-                  dispatch({ type: "TOGGLE_COUNTRY_CODES" })
-                }
+                onClick={() => dispatch({ type: "TOGGLE_COUNTRY_CODES" })}
                 className='country-code'
               >
                 +{state.currentCode}
@@ -171,9 +125,7 @@ export default function AuthBar() {
             <FloatingInput
               label={"Phone number"}
               value={state.inputValues.number}
-              propsedOnChange={(value) =>
-                handleValuesChange("number", value)
-              }
+              propsedOnChange={(value) => handleValuesChange("number", value)}
               errorMessage={state.errors.numberError}
               active={state.active}
             />
@@ -187,18 +139,14 @@ export default function AuthBar() {
             <FloatingInput
               label={"Email"}
               value={state.inputValues.email}
-              propsedOnChange={(value) =>
-                handleValuesChange("email", value)
-              }
+              propsedOnChange={(value) => handleValuesChange("email", value)}
               errorMessage={state.errors.emailError}
               active={state.active}
             />
             <FloatingInput
               label={"Password"}
               value={state.inputValues.password}
-              propsedOnChange={(value) =>
-                handleValuesChange("password", value)
-              }
+              propsedOnChange={(value) => handleValuesChange("password", value)}
               errorMessage={state.errors.passwordError}
               active={state.active}
             />
@@ -232,9 +180,7 @@ export default function AuthBar() {
         <button
           onClick={handleAuth}
           className={`submit-btn ${
-            state.active === "register" &&
-            !state.isChecked &&
-            "opacity-60"
+            state.active === "register" && !state.isChecked && "opacity-60"
           }`}
           disabled={state.active === "register" && !state.isChecked}
         >

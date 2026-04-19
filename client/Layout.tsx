@@ -8,21 +8,21 @@ import MainBar from "./src/components/shared/BottomNavBar/BottomNavBar";
 import AuthBar from "./src/features/AuthBar/AuthBar";
 import CompareBar from "./src/features/Compare/CompareBar";
 import WarningBar from "./src/features/AlertBar/AlertBar";
-import { useMyContext } from "./src/MyContext";
 import TopBar from "./src/components/shared/TopBar/TopBar";
 import FilterBar from "./src/features/FilterBar/FilterBar";
 import useWindowWidth from "./src/CosutmHooks/useWindowWidth";
+import { UseBarContext } from "./src/contexts/BarContext";
 
 export default function Layout() {
   const {
-    showSideBar,
     showAuthBar,
+    showFilterBar,
     showCompareBar,
-    isExitingBar,
     showAlert,
     showSearchBar,
-    showFilterBar,
-  } = useMyContext();
+    isExitingBar,
+    showSideBar,
+  } = UseBarContext();
 
   const width = useWindowWidth();
 

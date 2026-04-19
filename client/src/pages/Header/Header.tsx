@@ -10,9 +10,11 @@ import { useNavigate } from "react-router-dom";
 import Logo from "../../components/shared/Logo/Logo";
 import SearchBar from "../main/SearchBar/SearchBar";
 import { useEffect } from "react";
+import { useBarUpdater } from "../../contexts/BarContext";
 
 export default function Header() {
-  const { cart, setShowSideBar, showSearchBar, setShowSearchBar, setShowAuthBar } = useMyContext();
+  const { cart, showSearchBar, setShowSearchBar, setShowAuthBar } = useMyContext();
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,13 +39,7 @@ export default function Header() {
     <header>
       <div className='header'>
         {" "}
-        <img
-          onClick={() => {
-            setShowSideBar(true);
-          }}
-          src={slideIcon}
-          alt='slide-icon'
-        />
+        <img onClick={() => useBarUpdater("showSideBar", true)} src={slideIcon} alt='slide-icon' />
         <Logo />
       </div>
       <div className='header header-right-side-items'>

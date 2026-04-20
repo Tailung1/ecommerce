@@ -14,6 +14,9 @@ export default function BottomNavBar() {
 
   const { setShowSideBar, setShowSearchBar, setShowCompare, compareCart } = useMyContext();
 
+  const handleBarUpdate = useBarUpdater("showAuthBar", true);
+  console.log(handleBarUpdate)
+
   const options = [
     { id: "Main", icon: MainIcon, index: 1 },
     { id: "Categories", icon: CategoriesIcon, index: 2 },
@@ -50,7 +53,7 @@ export default function BottomNavBar() {
                   setIndex(cat.index);
                 }
               : cat.id === "Login"
-              ? () => useBarUpdater("showAuthBar", true)
+              ? () => handleBarUpdate()
               : undefined
           }
         >

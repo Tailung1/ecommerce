@@ -13,9 +13,9 @@ export default function BottomNavBar() {
   const [index, setIndex] = useState(1);
 
   const { setShowSideBar, setShowSearchBar, setShowCompare, compareCart } = useMyContext();
-
   const handleBarUpdate = useBarUpdater("showAuthBar", true);
-  console.log(handleBarUpdate)
+
+  const navigate = useNavigate();
 
   const options = [
     { id: "Main", icon: MainIcon, index: 1 },
@@ -24,60 +24,50 @@ export default function BottomNavBar() {
     { id: "Compare", icon: CompareIcon, index: 4 },
     { id: "Login", icon: LoginIcon, index: 6 },
   ];
-  const navigate = useNavigate();
+
+  const handlers: Record<string, () => void> = {
+    Main: () => {
+      navigate("/");
+      setShowSearchBar(false);
+      setIndex(1);
+    },
+    Categories: () => setShowSideBar(true),
+    Promotions: () => {
+      navigate("/promotions");
+      setIndex(3);
+    },
+    Compare: () => {
+      setShowCompare(true);
+      navigate("/compare-products");
+      setIndex(4);
+    },
+    Login: handleBarUpdate,
+  };
 
   return (
     <nav className='bottom-nav-bar'>
       {options.map((cat) => (
         <div
-          className={cat.id === "Promotions" ? "promotions-wrapper" : ""}
           key={cat.id}
-          onClick={
-            cat.id === "Main"
-              ? () => {
-                  navigate("/");
-                  setShowSearchBar(false);
-
-                  setIndex(cat.index);
-                }
-              : cat.id === "Categories"
-              ? () => setShowSideBar(true)
-              : cat.id === "Promotions"
-              ? () => {
-                  navigate("/promotions"), setIndex(cat.index);
-                }
-              : cat.id === "Compare"
-              ? () => {
-                  setShowCompare(true);
-                  navigate("/compare-products");
-                  setIndex(cat.index);
-                }
-              : cat.id === "Login"
-              ? () => handleBarUpdate()
-              : undefined
-          }
+          className={cat.id === "Promotions" ? "promotions-wrapper" : ""}
+          onClick={handlers[cat.id]}
         >
           {cat.id === "Promotions" ? (
             <>
-              {" "}
-              <img className='promotionsIcon bot' src={cat.icon} alt={cat.icon} />
+              <img className='promotionsIcon bot' src={cat.icon} alt={cat.id} />
               <img
                 className='promotionsIcon-block hover:rounded-[20px]'
                 src={cat.icon}
-                alt={cat.icon}
+                alt={cat.id}
               />
             </>
           ) : (
-            <img
-              className={cat.id === "Promotions" ? "promotionsIcon-block promotionsIcon " : ""}
-              src={cat.icon}
-              alt={cat.icon}
-            />
+            <img src={cat.icon} alt={cat.id} />
           )}
-
           <span className={`${index === cat.index ? "text-red-500" : ""}`}>{cat.id}</span>
         </div>
       ))}
+
       {compareCart.some((item) => item !== null) && (
         <div className='compare-amount'>
           <span>{compareCart.filter((item) => item !== null).length}</span>

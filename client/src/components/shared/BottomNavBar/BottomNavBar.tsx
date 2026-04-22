@@ -13,6 +13,7 @@ export default function BottomNavBar() {
   const [index, setIndex] = useState(1);
 
   const { setShowSideBar, setShowSearchBar, setShowCompare, compareCart } = useMyContext();
+
   const handleBarUpdate = useBarUpdater("showAuthBar", true);
 
   const navigate = useNavigate();
@@ -43,6 +44,7 @@ export default function BottomNavBar() {
     },
     Login: handleBarUpdate,
   };
+
 
   return (
     <nav className='bottom-nav-bar'>

@@ -22,6 +22,8 @@ export default function AuthBar() {
     dispatch({ type: "RESET_FORM" });
   };
 
+  const handleBarUpdate=()=> useBarUpdater("showAuthBar", false);
+
   const handleExit = () => {
     useBarUpdater("isExitingBar", true);
     setTimeout(() => {

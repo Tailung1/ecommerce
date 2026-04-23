@@ -14,7 +14,7 @@ export default function BottomNavBar() {
 
   const { setShowSideBar, setShowSearchBar, setShowCompare, compareCart } = useMyContext();
 
-  const handleBarUpdate = useBarUpdater("showAuthBar", true);
+  const handleBarUpdate = useBarUpdater();
 
   const navigate = useNavigate();
 
@@ -42,9 +42,8 @@ export default function BottomNavBar() {
       navigate("/compare-products");
       setIndex(4);
     },
-    Login: handleBarUpdate,
+    Login: () => handleBarUpdate("showAuthBar", true),
   };
-
 
   return (
     <nav className='bottom-nav-bar'>

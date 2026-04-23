@@ -22,13 +22,13 @@ export default function AuthBar() {
     dispatch({ type: "RESET_FORM" });
   };
 
-  const handleBarUpdate=()=> useBarUpdater("showAuthBar", false);
+  const handleBarUpdate = useBarUpdater();
 
   const handleExit = () => {
-    useBarUpdater("isExitingBar", true);
+    handleBarUpdate("isExitingBar", true);
     setTimeout(() => {
-      useBarUpdater("showAuthBar", false);
-      useBarUpdater("isExitingBar", false);
+      handleBarUpdate("showAuthBar", false);
+      handleBarUpdate("isExitingBar", false);
     }, 500);
   };
 

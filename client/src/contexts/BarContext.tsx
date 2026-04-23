@@ -58,9 +58,9 @@ export const UseBarContext = () => {
   return BarState;
 };
 
-export const useBarUpdater = (key: keyof barStateTypes, value: boolean) => {
+export const useBarUpdater = () => {
   const context = useContext(BarContext);
   if (!context) throw new Error("Bar context provider not found");
   const { BarDispatch } = context;
-  return () => BarDispatch({ type: "SET", key, value });
+  return (key: keyof barStateTypes, value: boolean) => BarDispatch({ type: "SET", key, value });
 };

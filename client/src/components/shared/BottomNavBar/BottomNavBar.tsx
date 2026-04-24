@@ -11,11 +11,8 @@ import { useBarUpdater } from "../../../contexts/BarContext";
 
 export default function BottomNavBar() {
   const [index, setIndex] = useState(1);
-
   const { setShowSideBar, setShowSearchBar, setShowCompare, compareCart } = useMyContext();
-
   const handleBarUpdate = useBarUpdater();
-
   const navigate = useNavigate();
 
   type optionsUnion = "Main" | "Categories" | "Promotions" | "Compare" | "Login";
@@ -58,16 +55,12 @@ export default function BottomNavBar() {
           {cat.id === "Promotions" ? (
             <>
               <img className='promotionsIcon bot' src={cat.icon} alt={cat.id} />
-              <img
-                className='promotionsIcon-block hover:rounded-[20px]'
-                src={cat.icon}
-                alt={cat.id}
-              />
+              <img className='promotionsIcon-block' src={cat.icon} alt={cat.id} />
             </>
           ) : (
             <img src={cat.icon} alt={cat.id} />
           )}
-          <span className={`${index === cat.index ? "text-red-500" : ""}`}>{cat.id}</span>
+          <span className={`${index === cat.index ? "active-category-text" : ""}`}>{cat.id}</span>
         </div>
       ))}
 

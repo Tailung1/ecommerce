@@ -10,14 +10,14 @@
   align-items: center;
   justify-content: center;
   gap: $gap;
-};
+}
 
+.active-category-text {
+  color: red;
+}
 
 .bottom-nav-bar {
-  @include display(
-    $padding: 10px,
-    $justify-content: space-around
-  );
+  @include display($padding: 10px, $justify-content: space-around);
   position: sticky;
   bottom: 0;
   width: 100%;
@@ -48,6 +48,9 @@
   position: absolute;
   top: -8px;
 }
+.promotionsIcon-block:hover {
+  border-radius: 20px;
+}
 
 .bottom-nav-bar img {
   transition: transform 0.2s ease, background-color 0.2s ease;
@@ -58,11 +61,6 @@
   background-color: rgb(240, 159, 82);
   border-radius: 10px;
 }
-
-
-
-
-
 
 @media (min-width: 500px) {
   .bottom-nav-bar {

@@ -1,15 +1,11 @@
+
 import { useMyContext } from "../../MyContext";
-import serachIcon from "../../assets/search-icon.png";
+import searchIcon from "../../assets/search-icon.png";
+import { useBarContext } from "../../contexts/BarContext";
 
 export default function CompareBar() {
-  const {
-    isExitingBar,
-    setIsExitingBar,
-    setShowCompareBar,
-    compareCart,
-    setCompareCart,
-    setActiveProductCategory,
-  } = useMyContext();
+  const { BarState, BarDispatch } = useBarContext();
+  const { compareCart, setCompareCart, setActiveProductCategory } = useMyContext();
 
   const testProducts = [
     { id: 1, name: "Laptop X", brand: "TechCorp", category: "phone" },
@@ -38,13 +34,14 @@ export default function CompareBar() {
       category: "tablet",
     },
   ];
-  const handleExit = () => {
-    setIsExitingBar(true);
-    setTimeout(() => {
-      setShowCompareBar(false);
-      setIsExitingBar(false);
-    }, 500);
+
+  const handleAnimationEnd = (e:React.SyntheticEvent) => {
+    if (BarState.isExitingBar && e.animationName === "BarOut") {
+      BarDispatch({ type: "SET", key: "showCompareBar", value: false });
+      BarDispatch({ type: "SET", key: "isExitingBar", value: false });
+    }
   };
+
   const insertProductInCompareList = (item: any) => {
     // category check doesnot work here well.. testing phase !!!
     if (compareCart.every((item) => item === null)) {
@@ -59,22 +56,22 @@ export default function CompareBar() {
         return newArr;
       });
     }
+    BarDispatch({ type: "SET", key: "isExitingBar", value: true });
   };
+
   return (
     <div
-      className={`Bar bar-modifed-compare ${
-        isExitingBar && "ExitBar"
-      }`}
+      onAnimationEnd={(e) => handleAnimationEnd(e)}
+      className={`Bar bar-modifed-compare ${BarState.isExitingBar ? "ExitBar" : ""}`}
     >
-      <p onClick={handleExit} className='exit-btn exit-btn-compare'>
+      <p
+        onClick={() => BarDispatch({ type: "SET", key: "isExitingBar", value: true })}
+        className='exit-btn exit-btn-compare'
+      >
         X
       </p>
       <div className='relative w-full'>
-        <img
-          className='absolute top-4 left-4'
-          src={serachIcon}
-          alt='Search Icon'
-        />
+        <img className='absolute top-4 left-4' src={searchIcon} alt='Search Icon' />
 
         <input
           placeholder='Search'
@@ -87,7 +84,6 @@ export default function CompareBar() {
           key={prod.id}
           onClick={() => {
             insertProductInCompareList(prod);
-            handleExit();
           }}
         >
           {" "}

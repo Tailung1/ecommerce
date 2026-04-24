@@ -1,5 +1,5 @@
-import "./Compare.scss"
-import "../../css/reusable/bar.scss"
+import "./Compare.scss";
+import "../../css/reusable/bar.scss";
 import { useMyContext } from "../../MyContext";
 import { useNavigate } from "react-router-dom";
 import leftArrowIcon from "../../assets/left-arrow.png";
@@ -7,16 +7,12 @@ import plusIcon from "../../assets/plus.png";
 import binIcon from "../../assets/bin.png";
 import searchIcon from "../../assets/search-icon.png";
 import rejectIcon from "../../assets/reject.png";
+import { useBarContext } from "../../contexts/BarContext";
 
 export default function Compare() {
   const navigate = useNavigate();
-  const {
-    setActiveProductCategory,
-    setShowCompareBar,
-    compareCart,
-    setCompareCart,
-    showCompare,
-  } = useMyContext();
+  const { BarState, BarDispatch } = useBarContext();
+  const { setActiveProductCategory, compareCart, setCompareCart } = useMyContext();
 
   const handleReset = () => {
     const hasAnyProduct = compareCart.some((item) => item !== null);
@@ -31,7 +27,7 @@ export default function Compare() {
     }
     if (id && compareCart.some((item) => item?.id === id)) return;
 
-    setShowCompareBar(true);
+    BarDispatch({ type: "SET", key: "showCompareBar", value: true });
   };
 
   const handleReject = (id: number) => {
@@ -43,22 +39,14 @@ export default function Compare() {
       //   while (filtred.length < prev.length) {
       //     filtred.push(null);
       //   }
-      return [
-        ...filtred,
-        ...Array(prev.length - filtred.length).fill(null),
-      ];
+      return [...filtred, ...Array(prev.length - filtred.length).fill(null)];
     });
   };
 
-  const allowCompare =
-    compareCart.filter((item) => item !== null).length < 2;
+  const allowCompare = compareCart.filter((item) => item !== null).length < 2;
 
   return (
-    <div
-      className={`compare-container ${
-        showCompare && "animate-compare-container"
-      }`}
-    >
+    <div className={`compare-container ${BarState.showCompareBar && "animate-compare-container"}`}>
       <div className='compare-header'>
         <div className='compare-navigation'>
           <div onClick={() => navigate("/")}>

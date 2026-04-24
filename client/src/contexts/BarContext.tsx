@@ -35,31 +35,31 @@ function reducer(state: barStateTypes, action: barActionTypes) {
   }
 }
 
-const BarContext = createContext<{
+const Context = createContext<{
   BarState: barStateTypes;
   BarDispatch: React.Dispatch<barActionTypes>;
 }>({ BarState: initialState, BarDispatch: () => {} });
 
 export const BarProvider = ({ children }: { children: ReactNode }) => {
   const [BarState, BarDispatch] = useReducer(reducer, initialState);
-  return <BarContext.Provider value={{ BarState, BarDispatch }}>{children}</BarContext.Provider>;
+  return <Context.Provider value={{ BarState, BarDispatch }}>{children}</Context.Provider>;
 };
 
-export const BarContextCotent = () => {
-  const context = useContext(BarContext);
+export const useBarContext = () => {
+  const context = useContext(Context);
   if (!context) throw new Error("Bar context provider not found");
   return context;
 };
 
-export const UseBarContext = () => {
-  const context = useContext(BarContext);
+export const useBarState = () => {
+  const context = useContext(Context);
   if (!context) throw new Error("Bar context provider not found");
   const { BarState } = context;
   return BarState;
 };
 
 export const useBarUpdater = () => {
-  const context = useContext(BarContext);
+  const context = useContext(Context);
   if (!context) throw new Error("Bar context provider not found");
   const { BarDispatch } = context;
   return (key: keyof barStateTypes, value: boolean) => BarDispatch({ type: "SET", key, value });

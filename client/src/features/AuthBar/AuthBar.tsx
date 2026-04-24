@@ -6,12 +6,12 @@ import checked from "../../assets/checked-rules.png";
 import unchecked from "../../assets/unchecked.png";
 import exitBtn from "../../assets/reject.png";
 import useAuthReducer from "../../MyReducer";
-import { BarContextCotent } from "../../contexts/BarContext";
+import { useBarState } from "../../contexts/BarContext";
 import { useBarUpdater } from "../../contexts/BarContext";
 
 export default function AuthBar() {
   const { state, dispatch } = useAuthReducer();
-  const { BarState } = BarContextCotent();
+  const BarState = useBarState();
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const countryCodes = ["995", "242", "927", "315"];
   const EmailAuthIsActive = state.activeAuthOption !== "number";
@@ -23,14 +23,6 @@ export default function AuthBar() {
   };
 
   const handleBarUpdate = useBarUpdater();
-
-  const handleExit = () => {
-    handleBarUpdate("isExitingBar", true);
-    setTimeout(() => {
-      handleBarUpdate("showAuthBar", false);
-      handleBarUpdate("isExitingBar", false);
-    }, 500);
-  };
 
   const handleValuesChange = (field: "email" | "password" | "number", value: string) => {
     if (field === "number" && value !== "" && !/^[0-9]+$/.test(value)) return;
@@ -60,10 +52,25 @@ export default function AuthBar() {
   };
 
   return (
-    <div className={`Bar ${BarState.isExitingBar && "ExitBar"}`}>
+    <div
+      onAnimationEnd={(e) => {
+        // Checking isExitingBar is redundant in this case,
+        // but useful if there are multiple animations on this element.
+        if (BarState.isExitingBar && e.animationName === "BarOut") {
+          handleBarUpdate("showAuthBar", false);
+          handleBarUpdate("isExitingBar", false);
+        }
+      }}
+      className={`Bar ${BarState.isExitingBar && "ExitBar"}`}
+    >
       <div onClick={resetValues} className='flex flex-col gap-2 w-full relative'>
         <div className='acces-options'>
-          <img src={exitBtn} onClick={handleExit} className='exit-btn w-10 h-8' alt='Exit icon' />
+          <img
+            src={exitBtn}
+            onClick={() => handleBarUpdate("isExitingBar", true)}
+            className='exit-btn w-10 h-8'
+            alt='Exit icon'
+          />
           <p onClick={() => dispatch({ type: "SET_ACTIVE", payload: "auth" })}>Authentication</p>
           <p onClick={() => dispatch({ type: "SET_ACTIVE", payload: "register" })}>Register</p>
         </div>

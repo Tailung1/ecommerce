@@ -11,7 +11,7 @@ import WarningBar from "./src/features/AlertBar/AlertBar";
 import TopBar from "./src/components/shared/TopBar/TopBar";
 import FilterBar from "./src/features/FilterBar/FilterBar";
 import useWindowWidth from "./src/CosutmHooks/useWindowWidth";
-import { UseBarContext } from "./src/contexts/BarContext";
+import { useBarState } from "./src/contexts/BarContext";
 
 export default function Layout() {
   const {
@@ -22,7 +22,7 @@ export default function Layout() {
     showSearchBar,
     isExitingBar,
     showSideBar,
-  } = UseBarContext();
+  } = useBarState();
 
   const width = useWindowWidth();
 

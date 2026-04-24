@@ -18,7 +18,9 @@ export default function BottomNavBar() {
 
   const navigate = useNavigate();
 
-  const options = [
+  type optionsUnion = "Main" | "Categories" | "Promotions" | "Compare" | "Login";
+
+  const options: { id: optionsUnion; icon: string; index: number }[] = [
     { id: "Main", icon: MainIcon, index: 1 },
     { id: "Categories", icon: CategoriesIcon, index: 2 },
     { id: "Promotions", icon: PromotionsIcon, index: 3 },
@@ -26,7 +28,7 @@ export default function BottomNavBar() {
     { id: "Login", icon: LoginIcon, index: 6 },
   ];
 
-  const handlers: Record<string, () => void> = {
+  const handlers: Record<optionsUnion, () => void> = {
     Main: () => {
       navigate("/");
       setShowSearchBar(false);

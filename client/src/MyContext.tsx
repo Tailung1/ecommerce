@@ -9,24 +9,14 @@ import React, {
 interface types {
   activeCategory: string;
   setActiveCategory: React.Dispatch<SetStateAction<string>>;
-  showSearchBar: boolean;
-  setShowSearchBar: React.Dispatch<SetStateAction<boolean>>;
-  showSideBar: boolean;
   popularSearches: any[];
   setPopularSearches: React.Dispatch<SetStateAction<productType[]>>;
-  setShowSideBar: React.Dispatch<SetStateAction<boolean>>;
   cart: any[];
   setCart: React.Dispatch<SetStateAction<productType[]>>;
-  showAuthBar: boolean;
-  setShowAuthBar: React.Dispatch<SetStateAction<boolean>>;
   showCompare: boolean;
   setShowCompare: React.Dispatch<SetStateAction<boolean>>;
   compareCart: (null | any)[];
   setCompareCart: React.Dispatch<SetStateAction<(null | any)[]>>;
-  showCompareBar: boolean;
-  setShowCompareBar: React.Dispatch<SetStateAction<boolean>>;
-  isExitingBar: boolean;
-  setIsExitingBar: React.Dispatch<SetStateAction<boolean>>;
   showAlert: boolean;
   setShowAlert: React.Dispatch<SetStateAction<boolean>>;
   isChosen: boolean;
@@ -41,45 +31,24 @@ interface types {
   setCurrentLanguage: React.Dispatch<SetStateAction<string>>;
   enablePC: boolean;
   setEnablePC: React.Dispatch<SetStateAction<boolean>>;
-  showFilterBar: boolean;
-  setShowFilterBar: React.Dispatch<SetStateAction<boolean>>;
 }
 
 const MyContext = createContext({} as types);
 
-export default function ContextProvider({
-  children,
-}: {
-  children: ReactNode;
-}) {
-  const [showFilterBar, setShowFilterBar] = useState<boolean>(false);
-
+export default function ContextProvider({ children }: { children: ReactNode }) {
   const [enablePC, setEnablePC] = useState<boolean>(false);
 
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const [isChosen, setIsChosen] = useState<boolean>(false);
   const [isFull, setIsFull] = useState<boolean>(false);
-  const [activeProductCategory, setActiveProductCategory] =
-    useState<string>("");
+  const [activeProductCategory, setActiveProductCategory] = useState<string>("");
   const [showLanguages, setShowLanguages] = useState<boolean>(false);
-  const [currentLanguage, setCurrentLanguage] =
-    useState<string>("EN");
-  const [showAuthBar, setShowAuthBar] = useState<boolean>(false);
+  const [currentLanguage, setCurrentLanguage] = useState<string>("EN");
   const [showCompare, setShowCompare] = useState<boolean>(false);
-  const [compareCart, setCompareCart] = useState<
-    (productType | null)[]
-  >([null, null, null, null]);
-  const [showCompareBar, setShowCompareBar] =
-    useState<boolean>(false);
-  const [isExitingBar, setIsExitingBar] = useState<boolean>(false);
+  const [compareCart, setCompareCart] = useState<(productType | null)[]>([null, null, null, null]);
 
-  const [activeCategory, setActiveCategory] =
-    useState<string>("mobile-phones");
-  const [showSearchBar, setShowSearchBar] = useState<boolean>(false);
-  const [showSideBar, setShowSideBar] = useState<boolean>(false);
-  const [popularSearches, setPopularSearches] = useState<
-    productType[]
-  >([]);
+  const [activeCategory, setActiveCategory] = useState<string>("mobile-phones");
+  const [popularSearches, setPopularSearches] = useState<productType[]>([]);
   const [cart, setCart] = useState<productType[] | []>([]);
 
   return (
@@ -87,22 +56,12 @@ export default function ContextProvider({
       value={{
         activeCategory,
         setActiveCategory,
-        showSearchBar,
-        setShowSearchBar,
-        showSideBar,
-        setShowSideBar,
         popularSearches,
         setPopularSearches,
         cart,
         setCart,
-        showAuthBar,
-        setShowAuthBar,
-        isExitingBar,
-        setIsExitingBar,
         compareCart,
         setCompareCart,
-        showCompareBar,
-        setShowCompareBar,
         showCompare,
         setShowCompare,
         showAlert,
@@ -119,8 +78,6 @@ export default function ContextProvider({
         setCurrentLanguage,
         enablePC,
         setEnablePC,
-        showFilterBar,
-        setShowFilterBar,
       }}
     >
       {children}

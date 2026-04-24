@@ -63,12 +63,13 @@ export default function BrandList() {
   const { activeCategory } = useMyContext();
   const brandList = brandsData[activeCategory as keyof brandsDataTypes] || [];
   const navigate = useNavigate();
+  const BarUpdater = useBarUpdater();
 
   const handleNavigate = (category: string, brand: string) => {
     const brandSlug = brand.toLowerCase().replace(/\s+/g, "-");
     const url = `${category}-${brandSlug}-c346`;
     navigate(url);
-    useBarUpdater("showSideBar", false);
+    BarUpdater("showSideBar", false);
   };
   {
   }

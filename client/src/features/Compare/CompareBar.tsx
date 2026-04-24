@@ -1,4 +1,3 @@
-
 import { useMyContext } from "../../MyContext";
 import searchIcon from "../../assets/search-icon.png";
 import { useBarContext } from "../../contexts/BarContext";
@@ -35,7 +34,7 @@ export default function CompareBar() {
     },
   ];
 
-  const handleAnimationEnd = (e:React.SyntheticEvent) => {
+  const handleAnimationEnd = (e: React.SyntheticEvent) => {
     if (BarState.isExitingBar && e.animationName === "BarOut") {
       BarDispatch({ type: "SET", key: "showCompareBar", value: false });
       BarDispatch({ type: "SET", key: "isExitingBar", value: false });

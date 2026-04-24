@@ -4,20 +4,13 @@ import { useMyContext } from "../../../MyContext";
 import compareIcon from "../../../assets/compare.png";
 import cartIcon from "../../../assets/shopping-cart.png";
 
-export default function ProductsContainer({
-  data,
-  img,
-}: {
-  data: any;
-  img: string;
-}) {
+export default function ProductsContainer({ data, img }: { data: any; img: string }) {
   const {
     cart,
     setCart,
     setShowAlert,
     setIsChosen,
     setIsFull,
-
     activeProductCategory,
     setActiveProductCategory,
     compareCart,
@@ -36,11 +29,7 @@ export default function ProductsContainer({
   //     return;
   //   }
 
-  const generateSlug = async (
-    name: string,
-    category: string,
-    id: number
-  ) => {
+  const generateSlug = async (name: string, category: string, id: number) => {
     const destName = name.replace(/\s+/g, "-");
     const slug = `${category}/${destName}-${id}`.toLowerCase();
     navigate(`/${slug}`);
@@ -59,13 +48,8 @@ export default function ProductsContainer({
   };
 
   const getCompareActionStatus = (item: any) => {
-    if (compareCart.some((i) => i && i.id === item.id))
-      return "isChosen";
-    if (
-      activeProductCategory &&
-      activeProductCategory !== item.category
-    )
-      return "wrongCategory";
+    if (compareCart.some((i) => i && i.id === item.id)) return "isChosen";
+    if (activeProductCategory && activeProductCategory !== item.category) return "wrongCategory";
     if (compareCart.every(Boolean)) return "isFull";
 
     return "ok";
@@ -76,16 +60,15 @@ export default function ProductsContainer({
       const status = getCompareActionStatus(item);
       if (status !== "ok") {
         enableAlertShow({ [status]: true });
-        return
+        return;
       }
- 
+
       const newArr = [...compareCart];
       const index = newArr.findIndex((i) => i === null);
       newArr[index] = item;
       setCompareCart(newArr);
 
-      if (!activeProductCategory)
-        setActiveProductCategory(item.category);
+      if (!activeProductCategory) setActiveProductCategory(item.category);
     }
 
     if (task == "cart") {
@@ -99,9 +82,7 @@ export default function ProductsContainer({
   };
 
   const handleProductCheckInCart = (item: any) => {
-    const inCart = cart.some(
-      (i) => i.id === item.id && i.category === item.category
-    );
+    const inCart = cart.some((i) => i.id === item.id && i.category === item.category);
     return inCart;
   };
 
@@ -110,9 +91,7 @@ export default function ProductsContainer({
       {data.map((item: any) => (
         <div key={item.id}>
           <img
-            onClick={() =>
-              generateSlug(item.name, item.category, item.id)
-            }
+            onClick={() => generateSlug(item.name, item.category, item.id)}
             className='item-image'
             src={img}
             alt='Item icon'
@@ -132,24 +111,15 @@ export default function ProductsContainer({
             <span className='item-name'>{item.name}</span>
           </div>
           <div className='product-actions-container'>
-            <div
-              onClick={() => handleAction("compare", item)}
-              className='compare-box'
-            >
+            <div onClick={() => handleAction("compare", item)} className='compare-box'>
               <img src={compareIcon} alt='Compare icon' />
             </div>
             {handleProductCheckInCart(item) ? (
-              <div
-                onClick={() => handleAction("cart", item)}
-                className='cart-container'
-              >
+              <div onClick={() => handleAction("cart", item)} className='cart-container'>
                 <span>In cart </span>
               </div>
             ) : (
-              <div
-                onClick={() => handleAction("cart", item)}
-                className='cart-container'
-              >
+              <div onClick={() => handleAction("cart", item)} className='cart-container'>
                 <img src={cartIcon} alt='Cart icon' />
                 <span>Add</span>
               </div>

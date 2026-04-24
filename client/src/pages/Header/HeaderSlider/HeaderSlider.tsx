@@ -9,6 +9,7 @@ import { useBarUpdater } from "../../../contexts/BarContext";
 
 export default function HeaderSlider() {
   const navigate = useNavigate();
+  const BarUpdater = useBarUpdater();
 
   return (
     <motion.div
@@ -22,13 +23,13 @@ export default function HeaderSlider() {
         <img
           src={rejectIcon}
           className='cursor-pointer'
-          onClick={() => useBarUpdater("showSideBar", false)}
+          onClick={() => BarUpdater("showSideBar", false)}
         />
 
         <div
           onClick={() => {
             navigate("/search");
-            useBarUpdater("showSideBar", false);
+            BarUpdater("showSideBar", false);
           }}
           className='serach-input-container'
         >

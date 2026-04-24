@@ -14,8 +14,7 @@ import { useBarUpdater } from "../../contexts/BarContext";
 
 export default function Header() {
   const { cart, showSearchBar, setShowSearchBar, setShowAuthBar } = useMyContext();
-
-
+  const  BarUpdater = useBarUpdater();
   useEffect(() => {
     const handleScroll = () => {
       const Y = window.scrollY;
@@ -39,7 +38,7 @@ export default function Header() {
     <header>
       <div className='header'>
         {" "}
-        <img onClick={() => useBarUpdater("showSideBar", true)} src={slideIcon} alt='slide-icon' />
+        <img onClick={() => BarUpdater("showSideBar", true)} src={slideIcon} alt='slide-icon' />
         <Logo />
       </div>
       <div className='header header-right-side-items'>

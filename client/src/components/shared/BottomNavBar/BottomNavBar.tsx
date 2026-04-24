@@ -11,7 +11,7 @@ import { useBarUpdater } from "../../../contexts/BarContext";
 
 export default function BottomNavBar() {
   const [index, setIndex] = useState(1);
-  const { setShowSideBar, setShowSearchBar, setShowCompare, compareCart } = useMyContext();
+  const { setShowCompare, compareCart } = useMyContext();
   const handleBarUpdate = useBarUpdater();
   const navigate = useNavigate();
 
@@ -28,10 +28,10 @@ export default function BottomNavBar() {
   const handlers: Record<optionsUnion, () => void> = {
     Main: () => {
       navigate("/");
-      setShowSearchBar(false);
+      handleBarUpdate("showSearchBar", true);
       setIndex(1);
     },
-    Categories: () => setShowSideBar(true),
+    Categories: () => handleBarUpdate("showSideBar", true),
     Promotions: () => {
       navigate("/promotions");
       setIndex(3);

@@ -7,27 +7,23 @@ import iphone from "../../assets/iphone.png";
 
 
 export default function ShoppingCartPop() {
-  const { cart } = useMyContext();
+  const { shoppingCart } = useMyContext();
 
   return (
     <div className='cart-pop'>
       <div>
         <span>Cart</span>
-        <span>{cart.length} Product</span>
+        <span>{shoppingCart.length} Product</span>
       </div>
-      {cart.length === 0 ? (
+      {shoppingCart.length === 0 ? (
         <div className='strech'>
           {" "}
-          <img
-            className='emptyCart-Image'
-            src={emptyCart}
-            alt='Empty cart icon'
-          />
+          <img className='emptyCart-Image' src={emptyCart} alt='Empty cart icon' />
         </div>
       ) : (
         <div className='items-container'>
-          {cart.map((item) => (
-            <div key={Math.random()*982} className='item-container'>
+          {shoppingCart.map((item) => (
+            <div key={Math.random() * 982} className='item-container'>
               <div className='flex justify-center items-center'>
                 <img src={iphone} alt={item.name} />
                 <div className='flex flex-col'>
@@ -41,9 +37,7 @@ export default function ShoppingCartPop() {
                 <div className='math-container '>
                   <span>-</span>
                   <span>{item.quantity}</span>
-                  <span>
-                    +
-                  </span>
+                  <span>+</span>
                 </div>
               </div>
             </div>

@@ -4,12 +4,12 @@ import { useNavigate } from "react-router-dom";
 import exitBtn from "../../assets/reject.png";
 import rejectIcon from "../../assets/reject.png";
 import phoneImage from "../../assets/iphone.png";
+import { useBarContext } from "../../contexts/BarContext";
 
 export default function WarningBar() {
   const navigate = useNavigate();
-
-  const { isExitingBar, isChosen, isFull, setIsExitingBar, setShowAlert, compareCart } =
-    useMyContext();
+  const { BarState, BarDispatch } = useBarContext();
+  const { isChosen, isFull, setShowAlert, compareCart } = useMyContext();
 
   const handleExit = () => {
     setIsExitingBar(true);
@@ -26,7 +26,17 @@ export default function WarningBar() {
   };
 
   return (
-    <div className={`Bar bar-modifed-warning ${isExitingBar && "ExitBar"}`}>
+    <div
+      onAnimationEnd={(e) => {
+        // Checking isExitingBar is redundant in this case,
+        // but useful if there are multiple animations on this element.
+        if (BarState.isExitingBar && e.animationName === "BarOut") {
+          handleBarUpdate("showAuthBar", false);
+          handleBarUpdate("isExitingBar", false);
+        }
+      }}
+      className={`Bar bar-modifed-warning ${isExitingBar && "ExitBar"}`}
+    >
       <img
         src={exitBtn}
         onClick={handleExit}

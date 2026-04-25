@@ -11,8 +11,8 @@ interface types {
   setActiveCategory: React.Dispatch<SetStateAction<string>>;
   popularSearches: any[];
   setPopularSearches: React.Dispatch<SetStateAction<productType[]>>;
-  cart: any[];
-  setCart: React.Dispatch<SetStateAction<productType[]>>;
+  shoppingCart: any[];
+  setShoppingCart: React.Dispatch<SetStateAction<productType[]>>;
   showCompare: boolean;
   setShowCompare: React.Dispatch<SetStateAction<boolean>>;
   compareCart: (null | any)[];
@@ -49,7 +49,7 @@ export default function ContextProvider({ children }: { children: ReactNode }) {
 
   const [activeCategory, setActiveCategory] = useState<string>("mobile-phones");
   const [popularSearches, setPopularSearches] = useState<productType[]>([]);
-  const [cart, setCart] = useState<productType[] | []>([]);
+  const [shoppingCart, setShoppingCart] = useState<productType[] | []>([]);
 
   return (
     <MyContext.Provider
@@ -58,8 +58,8 @@ export default function ContextProvider({ children }: { children: ReactNode }) {
         setActiveCategory,
         popularSearches,
         setPopularSearches,
-        cart,
-        setCart,
+        setShoppingCart,
+        shoppingCart,
         compareCart,
         setCompareCart,
         showCompare,

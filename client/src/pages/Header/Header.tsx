@@ -10,11 +10,11 @@ import { useNavigate } from "react-router-dom";
 import Logo from "../../components/shared/Logo/Logo";
 import SearchBar from "../main/SearchBar/SearchBar";
 import { useEffect } from "react";
-import { useBarUpdater } from "../../contexts/BarContext";
+import { useBarContext } from "../../contexts/BarContext";
 
 export default function Header() {
-  const { cart, showSearchBar, setShowSearchBar, setShowAuthBar } = useMyContext();
-  const  BarUpdater = useBarUpdater();
+  const { shoppingCart } = useMyContext();
+  const { BarDispatch, BarState } = useBarContext();
   useEffect(() => {
     const handleScroll = () => {
       const Y = window.scrollY;
@@ -38,7 +38,11 @@ export default function Header() {
     <header>
       <div className='header'>
         {" "}
-        <img onClick={() => BarUpdater("showSideBar", true)} src={slideIcon} alt='slide-icon' />
+        <img
+          onClick={() => BarDispatch({ type: "SET", key: "showSideBar", value: true })}
+          src={slideIcon}
+          alt='slide-icon'
+        />
         <Logo />
       </div>
       <div className='header header-right-side-items'>
@@ -50,9 +54,9 @@ export default function Header() {
           alt='search-logo'
         />
         <div className='shopping-cart-container-header'>
-          {cart.length !== 0 && (
+          {shoppingCart.length !== 0 && (
             <div className='cart-amount'>
-              <span>{cart.length}</span>
+              <span>{shoppingCart.length}</span>
             </div>
           )}
 
@@ -65,10 +69,13 @@ export default function Header() {
         <Logo />
         <div className='header-right-side-items'>
           <button className='orange-btn'>Navigation</button>
-          {showSearchBar ? (
+          {BarState.showSearchBar ? (
             <SearchBar />
           ) : (
-            <div onClick={() => setShowSearchBar(true)} className='input-container'>
+            <div
+              onClick={() => BarDispatch({ type: "SET", key: "showSearchBar", value: true })}
+              className='input-container'
+            >
               <input className='input' placeholder='Search' type='text' />
               <img className='search-icon' src={searchIcon} alt='search icon' />
             </div>
@@ -81,7 +88,10 @@ export default function Header() {
             <ShoppingCartPop />
           </div>
 
-          <div onClick={() => setShowAuthBar(true)} className='login-container-header'>
+          <div
+            onClick={() => BarDispatch({ type: "SET", key: "showAuthBar", value: true })}
+            className='login-container-header'
+          >
             <img src={loginIcon} alt='Login icon' />
             <span>Log In</span>
           </div>

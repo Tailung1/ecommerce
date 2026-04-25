@@ -6,8 +6,8 @@ import cartIcon from "../../../assets/shopping-cart.png";
 
 export default function ProductsContainer({ data, img }: { data: any; img: string }) {
   const {
-    cart,
-    setCart,
+    shoppingCart,
+    setShoppingCart,
     setShowAlert,
     setIsChosen,
     setIsFull,
@@ -72,17 +72,17 @@ export default function ProductsContainer({ data, img }: { data: any; img: strin
     }
 
     if (task == "cart") {
-      if (cart.some((i) => i.id === item.id)) {
+      if (shoppingCart.some((i) => i.id === item.id)) {
         enableAlertShow({ isChosen: true });
         return;
       } else {
-        setCart((prev) => [...prev, item]);
+        setShoppingCart((prev) => [...prev, item]);
       }
     }
   };
 
   const handleProductCheckInCart = (item: any) => {
-    const inCart = cart.some((i) => i.id === item.id && i.category === item.category);
+    const inCart = shoppingCart.some((i) => i.id === item.id && i.category === item.category);
     return inCart;
   };
 

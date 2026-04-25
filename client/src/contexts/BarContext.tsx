@@ -5,30 +5,41 @@ const initialState = {
   showCompareBar: false,
   showFilterBar: false,
   isExitingBar: false,
-  showAlert: false,
+  Alert: {
+    showAlert: false,
+    isFull: false,
+    isChosen: false,
+  },
   showSearchBar: false,
   showSideBar: false,
 };
-interface barStateTypes {
+interface BarStateTypes {
   showAuthBar: boolean;
   showCompareBar: boolean;
   showFilterBar: boolean;
   isExitingBar: boolean;
-  showAlert: boolean;
+  Alert: {
+    showAlert: boolean;
+    isFull: boolean;
+    isChosen: boolean;
+  };
   showSearchBar: boolean;
   showSideBar: boolean;
 }
-interface barActionTypes {
-  type: "SET";
-  key: keyof barStateTypes;
-  value: boolean;
-}
 
-function reducer(state: barStateTypes, action: barActionTypes) {
+
+type BarActions =
+  | { type: "SET_BAR"; key: keyof Omit<BarStateTypes, "Alert">; value: boolean }
+  | { type: "SET_ALERT"; key: keyof BarStateTypes["Alert"]; value: boolean };
+
+function reducer(state: BarStateTypes, action: BarActions) {
   const { key, value } = action;
   switch (action.type) {
-    case "SET": {
+    case "SET_BAR": {
       return { ...state, [key]: value };
+    }
+    case "SET_ALERT": {
+      return { ...state, Alert: { ...state.Alert, [action.key]: action.value } };
     }
     default:
       return state;
@@ -36,8 +47,8 @@ function reducer(state: barStateTypes, action: barActionTypes) {
 }
 
 const Context = createContext<{
-  BarState: barStateTypes;
-  BarDispatch: React.Dispatch<barActionTypes>;
+  BarState: BarStateTypes;
+  BarDispatch: React.Dispatch<BarActions>;
 }>({ BarState: initialState, BarDispatch: () => {} });
 
 export const BarProvider = ({ children }: { children: ReactNode }) => {
@@ -62,5 +73,13 @@ export const useBarUpdater = () => {
   const context = useContext(Context);
   if (!context) throw new Error("Bar context provider not found");
   const { BarDispatch } = context;
-  return (key: keyof barStateTypes, value: boolean) => BarDispatch({ type: "SET", key, value });
+  return (key: keyof Omit<BarStateTypes, "Alert">, value: boolean) =>
+    BarDispatch({ type: "SET_BAR", key, value });
+};
+export const useBarAlertUpdater = () => {
+  const context = useContext(Context);
+  if (!context) throw new Error("Bar context provider not found");
+  const { BarDispatch } = context;
+  return (key: keyof Pick<BarStateTypes, "Alert">, value: boolean) =>
+    BarDispatch({ type: "SET_ALERT", key, value });
 };

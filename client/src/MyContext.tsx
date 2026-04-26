@@ -17,12 +17,6 @@ interface types {
   setShowCompare: React.Dispatch<SetStateAction<boolean>>;
   compareCart: (null | any)[];
   setCompareCart: React.Dispatch<SetStateAction<(null | any)[]>>;
-  showAlert: boolean;
-  setShowAlert: React.Dispatch<SetStateAction<boolean>>;
-  isChosen: boolean;
-  setIsChosen: React.Dispatch<SetStateAction<boolean>>;
-  isFull: boolean;
-  setIsFull: React.Dispatch<SetStateAction<boolean>>;
   activeProductCategory: string;
   setActiveProductCategory: React.Dispatch<SetStateAction<string>>;
   showLanguages: boolean;
@@ -37,10 +31,6 @@ const MyContext = createContext({} as types);
 
 export default function ContextProvider({ children }: { children: ReactNode }) {
   const [enablePC, setEnablePC] = useState<boolean>(false);
-
-  const [showAlert, setShowAlert] = useState<boolean>(false);
-  const [isChosen, setIsChosen] = useState<boolean>(false);
-  const [isFull, setIsFull] = useState<boolean>(false);
   const [activeProductCategory, setActiveProductCategory] = useState<string>("");
   const [showLanguages, setShowLanguages] = useState<boolean>(false);
   const [currentLanguage, setCurrentLanguage] = useState<string>("EN");
@@ -64,12 +54,6 @@ export default function ContextProvider({ children }: { children: ReactNode }) {
         setCompareCart,
         showCompare,
         setShowCompare,
-        showAlert,
-        setShowAlert,
-        isChosen,
-        setIsChosen,
-        isFull,
-        setIsFull,
         activeProductCategory,
         setActiveProductCategory,
         showLanguages,

@@ -9,9 +9,6 @@ export default function ProductsContainer({ data, img }: { data: any; img: strin
   const {
     shoppingCart,
     setShoppingCart,
-    setShowAlert,
-    setIsChosen,
-    setIsFull,
     activeProductCategory,
     setActiveProductCategory,
     compareCart,
@@ -59,6 +56,7 @@ export default function ProductsContainer({ data, img }: { data: any; img: strin
   const handleAction = (task: "cart" | "compare", item: any) => {
     if (task === "compare") {
       const status = getCompareActionStatus(item);
+      console.log(status)
       if (status !== "ok") {
         enableAlertShow({ [status]: true });
         return;

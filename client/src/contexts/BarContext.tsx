@@ -27,7 +27,6 @@ interface BarStateTypes {
   showSideBar: boolean;
 }
 
-
 type BarActions =
   | { type: "SET_BAR"; key: keyof Omit<BarStateTypes, "Alert">; value: boolean }
   | { type: "SET_ALERT"; key: keyof BarStateTypes["Alert"]; value: boolean };
@@ -80,6 +79,6 @@ export const useBarAlertUpdater = () => {
   const context = useContext(Context);
   if (!context) throw new Error("Bar context provider not found");
   const { BarDispatch } = context;
-  return (key: keyof Pick<BarStateTypes, "Alert">, value: boolean) =>
+  return (key: keyof BarStateTypes["Alert"], value: boolean) =>
     BarDispatch({ type: "SET_ALERT", key, value });
 };

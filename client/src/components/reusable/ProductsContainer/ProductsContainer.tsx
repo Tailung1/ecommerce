@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useMyContext } from "../../../MyContext";
 import compareIcon from "../../../assets/compare.png";
 import cartIcon from "../../../assets/shopping-cart.png";
+import { useBarAlertUpdater } from "../../../contexts/BarContext";
 
 export default function ProductsContainer({ data, img }: { data: any; img: string }) {
   const {
@@ -16,7 +17,7 @@ export default function ProductsContainer({ data, img }: { data: any; img: strin
     compareCart,
     setCompareCart,
   } = useMyContext();
-
+  const BarAlerDispatch = useBarAlertUpdater();
   const navigate = useNavigate();
 
   //   great solution for category check if no useState is used to track it !!!!!
@@ -42,9 +43,9 @@ export default function ProductsContainer({ data, img }: { data: any; img: strin
     isFull?: boolean;
     isChosen?: boolean;
   }) => {
-    setShowAlert(true);
-    setIsChosen(isChosen);
-    setIsFull(isFull);
+    BarAlerDispatch("showAlert", true);
+    BarAlerDispatch("isChosen", isChosen);
+    BarAlerDispatch("isFull", isFull);
   };
 
   const getCompareActionStatus = (item: any) => {

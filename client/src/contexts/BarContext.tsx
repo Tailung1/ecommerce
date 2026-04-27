@@ -13,6 +13,8 @@ const initialState = {
   showSearchBar: false,
   showSideBar: false,
 };
+
+
 interface BarStateTypes {
   showAuthBar: boolean;
   showCompareBar: boolean;
@@ -57,27 +59,23 @@ export const BarProvider = ({ children }: { children: ReactNode }) => {
 
 export const useBarContext = () => {
   const context = useContext(Context);
-  if (!context) throw new Error("Bar context provider not found");
   return context;
 };
 
 export const useBarState = () => {
   const context = useContext(Context);
-  if (!context) throw new Error("Bar context provider not found");
   const { BarState } = context;
   return BarState;
 };
 
 export const useBarUpdater = () => {
   const context = useContext(Context);
-  if (!context) throw new Error("Bar context provider not found");
   const { BarDispatch } = context;
   return (key: keyof Omit<BarStateTypes, "Alert">, value: boolean) =>
     BarDispatch({ type: "SET_BAR", key, value });
 };
 export const useBarAlertUpdater = () => {
   const context = useContext(Context);
-  if (!context) throw new Error("Bar context provider not found");
   const { BarDispatch } = context;
   return (key: keyof BarStateTypes["Alert"], value: boolean) =>
     BarDispatch({ type: "SET_ALERT", key, value });

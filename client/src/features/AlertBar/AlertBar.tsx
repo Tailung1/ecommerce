@@ -9,7 +9,7 @@ import { useBarAlertUpdater } from "../../contexts/BarContext";
 
 export default function AlertBar() {
   const navigate = useNavigate();
-  const { BarState, BarDispatch } = useBarContext();
+  const { barState, barDispatch } = useBarContext();
   const AlertBarUpdater = useBarAlertUpdater();
   const { compareCart } = useMyContext();
 
@@ -25,32 +25,32 @@ export default function AlertBar() {
         // Checking isExitingBar is redundant in this case,
         // but useful if there are multiple animations on this element.
 
-        if (BarState.isExitingBar && e.animationName === "BarOut") {
+        if (barState.isExitingBar && e.animationName === "BarOut") {
           AlertBarUpdater("showAlert", false);
-          BarDispatch({ type: "SET_BAR", key: "isExitingBar", value: false });
+          barDispatch({ type: "SET_BAR", key: "isExitingBar", value: false });
         }
       }}
-      className={`Bar bar-modifed-warning ${BarState.isExitingBar && "ExitBar"}`}
+      className={`Bar bar-modifed-warning ${barState.isExitingBar && "ExitBar"}`}
     >
       <img
         src={exitBtn}
-        onClick={() => BarDispatch({ type: "SET_BAR", key: "isExitingBar", value: true })}
+        onClick={() => barDispatch({ type: "SET_BAR", key: "isExitingBar", value: true })}
         className='exit-btn exit-btn-warning w-10 h-8'
         alt='Exit icon'
       />
       <div className='warning-container'>
-        <h2>{BarState.Alert.isChosen ? "Warning!" : "Compare"}</h2>
+        <h2>{barState.Alert.isChosen ? "Warning!" : "Compare"}</h2>
         <hr />
       </div>
-      {BarState.Alert.isChosen ? (
+      {barState.Alert.isChosen ? (
         <p className='warning-reason-text'>Product is already chosen</p>
       ) : (
         <div className='flex flex-col  items-center  gap-5 w-full'>
           <p className='text-red-600 text-[22px]'>
-            {BarState.Alert.isFull ? "You already have 4 products" : "Product adding is impossible"}
+            {barState.Alert.isFull ? "You already have 4 products" : "Product adding is impossible"}
           </p>
           <p className='text-gray-500 text-[20px] text-center'>
-            {BarState.Alert.isFull
+            {barState.Alert.isFull
               ? "To add a new product, or remove one of them"
               : "Please choose another product from a different category or remove it"}
           </p>
@@ -70,7 +70,7 @@ export default function AlertBar() {
         </div>
       )}
 
-      <button onClick={() => BarDispatch({ type: "SET_BAR", key: "isExitingBar", value: true })}>
+      <button onClick={() => barDispatch({ type: "SET_BAR", key: "isExitingBar", value: true })}>
         It is clear
       </button>
     </div>

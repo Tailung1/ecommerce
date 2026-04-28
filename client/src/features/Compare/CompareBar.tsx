@@ -1,9 +1,11 @@
 import { useMyContext } from "../../MyContext";
 import searchIcon from "../../assets/search-icon.png";
-import { useBarContext } from "../../contexts/BarContext";
+import { useBarDispatch } from "../../contexts/BarContext";
+import { useBarStateValue } from "../../contexts/BarContext";
 
 export default function CompareBar() {
-  const { BarState, BarDispatch } = useBarContext();
+  const { setBar } = useBarDispatch();
+  const isExitingBar = useBarStateValue("isExitingBar");
   const { compareCart, setCompareCart, setActiveProductCategory } = useMyContext();
 
   const testProducts = [
@@ -34,10 +36,10 @@ export default function CompareBar() {
     },
   ];
 
-  const handleAnimationEnd = (e: React.SyntheticEvent) => {
-    if (BarState.isExitingBar && e.animationName === "BarOut") {
-      BarDispatch({ type: "SET", key: "showCompareBar", value: false });
-      BarDispatch({ type: "SET", key: "isExitingBar", value: false });
+  const handleAnimationEnd = (e: React.AnimationEvent<HTMLDivElement>) => {
+    if (isExitingBar && e.animationName === "BarOut") {
+      setBar("showCompareBar", false);
+      setBar("isExitingBar", false);
     }
   };
 
@@ -55,18 +57,15 @@ export default function CompareBar() {
         return newArr;
       });
     }
-    BarDispatch({ type: "SET", key: "isExitingBar", value: true });
+    setBar("isExitingBar", true);
   };
 
   return (
     <div
       onAnimationEnd={(e) => handleAnimationEnd(e)}
-      className={`Bar bar-modifed-compare ${BarState.isExitingBar ? "ExitBar" : ""}`}
+      className={`Bar bar-modifed-compare ${isExitingBar ? "ExitBar" : ""}`}
     >
-      <p
-        onClick={() => BarDispatch({ type: "SET", key: "isExitingBar", value: true })}
-        className='exit-btn exit-btn-compare'
-      >
+      <p onClick={() => setBar("isExitingBar", true)} className='exit-btn exit-btn-compare'>
         X
       </p>
       <div className='relative w-full'>

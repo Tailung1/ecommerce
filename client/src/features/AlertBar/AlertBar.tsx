@@ -4,17 +4,20 @@ import { useNavigate } from "react-router-dom";
 import exitBtn from "../../assets/reject.png";
 import rejectIcon from "../../assets/reject.png";
 import phoneImage from "../../assets/iphone.png";
-import { useBarContext } from "../../contexts/BarContext";
-import { useBarAlertUpdater } from "../../contexts/BarContext";
+import { useBarDispatch } from "../../contexts/BarContext";
+import { useBarStateValue } from "../../contexts/BarContext";
 
 export default function AlertBar() {
   const navigate = useNavigate();
-  const { barState, barDispatch } = useBarContext();
-  const AlertBarUpdater = useBarAlertUpdater();
+  const { setBar, setAlert } = useBarDispatch();
+  const isCompareCartFull = useBarStateValue("alert").isFull;
+  const isProductChosen = useBarStateValue("alert").isChosen;
+  const isExitingBar = useBarStateValue("isExitingBar");
+
   const { compareCart } = useMyContext();
 
   const handleReject = () => {
-    AlertBarUpdater("showAlert", false);
+    setAlert("showAlert", false);
     navigate("/compare-products");
     return;
   };
@@ -25,32 +28,32 @@ export default function AlertBar() {
         // Checking isExitingBar is redundant in this case,
         // but useful if there are multiple animations on this element.
 
-        if (barState.isExitingBar && e.animationName === "BarOut") {
-          AlertBarUpdater("showAlert", false);
-          barDispatch({ type: "SET_BAR", key: "isExitingBar", value: false });
+        if (isExitingBar && e.animationName === "BarOut") {
+          setAlert("showAlert", false);
+          setBar("isExitingBar", false);
         }
       }}
-      className={`Bar bar-modifed-warning ${barState.isExitingBar && "ExitBar"}`}
+      className={`Bar bar-modifed-warning ${isExitingBar && "ExitBar"}`}
     >
       <img
         src={exitBtn}
-        onClick={() => barDispatch({ type: "SET_BAR", key: "isExitingBar", value: true })}
+        onClick={() => setBar("isExitingBar", true)}
         className='exit-btn exit-btn-warning w-10 h-8'
         alt='Exit icon'
       />
       <div className='warning-container'>
-        <h2>{barState.Alert.isChosen ? "Warning!" : "Compare"}</h2>
+        <h2>{isProductChosen ? "Warning!" : "Compare"}</h2>
         <hr />
       </div>
-      {barState.Alert.isChosen ? (
+      {isProductChosen ? (
         <p className='warning-reason-text'>Product is already chosen</p>
       ) : (
         <div className='flex flex-col  items-center  gap-5 w-full'>
           <p className='text-red-600 text-[22px]'>
-            {barState.Alert.isFull ? "You already have 4 products" : "Product adding is impossible"}
+            {isCompareCartFull ? "You already have 4 products" : "Product adding is impossible"}
           </p>
           <p className='text-gray-500 text-[20px] text-center'>
-            {barState.Alert.isFull
+            {isCompareCartFull
               ? "To add a new product, or remove one of them"
               : "Please choose another product from a different category or remove it"}
           </p>
@@ -70,9 +73,7 @@ export default function AlertBar() {
         </div>
       )}
 
-      <button onClick={() => barDispatch({ type: "SET_BAR", key: "isExitingBar", value: true })}>
-        It is clear
-      </button>
+      <button onClick={() => setBar("isExitingBar", true)}>It is clear</button>
     </div>
   );
 }

@@ -11,24 +11,21 @@ import AlertBar from "./src/features/AlertBar/AlertBar";
 import TopBar from "./src/components/shared/TopBar/TopBar";
 import FilterBar from "./src/features/FilterBar/FilterBar";
 import useWindowWidth from "./src/CosutmHooks/useWindowWidth";
-import { useBarState } from "./src/contexts/BarContext";
+import { useBarStateValue } from "./src/contexts/BarContext";
 
 export default function Layout() {
-  const {
-    showAuthBar,
-    showFilterBar,
-    showCompareBar,
-    showSearchBar,
-    isExitingBar,
-    showSideBar,
-  } = useBarState();
-
-  const BarState=useBarState()
-  const showAlert=BarState.Alert.showAlert
+  const showAuthBar = useBarStateValue("showAuthBar");
+  const showFilterBar = useBarStateValue("showFilterBar");
+  const showCompareBar = useBarStateValue("showCompareBar");
+  const showSearchBar = useBarStateValue("showSearchBar");
+  const isExitingBar = useBarStateValue("isExitingBar");
+  const showSideBar = useBarStateValue("showSideBar");
+  const showAlert = useBarStateValue("alert").showAlert;
+  
   const width = useWindowWidth();
 
   let isVisible = useMemo(
-    () => [showCompareBar, showAuthBar,showAlert , showSearchBar, showFilterBar].some(Boolean),
+    () => [showCompareBar, showAuthBar, showAlert, showSearchBar, showFilterBar].some(Boolean),
     [showCompareBar, showAuthBar, showAlert, showSearchBar, showFilterBar]
   );
 

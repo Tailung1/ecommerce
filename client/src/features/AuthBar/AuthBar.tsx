@@ -6,12 +6,13 @@ import checked from "../../assets/checked-rules.png";
 import unchecked from "../../assets/unchecked.png";
 import exitBtn from "../../assets/reject.png";
 import useAuthReducer from "../../MyReducer";
-import { useBarState } from "../../contexts/BarContext";
-import { useBarUpdater } from "../../contexts/BarContext";
+import { useBarStateValue } from "../../contexts/BarContext";
+import { useBarDispatch } from "../../contexts/BarContext";
 
 export default function AuthBar() {
   const { state, dispatch } = useAuthReducer();
-  const BarState = useBarState();
+  const { setBar } = useBarDispatch();
+  const isExitingBar = useBarStateValue("isExitingBar");
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const countryCodes = ["995", "242", "927", "315"];
   const EmailAuthIsActive = state.activeAuthOption !== "number";
@@ -21,8 +22,6 @@ export default function AuthBar() {
   const resetValues = () => {
     dispatch({ type: "RESET_FORM" });
   };
-
-  const handleBarUpdate = useBarUpdater();
 
   const handleValuesChange = (field: "email" | "password" | "number", value: string) => {
     if (field === "number" && value !== "" && !/^[0-9]+$/.test(value)) return;
@@ -56,18 +55,18 @@ export default function AuthBar() {
       onAnimationEnd={(e) => {
         // Checking isExitingBar is redundant in this case,
         // but useful if there are multiple animations on this element.
-        if (BarState.isExitingBar && e.animationName === "BarOut") {
-          handleBarUpdate("showAuthBar", false);
-          handleBarUpdate("isExitingBar", false);
+        if (isExitingBar && e.animationName === "BarOut") {
+          setBar("showAuthBar", false);
+          setBar("isExitingBar", false);
         }
       }}
-      className={`Bar ${BarState.isExitingBar && "ExitBar"}`}
+      className={`Bar ${isExitingBar && "ExitBar"}`}
     >
       <div onClick={resetValues} className='flex flex-col gap-2 w-full relative'>
         <div className='acces-options'>
           <img
             src={exitBtn}
-            onClick={() => handleBarUpdate("isExitingBar", true)}
+            onClick={() => setBar("isExitingBar", true)}
             className='exit-btn w-10 h-8'
             alt='Exit icon'
           />

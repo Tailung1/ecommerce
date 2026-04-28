@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useMyContext } from "../../../MyContext";
 import compareIcon from "../../../assets/compare.png";
 import cartIcon from "../../../assets/shopping-cart.png";
-import { useBarAlertUpdater } from "../../../contexts/BarContext";
+import { useBarDispatch } from "../../../contexts/BarContext";
 
 export default function ProductsContainer({ data, img }: { data: any; img: string }) {
   const {
@@ -14,7 +14,7 @@ export default function ProductsContainer({ data, img }: { data: any; img: strin
     compareCart,
     setCompareCart,
   } = useMyContext();
-  const BarAlerDispatch = useBarAlertUpdater();
+  const { setAlert } = useBarDispatch();
   const navigate = useNavigate();
 
   //   great solution for category check if no useState is used to track it !!!!!
@@ -40,9 +40,9 @@ export default function ProductsContainer({ data, img }: { data: any; img: strin
     isFull?: boolean;
     isChosen?: boolean;
   }) => {
-    BarAlerDispatch("showAlert", true);
-    BarAlerDispatch("isChosen", isChosen);
-    BarAlerDispatch("isFull", isFull);
+    setAlert("showAlert", true);
+    setAlert("isChosen", isChosen);
+    setAlert("isFull", isFull);
   };
 
   const getCompareActionStatus = (item: any) => {
@@ -56,7 +56,7 @@ export default function ProductsContainer({ data, img }: { data: any; img: strin
   const handleAction = (task: "cart" | "compare", item: any) => {
     if (task === "compare") {
       const status = getCompareActionStatus(item);
-      console.log(status)
+      console.log(status);
       if (status !== "ok") {
         enableAlertShow({ [status]: true });
         return;

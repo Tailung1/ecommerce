@@ -7,12 +7,12 @@ import LoginIcon from "../../../assets/login.png";
 import { useMyContext } from "../../../MyContext";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useBarUpdater } from "../../../contexts/BarContext";
+import { useBarDispatch } from "../../../contexts/BarContext";
 
 export default function BottomNavBar() {
   const [index, setIndex] = useState(1);
   const { setShowCompare, compareCart } = useMyContext();
-  const handleBarUpdate = useBarUpdater();
+  const {setBar} = useBarDispatch();
   const navigate = useNavigate();
 
   type optionsUnion = "Main" | "Categories" | "Promotions" | "Compare" | "Login";
@@ -28,10 +28,11 @@ export default function BottomNavBar() {
   const handlers: Record<optionsUnion, () => void> = {
     Main: () => {
       navigate("/");
-      handleBarUpdate("showSearchBar", true);
+
+      setBar("showSearchBar", true);
       setIndex(1);
     },
-    Categories: () => handleBarUpdate("showSideBar", true),
+    Categories: () => setBar("showSideBar", true),
     Promotions: () => {
       navigate("/promotions");
       setIndex(3);
@@ -41,7 +42,7 @@ export default function BottomNavBar() {
       navigate("/compare-products");
       setIndex(4);
     },
-    Login: () => handleBarUpdate("showAuthBar", true),
+    Login: () =>  setBar("showAuthBar",true),
   };
 
   return (

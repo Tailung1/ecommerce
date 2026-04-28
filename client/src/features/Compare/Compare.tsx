@@ -7,11 +7,13 @@ import plusIcon from "../../assets/plus.png";
 import binIcon from "../../assets/bin.png";
 import searchIcon from "../../assets/search-icon.png";
 import rejectIcon from "../../assets/reject.png";
-import { useBarContext } from "../../contexts/BarContext";
+import { useBarDispatch } from "../../contexts/BarContext";
+import { useBarStateValue } from "../../contexts/BarContext";
 
 export default function Compare() {
   const navigate = useNavigate();
-  const { BarState, BarDispatch } = useBarContext();
+  const { setBar } = useBarDispatch();
+  const showCompareBar = useBarStateValue("isExitingBar");
   const { setActiveProductCategory, compareCart, setCompareCart } = useMyContext();
 
   const handleReset = () => {
@@ -27,7 +29,7 @@ export default function Compare() {
     }
     if (id && compareCart.some((item) => item?.id === id)) return;
 
-    BarDispatch({ type: "SET", key: "showCompareBar", value: true });
+    setBar("showCompareBar", true);
   };
 
   const handleReject = (id: number) => {
@@ -46,7 +48,7 @@ export default function Compare() {
   const allowCompare = compareCart.filter((item) => item !== null).length < 2;
 
   return (
-    <div className={`compare-container ${BarState.showCompareBar && "animate-compare-container"}`}>
+    <div className={`compare-container ${showCompareBar && "animate-compare-container"}`}>
       <div className='compare-header'>
         <div className='compare-navigation'>
           <div onClick={() => navigate("/")}>

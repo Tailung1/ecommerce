@@ -5,11 +5,11 @@ import { useNavigate } from "react-router-dom";
 import BrandList from "./BrandList";
 import searchIcon from "../../../assets/search-icon.png";
 import rejectIcon from "../../../assets/reject.png";
-import { useBarUpdater } from "../../../contexts/BarContext";
+import { useBarDispatch } from "../../../contexts/BarContext";
 
 export default function HeaderSlider() {
   const navigate = useNavigate();
-  const BarUpdater = useBarUpdater();
+  const { setBar } = useBarDispatch();
 
   return (
     <motion.div
@@ -23,13 +23,13 @@ export default function HeaderSlider() {
         <img
           src={rejectIcon}
           className='cursor-pointer'
-          onClick={() => BarUpdater("showSideBar", false)}
+          onClick={() => setBar("showSideBar", false)}
         />
 
         <div
           onClick={() => {
             navigate("/search");
-            BarUpdater("showSideBar", false);
+            setBar("showSideBar", false);
           }}
           className='serach-input-container'
         >

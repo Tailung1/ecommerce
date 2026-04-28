@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useMyContext } from "../../../MyContext";
 import phoneImage from "../../../assets/iphone.png";
-import { useBarUpdater } from "../../../contexts/BarContext";
+import { useBarDispatch } from "../../../contexts/BarContext";
 
 type brandsDataTypes = {
   "mobile-phones": { name: string; image: string }[];
@@ -63,13 +63,13 @@ export default function BrandList() {
   const { activeCategory } = useMyContext();
   const brandList = brandsData[activeCategory as keyof brandsDataTypes] || [];
   const navigate = useNavigate();
-  const BarUpdater = useBarUpdater();
+  const {setBar} = useBarDispatch();
 
   const handleNavigate = (category: string, brand: string) => {
     const brandSlug = brand.toLowerCase().replace(/\s+/g, "-");
     const url = `${category}-${brandSlug}-c346`;
     navigate(url);
-    BarUpdater("showSideBar", false);
+    setBar("showSideBar", false);
   };
   {
   }

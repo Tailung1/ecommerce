@@ -1,13 +1,13 @@
 import "./Products.scss";
 import { useParams } from "react-router-dom";
 import Sort from "../../../components/reusable/Sort/Sort";
-import { useBarUpdater } from "../../../contexts/BarContext";
+import { useBarDispatch } from "../../../contexts/BarContext";
 
 export default function Products() {
   const { slug } = useParams();
   // const costumSlug = id?.split("-").slice(-1).join("").replace(/\D/g, "");
   //   const costumSlug = slug?.split("-").slice(-1);
-  const BarDispatch = useBarUpdater();
+  const {setBar} = useBarDispatch();
   return (
     <div className='products-container'>
       {/* {/* <h1>{`Category: ${category}`}</h1> */}
@@ -17,7 +17,7 @@ export default function Products() {
         <hr />
         <div className='flex gap-2 items-center '>
           <Sort />
-          <p onClick={() => BarDispatch("showFilterBar", true)}>Filter</p>
+          <p onClick={() => setBar("showFilterBar", true)}>Filter</p>
         </div>
 
         <hr />

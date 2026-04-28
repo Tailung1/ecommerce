@@ -46,7 +46,7 @@ function reducer(state: BarStateTypes, action: BarActions) {
       return { ...state, [key]: value };
     }
     case "SET_ALERT": {
-      return { ...state, Alert: { ...state.alert, [action.key]: action.value } };
+      return { ...state, alert: { ...state.alert, [action.key]: action.value } };
     }
     default:
       return state;
@@ -63,20 +63,22 @@ export const BarProvider = ({ children }: { children: ReactNode }) => {
   return <Context.Provider value={{ barState, barDispatch }}>{children}</Context.Provider>;
 };
 
-export const useBarContext = () => {
-  const context = useContext(Context);
-  return context;
-};
+// export const useBarContext = () => {
+//   const context = useContext(Context);
+//   if (!context) throw new Error("Bar Context with provider not found");
+//   return context;
+// };
+
 export const useBarDispatch = () => {
   const context = useContext(Context);
   if (!context) throw new Error("Bar Context with provider not found");
   const { barDispatch } = context;
-  const barDispatcher = useCallback(
+  const setBar = useCallback(
     (key: keyof Omit<BarStateTypes, "alert">, value: boolean) =>
       barDispatch({ type: "SET_BAR", key, value }),
     [barDispatch]
   );
-  const barAlertDispatcher = useCallback(
+  const setAlert = useCallback(
     (key: keyof BarStateTypes["alert"], value: boolean) =>
       barDispatch({ type: "SET_ALERT", key, value }),
     [barDispatch]
@@ -84,12 +86,14 @@ export const useBarDispatch = () => {
 
   return useMemo(
     () => ({
-      barDispatcher,
-      barAlertDispatcher,
+      setBar,
+      setAlert,
     }),
-    [barDispatcher, barAlertDispatcher]
+    [setBar, setAlert]
   );
 };
+
+// Selective state hook 
 
 export function useBarStateValue<K extends keyof BarStateTypes>(key: K): BarStateTypes[K] {
   const { barState } = useContext(Context);

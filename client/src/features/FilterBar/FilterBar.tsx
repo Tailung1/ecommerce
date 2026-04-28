@@ -2,28 +2,30 @@ import { useMyContext } from "../../MyContext";
 import "./Filter.scss";
 import exitIcon from "../../assets/reject.png";
 import binIcon from "../../assets/bin.png";
-import { useBarContext } from "../../contexts/BarContext";
+import { useBarDispatch } from "../../contexts/BarContext";
+import { useBarStateValue } from "../../contexts/BarContext";
 
 export default function FilterBar() {
   const {} = useMyContext();
-  const { BarState, BarDispatch } = useBarContext();
+  const { setBar } = useBarDispatch();
+  const isExitingBar = useBarStateValue("isExitingBar");
   const handleReset = () => {};
 
-  const handleAnimationEnd = (e) => {
-    if (BarState.isExitingBar && e.animationName === "reject-FilterBar") {
-      BarDispatch({ type: "SET", key: "showFilterBar", value: false });
-      BarDispatch({ type: "SET", key: "isExitingBar", value: false });
+  const handleAnimationEnd = (e: React.AnimationEvent<HTMLDivElement>) => {
+    if (isExitingBar && e.animationName === "reject-FilterBar") {
+      setBar("showFilterBar", false);
+      setBar("isExitingBar", false);
     }
   };
 
   return (
     <div
       onAnimationEnd={(e) => handleAnimationEnd(e)}
-      className={`filterBar ${BarState.isExitingBar && "reject-FilterBar"}`}
+      className={`filterBar ${isExitingBar && "reject-FilterBar"}`}
     >
       <div className='compare-header'>
         <div className='compare-navigation'>
-          <div onClick={() => BarDispatch({ type: "SET", key: "isExitingBar", value: true })}>
+          <div onClick={() => setBar("isExitingBar", true)}>
             <img src={exitIcon} alt='Left arrow icon' />
             <p>Back</p>
           </div>

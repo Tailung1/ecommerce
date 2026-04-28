@@ -10,11 +10,14 @@ import { useNavigate } from "react-router-dom";
 import Logo from "../../components/shared/Logo/Logo";
 import SearchBar from "../main/SearchBar/SearchBar";
 import { useEffect } from "react";
-import { useBarContext } from "../../contexts/BarContext";
+import { useBarDispatch } from "../../contexts/BarContext";
+import { useBarStateValue } from "../../contexts/BarContext";
 
 export default function Header() {
   const { shoppingCart } = useMyContext();
-  const { BarDispatch, BarState } = useBarContext();
+  const { setBar } = useBarDispatch();
+  const showSearchBar = useBarStateValue("showSearchBar");
+
   useEffect(() => {
     const handleScroll = () => {
       const Y = window.scrollY;
@@ -38,11 +41,7 @@ export default function Header() {
     <header>
       <div className='header'>
         {" "}
-        <img
-          onClick={() => BarDispatch({ type: "SET", key: "showSideBar", value: true })}
-          src={slideIcon}
-          alt='slide-icon'
-        />
+        <img onClick={() => setBar("showSideBar", true)} src={slideIcon} alt='slide-icon' />
         <Logo />
       </div>
       <div className='header header-right-side-items'>
@@ -69,13 +68,10 @@ export default function Header() {
         <Logo />
         <div className='header-right-side-items'>
           <button className='orange-btn'>Navigation</button>
-          {BarState.showSearchBar ? (
+          {showSearchBar ? (
             <SearchBar />
           ) : (
-            <div
-              onClick={() => BarDispatch({ type: "SET", key: "showSearchBar", value: true })}
-              className='input-container'
-            >
+            <div onClick={() => setBar("showSearchBar", true)} className='input-container'>
               <input className='input' placeholder='Search' type='text' />
               <img className='search-icon' src={searchIcon} alt='search icon' />
             </div>
@@ -88,10 +84,7 @@ export default function Header() {
             <ShoppingCartPop />
           </div>
 
-          <div
-            onClick={() => BarDispatch({ type: "SET", key: "showAuthBar", value: true })}
-            className='login-container-header'
-          >
+          <div onClick={() => setBar("showAuthBar", true)} className='login-container-header'>
             <img src={loginIcon} alt='Login icon' />
             <span>Log In</span>
           </div>

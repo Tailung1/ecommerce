@@ -16,7 +16,7 @@
   position: fixed;
   bottom: 0; // needed, beacse when height changes, it doesnot pushes container under user viewport
   width: 100%;
-  z-index: 1;
+  z-index: 100;
   background-color: rgb(255, 255, 255);
   border-radius: 20px 20px 0 0;
   padding: 5px 15px;

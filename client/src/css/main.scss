@@ -3,10 +3,8 @@ main {
   flex-direction: column;
   flex-grow: 1;
   padding: 10px 0 10px 10px;
-  background-color: white; //needed any background to let filter work..
+  background-color: white;
 }
-
-
 
 @media (min-width: 1024px) {
   main {

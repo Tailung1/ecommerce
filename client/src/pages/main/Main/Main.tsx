@@ -1,4 +1,4 @@
-import "../main.scss"; // had to import there.. maybe temporarily
+import "../../../css/main.scss"; // had to import there.. maybe temporarily
 import "./Main.scss";
 import data from "../../../data.json";
 import PC from "../CategoriesCarousel/CategoriesCarousel";

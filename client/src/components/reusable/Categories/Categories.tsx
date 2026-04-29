@@ -1,5 +1,5 @@
 import "./Categories.scss";
-import { useMyContext } from "../../../MyContext";
+import { useMyContext } from "../../../contexts/MyContext";
 import mobilePhone from "../../../assets/mobile-phone.png";
 import tablet from "../../../assets/tablet.png";
 import laptop from "../../../assets/laptop.png";

@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useMyContext } from "../../../MyContext";
+import { useMyContext } from "../../../contexts/MyContext";
 import phoneImage from "../../../assets/iphone.png";
 import { useBarDispatch } from "../../../contexts/BarContext";
 

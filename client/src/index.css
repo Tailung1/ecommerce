@@ -17,8 +17,7 @@ img {
 }
 
 .noPointerEvents {
-  /* pointer-events: none; */
-}
+  /* pointer-events: none; */}
 
 .layer-IN {
   animation: layer-animateIN 0.3s forwards;

@@ -1,5 +1,4 @@
 import "./Header.scss";
-import { useMyContext } from "../../MyContext";
 import LanguageSelector from "../../components/shared/LanguageSelector/LanguageSelector";
 import ShoppingCartPop from "./ShoppingCartPop";
 import slideIcon from "../../assets/slide-icon.png";
@@ -14,10 +13,8 @@ import { useBarDispatch } from "../../contexts/BarContext";
 import { useBarStateValue } from "../../contexts/BarContext";
 
 export default function Header() {
-  const { shoppingCart } = useMyContext();
   const { setBar } = useBarDispatch();
   const showSearchBar = useBarStateValue("showSearchBar");
-
   useEffect(() => {
     const handleScroll = () => {
       const Y = window.scrollY;
@@ -53,11 +50,7 @@ export default function Header() {
           alt='search-logo'
         />
         <div className='shopping-cart-container-header'>
-          {shoppingCart.length !== 0 && (
-            <div className='cart-amount'>
-              <span>{shoppingCart.length}</span>
-            </div>
-          )}
+         
 
           <img onClick={() => navigate("/cart")} src={cartIcon} alt='cart-logo' />
         </div>

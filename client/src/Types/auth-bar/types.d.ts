@@ -7,7 +7,6 @@ interface productType {
   category: string;
 }
 
-
 type StateTypes = {
   active: "auth" | "register";
   activeAuthOption: "email" | "number";
@@ -28,22 +27,6 @@ type Errors = {
   numberError: string;
 };
 
-// type ActionTypes =
-//   | { type: "SET_ACTIVE"; payload: "auth" | "register" }
-//   | { type: "SET_AUTH_OPTION"; payload: "email" | "number" }
-//   | { type: "SET_CHECKED"; payload: boolean }
-//   | {
-//       type: "SET_INPUT";
-//       field: "email" | "password" | "number";
-//       value: string;
-//     }
-//   | {
-//       type: "SET_ERRORS";
-//       payload: Partial<Errors>;
-//     }
-//   | { type: "RESET_FORM" }
-//   | { type: "TOGGLE_COUNTRY_CODES" }
-//   | { type: "SET_COUNTRY_CODE"; payload: string };
 type ActionTypes =
   | { type: "SET_ACTIVE"; payload: "auth" | "register" }
   | { type: "SET_AUTH_OPTION"; payload: "email" | "number" }
@@ -60,4 +43,3 @@ type ActionTypes =
   | { type: "RESET_FORM" }
   | { type: "TOGGLE_COUNTRY_CODES" }
   | { type: "SET_COUNTRY_CODE"; payload: string };
-

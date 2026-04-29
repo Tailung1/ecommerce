@@ -1,4 +1,4 @@
-import { useMyContext } from "../../../MyContext";
+import { useMyContext } from "../../../contexts/MyContext";
 import cartImage from "../../../assets/cartImage.png";
 
 export default function Cart() {

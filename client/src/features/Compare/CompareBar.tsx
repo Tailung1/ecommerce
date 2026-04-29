@@ -1,4 +1,4 @@
-import { useMyContext } from "../../MyContext";
+import { useMyContext } from "../../contexts/MyContext";
 import searchIcon from "../../assets/search-icon.png";
 import { useBarDispatch } from "../../contexts/BarContext";
 import { useBarStateValue } from "../../contexts/BarContext";

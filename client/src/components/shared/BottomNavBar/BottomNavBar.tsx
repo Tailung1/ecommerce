@@ -4,7 +4,7 @@ import CategoriesIcon from "../../../assets/categories.png";
 import CompareIcon from "../../../assets/compare.png";
 import PromotionsIcon from "../../../assets/promotions.png";
 import LoginIcon from "../../../assets/login.png";
-import { useMyContext } from "../../../MyContext";
+import { useMyContext } from "../../../contexts/MyContext";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useBarDispatch } from "../../../contexts/BarContext";

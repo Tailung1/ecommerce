@@ -1,6 +1,6 @@
 import "./Compare.scss";
 import "../../css/reusable/bar.scss";
-import { useMyContext } from "../../MyContext";
+import { useMyContext } from "../../contexts/MyContext";
 import { useNavigate } from "react-router-dom";
 import leftArrowIcon from "../../assets/left-arrow.png";
 import plusIcon from "../../assets/plus.png";

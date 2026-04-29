@@ -1,6 +1,6 @@
 import "./ProductsContainer.scss";
 import { useNavigate } from "react-router-dom";
-import { useMyContext } from "../../../MyContext";
+import { useMyContext } from "../../../contexts/MyContext";
 import compareIcon from "../../../assets/compare.png";
 import cartIcon from "../../../assets/shopping-cart.png";
 import { useBarDispatch } from "../../../contexts/BarContext";

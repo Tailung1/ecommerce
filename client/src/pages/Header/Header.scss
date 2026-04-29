@@ -1,8 +1,4 @@
-@mixin display-gap-padding-justify(
-  $gap: 0px,
-  $padding: 0px,
-  $justify-content: center
-) {
+@mixin display-gap-padding-justify($gap: 0px, $padding: 0px, $justify-content: center) {
   display: flex;
   align-items: center;
   gap: $gap;
@@ -22,7 +18,7 @@ header {
     $padding: 5px 20px,
     $justify-content: space-between
   );
-  background-color: rgb(235, 235, 235, 0.5);
+  background-color: rgba(232, 231, 231, 0.6);
   backdrop-filter: blur(15px);
   position: sticky;
   top: 0;

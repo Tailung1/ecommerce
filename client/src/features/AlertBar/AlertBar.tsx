@@ -1,5 +1,5 @@
 import "./AlertBar.scss";
-import { useMyContext } from "../../MyContext";
+import { useMyContext } from "../../contexts/MyContext";
 import { useNavigate } from "react-router-dom";
 import exitBtn from "../../assets/reject.png";
 import rejectIcon from "../../assets/reject.png";

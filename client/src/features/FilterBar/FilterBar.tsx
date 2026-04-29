@@ -1,4 +1,4 @@
-import { useMyContext } from "../../MyContext";
+import { useMyContext } from "../../contexts/MyContext";
 import "./Filter.scss";
 import exitIcon from "../../assets/reject.png";
 import binIcon from "../../assets/bin.png";

@@ -1,5 +1,5 @@
 import "./LanguageSelector.scss";
-import { useMyContext } from "../../../MyContext";
+import { useMyContext } from "../../../contexts/MyContext";
 import usaFlag from "../../../assets/eng.png";
 import geoFlag from "../../../assets/georgia.png";
 

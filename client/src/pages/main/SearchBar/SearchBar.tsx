@@ -1,5 +1,5 @@
 import "./SearchBar.scss";
-import { useMyContext } from "../../../MyContext";
+import { useMyContext } from "../../../contexts/MyContext";
 import searchIcon from "../../../assets/search-icon.png";
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";

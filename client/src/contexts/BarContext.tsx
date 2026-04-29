@@ -93,7 +93,7 @@ export const useBarDispatch = () => {
   );
 };
 
-// Selective state hook 
+// Selective state hook
 
 export function useBarStateValue<K extends keyof BarStateTypes>(key: K): BarStateTypes[K] {
   const { barState } = useContext(Context);

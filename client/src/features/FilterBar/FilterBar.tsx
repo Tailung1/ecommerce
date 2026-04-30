@@ -4,6 +4,7 @@ import exitIcon from "../../assets/reject.png";
 import binIcon from "../../assets/bin.png";
 import { useBarDispatch } from "../../contexts/BarContext";
 import { useBarStateValue } from "../../contexts/BarContext";
+import ReactDOM from "react-dom";
 
 export default function FilterBar() {
   const {} = useMyContext();
@@ -17,8 +18,7 @@ export default function FilterBar() {
       setBar("isExitingBar", false);
     }
   };
-
-  return (
+  const content = (
     <div
       onAnimationEnd={(e) => handleAnimationEnd(e)}
       className={`filterBar ${isExitingBar && "reject-FilterBar"}`}
@@ -38,4 +38,6 @@ export default function FilterBar() {
       </div>
     </div>
   );
+
+  return ReactDOM.createPortal(content, document && document.body);
 }

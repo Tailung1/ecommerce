@@ -17,28 +17,6 @@ img {
 }
 
 .noPointerEvents {
-  /* pointer-events: none; */}
-
-.layer-IN {
-  animation: layer-animateIN 0.3s forwards;
-}
-.layer-OUT {
-  animation: layer-animateOUT 0.3s forwards;
-}
-@keyframes layer-animateIN {
-  0% {
-    filter: brightness(100%);
-  }
-  100% {
-    filter: brightness(50%);
-  }
+  pointer-events: none;
 }
 
-@keyframes layer-animateOUT {
-  0% {
-    filter: brightness(50%);
-  }
-  100% {
-    filter: brightness(100%);
-  }
-}

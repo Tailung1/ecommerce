@@ -1,27 +1,30 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 import { Outlet } from "react-router-dom";
 import Header from "./src/pages/Header/Header";
 import HeaderSlider from "./src/pages/Header/HeaderSlider/HeaderSlider";
 import { AnimatePresence } from "framer-motion";
 import Footer from "./src/pages/Footer/Footer";
-import MainBar from "./src/components/shared/BottomNavBar/BottomNavBar";
-import AuthBar from "./src/features/AuthBar/AuthBar";
-import CompareBar from "./src/features/Compare/CompareBar";
-import AlertBar from "./src/features/AlertBar/AlertBar";
+import BottomNavBar from "./src/components/shared/BottomNavBar/BottomNavBar";
 import TopBar from "./src/components/shared/TopBar/TopBar";
-import FilterBar from "./src/features/FilterBar/FilterBar";
 import useWindowWidth from "./src/CosutmHooks/useWindowWidth";
 import { useBarStateValue } from "./src/contexts/BarContext";
+import BarWrapper from "./src/BarWrapper/BarWrapper";
 
 export default function Layout() {
+  const [layerTarget, setLayerTarget] = useState<"main" | "full">("main");
+  const [mainHeight, setMainHeight] = useState<{ height: number; offsetTop: number }>({
+    height: 0,
+    offsetTop: 0,
+  });
+
   const showAuthBar = useBarStateValue("showAuthBar");
   const showFilterBar = useBarStateValue("showFilterBar");
   const showCompareBar = useBarStateValue("showCompareBar");
   const showSearchBar = useBarStateValue("showSearchBar");
-  const isExitingBar = useBarStateValue("isExitingBar");
   const showSideBar = useBarStateValue("showSideBar");
   const showAlert = useBarStateValue("alert").showAlert;
-  
+
+  const mainRef = useRef<HTMLElement>(null);
   const width = useWindowWidth();
 
   let isVisible = useMemo(
@@ -35,33 +38,26 @@ export default function Layout() {
 
   let isPc = width >= 1024;
 
-  const getLayerTargetClass = (targetType: "layer" | "main") => {
-    const target = showFilterBar || (isPc && !showSearchBar) ? "layer" : "main";
-
-    if (isExitingBar && targetType === target) {
-      return "layer-OUT noPointerEvents";
-    }
-    if (isVisible && targetType === target) return "layer-IN noPointerEvents";
-    return "";
-  };
+ useEffect(() => {
+   if (mainRef.current) {
+     const rect = mainRef.current.getBoundingClientRect();
+     setMainHeight({ height: rect.height, offsetTop: rect.top + window.scrollY });
+   }
+   const target = showFilterBar || (isPc && !showSearchBar) ? "full" : "main";
+   setLayerTarget(target);
+ }, [mainRef, isPc, showFilterBar, showSearchBar]);
 
   return (
-    <div className='flex flex-col min-h-screen '>
-      {" "}
-      {showAuthBar && <AuthBar />} {showCompareBar && <CompareBar />}
-      {showAlert && <AlertBar />}
-      {showFilterBar && <FilterBar />}
-      <div className={`layer1 flex flex-col flex-grow ${getLayerTargetClass("layer")} `}>
-        <TopBar />
-        <Header />
-        <AnimatePresence>{showSideBar && <HeaderSlider />}</AnimatePresence>
-
-        <main className={getLayerTargetClass("main")}>
-          <Outlet />
-        </main>
-        <Footer />
-        <MainBar />
-      </div>
+    <div className='flex flex-col flex-grow'>
+      <BarWrapper isVisible={isVisible} layerTarget={layerTarget} mainHeight={mainHeight} />
+      <TopBar />
+      <Header />
+      <AnimatePresence>{showSideBar && <HeaderSlider />}</AnimatePresence>
+      <main ref={mainRef}>
+        <Outlet />
+      </main>
+      {/* <Footer /> */}
+      <BottomNavBar />
     </div>
   );
 }

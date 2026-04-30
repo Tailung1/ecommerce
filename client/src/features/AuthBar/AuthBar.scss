@@ -15,6 +15,7 @@ $primary-color: #ec5e2a;
   gap: $gap;
 }
 
+
 .acces-options {
   display: flex;
   justify-content: space-around;
@@ -27,11 +28,7 @@ $primary-color: #ec5e2a;
 .auth-hr {
   height: 2px;
   margin-bottom: 6px;
-  background: linear-gradient(
-    to right,
-    #f2aa36 25%,
-    rgb(227, 224, 224) 25%
-  );
+  background: linear-gradient(to right, #f2aa36 25%, rgb(227, 224, 224) 25%);
   background-size: 200%;
   transition: 0.3s ease; // !!!!!!! not only background, but also padding!
   border: none;

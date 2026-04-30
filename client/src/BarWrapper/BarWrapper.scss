@@ -1,0 +1,27 @@
+.auth-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10; 
+}
+
+
+.Enter-overlay {
+  animation: overlayIN 0.3s ease forwards;
+}
+
+.Exit-overlay {
+  animation: fadeOut 0.3s ease forwards;
+}
+
+@keyframes overlayIN {
+  0% { background-color: rgba(61, 43, 43, 0); }
+  100% { background-color: rgba(27, 20, 20, 0.5); }
+}
+
+@keyframes fadeOut {
+  0% { background-color: rgba(61, 43, 43, 0.5); }
+  100% { background-color: rgba(61, 43, 43, 0); }
+}

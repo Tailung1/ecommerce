@@ -6,6 +6,7 @@ import rejectIcon from "../../assets/reject.png";
 import phoneImage from "../../assets/iphone.png";
 import { useBarDispatch } from "../../contexts/BarContext";
 import { useBarStateValue } from "../../contexts/BarContext";
+import ReactDOM from "react-dom";
 
 export default function AlertBar() {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ export default function AlertBar() {
     return;
   };
 
-  return (
+  return ReactDOM.createPortal(
     <div
       onAnimationEnd={(e) => {
         // Checking isExitingBar is redundant in this case,
@@ -74,6 +75,7 @@ export default function AlertBar() {
       )}
 
       <button onClick={() => setBar("isExitingBar", true)}>It is clear</button>
-    </div>
+    </div>,
+    document && document.body
   );
 }

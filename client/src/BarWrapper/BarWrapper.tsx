@@ -22,7 +22,6 @@ export default function BarWrapper({
   const showAlert = useBarStateValue("alert").showAlert;
   const isExitingBar = useBarStateValue("isExitingBar");
   const { setBar } = useBarDispatch();
-  console.log(showFilterBar)
   return ReactDom.createPortal(
     <>
       {isVisible && (
@@ -30,7 +29,7 @@ export default function BarWrapper({
           className={`auth-overlay  ${isExitingBar ? "Exit-overlay" : "Enter-overlay"}`}
           style={
             layerTarget === "main"
-              ? { height: `${mainHeight.height}px`, top: `${mainHeight.offsetTop}px`,zIndex:7 }
+              ? { height: `${mainHeight.height}px`, top: `${mainHeight.offsetTop}px`, zIndex: 7 }
               : undefined
           }
           onClick={() => setBar("isExitingBar", true)}

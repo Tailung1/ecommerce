@@ -56,7 +56,7 @@ export default function Layout() {
       <main ref={mainRef}>
         <Outlet />
       </main>
-      {/* <Footer /> */}
+      <Footer />
       <BottomNavBar />
     </div>
   );

@@ -1,6 +1,7 @@
 .filterBar {
   position: fixed;
-  z-index: 999;
+  top: 0;
+  z-index: 12;
   height: 100%;
   width: 100%;
   animation: animate-FilterBar 0.3s ease forwards;

@@ -5,8 +5,7 @@ import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function SearchBar() {
-  const { popularSearches, setShowSearchBar, setIsExitingBar } =
-    useMyContext();
+  const { popularSearches, setShowSearchBar, setIsExitingBar } = useMyContext();
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
@@ -30,11 +29,7 @@ export default function SearchBar() {
     }
   };
 
-  const generateSlug = async (
-    name: string,
-    color: string,
-    id: number
-  ) => {
+  const generateSlug = async (name: string, color: string, id: number) => {
     handleExit();
     const destName = name.replace(/\s+/g, "-");
     const slug = `${destName}-${color}-${id}`.toLowerCase();
@@ -44,17 +39,8 @@ export default function SearchBar() {
   return (
     <div className='searchBar-container'>
       <div className='input-container'>
-        <input
-          className='input'
-          ref={inputRef}
-          placeholder='Search'
-          type='text'
-        />
-        <img
-          className='search-icon'
-          src={searchIcon}
-          alt='search icon'
-        />
+        <input className='input' ref={inputRef} placeholder='Search' type='text' />
+        <img className='search-icon' src={searchIcon} alt='search icon' />
       </div>
 
       <div className='popular-searches-container'>

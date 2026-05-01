@@ -8,33 +8,40 @@ import ReactDom from "react-dom";
 import { useBarDispatch } from "../contexts/BarContext";
 
 export default function BarWrapper({
-  isVisible,
   layerTarget,
   mainHeight,
+  isPc,
 }: {
-  isVisible: any;
   layerTarget: string;
   mainHeight: { height: number; offsetTop: number };
+  isPc: boolean;
 }) {
   const showAuthBar = useBarStateValue("showAuthBar");
   const showFilterBar = useBarStateValue("showFilterBar");
   const showCompareBar = useBarStateValue("showCompareBar");
   const showAlert = useBarStateValue("alert").showAlert;
+  const showSearchBar = useBarStateValue("showSearchBar");
   const isExitingBar = useBarStateValue("isExitingBar");
   const { setBar } = useBarDispatch();
+
+  const handleOnClick = () => {
+    if (!isPc || (isPc && showSearchBar)) {
+      setBar("isExitingBar", true);
+    }
+  };
+
   return ReactDom.createPortal(
     <>
-      {isVisible && (
-        <div
-          className={`auth-overlay  ${isExitingBar ? "Exit-overlay" : "Enter-overlay"}`}
-          style={
-            layerTarget === "main"
-              ? { height: `${mainHeight.height}px`, top: `${mainHeight.offsetTop}px`, zIndex: 7 }
-              : undefined
-          }
-          onClick={() => setBar("isExitingBar", true)}
-        />
-      )}
+      <div
+        className={`auth-overlay  ${isExitingBar ? "Exit-overlay" : "Enter-overlay"}`}
+        style={
+          layerTarget === "main"
+            ? { height: `${mainHeight.height}px`, top: `${mainHeight.offsetTop}px`, zIndex: 7 }
+            : undefined
+        }
+        onClick={handleOnClick}
+      />
+
       <div>
         {showAuthBar && <AuthBar />} {showCompareBar && <CompareBar />}
         {showAlert && <AlertBar />}

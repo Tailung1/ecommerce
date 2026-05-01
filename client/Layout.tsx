@@ -38,18 +38,24 @@ export default function Layout() {
 
   let isPc = width >= 1024;
 
- useEffect(() => {
-   if (mainRef.current) {
-     const rect = mainRef.current.getBoundingClientRect();
-     setMainHeight({ height: rect.height, offsetTop: rect.top + window.scrollY });
-   }
-   const target = showFilterBar || (isPc && !showSearchBar) ? "full" : "main";
-   setLayerTarget(target);
- }, [mainRef, isPc, showFilterBar, showSearchBar]);
+  useEffect(() => {
+    if (mainRef.current) {
+      const rect = mainRef.current.getBoundingClientRect();
+      setMainHeight({ height: rect.height, offsetTop: rect.top + window.scrollY });
+    }
+    const target = showFilterBar || (isPc && !showSearchBar) ? "full" : "main";
+    setLayerTarget(target);
+  }, [mainRef, isPc, isVisible]);
 
   return (
     <div className='flex flex-col flex-grow'>
-      <BarWrapper isVisible={isVisible} layerTarget={layerTarget} mainHeight={mainHeight} />
+      {isVisible && (
+        <BarWrapper
+          layerTarget={layerTarget}
+          mainHeight={mainHeight}
+          isPc={isPc}
+        />
+      )}
       <TopBar />
       <Header />
       <AnimatePresence>{showSideBar && <HeaderSlider />}</AnimatePresence>

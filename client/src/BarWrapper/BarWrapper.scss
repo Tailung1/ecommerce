@@ -4,24 +4,31 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 10; 
+  z-index: 10;
 }
 
-
 .Enter-overlay {
-  animation: overlayIN 0.3s ease forwards;
+  animation: overlayIN 0.5s ease forwards;
 }
 
 .Exit-overlay {
-  animation: fadeOut 0.3s ease forwards;
+  animation: fadeOut 0.5s ease forwards;
 }
 
 @keyframes overlayIN {
-  0% { background-color: rgba(61, 43, 43, 0); }
-  100% { background-color: rgba(27, 20, 20, 0.5); }
+  0% {
+    background-color: rgba(61, 43, 43, 0);
+  }
+  100% {
+    background-color: rgba(18, 13, 13, 0.7);
+  }
 }
 
 @keyframes fadeOut {
-  0% { background-color: rgba(61, 43, 43, 0.5); }
-  100% { background-color: rgba(61, 43, 43, 0); }
+  0% {
+    background-color: rgba(18, 13, 13, 0.7);
+  }
+  100% {
+    background-color: rgba(61, 43, 43, 0);
+  }
 }

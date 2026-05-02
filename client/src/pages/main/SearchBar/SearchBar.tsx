@@ -3,9 +3,12 @@ import { useMyContext } from "../../../contexts/MyContext";
 import searchIcon from "../../../assets/search-icon.png";
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { useBarStateValue } from "../../../contexts/BarContext";
 
 export default function SearchBar() {
-  const { popularSearches, setShowSearchBar, setIsExitingBar } = useMyContext();
+  const { popularSearches } = useMyContext();
+  const isExiting = useBarStateValue("isExitingBar");
+  const showSearchBar = useBarStateValue("showSearchBar");
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
@@ -16,17 +19,8 @@ export default function SearchBar() {
   }, []);
 
   // no need this logic for mobile !!!! new width traker !!! 12 april.
-  const handleExit = () => {
-    let isPc = window.innerWidth >= 1024;
-    if (isPc) {
-      setIsExitingBar(true);
-      setShowSearchBar(false);
-      setTimeout(() => {
-        setIsExitingBar(false);
-      }, 600);
-    } else {
-      setShowSearchBar(false);
-    }
+  const handleAnimationEnd = () => {
+    
   };
 
   const generateSlug = async (name: string, color: string, id: number) => {

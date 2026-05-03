@@ -1,8 +1,4 @@
-@mixin display-gap-padding-justify(
-  $gap: 0px,
-  $padding: 0px,
-  $justify-content: center
-) {
+@mixin display-gap-padding-justify($gap: 0px, $padding: 0px, $justify-content: center) {
   display: flex;
   align-items: center;
   gap: $gap;
@@ -50,8 +46,36 @@
   padding: 5px;
   width: 100%;
   position: absolute;
-  top: 53px;
-  background-color: rgb(255, 255, 255);
+  top: 60px;
+  background-color: rgb(43, 89, 23);
+}
+.popular-searches-containerIN {
+  animation: SearchBarIn 0.3s ease forwards;
+}
+.popular-searches-containerOUT {
+  animation: SearchBarOut 0.3s ease forwards;
+}
+@keyframes SearchBarIn {
+  0% {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 100;
+  }
+}
+@keyframes SearchBarOut {
+  0% {
+    transform: translateY(0px);
+    opacity: 100;
+
+  }
+  100% {
+    transform: translateY(40px);
+    opacity: 0;
+
+  }
 }
 
 .popular-searches-wrapper {
@@ -62,16 +86,8 @@
   max-height: 100px;
   border-radius: 10px;
   height: fit-content;
-  animation: animateSearches 0.5s ease;
 }
-@keyframes animateSearches {
-  0% {
-    transform: translateY(20px);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
+
 .popular-searches-wrapper * {
   background-color: rgb(239, 239, 234);
   padding: 8px;

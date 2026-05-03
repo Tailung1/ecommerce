@@ -4,15 +4,15 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 10;
+  z-index: 11;
 }
 
 .Enter-overlay {
-  animation: overlayIN 0.5s ease forwards;
+  animation: overlayIN 0.3s ease forwards;
 }
 
 .Exit-overlay {
-  animation: fadeOut 0.5s ease forwards;
+  animation: fadeOut 0.3s ease forwards;
 }
 
 @keyframes overlayIN {

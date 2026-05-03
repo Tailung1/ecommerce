@@ -4,12 +4,13 @@ import searchIcon from "../../../assets/search-icon.png";
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useBarStateValue } from "../../../contexts/BarContext";
+import { useBarDispatch } from "../../../contexts/BarContext";
 
 export default function SearchBar() {
   const { popularSearches } = useMyContext();
   const isExiting = useBarStateValue("isExitingBar");
-  const showSearchBar = useBarStateValue("showSearchBar");
   const inputRef = useRef<HTMLInputElement>(null);
+  const { setBar } = useBarDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,12 +20,14 @@ export default function SearchBar() {
   }, []);
 
   // no need this logic for mobile !!!! new width traker !!! 12 april.
-  const handleAnimationEnd = () => {
-    
+  const handleAnimationEnd = (e: React.AnimationEvent<HTMLDivElement>) => {
+    if (e.animationName === "SearchBarOut") {
+      setBar("showSearchBar", false);
+      setBar("isExitingBar", false);
+    }
   };
 
   const generateSlug = async (name: string, color: string, id: number) => {
-    handleExit();
     const destName = name.replace(/\s+/g, "-");
     const slug = `${destName}-${color}-${id}`.toLowerCase();
     navigate(`/${slug}`);
@@ -37,10 +40,15 @@ export default function SearchBar() {
         <img className='search-icon' src={searchIcon} alt='search icon' />
       </div>
 
-      <div className='popular-searches-container'>
+      <div
+        onAnimationEnd={(e) => handleAnimationEnd(e)}
+        className={`popular-searches-container  ${
+          isExiting ? "popular-searches-containerOUT" : "popular-searches-containerIN"
+        }`}
+      >
         <p>Popular Searches:</p>
 
-        <section className='popular-searches-wrapper'>
+        <section className='popular-searches-wrapper '>
           {popularSearches.map((item) => (
             <p
               onClick={() => {

@@ -1,6 +1,6 @@
 import "./Header.scss";
 import LanguageSelector from "../../components/shared/LanguageSelector/LanguageSelector";
-import ShoppingCartPop from "./ShoppingCartPop";
+import ShoppingCartPop from "./ShoppingCartPop/ShoppingCartPop";
 import slideIcon from "../../assets/slide-icon.png";
 import searchIcon from "../../assets/search-icon.png";
 import cartIcon from "../../assets/shopping-cart.png";
@@ -50,8 +50,6 @@ export default function Header() {
           alt='search-logo'
         />
         <div className='shopping-cart-container-header'>
-         
-
           <img onClick={() => navigate("/cart")} src={cartIcon} alt='cart-logo' />
         </div>
         <LanguageSelector />

@@ -1,9 +1,9 @@
 import "./ShoppingCartPop.scss";
-import "./Header.scss"
-import { useMyContext } from "../../contexts/MyContext";
-import emptyCart from "../../assets/cartImage.png";
-import bin from "../../assets/bin.png";
-import iphone from "../../assets/iphone.png";
+import "../Header"
+import { useMyContext } from "../../../contexts/MyContext";
+import emptyCart from "../../../assets/cartImage.png";
+import bin from "../../../assets/bin.png";
+import iphone from "../../../assets/iphone.png";
 
 
 export default function ShoppingCartPop() {

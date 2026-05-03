@@ -33,14 +33,11 @@ export default function Categories() {
         <div
           key={cat.id}
           className={`${
-            activeCategory === cat.id
-              ? "active-category category-animate"
-              : ""
+            activeCategory === cat.id ? "active-category category-animate" : ""
           } category`}
           onClick={() => setActiveCategory(cat.id)}
-          onMouseEnter={
-            enablePC ? () => setActiveCategory(cat.id) : undefined
-          }
+          onMouseEnter={enablePC ? () => setActiveCategory(cat.id) : undefined}
+          onMouseLeave={enablePC ? () => setActiveCategory("mobile-phones") : undefined}
         >
           <img src={cat.icon} alt={`${cat.id} icon`} />
           <div className={`${cat.label.length > 1 && cat.id}`}>

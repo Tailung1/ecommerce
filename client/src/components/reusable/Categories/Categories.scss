@@ -1,8 +1,4 @@
-@mixin display-gap-padding-justify(
-  $gap: 0px,
-  $padding: 0px,
-  $justify-content: center
-) {
+@mixin display-gap-padding-justify($gap: 0px, $padding: 0px, $justify-content: center) {
   display: flex;
   align-items: center;
   gap: $gap;
@@ -41,7 +37,7 @@
 }
 
 .active-category {
-  background-color: rgb(235, 235, 235);
+  background-color: #efe1dd;
 }
 
 .category-animate {

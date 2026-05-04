@@ -6,7 +6,7 @@ import { useBarStateValue } from "../../contexts/BarContext";
 export default function CompareBar() {
   const { setBar } = useBarDispatch();
   const isExitingBar = useBarStateValue("isExitingBar");
-  const { compareCart, setCompareCart, setActiveProductCategory } = useMyContext();
+  const { compareCart, setCompareCart, setActiveCompareCategory } = useMyContext();
 
   const testProducts = [
     { id: 1, name: "Laptop X", brand: "TechCorp", category: "phone" },
@@ -46,7 +46,7 @@ export default function CompareBar() {
   const insertProductInCompareList = (item: any) => {
     // category check doesnot work here well.. testing phase !!!
     if (compareCart.every((item) => item === null)) {
-      setActiveProductCategory(item.category);
+      setActiveCompareCategory(item.category);
     }
     let product = testProducts.find((i) => i.id === item.id) || null;
     if (product) {

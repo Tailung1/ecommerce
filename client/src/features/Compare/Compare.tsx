@@ -9,18 +9,21 @@ import searchIcon from "../../assets/search-icon.png";
 import rejectIcon from "../../assets/reject.png";
 import { useBarDispatch } from "../../contexts/BarContext";
 import { useBarStateValue } from "../../contexts/BarContext";
+import { useCompareCart, useCompareDispatch } from "../../contexts/CompareContext";
 
 export default function Compare() {
   const navigate = useNavigate();
   const { setBar } = useBarDispatch();
   const showCompareBar = useBarStateValue("isExitingBar");
-  const { setActiveProductCategory, compareCart, setCompareCart } = useMyContext();
+  const { setCompareCart } = useMyContext();
+  const { compareCart } = useCompareCart();
+  const compareDispatch = useCompareDispatch();
 
   const handleReset = () => {
     const hasAnyProduct = compareCart.some((item) => item !== null);
     if (!hasAnyProduct) return;
-    setCompareCart([null, null, null, null]);
-    setActiveProductCategory("");
+    compareDispatch({ type: "SET_COMPARE_CART", payload: [null, null, null, null] });
+    compareDispatch({ type: "SET_ACTIVE_COMPARE_CATEGORY", payload: "" });
   };
 
   const handleBarOpen = (id: number) => {
@@ -36,7 +39,7 @@ export default function Compare() {
     setCompareCart((prev) => {
       const filtred = prev.filter((_, index) => index !== Number(id));
       if (filtred.every((item) => item === null)) {
-        setActiveProductCategory("");
+        compareDispatch({ type: "SET_ACTIVE_COMPARE_CATEGORY", payload: "" });
       }
       //   while (filtred.length < prev.length) {
       //     filtred.push(null);

@@ -9,8 +9,8 @@ export default function ProductsContainer({ data, img }: { data: any; img: strin
   const {
     shoppingCart,
     setShoppingCart,
-    activeProductCategory,
-    setActiveProductCategory,
+    activeCategory,
+    setActiveCompareCategory,
     compareCart,
     setCompareCart,
   } = useMyContext();
@@ -47,7 +47,7 @@ export default function ProductsContainer({ data, img }: { data: any; img: strin
 
   const getCompareActionStatus = (item: any) => {
     if (compareCart.some((i) => i && i.id === item.id)) return "isChosen";
-    if (activeProductCategory && activeProductCategory !== item.category) return "wrongCategory";
+    if (activeCategory && activeCategory !== item.category) return "wrongCategory";
     if (compareCart.every(Boolean)) return "isFull";
 
     return "ok";
@@ -56,7 +56,6 @@ export default function ProductsContainer({ data, img }: { data: any; img: strin
   const handleAction = (task: "cart" | "compare", item: any) => {
     if (task === "compare") {
       const status = getCompareActionStatus(item);
-      console.log(status);
       if (status !== "ok") {
         enableAlertShow({ [status]: true });
         return;
@@ -67,7 +66,7 @@ export default function ProductsContainer({ data, img }: { data: any; img: strin
       newArr[index] = item;
       setCompareCart(newArr);
 
-      if (!activeProductCategory) setActiveProductCategory(item.category);
+      if (!activeCategory) setActiveCompareCategory(item.category);
     }
 
     if (task == "cart") {

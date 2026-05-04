@@ -6,10 +6,14 @@ import laptop from "../../../assets/laptop.png";
 import consoleIcon from "../../../assets/console.png";
 import television from "../../../assets/television.png";
 import smartHome from "../../../assets/smart-home.png";
+import { useEffect } from "react";
 
 export default function Categories() {
-  const { activeCategory, setActiveCategory, enablePC } =
-    useMyContext();
+  const { activeCategory, setActiveCategory, enablePC } = useMyContext();
+
+  useEffect(() => {
+    if (enablePC) setActiveCategory("");
+  }, [enablePC]);
 
   const categories = [
     {
@@ -37,7 +41,7 @@ export default function Categories() {
           } category`}
           onClick={() => setActiveCategory(cat.id)}
           onMouseEnter={enablePC ? () => setActiveCategory(cat.id) : undefined}
-          onMouseLeave={enablePC ? () => setActiveCategory("mobile-phones") : undefined}
+          onMouseLeave={enablePC ? () => setActiveCategory("") : undefined}
         >
           <img src={cat.icon} alt={`${cat.id} icon`} />
           <div className={`${cat.label.length > 1 && cat.id}`}>

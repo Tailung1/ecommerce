@@ -17,8 +17,8 @@ interface types {
   setShowCompare: React.Dispatch<SetStateAction<boolean>>;
   compareCart: (null | any)[];
   setCompareCart: React.Dispatch<SetStateAction<(null | any)[]>>;
-  activeProductCategory: string;
-  setActiveProductCategory: React.Dispatch<SetStateAction<string>>;
+  activeCompareCategory: string;
+  setActiveCompareCategory: React.Dispatch<SetStateAction<string>>;
   showLanguages: boolean;
   setShowLanguages: React.Dispatch<SetStateAction<boolean>>;
   currentLanguage: string;
@@ -31,7 +31,7 @@ const MyContext = createContext({} as types);
 
 export default function ContextProvider({ children }: { children: ReactNode }) {
   const [enablePC, setEnablePC] = useState<boolean>(false);
-  const [activeProductCategory, setActiveProductCategory] = useState<string>("");
+  const [activeCompareCategory, setActiveCompareCategory] = useState<string>("");
   const [showLanguages, setShowLanguages] = useState<boolean>(false);
   const [currentLanguage, setCurrentLanguage] = useState<string>("EN");
   const [showCompare, setShowCompare] = useState<boolean>(false);
@@ -54,8 +54,8 @@ export default function ContextProvider({ children }: { children: ReactNode }) {
         setCompareCart,
         showCompare,
         setShowCompare,
-        activeProductCategory,
-        setActiveProductCategory,
+        activeCompareCategory,
+        setActiveCompareCategory,
         showLanguages,
         setShowLanguages,
         currentLanguage,

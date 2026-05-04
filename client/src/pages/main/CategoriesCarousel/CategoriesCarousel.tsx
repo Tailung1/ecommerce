@@ -68,7 +68,6 @@ export default function PC() {
 
   useEffect(() => {
     setEnablePC(true);
-    return () => setEnablePC(false);
   }, []);
 
   const handleScroll = (dir: "left" | "right") => {

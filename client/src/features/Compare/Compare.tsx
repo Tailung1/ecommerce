@@ -1,6 +1,5 @@
 import "./Compare.scss";
 import "../../css/reusable/bar.scss";
-import { useMyContext } from "../../contexts/MyContext";
 import { useNavigate } from "react-router-dom";
 import leftArrowIcon from "../../assets/left-arrow.png";
 import plusIcon from "../../assets/plus.png";
@@ -15,15 +14,14 @@ export default function Compare() {
   const navigate = useNavigate();
   const { setBar } = useBarDispatch();
   const showCompareBar = useBarStateValue("isExitingBar");
-  const { setCompareCart } = useMyContext();
   const { compareCart } = useCompareCart();
-  const compareDispatch = useCompareDispatch();
+  const { setCompareCart, removeCompareProduct, setCompareCategory } = useCompareDispatch();
 
   const handleReset = () => {
     const hasAnyProduct = compareCart.some((item) => item !== null);
     if (!hasAnyProduct) return;
-    compareDispatch({ type: "SET_COMPARE_CART", payload: [null, null, null, null] });
-    compareDispatch({ type: "SET_ACTIVE_COMPARE_CATEGORY", payload: "" });
+    setCompareCart([null, null, null, null]);
+    setCompareCategory("");
   };
 
   const handleBarOpen = (id: number) => {
@@ -35,17 +33,8 @@ export default function Compare() {
     setBar("showCompareBar", true);
   };
 
-  const handleReject = (id: number) => {
-    setCompareCart((prev) => {
-      const filtred = prev.filter((_, index) => index !== Number(id));
-      if (filtred.every((item) => item === null)) {
-        compareDispatch({ type: "SET_ACTIVE_COMPARE_CATEGORY", payload: "" });
-      }
-      //   while (filtred.length < prev.length) {
-      //     filtred.push(null);
-      //   }
-      return [...filtred, ...Array(prev.length - filtred.length).fill(null)];
-    });
+  const handleReject = (index: number) => {
+    removeCompareProduct(index);
   };
 
   const allowCompare = compareCart.filter((item) => item !== null).length < 2;

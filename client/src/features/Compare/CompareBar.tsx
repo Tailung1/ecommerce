@@ -1,35 +1,44 @@
-import { useMyContext } from "../../contexts/MyContext";
 import searchIcon from "../../assets/search-icon.png";
 import { useBarDispatch } from "../../contexts/BarContext";
 import { useBarStateValue } from "../../contexts/BarContext";
+import { useCompareDispatch } from "../../contexts/CompareContext";
 
 export default function CompareBar() {
   const { setBar } = useBarDispatch();
   const isExitingBar = useBarStateValue("isExitingBar");
-  const { compareCart, setCompareCart, setActiveCompareCategory } = useMyContext();
+  const { addCompareProduct } = useCompareDispatch();
 
   const testProducts = [
-    { id: 1, name: "Laptop X", brand: "TechCorp", category: "phone" },
+    { id: 1, stock: 23, price: 331, name: "Laptop X", brand: "TechCorp", category: "phone" },
     {
       id: 2,
       name: "samsung tv-hd",
+      price: 312,
       brand: "GizmoWorks",
+      stock: 2,
       category: "tv",
     },
+
     {
       id: 3,
       name: "lenovo laptop",
+      stock: 5,
+      price: 392,
       brand: "SoundMax",
       category: "laptop",
     },
     {
       id: 4,
+      price: 25,
+      stock: 21,
       name: "Smartwatch A1",
       brand: "TimeTech",
       category: "phone",
     },
     {
       id: 5,
+      stock: 3,
+      price: 451,
       name: "Tablet Q",
       brand: "ScreenMakers",
       category: "tablet",
@@ -41,23 +50,6 @@ export default function CompareBar() {
       setBar("showCompareBar", false);
       setBar("isExitingBar", false);
     }
-  };
-
-  const insertProductInCompareList = (item: any) => {
-    // category check doesnot work here well.. testing phase !!!
-    if (compareCart.every((item) => item === null)) {
-      setActiveCompareCategory(item.category);
-    }
-    let product = testProducts.find((i) => i.id === item.id) || null;
-    if (product) {
-      setCompareCart((prev) => {
-        const newArr = [...prev];
-        const index = newArr.indexOf(null);
-        newArr[index] = product;
-        return newArr;
-      });
-    }
-    setBar("isExitingBar", true);
   };
 
   return (
@@ -81,7 +73,8 @@ export default function CompareBar() {
         <div
           key={prod.id}
           onClick={() => {
-            insertProductInCompareList(prod);
+            addCompareProduct(prod);
+            setBar("isExitingBar",true)
           }}
         >
           {" "}

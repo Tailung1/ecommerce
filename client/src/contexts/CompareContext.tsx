@@ -10,6 +10,7 @@ interface ProductType {
 }
 
 interface CompareStateTypes {
+  isCompareVisible: boolean;
   compareCart: (null | ProductType)[];
   activeCompareCategory: string;
 }
@@ -18,9 +19,11 @@ type CompareActionTypes =
   | { type: "SET_COMPARE_CART"; payload: (null | ProductType)[] }
   | { type: "SET_COMPARE_CATEGORY"; payload: string }
   | { type: "REMOVE_COMPARE_PRODUCT"; payload: number }
-  | { type: "ADD_COMPARE_PRODUCT"; payload: ProductType };
+  | { type: "ADD_COMPARE_PRODUCT"; payload: ProductType }
+  | { type: "IS_COMPARE_VISIBLE"; payload: boolean };
 
 const initalState = {
+  isCompareVisible: false,
   compareCart: [null, null, null, null],
   activeCompareCategory: "",
 };
@@ -28,6 +31,9 @@ const initalState = {
 function CompareReducer(state: CompareStateTypes, action: CompareActionTypes) {
   state.compareCart;
   switch (action.type) {
+    case "IS_COMPARE_VISIBLE": {
+      return { ...state, isCompareVisible: action.payload };
+    }
     case "SET_COMPARE_CART": {
       return { ...state, compareCart: action.payload };
     }
@@ -80,7 +86,9 @@ export const useCompareDispatch = () => {
   const context = useContext(Context);
   if (!context) throw new Error("Compare Context with provider not found");
   const { compareDispatch } = context;
-
+  const setIsCompareVisible = (arg:boolean) => {
+    return compareDispatch({ type: "IS_COMPARE_VISIBLE", payload:arg  });
+  };
   const setCompareCart = (newCart: (null | ProductType)[]) => {
     return compareDispatch({ type: "SET_COMPARE_CART", payload: newCart });
   };
@@ -94,5 +102,11 @@ export const useCompareDispatch = () => {
     return compareDispatch({ type: "SET_COMPARE_CATEGORY", payload: category });
   };
 
-  return { setCompareCart, setCompareCategory, addCompareProduct, removeCompareProduct };
+  return {
+    setCompareCart,
+    setCompareCategory,
+    addCompareProduct,
+    removeCompareProduct,
+    setIsCompareVisible,
+  };
 };

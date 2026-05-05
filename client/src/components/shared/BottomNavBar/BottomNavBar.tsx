@@ -4,16 +4,18 @@ import CategoriesIcon from "../../../assets/categories.png";
 import CompareIcon from "../../../assets/compare.png";
 import PromotionsIcon from "../../../assets/promotions.png";
 import LoginIcon from "../../../assets/login.png";
-import { useMyContext } from "../../../contexts/MyContext";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useBarDispatch } from "../../../contexts/BarContext";
+import { useCompareDispatch } from "../../../contexts/CompareContext";
+import { useCompareCart } from "../../../contexts/CompareContext";
 
 export default function BottomNavBar() {
   const [index, setIndex] = useState(1);
-  const { setShowCompare, compareCart } = useMyContext();
-  const {setBar} = useBarDispatch();
+  const { setBar } = useBarDispatch();
   const navigate = useNavigate();
+  const { setIsCompareVisible } = useCompareDispatch();
+  const { compareCart } = useCompareCart();
 
   type optionsUnion = "Main" | "Categories" | "Promotions" | "Compare" | "Login";
 
@@ -38,11 +40,11 @@ export default function BottomNavBar() {
       setIndex(3);
     },
     Compare: () => {
-      setShowCompare(true);
+      setIsCompareVisible(true)
       navigate("/compare-products");
       setIndex(4);
     },
-    Login: () =>  setBar("showAuthBar",true),
+    Login: () => setBar("showAuthBar", true),
   };
 
   return (

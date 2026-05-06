@@ -5,15 +5,18 @@ import App from "./App.tsx";
 import ContextProvider from "./contexts/MyContext.tsx";
 import { BarProvider } from "./contexts/BarContext.tsx";
 import { CompareProvider } from "./contexts/CompareContext.tsx";
+import { LanguageProvider } from "./contexts/LanguageContext.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <ContextProvider>
-      <BarProvider>
-        <CompareProvider>
-          <App />
-        </CompareProvider>
-      </BarProvider>
-    </ContextProvider>
+    <LanguageProvider>
+      <ContextProvider>
+        <BarProvider>
+          <CompareProvider>
+            <App />
+          </CompareProvider>
+        </BarProvider>
+      </ContextProvider>
+    </LanguageProvider>
   </StrictMode>
 );

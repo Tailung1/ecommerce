@@ -4,17 +4,14 @@ import { useMyContext } from "../../../contexts/MyContext";
 import compareIcon from "../../../assets/compare.png";
 import cartIcon from "../../../assets/shopping-cart.png";
 import { useBarDispatch } from "../../../contexts/BarContext";
+import { useCompareCart } from "../../../contexts/CompareContext";
+import { useCompareDispatch } from "../../../contexts/CompareContext";
 
 export default function ProductsContainer({ data, img }: { data: any; img: string }) {
-  const {
-    shoppingCart,
-    setShoppingCart,
-    activeCategory,
-    setActiveCompareCategory,
-    compareCart,
-    setCompareCart,
-  } = useMyContext();
+  const { shoppingCart, setShoppingCart } = useMyContext();
   const { setAlert } = useBarDispatch();
+  const { compareCart,activeCompareCategory } = useCompareCart();
+  const { setCompareCart, setCompareCategory } = useCompareDispatch();
   const navigate = useNavigate();
 
   //   great solution for category check if no useState is used to track it !!!!!
@@ -47,7 +44,7 @@ export default function ProductsContainer({ data, img }: { data: any; img: strin
 
   const getCompareActionStatus = (item: any) => {
     if (compareCart.some((i) => i && i.id === item.id)) return "isChosen";
-    if (activeCategory && activeCategory !== item.category) return "wrongCategory";
+    if (activeCompareCategory && activeCompareCategory !== item.category) return "wrongCategory";
     if (compareCart.every(Boolean)) return "isFull";
 
     return "ok";
@@ -66,7 +63,7 @@ export default function ProductsContainer({ data, img }: { data: any; img: strin
       newArr[index] = item;
       setCompareCart(newArr);
 
-      if (!activeCategory) setActiveCompareCategory(item.category);
+      if (!activeCompareCategory) setCompareCategory(item.category);
     }
 
     if (task == "cart") {

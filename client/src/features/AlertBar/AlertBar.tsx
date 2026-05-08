@@ -1,11 +1,11 @@
 import "./AlertBar.scss";
-import { useMyContext } from "../../contexts/MyContext";
 import { useNavigate } from "react-router-dom";
 import exitBtn from "../../assets/reject.png";
 import rejectIcon from "../../assets/reject.png";
 import phoneImage from "../../assets/iphone.png";
 import { useBarDispatch } from "../../contexts/BarContext";
 import { useBarStateValue } from "../../contexts/BarContext";
+import { useCompareCart } from "../../contexts/CompareContext";
 import ReactDOM from "react-dom";
 
 export default function AlertBar() {
@@ -15,7 +15,7 @@ export default function AlertBar() {
   const isProductChosen = useBarStateValue("alert").isChosen;
   const isExitingBar = useBarStateValue("isExitingBar");
 
-  const { compareCart } = useMyContext();
+  const { compareCart } = useCompareCart();
 
   const handleReject = () => {
     setAlert("showAlert", false);

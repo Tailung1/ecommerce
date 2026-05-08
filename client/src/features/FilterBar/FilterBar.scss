@@ -1,14 +1,50 @@
-.filterBar {
+@mixin display($padding: 0px, $justify-content: center) {
+  display: flex;
+  align-items: center;
+  justify-content: $justify-content;
+  padding: $padding;
+}
+@mixin display-col($gap: 0px) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $gap;
+}
+.filter-container {
   position: fixed;
   top: 0;
+  right: 0;
   z-index: 12;
   height: 100%;
-  width: 100%;
+  background-color: white;
+  width: 80vw;
   animation: animate-FilterBar 0.3s ease forwards;
-  background-color: red;
+  padding: 0 1rem;
 }
+
 .reject-FilterBar {
   animation: reject-FilterBar 0.3s ease forwards;
+}
+
+.filter-header {
+  @include display-col();
+  width: 100%;
+}
+
+.filter-navigation {
+  @include display($padding: 7px 0px 13px, $justify-content: space-between);
+  width: 100%;
+}
+.filter-navigation > div {
+  @include display($padding: 5px);
+  gap: 10px;
+}
+.filter-hr {
+  background-color: rgb(195, 207, 214);
+  height: 1px;
+  width: 100%;
+  border: none;
 }
 
 @keyframes animate-FilterBar {
@@ -16,14 +52,30 @@
     transform: translateX(100%);
   }
   100% {
-    transform: translateX(20%);
+    transform: translateX(0%);
   }
 }
 @keyframes reject-FilterBar {
   0% {
-    transform: translateX(20%);
+    transform: translateX(0%);
   }
   100% {
     transform: translateX(100%);
   }
+}
+.filter-price-container {
+  @include display-col($gap: 30px);
+  align-items: flex-start;
+}
+.filter-price-container > div {
+  @include display(0, $justify-content: space-between);
+  width: 100%;
+}
+.min-max-price-container {
+  @include display(0, $justify-content: space-between);
+}
+.min-max-price-container > div {
+  @include display($padding: 5px 10px, $justify-content: space-between);
+  border: 1px solid red;
+  gap: 10px;
 }

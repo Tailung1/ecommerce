@@ -1,13 +1,15 @@
+import useWindowWidth from "../../../CosutmHooks/useWindowWidth";
 import "../../../css/main.scss"; // had to import there.. maybe temporarily
 import "./Main.scss";
 import data from "../../../data.json";
-import PC from "../CategoriesCarousel/CategoriesCarousel";
+import CategoriesAndCarousel from "../CategoriesCarousel/CategoriesCarousel";
 import mobilePhone from "../../../assets/iphone.png";
 import tv from "../../../assets/television.png";
 import laptops from "../../../assets/laptop.png";
 import ProductsContainer from "../../../components/reusable/ProductsContainer/ProductsContainer";
 
 export default function Main() {
+  const width = useWindowWidth();
   return (
     <div className='main-content'>
       <section className='hightlights-wrapper'>
@@ -17,7 +19,7 @@ export default function Main() {
           </div>
         ))}
       </section>
-      <PC />
+      {width > 1023 && <CategoriesAndCarousel />}
 
       <section className='products-shared-container'>
         <p>Breathles in zommer</p>

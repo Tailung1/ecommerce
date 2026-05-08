@@ -8,7 +8,7 @@ import iphone from "../../../assets/iphone.png";
 import consoleIcon from "../../../assets/console.png";
 import tv from "../../../assets/television.png";
 
-export default function PC() {
+export default function CategoriesAndCarousel() {
   const { setEnablePC, activeCategory } = useMyContext();
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -68,6 +68,7 @@ export default function PC() {
 
   useEffect(() => {
     setEnablePC(true);
+    console.log("hi")
   }, []);
 
   const handleScroll = (dir: "left" | "right") => {

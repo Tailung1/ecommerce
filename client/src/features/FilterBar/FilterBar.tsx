@@ -3,12 +3,11 @@ import exitIcon from "../../assets/reject.png";
 import binIcon from "../../assets/bin.png";
 import { useBarDispatch } from "../../contexts/BarContext";
 import { useBarStateValue } from "../../contexts/BarContext";
-import { useState } from "react";
+import PriceRangeSlider from "../PriceRangeSlider/PriceRangeSlider";
 
 export default function FilterBar() {
   const { setBar } = useBarDispatch();
   const isExitingBar = useBarStateValue("isExitingBar");
-  const [priceRange, setPriceRange] = useState<number>(0);
   const handleReset = () => {};
 
   const handleAnimationEnd = (e: React.AnimationEvent<HTMLDivElement>) => {
@@ -40,10 +39,7 @@ export default function FilterBar() {
           <span>Price</span>
           <span>-</span>
         </div>
-        <div className='price-selector-container'>
-          <input type='range' onChange={(e) => setPriceRange(Number(e.target.value))} />
-        </div>
-        <span>{priceRange}</span>
+        <PriceRangeSlider />
         <div className='min-max-price-container'>
           <div>
             <span>MIN</span>

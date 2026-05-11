@@ -39,18 +39,7 @@ export default function FilterBar() {
           <span>Price</span>
           <span>-</span>
         </div>
-        <PriceRangeSlider />
-        <div className='min-max-price-container'>
-          <div>
-            <span>MIN</span>
-            <span>0</span>
-          </div>
-          <div>
-            {" "}
-            <span>MAX</span>
-            <span>2000</span>
-          </div>
-        </div>
+        <PriceRangeSlider min={0} max={14499} step={30}  />
       </section>
     </div>
   );

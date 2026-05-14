@@ -20,14 +20,11 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({ min, max, step }) =
   // -----------------------------
   // UTILS
   // -----------------------------
-  // const snap = (value: number) => Math.round((value - min) / step) * step + min;
-  const snap = (value: number) => Math.round(value / step) * step;
+  const snap = (value: number) => Math.round((value - min) / step) * step + min;
 
-  //   const clamp = (value: number) => Math.min(Math.max(value, min), max);
-  const clamp = (value: number) => Math.min(value, max);
+  const clamp = (value: number) => Math.min(Math.max(value, min), max);
 
-  //   const valueToPercent = (value: number) => ((value - min) / (max - min)) * 100;
-  const valueToPercent = (value: number) => (value / max) * 100;
+  const valueToPercent = (value: number) => ((value - min) / (max - min)) * 100;
 
   // -----------------------------
   // DRAG LOGIC

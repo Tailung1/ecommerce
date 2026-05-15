@@ -34,11 +34,9 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({ min, max, step }) =
     const rect = sliderRef.current.getBoundingClientRect();
     let percent = (clientX - rect.left) / rect.width;
     percent = Math.min(Math.max(percent, 0), 1);
-
-    // let value = snap(percent * (max - min) + min);
-    //  value = clamp(value);
-    let value = snap(percent * max);
+    let value = snap(percent * (max - min) + min);
     value = clamp(value);
+    console.log(value)
     setDragValue(value);
 
     if (dragging === "min" && value > maxValue) {
@@ -57,7 +55,6 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({ min, max, step }) =
       }
     }
   };
-
   const startDrag = (handle: "min" | "max") => {
     setDragging(handle);
     setDragValue(handle === "min" ? minValue : maxValue);

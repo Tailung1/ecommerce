@@ -12,7 +12,6 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({ min, max, step }) =
   const [maxValue, setMaxValue] = useState(max);
 
   const [dragging, setDragging] = useState<"min" | "max" | null>(null);
-  const [dragValue, setDragValue] = useState<number | null>(null);
   const [isClickMove, setIsClickMove] = useState(false);
 
   const sliderRef = useRef<HTMLDivElement>(null);
@@ -21,21 +20,16 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({ min, max, step }) =
   // UTILS
   // -----------------------------
   const snap = (value: number) => Math.round((value - min) / step) * step + min;
-
   const clamp = (value: number) => Math.min(Math.max(value, min), max);
-
   const valueToPercent = (value: number) => ((value - min) / (max - min)) * 100;
 
-  // -----------------------------
-  // DRAG LOGIC
-  // -----------------------------
   const handleMove = (clientX: number) => {
+    console.log(clientX)
     if (!dragging || !sliderRef.current) return;
     const rect = sliderRef.current.getBoundingClientRect();
     let percent = (clientX - rect.left) / rect.width;
     percent = Math.min(Math.max(percent, 0), 1);
     let value = snap(percent * (max - min) + min);
-    setDragValue(value);
 
     if (dragging === "min" && value > maxValue) {
       setMinValue(maxValue);
@@ -56,17 +50,12 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({ min, max, step }) =
 
   const startDrag = (handle: "min" | "max") => {
     setDragging(handle);
-    setDragValue(handle === "min" ? minValue : maxValue);
   };
 
   const stopDrag = () => {
     setDragging(null);
-    setDragValue(null);
   };
 
-  // -----------------------------
-  // MOUSE / TOUCH EVENTS
-  // -----------------------------
   useEffect(() => {
     const onMouseMove = (e: MouseEvent) => handleMove(e.clientX);
     const onTouchMove = (e: TouchEvent) => handleMove(e.touches[0].clientX);
@@ -85,9 +74,6 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({ min, max, step }) =
     };
   }, [dragging, minValue, maxValue]);
 
-  // -----------------------------
-  // TRACK CLICK
-  // -----------------------------
   const handleTrackClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!sliderRef.current) return;
     const rect = sliderRef.current.getBoundingClientRect();
@@ -99,27 +85,16 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({ min, max, step }) =
     const distMax = Math.abs(value - maxValue);
 
     if (distMin < distMax) {
-      if (value > maxValue) {
-        setMinValue(maxValue);
-        setMaxValue(value);
-      } else {
-        setMinValue(value);
-      }
+      setMinValue(value);
     } else {
-      if (value < minValue) {
-        setMaxValue(minValue);
-        setMinValue(value);
-      } else {
-        setMaxValue(value);
-      }
+      setMaxValue(value);
     }
 
     setTimeout(() => setIsClickMove(false), 300);
   };
 
-  // -----------------------------
   // INPUT HANDLING
-  // -----------------------------
+
   const handleMinCommit = () => {
     let value = clamp(minValue);
     value = snap(value);
@@ -142,15 +117,10 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({ min, max, step }) =
     }
   };
 
-  // -----------------------------
-  // HANDLE POSITIONS
-  // -----------------------------
-
-  const minPercent =
-    dragging === "min" && dragValue !== null ? valueToPercent(dragValue) : valueToPercent(minValue);
-
-  const maxPercent =
-    dragging === "max" && dragValue !== null ? valueToPercent(dragValue) : valueToPercent(maxValue);
+  const minPercent = valueToPercent(minValue);
+  const maxPercent = valueToPercent(maxValue);
+  console.log(maxPercent,"m")
+  console.log(minPercent);
 
   return (
     <div ref={sliderRef} className='price-slider-container'>
@@ -160,6 +130,7 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({ min, max, step }) =
           style={{
             left: `${Math.min(minPercent, maxPercent)}%`,
             width: `${Math.abs(maxPercent - minPercent)}%`,
+            backgroundColor:"blue"
           }}
         />
       </div>
@@ -170,7 +141,7 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({ min, max, step }) =
         onContextMenu={(e) => e.preventDefault()}
         style={{
           left: `${minPercent}%`,
-          transition: isClickMove && dragging !== "min" ? "left 0.3s" : "none",
+          transition: isClickMove && dragging !== "min" ? " 0.2s" : "none",
           zIndex: dragging === "min" ? 3 : 2,
         }}
         onMouseDown={() => startDrag("min")}
@@ -184,7 +155,7 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({ min, max, step }) =
         className='slider-handle'
         style={{
           left: `${maxPercent}%`,
-          transition: isClickMove && dragging !== "max" ? "left 0.3s" : "none",
+          transition: isClickMove && dragging !== "max" ? "left 0.2s" : "none",
           zIndex: dragging === "max" ? 3 : 2,
         }}
         onMouseDown={() => startDrag("max")}

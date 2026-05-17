@@ -24,7 +24,6 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({ min, max, step }) =
   const valueToPercent = (value: number) => ((value - min) / (max - min)) * 100;
 
   const handleMove = (clientX: number) => {
-    console.log(clientX)
     if (!dragging || !sliderRef.current) return;
     const rect = sliderRef.current.getBoundingClientRect();
     let percent = (clientX - rect.left) / rect.width;
@@ -119,8 +118,7 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({ min, max, step }) =
 
   const minPercent = valueToPercent(minValue);
   const maxPercent = valueToPercent(maxValue);
-  console.log(maxPercent,"m")
-  console.log(minPercent);
+
 
   return (
     <div ref={sliderRef} className='price-slider-container'>
@@ -130,7 +128,7 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({ min, max, step }) =
           style={{
             left: `${Math.min(minPercent, maxPercent)}%`,
             width: `${Math.abs(maxPercent - minPercent)}%`,
-            backgroundColor:"blue"
+            backgroundColor: "blue",
           }}
         />
       </div>

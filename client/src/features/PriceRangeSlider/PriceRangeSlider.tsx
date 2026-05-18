@@ -10,18 +10,17 @@ interface PriceRangeSliderProps {
 const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({ min, max, step }) => {
   const [minValue, setMinValue] = useState(min);
   const [maxValue, setMaxValue] = useState(max);
-
   const [dragging, setDragging] = useState<"min" | "max" | null>(null);
   const [isClickMove, setIsClickMove] = useState(false);
 
   const sliderRef = useRef<HTMLDivElement>(null);
 
-  // -----------------------------
-  // UTILS
-  // -----------------------------
   const snap = (value: number) => Math.round((value - min) / step) * step + min;
-  const clamp = (value: number) => Math.min(Math.max(value, min), max);
-  const valueToPercent = (value: number) => ((value - min) / (max - min)) * 100;
+
+  const valueToPercent = (value: number) => {
+    const percent = ((value - min) / (max - min)) * 100;
+    return Math.min(Math.max(percent, 0), 100);
+  };
 
   const handleMove = (clientX: number) => {
     if (!dragging || !sliderRef.current) return;
@@ -92,33 +91,19 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({ min, max, step }) =
     setTimeout(() => setIsClickMove(false), 300);
   };
 
-  // INPUT HANDLING
-
-  const handleMinCommit = () => {
-    let value = clamp(minValue);
-    value = snap(value);
-    if (value > maxValue) {
-      setMinValue(maxValue);
-      setMaxValue(value);
+  const handleInput = (target: "min" | "max", value: number) => {
+    if (isNaN(value)) return;
+    if (target === "min") {
+      const clamped = Math.min(Math.max(value, min), max);
+      setMinValue(clamped);
     } else {
-      setMinValue(value);
-    }
-  };
-
-  const handleMaxCommit = () => {
-    let value = clamp(maxValue);
-    value = snap(value);
-    if (value < minValue) {
-      setMaxValue(minValue);
-      setMinValue(value);
-    } else {
-      setMaxValue(value);
+      const clamped = Math.min(Math.max(value, min), max);
+      setMaxValue(clamped);
     }
   };
 
   const minPercent = valueToPercent(minValue);
   const maxPercent = valueToPercent(maxValue);
-
 
   return (
     <div ref={sliderRef} className='price-slider-container'>
@@ -128,18 +113,18 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({ min, max, step }) =
           style={{
             left: `${Math.min(minPercent, maxPercent)}%`,
             width: `${Math.abs(maxPercent - minPercent)}%`,
-            backgroundColor: "blue",
+            transition: !dragging ? "0.15s" : "",
           }}
         />
       </div>
 
-      {/* MIN HANDLE */}
+      {/* MIN hanlde  */}
       <div
         className='slider-handle'
         onContextMenu={(e) => e.preventDefault()}
         style={{
           left: `${minPercent}%`,
-          transition: isClickMove && dragging !== "min" ? " 0.2s" : "none",
+          transition: isClickMove ? " 0.15s" : "none",
           zIndex: dragging === "min" ? 3 : 2,
         }}
         onMouseDown={() => startDrag("min")}
@@ -148,7 +133,7 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({ min, max, step }) =
         <div className='slider-label'>{minValue}</div>
       </div>
 
-      {/* MAX HANDLE */}
+      {/* MAX handle */}
       <div
         className='slider-handle'
         style={{
@@ -169,9 +154,7 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({ min, max, step }) =
           <input
             type='text'
             value={minValue}
-            onChange={(e) => setMinValue(Number(e.target.value))}
-            onBlur={handleMinCommit}
-            onKeyDown={(e) => e.key === "Enter" && handleMinCommit()}
+            onChange={(e) => handleInput("min", Number(e.target.value))}
           />
         </div>
 
@@ -180,9 +163,7 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({ min, max, step }) =
           <input
             type='text'
             value={maxValue}
-            onChange={(e) => setMaxValue(Number(e.target.value))}
-            onBlur={handleMaxCommit}
-            onKeyDown={(e) => e.key === "Enter" && handleMaxCommit()}
+            onChange={(e) => handleInput("max", Number(e.target.value))}
           />
         </div>
       </div>

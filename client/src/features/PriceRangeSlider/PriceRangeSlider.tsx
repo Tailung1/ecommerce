@@ -76,7 +76,7 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({ min, max, step }) =
     if (!sliderRef.current) return;
     const rect = sliderRef.current.getBoundingClientRect();
     const percent = Math.min(Math.max((e.clientX - rect.left) / rect.width, 0), 1);
-    const value = snap(percent * (max - min) + min);
+  const value = snap(percent * (max - min) + min);
 
     setIsClickMove(true);
     const distMin = Math.abs(value - minValue);
@@ -94,10 +94,10 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({ min, max, step }) =
   const handleInput = (target: "min" | "max", value: number) => {
     if (isNaN(value)) return;
     if (target === "min") {
-      const clamped = Math.min(Math.max(value, min), max);
+      const clamped = Math.min(Math.max(value, min), maxValue);
       setMinValue(clamped);
     } else {
-      const clamped = Math.min(Math.max(value, min), max);
+      const clamped = Math.min(Math.max(value, minValue), max);
       setMaxValue(clamped);
     }
   };

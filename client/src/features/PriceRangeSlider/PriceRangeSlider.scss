@@ -28,23 +28,34 @@
   transform: translate(-50%, -50%);
   width: 30px;
   height: 30px;
-  background: white;
+  background: orange;
   border: 2px solid orange;
   border-radius: 50%;
   cursor: pointer;
   z-index: 2;
+  transition: box-shadow 0.1s;
+}
+
+.slider-handle.active {
+  box-shadow: 0 0 0 8px rgba(255, 165, 0, 0.2); // small halo on focus/click
+}
+
+.slider-handle.dragging {
+  box-shadow: 0 0 0 12px rgba(255, 165, 0, 0.3); // bigger halo while dragging
+}
+.slider-handle:focus {
+  outline: none; /* removes the blue focus border */
 }
 
 .slider-label {
   position: absolute;
-  top: -25px;
+  top: -35px;
   text-align: center;
   padding: 0 10px;
   font-size: 13px;
   transform: translateX(-25%);
-
   color: black;
-  background-color:white;
+  background-color: white;
   pointer-events: none;
 }
 
@@ -80,7 +91,6 @@
     font-size: 16px;
     border-radius: 4px;
     transition: border 0.2s;
-    // -moz-appearance: textfield; /* Firefox */
   }
 
   input:focus {
@@ -89,7 +99,7 @@
 
   input::-webkit-inner-spin-button,
   input::-webkit-outer-spin-button {
-    -webkit-appearance: none; /* Chrome/Safari */
+    -webkit-appearance: none;
     margin: 0;
   }
 }

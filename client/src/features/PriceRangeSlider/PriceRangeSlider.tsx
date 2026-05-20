@@ -9,6 +9,8 @@ interface PriceRangeSliderProps {
 
 const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({ min, max, step }) => {
   const [minValue, setMinValue] = useState(min);
+  const [inputMinValue, setInputMinValue] = useState(max);
+  const [inputMaxValue, setInputMaxValue] = useState(max);
   const [maxValue, setMaxValue] = useState(max);
   const [draggingTarget, setDraggingTarget] = useState<"min" | "max" | null>(null);
   const [activeHandle, setActiveHandle] = useState<"min" | "max" | null>(null);

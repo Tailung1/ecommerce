@@ -9,6 +9,7 @@
   border-radius: 1px;
   width: 100%;
   border-radius: 3px;
+  background-color: green;
 }
 .slider-range {
   position: absolute;
@@ -23,7 +24,6 @@
   flex-direction: column;
   gap: 10px;
   width: 40px;
-  bottom: -18px;
 }
 
 .handle-container > span {
@@ -37,5 +37,8 @@
   height: 35px;
   border-radius: 20px;
   cursor: pointer;
+  user-select: none;
   z-index: 1;
+  transform: translate(-50%,-50%);
+
 }

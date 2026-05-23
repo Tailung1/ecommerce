@@ -39,6 +39,31 @@
   cursor: pointer;
   user-select: none;
   z-index: 1;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
+}
 
+.slider-inputs-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  position: absolute;
+  top: 50px;
+}
+.slider-inputs-container > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid red;
+  padding: 12px;
+  width: 200px;
+}
+.slider-inputs-container * {
+  font-size: 18px;
+}
+
+.slider-inputs-container * input {
+  all: unset;
+  width: 50px;
 }

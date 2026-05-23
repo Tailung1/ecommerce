@@ -2,7 +2,7 @@ import "./PriceRangeSlider.scss";
 import { useEffect, useState, useRef } from "react";
 
 export default function PriceRangeSlider({
-//   min = 0,
+  min = 0,
   max = 2000,
   step = 20,
 }: {
@@ -11,7 +11,7 @@ export default function PriceRangeSlider({
   step: number;
 }) {
   const sliderRef = useRef<HTMLDivElement>(null);
-  const [minValue, setMinValue] = useState<number>(0);
+  const [minValue, setMinValue] = useState<number>(min);
   const [maxValue, setMaxValue] = useState<number>(max);
   const [draggingTarget, setDraggingTarget] = useState<"min" | "max" | null>(null);
 
@@ -83,9 +83,15 @@ export default function PriceRangeSlider({
         <span>{maxValue}</span>
         <div onMouseDown={() => setDraggingTarget("max")} className='handle'></div>
       </div>
-      <div className='flex gap-10 absolute top-10'>
-        <span>{minValue}</span>
-        <span>{maxValue}</span>
+      <div className='slider-inputs-container '>
+        <div>
+          <span>MIN</span>
+          <input value={minValue} type='text' />
+        </div>
+        <div>
+          <span>MAX</span>
+          <input value={maxValue} type='text' />
+        </div>
       </div>
     </div>
   );

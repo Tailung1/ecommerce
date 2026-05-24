@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import "./PriceRangeSlider.scss";
+import "./t.scss";
 
 interface PriceRangeSliderProps {
   min: number;

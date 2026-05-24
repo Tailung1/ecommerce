@@ -37,7 +37,6 @@ export default function PriceRangeSlider({
       } else {
         setMinValue(value);
       }
-      setMinValue(value);
     } else if (draggingTarget === "MAX") {
       if (value <= minValue) {
         setMaxValue(minValue);

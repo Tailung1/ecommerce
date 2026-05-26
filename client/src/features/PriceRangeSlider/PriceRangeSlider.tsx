@@ -13,21 +13,31 @@ export default function PriceRangeSlider({
   const sliderRef = useRef<HTMLDivElement>(null);
   const [minValue, setMinValue] = useState<number>(min);
   const [maxValue, setMaxValue] = useState<number>(max);
+  //   const [minInput, setMinInput] = useState<number>(min);
+  //   const [maxInput, setMaxInput] = useState<number>(max);
+
   const [draggingTarget, setDraggingTarget] = useState<"MIN" | "MAX" | null>(null);
 
-  const clamp = (percent: number) => Math.min(Math.max(percent, 0), 1);
+  const clamp = (value: number, minBound: number, maxBound: number) =>
+    Math.min(Math.max(value, minBound), maxBound);
+
   const snap = (value: number) => {
     let snapped = Math.round(value / step) * step;
     if (snapped > max) return max;
     return snapped;
   };
 
-  const handleMove = (clientX: number) => {
-    if (!sliderRef.current) return;
-    const rect = sliderRef.current.getBoundingClientRect();
+  const positionToValue = (clientX: number) => {
+    if (!sliderRef.current) return min;
 
-    let percent = clamp((clientX - rect.left) / rect.width);
-    let value = snap(percent * max);
+    const rect = sliderRef.current.getBoundingClientRect();
+    const percent = clamp((clientX - rect.left) / rect.width, 0, 1);
+    const value = snap(percent * max);
+    return value;
+  };
+
+  const handleMove = (clientX: number) => {
+    let value = positionToValue(clientX);
 
     if (draggingTarget === "MIN") {
       if (value >= maxValue) {
@@ -77,16 +87,22 @@ export default function PriceRangeSlider({
 
   // Click
   const handleClickToMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!sliderRef.current) return;
-    const rect = sliderRef.current.getBoundingClientRect();
-    let percent = clamp((e.clientX - rect.left) / rect.width);
-    let value = snap(percent * max);
+    let value = positionToValue(e.clientX);
 
     let distMin = Math.abs(value - minValue);
     let distMax = Math.abs(value - maxValue);
 
     if (distMin > distMax) setMaxValue(value);
     else setMinValue(value);
+  };
+
+  const handleInputChange = (target: "MIN" | "MAX", rawValue: number) => {
+    //     if (target === "MIN") {
+    //       setMinInput(rawValue);
+    //     } else {
+    //       setMaxInput(rawValue);
+    //     }
+    //     let normalized=
   };
 
   const minPercent = (minValue / max) * 100;
@@ -111,11 +127,10 @@ export default function PriceRangeSlider({
       >
         <span>{minValue}</span>
         <div
-        style={{backgroundColor:"yellow",zIndex:"10"}}
           onTouchStart={() => startDrag("MIN")}
           onMouseDown={() => setDraggingTarget("MIN")}
           onTouchEnd={endDrag}
-          className='handle '
+          className='handle'
         ></div>
       </div>
 
@@ -135,11 +150,19 @@ export default function PriceRangeSlider({
       <div className='slider-inputs-container '>
         <div>
           <span>MIN</span>
-          <input onChange={(e) => e.target.value} value={minValue} type='text' />
+          <input
+            onChange={(e) => handleInputChange("MIN", Number(e.target.value))}
+            value={minValue}
+            type='text'
+          />
         </div>
         <div>
           <span>MAX</span>
-          <input onChange={(e) => e.target.value} value={maxValue} type='text' />
+          <input
+            onChange={(e) => handleInputChange("MAX", Number(e.target.value))}
+            value={maxValue}
+            type='text'
+          />
         </div>
       </div>
     </div>

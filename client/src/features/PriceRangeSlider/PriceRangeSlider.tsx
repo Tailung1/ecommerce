@@ -13,8 +13,8 @@ export default function PriceRangeSlider({
   const sliderRef = useRef<HTMLDivElement>(null);
   const [minValue, setMinValue] = useState<number>(min);
   const [maxValue, setMaxValue] = useState<number>(max);
-  //   const [minInput, setMinInput] = useState<number>(min);
-  //   const [maxInput, setMaxInput] = useState<number>(max);
+  const [minInput, setMinInput] = useState<number>(min);
+  const [maxInput, setMaxInput] = useState<number>(max);
 
   const [draggingTarget, setDraggingTarget] = useState<"MIN" | "MAX" | null>(null);
 
@@ -43,17 +43,23 @@ export default function PriceRangeSlider({
       if (value >= maxValue) {
         setMinValue(maxValue);
         setMaxValue(value);
+        setMinInput(maxValue);
+        setMaxInput(value);
         setDraggingTarget("MAX");
       } else {
         setMinValue(value);
+        setMinInput(value);
       }
     } else if (draggingTarget === "MAX") {
       if (value <= minValue) {
         setMaxValue(minValue);
         setMinValue(value);
+        setMinInput(value);
+        setMaxInput(maxValue);
         setDraggingTarget("MIN");
       } else {
         setMaxValue(value);
+        setMaxInput(value);
       }
     }
   };
@@ -92,17 +98,47 @@ export default function PriceRangeSlider({
     let distMin = Math.abs(value - minValue);
     let distMax = Math.abs(value - maxValue);
 
-    if (distMin > distMax) setMaxValue(value);
-    else setMinValue(value);
+    if (distMin > distMax) {
+      setMaxValue(value);
+      setMaxInput(value);
+    } else {
+      setMinValue(value);
+      setMinInput(value);
+    }
   };
 
   const handleInputChange = (target: "MIN" | "MAX", rawValue: number) => {
-    //     if (target === "MIN") {
-    //       setMinInput(rawValue);
-    //     } else {
-    //       setMaxInput(rawValue);
-    //     }
-    //     let normalized=
+    if (target === "MIN") {
+      setMinInput(rawValue);
+    } else {
+      setMaxInput(rawValue);
+    }
+    if ( maxValue < minValue) return;
+    let nextMin = minValue;
+    let nextMax = maxValue;
+
+    const normalized = clamp(rawValue, min, max);
+
+    if (target === "MIN") {
+      if (normalized > maxValue) {
+        nextMin = maxValue;
+        nextMax = normalized;
+      } else {
+        nextMin = normalized;
+      }
+    }
+
+    if (target === "MAX") {
+      if (normalized < minValue) {
+        nextMin = normalized;
+        nextMax = minValue;
+      } else {
+        nextMax = normalized;
+      }
+    }
+
+    setMinValue(nextMin);
+    setMaxValue(nextMax);
   };
 
   const minPercent = (minValue / max) * 100;
@@ -152,7 +188,7 @@ export default function PriceRangeSlider({
           <span>MIN</span>
           <input
             onChange={(e) => handleInputChange("MIN", Number(e.target.value))}
-            value={minValue}
+            value={minInput}
             type='text'
           />
         </div>
@@ -160,7 +196,7 @@ export default function PriceRangeSlider({
           <span>MAX</span>
           <input
             onChange={(e) => handleInputChange("MAX", Number(e.target.value))}
-            value={maxValue}
+            value={maxInput}
             type='text'
           />
         </div>

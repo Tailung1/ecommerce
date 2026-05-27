@@ -140,11 +140,13 @@ export default function PriceRangeSlider({
       if (minInput > minValue) {
         if (clamped <= minValue) {
           nextMin = clamped;
-        } else if (clamped > minValue && clamped <= maxValue) {
-          nextMin = clamped;
-        } else if (clamped > minValue && clamped > maxValue) {
-          nextMin = maxValue;
-          nextMax = clamped;
+        } else if (clamped > minValue) {
+          if (clamped <= maxValue) {
+            nextMin = clamped;
+          } else if (clamped > maxValue) {
+            nextMin = maxValue;
+            nextMax = clamped;
+          }
         }
       } else if (clamped <= minValue) {
         nextMin = clamped;

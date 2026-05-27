@@ -113,30 +113,44 @@ export default function PriceRangeSlider({
     } else {
       setMaxInput(rawValue);
     }
-    if ( maxValue < minValue) return;
+    if (maxValue < minValue) return;
     let nextMin = minValue;
     let nextMax = maxValue;
 
-    const normalized = clamp(rawValue, min, max);
+    const clamped = clamp(rawValue, min, max);
 
     if (target === "MIN") {
-      if (normalized > maxValue) {
+      if (maxInput < max && maxValue >= max && clamped >= max) {
+        return;
+      } else if (maxInput < max && maxValue >= max && clamped < max) {
+        nextMin = clamped;
+        nextMax = minValue;
+      } else if (clamped > maxValue) {
         nextMin = maxValue;
-        nextMax = normalized;
+        nextMax = clamped;
       } else {
-        nextMin = normalized;
+        nextMin = clamped;
       }
     }
 
     if (target === "MAX") {
-      if (normalized < minValue) {
-        nextMin = normalized;
+      if (minInput > minValue) {
+        if (clamped <= minValue) {
+          nextMin = clamped;
+          nextMax = minInput;
+        } else if (clamped > minValue && clamped <= maxValue) {
+          nextMin = clamped;
+        } else if (clamped > minValue && clamped > maxValue) {
+          nextMin = maxValue;
+          nextMax = clamped;
+        }
+      } else if (clamped <= minValue) {
+        nextMin = clamped;
         nextMax = minValue;
       } else {
-        nextMax = normalized;
+        nextMax = clamped;
       }
     }
-
     setMinValue(nextMin);
     setMaxValue(nextMax);
   };
@@ -161,7 +175,7 @@ export default function PriceRangeSlider({
         style={{ left: `${minPercent}%`, transition: !draggingTarget ? "0.15s" : "" }}
         className='min-container handle-container'
       >
-        <span>{minValue}</span>
+        <span style={{ backgroundColor: "green" }}>{minValue}</span>
         <div
           onTouchStart={() => startDrag("MIN")}
           onMouseDown={() => setDraggingTarget("MIN")}

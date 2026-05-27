@@ -31,9 +31,15 @@
 
 .handle-container > span {
   width: 25px;
-  background-color: rgb(140, 161, 155);
   padding: 3px 7px;
   width: fit-content;
+}
+.handle-price-styles-for-mobile {
+  transform: translateY(300%);
+}
+.handle-price-styles-for-pc {
+  transform: translateY(-30%);
+  background-color: rgb(140, 161, 155);
 }
 .handle {
   background-color: rgb(248, 111, 31);
@@ -51,7 +57,7 @@
   align-items: center;
   gap: 20px;
   position: absolute;
-  top: 50px;
+  top: 80px;
   width: 100%;
 }
 .slider-inputs-container > div {

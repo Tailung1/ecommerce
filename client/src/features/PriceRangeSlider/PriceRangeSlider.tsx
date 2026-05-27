@@ -1,5 +1,6 @@
 import "./PriceRangeSlider.scss";
 import { useEffect, useState, useRef } from "react";
+import useWindowWidth from "../../CosutmHooks/useWindowWidth";
 
 export default function PriceRangeSlider({
   min = 0,
@@ -10,6 +11,8 @@ export default function PriceRangeSlider({
   max: number;
   step: number;
 }) {
+  const width = useWindowWidth();
+  const isPC = width > 1023;
   const sliderRef = useRef<HTMLDivElement>(null);
   const [minValue, setMinValue] = useState<number>(min);
   const [maxValue, setMaxValue] = useState<number>(max);
@@ -137,7 +140,6 @@ export default function PriceRangeSlider({
       if (minInput > minValue) {
         if (clamped <= minValue) {
           nextMin = clamped;
-          nextMax = minInput;
         } else if (clamped > minValue && clamped <= maxValue) {
           nextMin = clamped;
         } else if (clamped > minValue && clamped > maxValue) {
@@ -175,7 +177,9 @@ export default function PriceRangeSlider({
         style={{ left: `${minPercent}%`, transition: !draggingTarget ? "0.15s" : "" }}
         className='min-container handle-container'
       >
-        <span style={{ backgroundColor: "green" }}>{minValue}</span>
+        <span className={isPC ? "handle-price-styles-for-pc" : "handle-price-styles-for-mobile"}>
+          {minValue}
+        </span>
         <div
           onTouchStart={() => startDrag("MIN")}
           onMouseDown={() => setDraggingTarget("MIN")}
@@ -188,7 +192,9 @@ export default function PriceRangeSlider({
         style={{ left: `${maxPercent}%`, transition: !draggingTarget ? "0.15s" : "" }}
         className='max-container handle-container'
       >
-        <span>{maxValue}</span>
+        <span className={isPC ? "handle-price-styles-for-pc" : "handle-price-styles-for-mobile"}>
+          {maxValue}
+        </span>
         <div
           onTouchStart={() => startDrag("MAX")}
           onMouseDown={() => setDraggingTarget("MAX")}

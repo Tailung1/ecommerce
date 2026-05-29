@@ -182,7 +182,7 @@ export default function PriceRangeSlider({
           <div className='handle-wrapper'>
             <div className={`handle-price-styles ${isPC ? "above" : "below"}`}>
               <span>{minValue}</span>
-              <img src={lariSign} alt='Lari sign' />
+              <img className='lari-sign' src={lariSign} alt='Lari sign' />
             </div>
             <div
               onTouchStart={() => startDrag("MIN")}
@@ -200,7 +200,7 @@ export default function PriceRangeSlider({
           <div className='handle-wrapper'>
             <div className={`handle-price-styles ${isPC ? "above" : "below"}`}>
               <span>{maxValue}</span>
-              <img src={lariSign} alt='Lari sign' />
+              <img className='lari-sign' src={lariSign} alt='Lari sign' />
             </div>
             <div
               onTouchStart={() => startDrag("MAX")}
@@ -211,22 +211,28 @@ export default function PriceRangeSlider({
           </div>
         </div>
       </div>
-      <div className='slider-inputs-container '>
+      <div className='slider-inputs-container'>
         <div>
-          <span>MIN</span>
-          <input
-            onChange={(e) => handleInputChange("MIN", Number(e.target.value))}
-            value={minInput}
-            type='text'
-          />
+          <span>MIN:</span>
+          <div>
+            <input
+              onChange={(e) => handleInputChange("MIN", Number(e.target.value))}
+              className='costum-input d'
+              value={minInput}
+            />
+            <img className='lari-sign' src={lariSign} alt='Lari sign' />
+          </div>
         </div>
         <div>
-          <span>MAX</span>
-          <input
-            onChange={(e) => handleInputChange("MAX", Number(e.target.value))}
-            value={maxInput}
-            type='text'
-          />
+          <span>MAX:</span>
+          <div>
+            <input
+              onChange={(e) => handleInputChange("MAX", Number(e.target.value))}
+              className='costum-input d'
+              value={maxInput}
+            />
+            <img className='lari-sign' src={lariSign} alt='Lari sign' />
+          </div>
         </div>
       </div>
     </div>

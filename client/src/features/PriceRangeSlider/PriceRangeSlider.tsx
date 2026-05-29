@@ -1,4 +1,5 @@
 import "./PriceRangeSlider.scss";
+import lariSign from "../../assets/lari-sign.png";
 import { useEffect, useState, useRef } from "react";
 import useWindowWidth from "../../CosutmHooks/useWindowWidth";
 
@@ -179,30 +180,36 @@ export default function PriceRangeSlider({
         style={{ left: `${minPercent}%`, transition: !draggingTarget ? "0.15s" : "" }}
         className='min-container handle-container'
       >
-        <span className={isPC ? "handle-price-styles-for-pc" : "handle-price-styles-for-mobile"}>
-          {minValue}
-        </span>
-        <div
-          onTouchStart={() => startDrag("MIN")}
-          onMouseDown={() => setDraggingTarget("MIN")}
-          onTouchEnd={endDrag}
-          className='handle'
-        ></div>
+        <div className='handle-wrapper'>
+          <div className={`handle-price-styles ${isPC ? "above" : "below"}`}>
+            <span>{minValue}</span>
+            <img src={lariSign} alt='Lari sign' />
+          </div>
+          <div
+            onTouchStart={() => startDrag("MIN")}
+            onMouseDown={() => setDraggingTarget("MIN")}
+            onTouchEnd={endDrag}
+            className='handle'
+          ></div>
+        </div>
       </div>
 
       <div
         style={{ left: `${maxPercent}%`, transition: !draggingTarget ? "0.15s" : "" }}
         className='max-container handle-container'
       >
-        <span className={isPC ? "handle-price-styles-for-pc" : "handle-price-styles-for-mobile"}>
-          {maxValue}
-        </span>
-        <div
-          onTouchStart={() => startDrag("MAX")}
-          onMouseDown={() => setDraggingTarget("MAX")}
-          onTouchEnd={endDrag}
-          className='handle'
-        ></div>
+        <div className='handle-wrapper'>
+          <div className={`handle-price-styles ${isPC ? "above" : "below"}`}>
+            <span>{maxValue}</span>
+            <img src={lariSign} alt='Lari sign' />
+          </div>
+          <div
+            onTouchStart={() => startDrag("MAX")}
+            onMouseDown={() => setDraggingTarget("MAX")}
+            onTouchEnd={endDrag}
+            className='handle'
+          ></div>
+        </div>
       </div>
 
       <div className='slider-inputs-container '>

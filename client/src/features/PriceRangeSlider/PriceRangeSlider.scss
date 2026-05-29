@@ -9,16 +9,15 @@
   position: absolute;
   height: 13px;
   border-radius: 1px;
-  width: 96%;
+  width: 100%;
   border-radius: 3px;
   background-color: green;
 }
 .slider-range {
   position: absolute;
-  height: 13px;
+  height: 100%;
   border-radius: 1px;
   background-color: orange;
-  width: 100%;
 }
 ///////////
 .handle-container {
@@ -28,7 +27,7 @@
 .handle-wrapper {
   position: relative;
   width: 40px;
-  height: 35px;
+  height: 13px;
 }
 .handle {
   position: absolute;
@@ -66,7 +65,7 @@
 
 /* Mobile = below center */
 .handle-price-styles.below {
-  top: 130%;
+  top: 200%;
   background-color: white;
   color: black;
 }

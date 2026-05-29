@@ -164,54 +164,53 @@ export default function PriceRangeSlider({
   const maxPercent = (maxValue / max) * 100;
 
   return (
-    <div ref={sliderRef} className='price-slider-container'>
-      <div onClick={handleClickToMove} className='slider-track'></div>
-      <div
-        onClick={handleClickToMove}
-        style={{
-          left: `${minPercent}%`,
-          width: `${Math.abs(maxPercent - minPercent)}%`,
-          transition: !draggingTarget ? " 0.15s" : "",
-        }}
-        className='slider-range'
-      ></div>
+    <div className='price-slider-container'>
+      <div ref={sliderRef} onClick={handleClickToMove} className='slider-track'>
+        <div
+          style={{
+            left: `${minPercent}%`,
+            width: `${Math.abs(maxPercent - minPercent)}%`,
+            transition: !draggingTarget ? " 0.15s" : "",
+          }}
+          className='slider-range'
+        ></div>
 
-      <div
-        style={{ left: `${minPercent}%`, transition: !draggingTarget ? "0.15s" : "" }}
-        className='min-container handle-container'
-      >
-        <div className='handle-wrapper'>
-          <div className={`handle-price-styles ${isPC ? "above" : "below"}`}>
-            <span>{minValue}</span>
-            <img src={lariSign} alt='Lari sign' />
+        <div
+          style={{ left: `${minPercent}%`, transition: !draggingTarget ? "0.15s" : "" }}
+          className='min-container handle-container'
+        >
+          <div className='handle-wrapper'>
+            <div className={`handle-price-styles ${isPC ? "above" : "below"}`}>
+              <span>{minValue}</span>
+              <img src={lariSign} alt='Lari sign' />
+            </div>
+            <div
+              onTouchStart={() => startDrag("MIN")}
+              onMouseDown={() => setDraggingTarget("MIN")}
+              onTouchEnd={endDrag}
+              className='handle'
+            ></div>
           </div>
-          <div
-            onTouchStart={() => startDrag("MIN")}
-            onMouseDown={() => setDraggingTarget("MIN")}
-            onTouchEnd={endDrag}
-            className='handle'
-          ></div>
+        </div>
+
+        <div
+          style={{ left: `${maxPercent}%`, transition: !draggingTarget ? "0.15s" : "" }}
+          className='max-container handle-container'
+        >
+          <div className='handle-wrapper'>
+            <div className={`handle-price-styles ${isPC ? "above" : "below"}`}>
+              <span>{maxValue}</span>
+              <img src={lariSign} alt='Lari sign' />
+            </div>
+            <div
+              onTouchStart={() => startDrag("MAX")}
+              onMouseDown={() => setDraggingTarget("MAX")}
+              onTouchEnd={endDrag}
+              className='handle'
+            ></div>
+          </div>
         </div>
       </div>
-
-      <div
-        style={{ left: `${maxPercent}%`, transition: !draggingTarget ? "0.15s" : "" }}
-        className='max-container handle-container'
-      >
-        <div className='handle-wrapper'>
-          <div className={`handle-price-styles ${isPC ? "above" : "below"}`}>
-            <span>{maxValue}</span>
-            <img src={lariSign} alt='Lari sign' />
-          </div>
-          <div
-            onTouchStart={() => startDrag("MAX")}
-            onMouseDown={() => setDraggingTarget("MAX")}
-            onTouchEnd={endDrag}
-            className='handle'
-          ></div>
-        </div>
-      </div>
-
       <div className='slider-inputs-container '>
         <div>
           <span>MIN</span>

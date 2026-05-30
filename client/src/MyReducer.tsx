@@ -1,6 +1,6 @@
-import { useReducer } from "react";
+import { useReducer,createContext,useContext } from "react";
 
-const initialState: StateTypes = {
+const initialState: AuthStateTypes = {
   active: "auth",
   activeAuthOption: "number",
   isChecked: false,
@@ -8,10 +8,11 @@ const initialState: StateTypes = {
   currentCode: "995",
   inputValues: { email: "", password: "", number: "" },
   errors: { emailError: "", passwordError: "", numberError: "" },
+  enablePasswordReset: false,
 };
 
 const useAuthReducer = () => {
-  function reducer(state: StateTypes, action: ActionTypes) {
+  function reducer(state: AuthStateTypes, action: ActionTypes) {
     switch (action.type) {
       case "SET_ACTIVE":
         return { ...state, active: action.payload };
@@ -55,6 +56,8 @@ const useAuthReducer = () => {
           currentCode: action.payload,
           showCountryCodes: false,
         };
+      case "ENABLE_PASSWORD_RESET":
+        return { ...state, enablePasswordReset: action.payload };
       default:
         return state;
     }
@@ -62,8 +65,10 @@ const useAuthReducer = () => {
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
-
   return { state, dispatch };
 };
+
+const AuthProvider=createContext(null)
+
 
 export default useAuthReducer;

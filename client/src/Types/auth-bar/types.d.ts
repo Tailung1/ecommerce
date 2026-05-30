@@ -7,7 +7,7 @@ interface productType {
   category: string;
 }
 
-type StateTypes = {
+type AuthStateTypes = {
   active: "auth" | "register";
   activeAuthOption: "email" | "number";
   isChecked: boolean;
@@ -19,6 +19,7 @@ type StateTypes = {
     passwordError: string;
     numberError: string;
   };
+  enablePasswordReset:boolean
 };
 
 type Errors = {
@@ -42,4 +43,5 @@ type ActionTypes =
     }
   | { type: "RESET_FORM" }
   | { type: "TOGGLE_COUNTRY_CODES" }
-  | { type: "SET_COUNTRY_CODE"; payload: string };
+  | { type: "SET_COUNTRY_CODE"; payload: string }
+  | { type: "ENABLE_PASSWORD_RESET"; payload: boolean };

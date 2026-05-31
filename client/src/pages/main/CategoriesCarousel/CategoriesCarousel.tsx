@@ -68,7 +68,6 @@ export default function CategoriesAndCarousel() {
 
   useEffect(() => {
     setEnablePC(true);
-    console.log("hi")
   }, []);
 
   const handleScroll = (dir: "left" | "right") => {

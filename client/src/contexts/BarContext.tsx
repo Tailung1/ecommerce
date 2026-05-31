@@ -10,7 +10,7 @@ import React, {
 const initialState = {
   showAuthBar: false,
   showCompareBar: false,
-  showFilterBar: true,
+  showFilterBar: false,
   isExitingBar: false,
   alert: {
     showAlert: false,

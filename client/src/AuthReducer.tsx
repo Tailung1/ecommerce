@@ -1,6 +1,6 @@
-import { useReducer,createContext,useContext } from "react";
+import { useReducer } from "react";
 
-const initialState: AuthStateTypes = {
+const initialState: authStateTypes = {
   active: "auth",
   activeAuthOption: "number",
   isChecked: false,
@@ -12,7 +12,7 @@ const initialState: AuthStateTypes = {
 };
 
 const useAuthReducer = () => {
-  function reducer(state: AuthStateTypes, action: ActionTypes) {
+  function reducer(state: authStateTypes, action: authActionTypes) {
     switch (action.type) {
       case "SET_ACTIVE":
         return { ...state, active: action.payload };
@@ -63,12 +63,11 @@ const useAuthReducer = () => {
     }
   }
 
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [authState, authDispatch] = useReducer(reducer, initialState);
 
-  return { state, dispatch };
+  return { authState, authDispatch };
 };
 
-const AuthProvider=createContext(null)
 
 
 export default useAuthReducer;

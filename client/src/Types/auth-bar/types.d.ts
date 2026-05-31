@@ -7,7 +7,7 @@ interface productType {
   category: string;
 }
 
-type AuthStateTypes = {
+type authStateTypes = {
   active: "auth" | "register";
   activeAuthOption: "email" | "number";
   isChecked: boolean;
@@ -28,7 +28,7 @@ type Errors = {
   numberError: string;
 };
 
-type ActionTypes =
+type authActionTypes =
   | { type: "SET_ACTIVE"; payload: "auth" | "register" }
   | { type: "SET_AUTH_OPTION"; payload: "email" | "number" }
   | { type: "SET_CHECKED"; payload: boolean }

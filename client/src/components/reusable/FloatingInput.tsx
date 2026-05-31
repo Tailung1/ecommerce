@@ -7,6 +7,7 @@ interface propsTypes {
   propsedOnChange: (value: string) => void;
   errorMessage: string;
   active: "auth" | "register";
+  authDispatch:React.Dispatch<authActionTypes>
 }
 
 export default function FloatingInput({
@@ -15,6 +16,7 @@ export default function FloatingInput({
   propsedOnChange,
   errorMessage,
   active,
+  authDispatch,
 }: propsTypes) {
   const [activityTrack, setActivityTrack] = useState({
     isFocused: false,
@@ -41,25 +43,17 @@ export default function FloatingInput({
       </motion.label>
       <input
         id={inputId}
-        className={
-          hasError ? "border border-red-500" : "border border-white"
-        }
+        className={hasError ? "border border-red-500" : "border border-white"}
         value={value}
         onChange={(e) => propsedOnChange(e.target.value)}
-        onFocus={() =>
-          setActivityTrack((prev) => ({ ...prev, isFocused: true }))
-        }
-        onBlur={() =>
-          setActivityTrack((prev) => ({ ...prev, isFocused: false }))
-        }
+        onFocus={() => setActivityTrack((prev) => ({ ...prev, isFocused: true }))}
+        onBlur={() => setActivityTrack((prev) => ({ ...prev, isFocused: false }))}
         type='text'
       />
       <div className='input-feedback'>
         <span>{hasError ? errorMessage : ""}</span>
-        <span>
-          {label === "Password" && active === "auth"
-            ? "Forgot Password"
-            : ""}
+        <span onClick={() => authDispatch({ type: "ENABLE_PASSWORD_RESET", payload: true })}>
+          {label === "Password" && active === "auth" ? "Forgot Password" : ""}
         </span>
       </div>
     </div>

@@ -179,9 +179,7 @@ export default function AuthBar() {
               </div>
             ) : (
               <div
-                className={`auth-with-email-container ${
-                  isEmailError ? "emailInputExtraPaddingIN" : ""
-                }`}
+                className={`auth-with-email-container ${isEmailError ? "emailContainerGapIN" : ""}`}
               >
                 <FloatingInput
                   label={"Email"}
@@ -189,7 +187,6 @@ export default function AuthBar() {
                   propsedOnChange={(value) => handleValuesChange("email", value)}
                   errorMessage={authState.errors.emailError}
                   active={authState.active}
-                  
                 />
                 <FloatingInput
                   label={"Password"}

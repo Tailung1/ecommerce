@@ -6,7 +6,7 @@ interface propsTypes {
   value: string;
   propsedOnChange: (value: string) => void;
   errorMessage: string;
-  active: "auth" | "register";
+  active?: "auth" | "register";
   onForgotPasswordClick?: () => void;
 }
 

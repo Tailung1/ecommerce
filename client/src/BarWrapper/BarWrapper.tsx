@@ -1,5 +1,5 @@
 import "./BarWrapper.scss";
-import AuthBar from "../features/AuthBar/AuthBar";
+import AuthBar from "../features/Auth/AuthBar/AuthBar";
 import CompareBar from "../features/Compare/CompareBar";
 import AlertBar from "../features/AlertBar/AlertBar";
 import FilterBar from "../features/FilterBar/FilterBar";

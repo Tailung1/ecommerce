@@ -7,7 +7,7 @@ interface propsTypes {
   propsedOnChange: (value: string) => void;
   errorMessage: string;
   active: "auth" | "register";
-  authDispatch:React.Dispatch<authActionTypes>
+  onForgotPasswordClick?: () => void;
 }
 
 export default function FloatingInput({
@@ -16,7 +16,7 @@ export default function FloatingInput({
   propsedOnChange,
   errorMessage,
   active,
-  authDispatch,
+  onForgotPasswordClick,
 }: propsTypes) {
   const [activityTrack, setActivityTrack] = useState({
     isFocused: false,
@@ -52,7 +52,7 @@ export default function FloatingInput({
       />
       <div className='input-feedback'>
         <span>{hasError ? errorMessage : ""}</span>
-        <span onClick={() => authDispatch({ type: "ENABLE_PASSWORD_RESET", payload: true })}>
+        <span onClick={onForgotPasswordClick}>
           {label === "Password" && active === "auth" ? "Forgot Password" : ""}
         </span>
       </div>

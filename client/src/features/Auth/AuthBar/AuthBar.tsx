@@ -1,14 +1,14 @@
 import "./AuthBar.scss";
-import "../../css/reusable/bar.scss";
-import FloatingInput from "../../components/reusable/FloatingInput";
-import icon from "../../assets/main-logo.png";
-import checked from "../../assets/checked-rules.png";
-import unchecked from "../../assets/unchecked.png";
-import exitBtn from "../../assets/reject.png";
-import useAuthReducer from "../../AuthReducer";
-import { useBarStateValue } from "../../contexts/BarContext";
-import { useBarDispatch } from "../../contexts/BarContext";
-import ResetPassword from "./ResetPassword";
+import "../../../css/reusable/bar.scss";
+import FloatingInput from "../../../components/reusable/FloatingInput";
+import icon from "../../../assets/main-logo.png";
+import checked from "../../../assets/checked-rules.png";
+import unchecked from "../../../assets/unchecked.png";
+import exitBtn from "../../../assets/reject.png";
+import useAuthReducer from "../../../AuthReducer";
+import { useBarStateValue } from "../../../contexts/BarContext";
+import { useBarDispatch } from "../../../contexts/BarContext";
+import ResetPassword from "../ResetPassword/ResetPassword";
 
 export default function AuthBar() {
   const { authState, authDispatch } = useAuthReducer();
@@ -19,6 +19,10 @@ export default function AuthBar() {
   const EmailAuthIsActive = authState.activeAuthOption !== "number";
   const checkIcon = authState.isChecked ? checked : unchecked;
   const isEmailError = authState.errors.emailError !== "";
+
+  const onForgotPasswordClick = () => {
+    authDispatch({ type: "ENABLE_PASSWORD_RESET", payload: true });
+  };
 
   const resetValues = () => {
     authDispatch({ type: "RESET_FORM" });
@@ -55,7 +59,7 @@ export default function AuthBar() {
     <>
       {authState.enablePasswordReset ? (
         <div
-        key="reset"
+          key='reset'
           onAnimationEnd={(e) => {
             // Checking isExitingBar is redundant in this case,
             // but useful if there are multiple animations on this element.
@@ -77,7 +81,7 @@ export default function AuthBar() {
         </div>
       ) : (
         <div
-        key="auth"
+          key='auth'
           onAnimationEnd={(e) => {
             // Checking isExitingBar is redundant in this case,
             // but useful if there are multiple animations on this element.
@@ -171,7 +175,6 @@ export default function AuthBar() {
                   propsedOnChange={(value) => handleValuesChange("number", value)}
                   errorMessage={authState.errors.numberError}
                   active={authState.active}
-                  authDispatch={authDispatch}
                 />
               </div>
             ) : (
@@ -186,7 +189,7 @@ export default function AuthBar() {
                   propsedOnChange={(value) => handleValuesChange("email", value)}
                   errorMessage={authState.errors.emailError}
                   active={authState.active}
-                  authDispatch={authDispatch}
+                  
                 />
                 <FloatingInput
                   label={"Password"}
@@ -194,7 +197,7 @@ export default function AuthBar() {
                   propsedOnChange={(value) => handleValuesChange("password", value)}
                   errorMessage={authState.errors.passwordError}
                   active={authState.active}
-                  authDispatch={authDispatch}
+                  onForgotPasswordClick={onForgotPasswordClick}
                 />
               </div>
             )}

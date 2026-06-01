@@ -9,10 +9,12 @@ import useAuthReducer from "../../../AuthReducer";
 import { useBarStateValue } from "../../../contexts/BarContext";
 import { useBarDispatch } from "../../../contexts/BarContext";
 import ResetPassword from "../ResetPassword/ResetPassword";
+import { useState } from "react";
 
 export default function AuthBar() {
   const { authState, authDispatch } = useAuthReducer();
   const { setBar } = useBarDispatch();
+    const [otpPhase, setOtpPhase] = useState<boolean>(false);
   const isExitingBar = useBarStateValue("isExitingBar");
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const countryCodes = ["995", "242", "927", "315"];
@@ -59,7 +61,7 @@ export default function AuthBar() {
     <>
       {authState.enablePasswordReset ? (
         <div
-          key='reset'
+          key="reset"
           onAnimationEnd={(e) => {
             // Checking isExitingBar is redundant in this case,
             // but useful if there are multiple animations on this element.
@@ -68,7 +70,7 @@ export default function AuthBar() {
               setBar("isExitingBar", false);
             }
           }}
-          className={`Bar ${isExitingBar && "ExitBar"}`}
+          className={`Bar ${isExitingBar && "ExitBar"} ${otpPhase?"animateForPassRecovery":""}`}
         >
           {" "}
           <img
@@ -77,7 +79,7 @@ export default function AuthBar() {
             className='exit-btn w-10 h-8'
             alt='Exit icon'
           />
-          <ResetPassword />
+          <ResetPassword otpPhase={otpPhase} setOtpPhase={setOtpPhase} />
         </div>
       ) : (
         <div

@@ -11,6 +11,8 @@ export default function Sort() {
         className='flex justify-between p-2 rounded-lg min-w-[200px] bg-red-400'
       >
         <span>Sort</span>
+        <span>{sortOption} temporary !!! vercel error</span>
+
         <img
           className={`${rotate ? "rotate-[90deg]" : "rotate-[-90deg]"}  duration-200`}
           src={ArrowIocn}

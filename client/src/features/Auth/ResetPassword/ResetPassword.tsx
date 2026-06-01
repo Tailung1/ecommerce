@@ -11,12 +11,13 @@ export default function ResetPassword({
 }) {
   const [value, setValue] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
-  const [otp, setOtp] = useState<boolean>(false);
+//   const [otp, setOtp] = useState<boolean>(false);
   const [userEmail, setUserEmail] = useState<string>("ramaz11");
 
   const handleValueChange = (v: string) => {
     setValue(v);
     if (v.length > 4) setErrorMessage("");
+    setUserEmail("") // temporary
   };
 
   const hanldeSubmit = () => {

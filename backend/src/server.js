@@ -15,6 +15,4 @@ app.use(express.json());
 
 app.use("/api/products", router);
 
-app.listen(3000, () =>
-  console.log("Backend server is running on port '3000' ")
-);
+app.listen(3000, () => console.log("Backend server is running on port '3000' "));

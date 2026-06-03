@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
-import router from "./routes/route.js";
+import productRouter from "./routes/productRoutes.js";
+import userRouter from "./routes/userRoutes.js";
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(
 
 app.use(express.json());
 
-app.use("/api/products", router);
+app.use("/api/products", productRouter);
+app.use("/api/users",userRouter)
 
 app.listen(3000, () => console.log("Backend server is running on port '3000' "));

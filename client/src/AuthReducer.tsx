@@ -1,7 +1,7 @@
 import { useReducer } from "react";
 
 const initialState: authStateTypes = {
-  active: "auth",
+  activeMode: "auth" || "register",
   activeAuthOption: "number",
   isChecked: false,
   showCountryCodes: false,
@@ -15,7 +15,7 @@ const useAuthReducer = () => {
   function reducer(state: authStateTypes, action: authActionTypes) {
     switch (action.type) {
       case "SET_ACTIVE":
-        return { ...state, active: action.payload };
+        return { ...state, activeMode: action.payload };
       case "SET_AUTH_OPTION":
         return { ...state, activeAuthOption: action.payload };
       case "SET_CHECKED":

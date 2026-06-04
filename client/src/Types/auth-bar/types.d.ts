@@ -8,7 +8,7 @@ interface productType {
 }
 
 type authStateTypes = {
-  active: "auth" | "register";
+  activeMode: "auth" | "register";
   activeAuthOption: "email" | "number";
   isChecked: boolean;
   showCountryCodes: boolean;
@@ -19,7 +19,7 @@ type authStateTypes = {
     passwordError: string;
     numberError: string;
   };
-  enablePasswordReset:boolean
+  enablePasswordReset: boolean;
 };
 
 type Errors = {

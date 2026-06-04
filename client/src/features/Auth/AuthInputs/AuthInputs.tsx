@@ -11,9 +11,9 @@ interface AuthInputsProps {
   };
   handleValuesChange: (field: "email" | "password" | "number", value: string) => void;
   authCommands: {
-    onToggleCountryCodes: () => void;
-    onSelectCountryCode: (code: string) => void;
-    onEnablePasswordReset: () => void;
+    ToggleCountryCodes: () => void;
+    SelectCountryCode: (code: string) => void;
+    EnablePasswordReset: () => void;
   };
 }
 
@@ -22,7 +22,7 @@ export default function ({ authState, handleValuesChange, authCommands }: AuthIn
   const isEmailError = authState.errors.emailError !== "";
 
   const onForgotPasswordClick = () => {
-    authCommands.onEnablePasswordReset();
+    authCommands.EnablePasswordReset();
   };
 
   return (
@@ -30,14 +30,14 @@ export default function ({ authState, handleValuesChange, authCommands }: AuthIn
       {authState.activeAuthOption === "number" ? (
         <div className='auth-and-register-with-number-container'>
           <div className='country-codes-container'>
-            <div onClick={authCommands.onToggleCountryCodes} className='country-code'>
+            <div onClick={authCommands.ToggleCountryCodes} className='country-code'>
               +{authState.currentCode}
             </div>
 
             {authState.showCountryCodes && (
               <div className='codes-wrapper'>
                 {countryCodes.map((code) => (
-                  <span key={code} onClick={() => authCommands.onSelectCountryCode(code)}>
+                  <span key={code} onClick={() => authCommands.SelectCountryCode(code)}>
                     +{code}
                   </span>
                 ))}

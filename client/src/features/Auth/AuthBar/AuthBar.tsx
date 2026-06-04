@@ -21,11 +21,11 @@ export default function AuthBar() {
   const checkIcon = authState.isChecked ? checked : unchecked;
 
   const authCommands = {
-    onToggleCountryCodes: () => authDispatch({ type: "TOGGLE_COUNTRY_CODES" }),
-    onSelectCountryCode: (code: string) =>
+    ToggleCountryCodes: () => authDispatch({ type: "TOGGLE_COUNTRY_CODES" }),
+    SelectCountryCode: (code: string) =>
       authDispatch({ type: "SET_COUNTRY_CODE", payload: code }),
 
-    onEnablePasswordReset: () => authDispatch({ type: "ENABLE_PASSWORD_RESET", payload: true }),
+    EnablePasswordReset: () => authDispatch({ type: "ENABLE_PASSWORD_RESET", payload: true }),
   };
 
   const handleValuesChange = (field: "email" | "password" | "number", value: string) => {

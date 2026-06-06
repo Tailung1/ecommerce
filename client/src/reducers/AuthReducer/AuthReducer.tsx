@@ -1,21 +1,22 @@
 import { useReducer } from "react";
+import type {AuthState,AuthAction} from "./auth-types"
 
-const initialState: authStateTypes = {
-  activeMode: "auth" || "register",
-  activeAuthOption: "number",
+const initialState: AuthState = {
+  authView: "login" || "register",
+  activeAuthOption: "phone",
   isChecked: false,
   showCountryCodes: false,
   currentCode: "995",
-  inputValues: { email: "", password: "", number: "" },
-  errors: { emailError: "", passwordError: "", numberError: "" },
+  inputValues: { email: "", password: "", phone: "" },
+  errors: { emailError: "", passwordError: "", phoneError: "" },
   enablePasswordReset: false,
 };
 
 const useAuthReducer = () => {
-  function reducer(state: authStateTypes, action: authActionTypes) {
+  function reducer(state: AuthState, action: AuthAction) {
     switch (action.type) {
-      case "SET_ACTIVE":
-        return { ...state, activeMode: action.payload };
+      case "SET_AUTH_VIEW":
+        return { ...state, authView: action.payload };
       case "SET_AUTH_OPTION":
         return { ...state, activeAuthOption: action.payload };
       case "SET_CHECKED":
@@ -37,11 +38,11 @@ const useAuthReducer = () => {
       case "RESET_FORM":
         return {
           ...state,
-          inputValues: { email: "", password: "", number: "" },
+          inputValues: { email: "", password: "", phone: "" },
           errors: {
             emailError: "",
             passwordError: "",
-            numberError: "",
+            phoneError: "",
           },
           showCountryCodes: false,
         };
@@ -67,7 +68,5 @@ const useAuthReducer = () => {
 
   return { authState, authDispatch };
 };
-
-
 
 export default useAuthReducer;

@@ -1,15 +1,16 @@
 import FloatingInput from "../../../components/reusable/FloatingInput";
+import "./AuthInputs.scss"
 
 interface AuthInputsProps {
   authState: {
-    activeMode: "auth" | "register";
-    activeAuthOption: "number" | "email";
-    inputValues: { email: string; password: string; number: string };
-    errors: { emailError: string; passwordError: string; numberError: string };
+    authView: "login" | "register";
+    activeAuthOption: "phone" | "email";
+    inputValues: { email: string; password: string; phone: string };
+    errors: { emailError: string; passwordError: string; phoneError: string };
     currentCode: string;
     showCountryCodes: boolean;
   };
-  handleValuesChange: (field: "email" | "password" | "number", value: string) => void;
+  handleValuesChange: (field: "email" | "password" | "phone", value: string) => void;
   authCommands: {
     ToggleCountryCodes: () => void;
     SelectCountryCode: (code: string) => void;
@@ -27,8 +28,8 @@ export default function ({ authState, handleValuesChange, authCommands }: AuthIn
 
   return (
     <div>
-      {authState.activeAuthOption === "number" ? (
-        <div className='auth-and-register-with-number-container'>
+      {authState.activeAuthOption === "phone" ? (
+        <div className='auth-and-register-with-phone-container'>
           <div className='country-codes-container'>
             <div onClick={authCommands.ToggleCountryCodes} className='country-code'>
               +{authState.currentCode}
@@ -46,10 +47,10 @@ export default function ({ authState, handleValuesChange, authCommands }: AuthIn
           </div>
           <FloatingInput
             label={"Phone number"}
-            value={authState.inputValues.number}
-            propsedOnChange={(value) => handleValuesChange("number", value)}
-            errorMessage={authState.errors.numberError}
-            active={authState.activeMode}
+            value={authState.inputValues.phone}
+            propsedOnChange={(value) => handleValuesChange("phone", value)}
+            errorMessage={authState.errors.phoneError}
+            active={authState.authView}
           />
         </div>
       ) : (
@@ -59,14 +60,14 @@ export default function ({ authState, handleValuesChange, authCommands }: AuthIn
             value={authState.inputValues.email}
             propsedOnChange={(value) => handleValuesChange("email", value)}
             errorMessage={authState.errors.emailError}
-            active={authState.activeMode}
+            active={authState.authView}
           />
           <FloatingInput
             label={"Password"}
             value={authState.inputValues.password}
             propsedOnChange={(value) => handleValuesChange("password", value)}
             errorMessage={authState.errors.passwordError}
-            active={authState.activeMode}
+            active={authState.authView}
             onForgotPasswordClick={onForgotPasswordClick}
           />
         </div>

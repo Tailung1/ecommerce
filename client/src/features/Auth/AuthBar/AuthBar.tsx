@@ -4,7 +4,7 @@ import icon from "../../../assets/main-logo.png";
 import checked from "../../../assets/checked-rules.png";
 import unchecked from "../../../assets/unchecked.png";
 import exitBtn from "../../../assets/reject.png";
-import useAuthReducer from "../../../AuthReducer";
+import useAuthReducer from "../../../reducers/AuthReducer/AuthReducer";
 import { useBarStateValue } from "../../../contexts/BarContext";
 import { useBarDispatch } from "../../../contexts/BarContext";
 import ResetPassword from "../ResetPassword/ResetPassword";
@@ -17,7 +17,7 @@ export default function AuthBar() {
   const [otpPhase, setOtpPhase] = useState<boolean>(false);
   const isExitingBar = useBarStateValue("isExitingBar");
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const EmailAuthIsActive = authState.activeAuthOption !== "number";
+  const EmailAuthIsActive = authState.activeAuthOption !== "phone";
   const checkIcon = authState.isChecked ? checked : unchecked;
 
   const authCommands = {
@@ -26,8 +26,8 @@ export default function AuthBar() {
     EnablePasswordReset: () => authDispatch({ type: "ENABLE_PASSWORD_RESET", payload: true }),
   };
 
-  const handleValuesChange = (field: "email" | "password" | "number", value: string) => {
-    if (field === "number" && value !== "" && !/^[0-9]+$/.test(value)) return;
+  const handleValuesChange = (field: "email" | "password" | "phone", value: string) => {
+    if (field === "phone" && value !== "" && !/^[0-9]+$/.test(value)) return;
     authDispatch({ type: "SET_INPUT", field, value });
   };
 
@@ -36,10 +36,10 @@ export default function AuthBar() {
   };
 
   const validateInputs = (
-    authOption: "email" | "number",
-    value: { email: string; password: string; number: string }
+    authOption: "email" | "phone",
+    value: { email: string; password: string; phone: string }
   ) => {
-    const errors: Partial<{ emailError: string; passwordError: string; numberError: string }> = {};
+    const errors: Partial<{ emailError: string; passwordError: string; phoneError: string }> = {};
 
     if (authOption === "email") {
       errors.emailError = !value.email
@@ -49,22 +49,25 @@ export default function AuthBar() {
         : "";
       errors.passwordError = !value.password ? "Can't be empty" : "";
     }
-    if (authOption === "number") {
-      errors.numberError = !value.number ? "Can't be empty" : "";
+    if (authOption === "phone") {
+      errors.phoneError = !value.phone ? "Can't be empty" : "";
     }
     return errors;
   };
 
-  const startAuthRequest = async (activeAuthOption: "email" | "number") => {
+  const startAuthRequest = async (
+    authMode: "login" | "register",
+    activeAuthOption: "email" | "phone"
+  ) => {
     let actionData = {};
     if (activeAuthOption === "email") {
       actionData = { email: authState.inputValues.email, password: authState.inputValues.password };
     } else {
-      actionData = { number: authState.inputValues.number };
+      actionData = { phone: authState.inputValues.phone };
     }
 
     try {
-      const sendRequest = await fetch("http://localhost:3000/api/users", {
+      const sendRequest = await fetch(`http://localhost:3000/api/users/${authMode}`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -72,12 +75,16 @@ export default function AuthBar() {
         body: JSON.stringify(actionData),
       });
       if (!sendRequest.ok) {
-        throw new Error("Failed, eh");
+        throw new Error(`${authMode} Request failed`);
       }
       const response = await sendRequest.json();
-      console.log(response,"sdd");
-    } catch (err) {
-      console.log(err);
+      console.log(response);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        console.log(err.message);
+      } else {
+        console.log(err);
+      }
     }
   };
 
@@ -86,7 +93,7 @@ export default function AuthBar() {
     authDispatch({ type: "SET_ERRORS", payload: errors });
     const hasError = Object.values(errors).some(Boolean);
     if (hasError) return;
-    startAuthRequest(authState.activeAuthOption);
+    startAuthRequest(authState.authView, authState.activeAuthOption);
   };
 
   return (
@@ -133,33 +140,33 @@ export default function AuthBar() {
                 className='exit-btn w-10 h-8'
                 alt='Exit icon'
               />
-              <p onClick={() => authDispatch({ type: "SET_ACTIVE", payload: "auth" })}>
+              <p onClick={() => authDispatch({ type: "SET_AUTH_VIEW", payload: "login" })}>
                 Authentication
               </p>
-              <p onClick={() => authDispatch({ type: "SET_ACTIVE", payload: "register" })}>
+              <p onClick={() => authDispatch({ type: "SET_AUTH_VIEW", payload: "register" })}>
                 Register
               </p>
             </div>
             <hr
               className={`auth-hr ${
-                authState.activeMode === "auth" ? "bg-auth" : "bg-register more-bottom"
+                authState.authView === "login" ? "bg-login" : "bg-register more-bottom"
               }`}
             />
           </div>
           <div
             onClick={resetValues}
             style={{ paddingBottom: EmailAuthIsActive ? "20px" : "15px" }}
-            className='auth-options flex gap-2'
+            className='auth-option flex gap-2'
           >
             <p
               className={
-                authState.activeAuthOption === "number"
+                authState.activeAuthOption === "phone"
                   ? "active-auth-option"
                   : "non-active-auth-option"
               }
-              onClick={() => authDispatch({ type: "SET_AUTH_OPTION", payload: "number" })}
+              onClick={() => authDispatch({ type: "SET_AUTH_OPTION", payload: "phone" })}
             >
-              {`${authState.activeMode === "auth" ? "Authenticate" : "Register"} with Phone number`}
+              {`${authState.authView === "login" ? "Authenticate" : "Register"} with Phone number`}
             </p>
             <p
               className={
@@ -169,7 +176,7 @@ export default function AuthBar() {
               }
               onClick={() => authDispatch({ type: "SET_AUTH_OPTION", payload: "email" })}
             >
-              {`${authState.activeMode === "auth" ? "Authenticate" : "Register"} with Email`}
+              {`${authState.authView === "login" ? "Authenticate" : "Register"} with Email`}
             </p>
           </div>
           <div className='w-full relative'>
@@ -179,7 +186,7 @@ export default function AuthBar() {
               authCommands={authCommands}
             />
 
-            {authState.activeMode === "register" && (
+            {authState.authView === "register" && (
               <div className='policy-container'>
                 <img
                   onClick={() =>
@@ -205,13 +212,13 @@ export default function AuthBar() {
             <button
               onClick={handleAuth}
               className={`submit-btn ${
-                authState.activeMode === "register" && !authState.isChecked && "opacity-60"
+                authState.authView === "register" && !authState.isChecked && "opacity-60"
               }`}
-              disabled={authState.activeMode === "register" && !authState.isChecked}
+              disabled={authState.authView === "register" && !authState.isChecked}
             >
-              {authState.activeMode === "register"
+              {authState.authView === "register"
                 ? "REGISTRATION"
-                : authState.activeAuthOption === "number"
+                : authState.activeAuthOption === "phone"
                 ? "SEND CODE"
                 : "LOG IN"}
             </button>

@@ -6,7 +6,7 @@ interface propsTypes {
   value: string;
   propsedOnChange: (value: string) => void;
   errorMessage: string;
-  active?: "auth" | "register";
+  active?: "login" | "register";
   onForgotPasswordClick?: () => void;
 }
 
@@ -53,7 +53,7 @@ export default function FloatingInput({
       <div className='input-feedback'>
         <span>{hasError ? errorMessage : ""}</span>
         <span onClick={onForgotPasswordClick}>
-          {label === "Password" && active === "auth" ? "Forgot Password" : ""}
+          {label === "Password" && active === "login" ? "Forgot Password" : ""}
         </span>
       </div>
     </div>

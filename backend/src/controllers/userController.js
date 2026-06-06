@@ -5,40 +5,45 @@ import jwt from "jsonwebtoken";
 async function login(req, res) {
   const { email, password } = req.body;
   try {
-    const isUser = await pool.query("SELECT * FROM users WHERE email=$1", [email]);
-    if (!isUser) {
-      if (!comparePassword) {
-        throw new Error("Incorrect email");
-      }
+    
+    const user = await pool.query("SELECT * FROM users WHERE email=$1", [email]);
+    const User = user.rows[0];
+    if (!User) {
+      throw new Error("Incorrect email");
     }
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const comparePassword = await bcrypt.compare(hashedPassword, password);
+    const comparePassword = await bcrypt.compare(password, User.password);
     if (!comparePassword) {
       throw new Error("Incorrect password");
     }
-
-    res.json(result);
+    const token = jwt.sign({ id: User.id }, process.env.JWT_SECRET);
+    res.json(token);
   } catch (err) {
-    res.status(200).send({ message: err.message });
+    // bcs of its object, express will automatically convert them to JSON
+    res.status(400).send({ message: err.message });
+    // String → sent as plain text (NOT JSON)
+    // res.status(400).send("done");
+    // Always JSON → explicit, safe, consistent (recommended)
+    // res.status(400).json("done")
   }
 }
 
 async function register(req, res) {
   const { email, password } = req.body;
   try {
+    const normalizedEmil = email.toLowerCase();
+    const user = await pool.query("SELECT * FROM users WHERE email=$1", [normalizedEmil]);
+    const User = user.rows[0];
+    if (User) {
+      return res.json("User already exists");
+    }
     const hashedPassword = await bcrypt.hash(password, 10);
-    const result = await pool.query("INSERT INTO users (email,password) VALUES ($1,$2)", [
-      email,
-      hashedPassword,
-    ]);
-    res.json(result);
+    const result = await pool.query(
+      "INSERT INTO users (email,password) VALUES ($1,$2) RETURNING *",
+      [email, hashedPassword]
+    );
+    res.json("Registered successfully");
   } catch (err) {
-    // bcs of its object, express will automatically convert them to JSON
-    res.status(200).send({ message: err.message });
-    // String → sent as plain text (NOT JSON)
-    // res.status(200).send("done");
-    // Always JSON → explicit, safe, consistent (recommended)
-    // res.status(200).json("done");
+    res.status(400).send({ message: err.message });
   }
 }
 

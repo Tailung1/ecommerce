@@ -1,0 +1,60 @@
+$primary-color: #ec5e2a;
+
+@mixin display-col($gap: 0px, $padding: 0px) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: $gap;
+  padding: $padding;
+}
+@mixin display-row($gap: 0px) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: $gap;
+}
+
+.auth-and-register-with-phone-container {
+  @include display-row($gap: 10px);
+  width: 100%;
+  padding-bottom: 25px;
+}
+.country-codes-container {
+  @include display-col($gap: 1px, $padding: 10px 15px);
+  justify-content: center;
+  align-items: center;
+  max-width: 70px;
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+}
+
+.country-code {
+  @include display-row();
+  min-width: 70px;
+  background-color: #f2f2f2;
+  padding: 8px;
+  border-radius: 8px;
+  //   font-size: 20px;
+}
+
+.codes-wrapper {
+  @include display-col($gap: 5px, $padding: 10px 10px);
+  width: fit-content;
+  height: fit-content;
+  background-color: #dd3f3f;
+  border-radius: 10px;
+  position: absolute;
+  left: 50;
+  top: 87%;
+  z-index: 1;
+}
+.codes-wrapper * {
+  border-bottom: 1px solid rgb(0, 255, 55);
+  //   font-size: 20px;
+}
+.codes-wrapper *:hover {
+  color: rgb(79, 67, 238);
+  cursor: pointer;
+}

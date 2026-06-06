@@ -22,9 +22,7 @@ export default function AuthBar() {
 
   const authCommands = {
     ToggleCountryCodes: () => authDispatch({ type: "TOGGLE_COUNTRY_CODES" }),
-    SelectCountryCode: (code: string) =>
-      authDispatch({ type: "SET_COUNTRY_CODE", payload: code }),
-
+    SelectCountryCode: (code: string) => authDispatch({ type: "SET_COUNTRY_CODE", payload: code }),
     EnablePasswordReset: () => authDispatch({ type: "ENABLE_PASSWORD_RESET", payload: true }),
   };
 
@@ -57,14 +55,38 @@ export default function AuthBar() {
     return errors;
   };
 
-  const startAuthRequest = (authMode: string, activeAuthOption: string) => {};
+  const startAuthRequest = async (activeAuthOption: "email" | "number") => {
+    let actionData = {};
+    if (activeAuthOption === "email") {
+      actionData = { email: authState.inputValues.email, password: authState.inputValues.password };
+    } else {
+      actionData = { number: authState.inputValues.number };
+    }
+
+    try {
+      const sendRequest = await fetch("http://localhost:3000/api/users", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(actionData),
+      });
+      if (!sendRequest.ok) {
+        throw new Error("Failed, eh");
+      }
+      const response = await sendRequest.json();
+      console.log(response,"sdd");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const handleAuth = () => {
     const errors = validateInputs(authState.activeAuthOption, authState.inputValues);
-    authDispatch({type:"SET_ERRORS",payload:errors})
+    authDispatch({ type: "SET_ERRORS", payload: errors });
     const hasError = Object.values(errors).some(Boolean);
     if (hasError) return;
-    startAuthRequest(authState.activeMode, authState.activeAuthOption);
+    startAuthRequest(authState.activeAuthOption);
   };
 
   return (

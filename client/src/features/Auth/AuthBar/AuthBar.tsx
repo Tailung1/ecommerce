@@ -67,18 +67,20 @@ export default function AuthBar() {
     }
 
     try {
-      const sendRequest = await fetch(`http://localhost:3000/api/users/${authMode}`, {
+      const response = await fetch(`http://localhost:3000/api/users/${authMode}`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",
         },
         body: JSON.stringify(actionData),
       });
-      if (!sendRequest.ok) {
-        throw new Error(`${authMode} Request failed`);
+
+      const result = await response.json();
+      if (result.success) {
+        console.log(result.data);
+      } else {
+        console.log(result.message);
       }
-      const response = await sendRequest.json();
-      console.log(response);
     } catch (err: unknown) {
       if (err instanceof Error) {
         console.log(err.message);

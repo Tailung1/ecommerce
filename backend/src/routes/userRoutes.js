@@ -1,4 +1,5 @@
 import express from "express";
+import authMiddleware from "../server.js";
 import {
   register,
   login,

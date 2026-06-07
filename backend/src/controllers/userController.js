@@ -15,7 +15,13 @@ async function login(req, res) {
       throw new Error("Incorrect password");
     }
     const token = jwt.sign({ id: User.id }, process.env.JWT_SECRET);
-    res.json({ success: true, data: token });
+    res.cookie("token", token, {
+      httpOnly: true, // prevents JS access
+      secure: false, // only sent over HTTPS
+      sameSite: "strict", // protects against CSRF
+      maxAge: 24 * 60 * 60 * 1000, // 1 day // optional: cookie expires in 1 day
+    });
+    res.json({ success: true, message: "Logged in successfully" });
   } catch (err) {
     // bcs of its object, express will automatically convert them to JSON
     res.status(400).json({ success: false, message: err.message });
@@ -46,9 +52,7 @@ async function register(req, res) {
   }
 }
 
-async function requestPasswordReset() {
-    
-}
+async function requestPasswordReset() {}
 async function resetPassword() {}
 
 export { login, register, requestPasswordReset, resetPassword };

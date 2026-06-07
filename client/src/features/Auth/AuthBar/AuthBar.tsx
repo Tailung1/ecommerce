@@ -73,14 +73,12 @@ export default function AuthBar() {
           "Content-type": "application/json",
         },
         body: JSON.stringify(actionData),
+        credentials: "include",
       });
 
       const result = await response.json();
-      if (result.success) {
-        console.log(result.data);
-      } else {
-        console.log(result.message);
-      }
+
+      console.log(result.message);
     } catch (err: unknown) {
       if (err instanceof Error) {
         console.log(err.message);

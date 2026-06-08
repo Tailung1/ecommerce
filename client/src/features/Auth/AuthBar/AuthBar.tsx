@@ -8,13 +8,11 @@ import useAuthReducer from "../../../reducers/AuthReducer/AuthReducer";
 import { useBarStateValue } from "../../../contexts/BarContext";
 import { useBarDispatch } from "../../../contexts/BarContext";
 import ResetPassword from "../ResetPassword/ResetPassword";
-import { useState } from "react";
 import AuthInputs from "../AuthInputs/AuthInputs";
 
 export default function AuthBar() {
   const { authState, authDispatch } = useAuthReducer();
   const { setBar } = useBarDispatch();
-  const [otpPhase, setOtpPhase] = useState<boolean>(false);
   const isExitingBar = useBarStateValue("isExitingBar");
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const EmailAuthIsActive = authState.activeAuthOption !== "phone";
@@ -109,7 +107,7 @@ export default function AuthBar() {
               setBar("isExitingBar", false);
             }
           }}
-          className={`Bar ${isExitingBar && "ExitBar"} ${otpPhase ? "animateForPassRecovery" : ""}`}
+          className={`Bar ${isExitingBar && "ExitBar"}`}
         >
           {" "}
           <img
@@ -118,7 +116,7 @@ export default function AuthBar() {
             className='exit-btn w-10 h-8'
             alt='Exit icon'
           />
-          <ResetPassword otpPhase={otpPhase} setOtpPhase={setOtpPhase} />
+          <ResetPassword />
         </div>
       ) : (
         <div

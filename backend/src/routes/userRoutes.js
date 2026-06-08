@@ -11,7 +11,7 @@ const userRouter = express.Router();
 
 userRouter.post("/login", login);
 userRouter.post("/register", register);
-userRouter.post("/recover-password", requestPasswordReset);
+userRouter.post("/recover-password", authMiddleware, requestPasswordReset);
 userRouter.post("/reset-password", resetPassword);
 
 export default userRouter;

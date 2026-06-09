@@ -6,7 +6,9 @@ export type errorTypes = {
 };
 
 export type PhaseTypes = {
-  userEmailPhase: boolean;
-  otpPhase: boolean;
-  recoveryPhase: boolean;
+  userEmail: boolean;
+  otpCode: boolean;
+  recovery: boolean;
 };
+
+

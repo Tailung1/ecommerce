@@ -1,6 +1,7 @@
 import pool from "../db.config.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import nodemailer from "nodemailer";
 
 async function login(req, res) {
   const { email, password } = req.body;
@@ -51,8 +52,27 @@ async function register(req, res) {
     res.status(400).send({ message: err.message });
   }
 }
+async function resetPassword(req, res) {
+  const { userEmail } = req.body;
+  try {
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: userEmail,
+      text: `Your otp code is 5821`,
+    });
+    res.status(200).json({ message: "Otp code sent successfully" });
+  } catch (err) {
+    res.status(500).json({ message: "Internal server error" });
+  }
+}
 
-async function requestPasswordReset() {}
-async function resetPassword() {}
+async function recoveryPassword() {}
 
-export { login, register, requestPasswordReset, resetPassword };
+export { login, register, recoveryPassword, resetPassword };

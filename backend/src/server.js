@@ -31,5 +31,6 @@ export default function authMiddleware(req, res, next) {
 
 app.use("/api/products", productRouter);
 app.use("/api/users", userRouter);
+app.use((req, res) => res.json("Route Not found"));
 
 app.listen(3000, () => console.log("Backend server is running on port '3000' "));

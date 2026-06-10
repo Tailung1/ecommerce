@@ -4,6 +4,12 @@ import FloatingInput from "../../../components/reusable/FloatingInput";
 import type { errorTypes, PhaseTypes } from "./ResetPassword-types";
 
 export default function ResetPassword() {
+  const [inputValues, setInputValues] = useState({
+    userEmail: "",
+    otpCode: "",
+    newPassword: "",
+    repeatNewPassword: "",
+  });
   const [inputErrors, setInputErrors] = useState<errorTypes>({
     userEmail: "",
     otpCode: "",
@@ -17,18 +23,11 @@ export default function ResetPassword() {
   });
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  let inputValues = {
-    userEmail: "",
-    otpCode: "",
-    newPassword: "",
-    repeatNewPassword: "",
-  };
-
   const handleValueChange = (value: string) => {
     if (phases.otpCode) {
-      inputValues = { ...inputValues, otpCode: value };
+      setInputValues((prev) => ({ ...prev, otpCode: value }));
     } else {
-      inputValues = { ...inputValues, userEmail: value };
+      setInputValues((prev) => ({ ...prev, userEmail: value }));
     }
   };
 
@@ -59,13 +58,27 @@ export default function ResetPassword() {
 
     let data = Object.fromEntries(keys.map((k) => [k, inputValues[k]]));
 
-    const response = fetch("http://localhost:3000/api/users/reset-password", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+    try {
+      const response = await fetch("http://localhost:3000/api/users/reset-password", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const result = await response.json();
+      if (!response.ok) {
+        console.log(result.message);
+        return;
+      }
+      console.log(result.message);
+      setPhases((prev) => ({ ...prev, otpCode: true }));
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        console.log(err.message);
+      }
+      console.log(err);
+    }
   };
 
   const handleSubmit = () => {

@@ -9,6 +9,8 @@ const prisma = new PrismaClient();
 
 async function login(req, res) {
   const { email, password } = req.body;
+  const normalizedEmail = email.toLowerCase();
+
   try {
     // const user = await pool.query("SELECT * FROM users WHERE email=$1", [email]);
     // const User = user.rows[0];
@@ -16,7 +18,7 @@ async function login(req, res) {
     //   throw new Error("Incorrect email");
     // }
     // prisma
-    const user = await prisma.users.findMany({ where: { email } });
+    const user = await prisma.users.findUnique({ where: { email: normalizedEmail } });
     if (!user) {
       throw new Error("Incorrect email");
     }

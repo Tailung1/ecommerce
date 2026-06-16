@@ -1,21 +1,31 @@
-import pool from "../db.config.js";
+// import pool from "../db.config.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import nodemailer from "nodemailer";
+import { PrismaClient } from "@prisma/client";
+import { Prisma } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 async function login(req, res) {
   const { email, password } = req.body;
   try {
-    const user = await pool.query("SELECT * FROM users WHERE email=$1", [email]);
-    const User = user.rows[0];
-    if (!User) {
+    // const user = await pool.query("SELECT * FROM users WHERE email=$1", [email]);
+    // const User = user.rows[0];
+    // if (!User) {
+    //   throw new Error("Incorrect email");
+    // }
+    // prisma
+    const user = await prisma.users.findMany({ where: { email } });
+    if (!user) {
       throw new Error("Incorrect email");
     }
-    const comparePassword = await bcrypt.compare(password, User.password);
+
+    const comparePassword = await bcrypt.compare(password, user.password);
     if (!comparePassword) {
       throw new Error("Incorrect password");
     }
-    const token = jwt.sign({ id: User.id }, process.env.JWT_SECRET);
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
     res.cookie("token", token, {
       httpOnly: true, // prevents JS access
       secure: false, // only sent over HTTPS
@@ -24,6 +34,7 @@ async function login(req, res) {
     });
     res.json({ success: true, message: "Logged in successfully" });
   } catch (err) {
+    console.log(err.message);
     // bcs of its object, express will automatically convert them to JSON
     res.status(400).json({ success: false, message: err.message });
     // String → sent as plain text (NOT JSON)
@@ -36,22 +47,31 @@ async function login(req, res) {
 async function register(req, res) {
   const { email, password } = req.body;
   try {
-    const normalizedEmil = email.toLowerCase();
-    const user = await pool.query("SELECT * FROM users WHERE email=$1", [normalizedEmil]);
-    const User = user.rows[0];
-    if (User) {
-      return res.json("User already exists");
-    }
+    const normalizedEmail = email.toLowerCase();
+    // const user = await pool.query("SELECT * FROM users WHERE email=$1", [normalizedEmail]);
+    // const User = user.rows[0];
+    //  const result = await pool.query(
+    //    "INSERT INTO users (email,password) VALUES ($1,$2) RETURNING *",
+    //    [email, hashedPassword]
+    //  );
+
     const hashedPassword = await bcrypt.hash(password, 10);
-    const result = await pool.query(
-      "INSERT INTO users (email,password) VALUES ($1,$2) RETURNING *",
-      [email, hashedPassword]
-    );
-    res.json("Registered successfully");
+    const user = await prisma.users.create({
+      data: { email: normalizedEmail, password: hashedPassword },
+    });
+
+    res.json({ message: "Registered successfully", user });
   } catch (err) {
-    res.status(400).send({ message: err.message });
+    if (err instanceof Prisma.PrismaClientKnownRequestError) {
+      if (err.code === "P2002") {
+        return res.status(409).json({ message: "Email already exists" });
+        // 409 responses are errors sent to the client so that a user might be able to resolve a conflict and resubmit the request.
+      }
+    }
+    return res.status(500).json({ message: "Internal server error" });
   }
 }
+
 async function resetPassword(req, res) {
   const { userEmail } = req.body;
   try {

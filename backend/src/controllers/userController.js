@@ -6,11 +6,12 @@ import { PrismaClient } from "@prisma/client";
 import { Prisma } from "@prisma/client";
 
 const prisma = new PrismaClient();
+const isProd = process.env.NODE_ENV !== "development";
 
 async function login(req, res) {
   const { email, password } = req.body;
   const normalizedEmail = email.toLowerCase();
-
+  console.log(isProd);
   try {
     // const user = await pool.query("SELECT * FROM users WHERE email=$1", [email]);
     // const User = user.rows[0];

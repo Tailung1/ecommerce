@@ -75,9 +75,15 @@ async function register(req, res) {
   }
 }
 
-async function resetPassword(req, res) {
+async function requestPasswordReset(req, res) {
   const { userEmail } = req.body;
   try {
+    const isEmailValid = await prisma.users.findUnique({ where: { email: userEmail } });
+    if (!isEmailValid) {
+      console.log(0);
+
+      return res.status(404).json({ message: "Email not found" });
+    }
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -85,17 +91,19 @@ async function resetPassword(req, res) {
         pass: process.env.EMAIL_PASS,
       },
     });
-    await transporter.sendMail({
+
+    transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: userEmail,
       text: `Your otp code is 5821`,
     });
+
     res.status(200).json({ message: "Otp code sent successfully" });
   } catch (err) {
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: err.message });
   }
 }
 
 async function recoveryPassword() {}
 
-export { login, register, recoveryPassword, resetPassword };
+export { login, register, recoveryPassword, requestPasswordReset };

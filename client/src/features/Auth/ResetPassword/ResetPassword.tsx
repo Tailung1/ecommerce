@@ -59,7 +59,7 @@ export default function ResetPassword() {
     let data = Object.fromEntries(keys.map((k) => [k, inputValues[k]]));
 
     try {
-      const response = await fetch("http://localhost:3000/api/users/reset-password", {
+      const response = await fetch("http://localhost:3000/api/users/requestPasswordReset", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

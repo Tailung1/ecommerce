@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import nodemailer from "nodemailer";
 import { PrismaClient } from "@prisma/client";
 import { Prisma } from "@prisma/client";
+import crypto from "crypto";
 
 const prisma = new PrismaClient();
 const isProd = process.env.NODE_ENV !== "development";
@@ -75,15 +76,18 @@ async function register(req, res) {
   }
 }
 
-async function requestPasswordReset(req, res) {
-  const { userEmail } = req.body;
-  try {
-    const isEmailValid = await prisma.users.findUnique({ where: { email: userEmail } });
-    if (!isEmailValid) {
-      console.log(0);
+function generateOTP() {
+  return crypto.randomInt(100000, 1000000).toString();
+}
 
-      return res.status(404).json({ message: "Email not found" });
+async function requestPasswordReset(req, res) {
+  const { email } = req.body;
+  try {
+    const user = await prisma.users.findUnique({ where: { email } });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
     }
+    const otpCode = generateOTP();
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -94,8 +98,8 @@ async function requestPasswordReset(req, res) {
 
     transporter.sendMail({
       from: process.env.EMAIL_USER,
-      to: userEmail,
-      text: `Your otp code is 5821`,
+      to: email,
+      text: `Your otp code is ${otpCode}`,
     });
 
     res.status(200).json({ message: "Otp code sent successfully" });
@@ -104,6 +108,19 @@ async function requestPasswordReset(req, res) {
   }
 }
 
+async function verifyResetCode(req, res) {
+  const { email, otpCode } = req.body;
+  try {
+    const user = await prisma.users.findUnique({ where: { email: email } });
+
+    if (otpCode === user.otpCode) {
+      res.status(200).json({ message: "Otp code is correct" });
+    }
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+}
+
 async function recoveryPassword() {}
 
-export { login, register, recoveryPassword, requestPasswordReset };
+export { login, register, recoveryPassword, requestPasswordReset, verifyResetCode };

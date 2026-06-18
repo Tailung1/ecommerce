@@ -1,12 +1,12 @@
 export type errorTypes = {
-  userEmail: string;
+  email: string;
   otpCode: string;
   newPassword: string;
   repeatNewPassword: string;
 };
 
 export type PhaseTypes = {
-  userEmail: boolean;
+  email: boolean;
   otpCode: boolean;
   recovery: boolean;
 };

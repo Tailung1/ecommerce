@@ -6,9 +6,9 @@ export type errorTypes = {
 };
 
 export type PhaseTypes = {
-  email: boolean;
-  otpCode: boolean;
-  recovery: boolean;
+  requestPasswordReset: boolean;
+  checkOtpCode: boolean;
+  resetPassword: boolean;
 };
 
 

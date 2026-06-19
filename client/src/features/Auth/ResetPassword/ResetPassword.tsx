@@ -17,43 +17,59 @@ export default function ResetPassword() {
     repeatNewPassword: "",
   });
   const [phases, setPhases] = useState<PhaseTypes>({
-    email: true,
-    otpCode: false,
-    recovery: false,
+    requestPasswordReset: true,
+    checkOtpCode: false,
+    resetPassword: false,
   });
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const handleValueChange = (value: string) => {
-    if (phases.otpCode) {
-      setInputValues((prev) => ({ ...prev, otpCode: value }));
+    if (phases.checkOtpCode) {
+      setInputValues((prev) => ({ ...prev, checkOtpCode: value }));
     } else {
       setInputValues((prev) => ({ ...prev, email: value }));
     }
   };
-
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const validateInputs = () => {
-    let errors: errorTypes | {} = {};
-    if (phases.otpCode && inputValues.otpCode.length !== 4) return;
-    if (emailRegex.test(inputValues.email)) {
-      errors = { ...inputErrors, email: "Invalid email format" };
-      return errors;
-    }
-    return Object.values(inputErrors).some(Boolean);
-  };
+    let errors!: errorTypes;
 
-  const getActivePhase = (): keyof Omit<PhaseTypes, "otpCode"> => {
-    const entry = (
-      Object.entries(phases) as [keyof Omit<PhaseTypes, "otpCode">, value: boolean][]
-    ).find(([_, value]) => value === true);
-    return entry ? entry[0] : "email";
+    if (phases.requestPasswordReset) {
+      if (!emailRegex.test(inputValues.email)) {
+        errors = { ...inputErrors, email: "Invalid email format" };
+      }
+    } else if (phases.checkOtpCode) {
+      if (inputValues.otpCode.length !== 4) {
+        errors = { ...inputErrors, otpCode: "Invalid data" };
+      }
+    } else {
+      if (inputValues.newPassword.length < 5) {
+        errors = { ...inputErrors, newPassword: "Min 5 charachters" };
+      }
+      if (inputValues.repeatNewPassword !== inputValues.newPassword) {
+        errors = { ...inputErrors, repeatNewPassword: "Passwords dosn't much" };
+      }
+    }
+    setInputErrors(errors);
+    return Object.values(errors).some(Boolean);
   };
 
   let isError = false;
 
-  const startPhaseRequest = async (activePhase: "email" | "recovery") => {
-    type inputKey = Exclude<keyof typeof inputValues, "otpCode">;
+  const getActivePhase = (): keyof PhaseTypes => {
+    const keys = Object.keys(phases) as (keyof PhaseTypes)[];
+    for (let i = keys.length - 1; i >= 0; i--) {
+      const key = keys[i];
+      if (phases[key] === true) {
+        return key;
+      }
+    }
+    return "requestPasswordReset";
+  };
+
+  const startResetRequest = async (activePhase: keyof PhaseTypes) => {
+    type inputKey = Exclude<keyof typeof inputValues, "checkOtpCode">;
     const keys: inputKey[] =
-      activePhase === "email" ? ["email"] : ["newPassword", "repeatNewPassword"];
+      activePhase === "requestPasswordReset" ? ["email"] : ["newPassword", "repeatNewPassword"];
 
     let data = Object.fromEntries(keys.map((k) => [k, inputValues[k]]));
 
@@ -71,7 +87,7 @@ export default function ResetPassword() {
         return;
       }
       console.log(result.message);
-      setPhases((prev) => ({ ...prev, otpCode: true }));
+      setPhases((prev) => ({ ...prev, checkOtpCode: true }));
     } catch (err: unknown) {
       if (err instanceof Error) {
         console.log(err.message);
@@ -85,16 +101,16 @@ export default function ResetPassword() {
     const validationResult = validateInputs();
     if (validationResult) return (isError = true);
 
-    startPhaseRequest(getActivePhase());
+    startResetRequest(getActivePhase());
   };
 
   return (
-    <div className={`reset-password-container ${phases.otpCode ? "animate" : ""}`}>
+    <div className={`reset-password-container ${phases.checkOtpCode ? "animate" : ""}`}>
       <h2>Password Recovery</h2>
       <hr />
-      <h3>{phases.otpCode ? "Verify Identify" : "Enter your phone number or email"}</h3>
+      <h3>{phases.checkOtpCode ? "Verify Identify" : "Enter your phone number or email"}</h3>
       <h4
-        className={`${phases.otpCode ? "opacityShow" : "opacityHide"}`}
+        className={`${phases.checkOtpCode ? "opacityShow" : "opacityHide"}`}
       >{`Code sent to your email: ${inputValues.email}`}</h4>
       <div
         className={`${
@@ -102,13 +118,15 @@ export default function ResetPassword() {
         } reset-password-input-container`}
       >
         <FloatingInput
-          label={phases.otpCode ? "Enter Code" : "Email"}
-          value={`${phases.otpCode ? inputValues.otpCode : inputValues.email}`}
+          label={phases.checkOtpCode ? "Enter Code" : "Email"}
+          value={`${phases.checkOtpCode ? inputValues.otpCode : inputValues.email}`}
           propsedOnChange={handleValueChange}
           errorMessage={inputErrors.email}
         />
       </div>
-      <button onClick={handleSubmit}>{phases.otpCode ? "ENTER NUMBER" : "RECOVER PASSWORD"}</button>
+      <button onClick={handleSubmit}>
+        {phases.checkOtpCode ? "ENTER NUMBER" : "RECOVER PASSWORD"}
+      </button>
     </div>
   );
 }

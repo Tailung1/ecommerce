@@ -5,10 +5,8 @@ export type errorTypes = {
   repeatNewPassword: string;
 };
 
-export type PhaseTypes = {
-  requestPasswordReset: boolean;
-  checkOtpCode: boolean;
-  resetPassword: boolean;
-};
-
-
+export type PasswordRecoveryStepTypes =
+  | "collect_identifier"
+  | "verify_otp"
+  | "set_new_password"
+  | "completed";

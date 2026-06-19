@@ -66,15 +66,26 @@ export default function ResetPassword() {
     return "requestPasswordReset";
   };
 
-  const startResetRequest = async (activePhase: keyof PhaseTypes) => {
-    type inputKey = Exclude<keyof typeof inputValues, "checkOtpCode">;
-    const keys: inputKey[] =
-      activePhase === "requestPasswordReset" ? ["email"] : ["newPassword", "repeatNewPassword"];
+  const getData = () => {
+    let data = {};
+    const activePhase = getActivePhase();
+    if (activePhase === "requestPasswordReset") {
+      data = { email: inputValues.email };
+    } else if (activePhase === "checkOtpCode") {
+      data = { otpCode: inputValues.otpCode };
+    } else if (activePhase === "resetPassword") {
+      data = {
+        newPassword: inputValues.newPassword,
+        repeatNewPassword: inputValues.repeatNewPassword,
+      };
+    }
+    return { data, activePhase };
+  };
 
-    let data = Object.fromEntries(keys.map((k) => [k, inputValues[k]]));
-
+  const startResetRequest = async () => {
+    const { data, activePhase } = getData();
     try {
-      const response = await fetch("http://localhost:3000/api/users/requestPasswordReset", {
+      const response = await fetch(`http://localhost:3000/api/users/${activePhase}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -101,7 +112,7 @@ export default function ResetPassword() {
     const validationResult = validateInputs();
     if (validationResult) return (isError = true);
 
-    startResetRequest(getActivePhase());
+    startResetRequest();
   };
 
   return (

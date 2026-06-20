@@ -53,18 +53,18 @@ export default function ResetPassword() {
   let isError = false;
 
   const getData = () => {
-    let data = {};
+    let dataToSend = {};
     if (passwordRecoveryStep === "collect_identifier") {
-      data = { email: inputValues.email };
+      dataToSend = { email: inputValues.email };
     } else if (passwordRecoveryStep === "verify_otp") {
-      data = { otpCode: inputValues.otpCode };
+      dataToSend = { otpCode: inputValues.otpCode };
     } else if (passwordRecoveryStep === "set_new_password") {
-      data = {
+      dataToSend = {
         newPassword: inputValues.newPassword,
         repeatNewPassword: inputValues.repeatNewPassword,
       };
     }
-    return { data };
+    return { dataToSend };
   };
 
   const handlePostRequestAction = () => {
@@ -78,14 +78,14 @@ export default function ResetPassword() {
   };
 
   const startResetRequest = async () => {
-    const { data } = getData();
+    const { dataToSend } = getData();
     try {
       const response = await fetch(`http://localhost:3000/api/users/${passwordRecoveryStep}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(dataToSend),
       });
       const result = await response.json();
       if (!response.ok) {

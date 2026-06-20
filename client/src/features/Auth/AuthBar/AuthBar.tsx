@@ -5,15 +5,14 @@ import checked from "../../../assets/checked-rules.png";
 import unchecked from "../../../assets/unchecked.png";
 import exitBtn from "../../../assets/reject.png";
 import useAuthReducer from "../../../reducers/AuthReducer/AuthReducer";
-import { useBarStateValue } from "../../../contexts/BarContext";
 import { useBarDispatch } from "../../../contexts/BarContext";
 import ResetPassword from "../ResetPassword/ResetPassword";
 import AuthInputs from "../AuthInputs/AuthInputs";
+import { useAuthFlow } from "./useAuthFlow";
 
 export default function AuthBar() {
   const { authState, authDispatch } = useAuthReducer();
   const { setBar } = useBarDispatch();
-  const isExitingBar = useBarStateValue("isExitingBar");
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const EmailAuthIsActive = authState.activeAuthOption !== "phone";
   const checkIcon = authState.isChecked ? checked : unchecked;

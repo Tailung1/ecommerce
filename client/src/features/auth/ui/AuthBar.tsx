@@ -8,12 +8,14 @@ import useAuthReducer from "../../../reducers/AuthReducer/AuthReducer";
 import { useBarDispatch } from "../../../contexts/BarContext";
 import ResetPassword from "../reset-password/ResetPassword";
 import AuthInputs from "./AuthInputs";
-import { authCommands } from "../logic/auth.commands";
+import { useAuthCommands } from "../logic/auth.commands";
 import { useBarStateValue } from "../../../contexts/BarContext";
+import type { AuthView } from "../../../reducers/AuthReducer/auth-types";
 
 export default function AuthBar() {
   const { authState, authDispatch } = useAuthReducer();
   const { setBar } = useBarDispatch();
+  const authCommands = useAuthCommands();
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const EmailAuthIsActive = authState.activeAuthOption !== "phone";
   const checkIcon = authState.isChecked ? checked : unchecked;
@@ -21,7 +23,7 @@ export default function AuthBar() {
 
   const handleValuesChange = (field: "email" | "password" | "phone", value: string) => {
     if (field === "phone" && value !== "" && !/^[0-9]+$/.test(value)) return;
-    authCommands.setInput(field, value);
+    authCommands.setInputField(field, value);
   };
 
   const validateInputs = (
@@ -44,10 +46,7 @@ export default function AuthBar() {
     return errors;
   };
 
-  const startAuthRequest = async (
-    authMode: "login" | "register",
-    activeAuthOption: "email" | "phone"
-  ) => {
+  const startAuthRequest = async (authMode: AuthView, activeAuthOption: "email" | "phone") => {
     let actionData = {};
     if (activeAuthOption === "email") {
       actionData = { email: authState.inputValues.email, password: authState.inputValues.password };
@@ -87,7 +86,7 @@ export default function AuthBar() {
 
   return (
     <>
-      {authState.enablePasswordReset ? (
+      {authState.authView === "reset_password" ? (
         <div
           key='reset'
           onAnimationEnd={(e) => {

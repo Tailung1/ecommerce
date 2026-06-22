@@ -1,12 +1,13 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
+import type { AuthView } from "../../reducers/AuthReducer/auth-types";
 
 interface propsTypes {
   label: string;
   value: string;
   propsedOnChange: (value: string) => void;
   errorMessage: string;
-  active?: "login" | "register";
+  active?: AuthView;
   onForgotPasswordClick?: () => void;
 }
 

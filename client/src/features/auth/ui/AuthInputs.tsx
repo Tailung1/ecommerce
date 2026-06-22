@@ -1,10 +1,15 @@
 import FloatingInput from "../../../components/reusable/FloatingInput";
+import type {
+  AuthView,
+  AuthOption,
+  AuthInputFields,
+} from "../../../reducers/AuthReducer/auth-types";
 import "./AuthInputs.scss";
 
 interface AuthInputsProps {
   authState: {
-    authView: "login" | "register";
-    activeAuthOption: "phone" | "email";
+    authView: AuthView;
+    activeAuthOption: AuthOption;
     inputValues: { email: string; password: string; phone: string };
     errors: { emailError: string; passwordError: string; phoneError: string };
     currentCode: string;
@@ -12,10 +17,11 @@ interface AuthInputsProps {
   };
   handleValuesChange: (field: "email" | "password" | "phone", value: string) => void;
   authCommands: {
+    setAuthView: (payload: AuthView) => void;
+    setInputField: (field: AuthInputFields, value: string) => void;
     resetForms: () => void;
     toggleCountryCodes: () => void;
     selectCountryCode: (code: string) => void;
-    enablePasswordReset: () => void;
   };
 }
 
@@ -24,7 +30,7 @@ export default function ({ authState, handleValuesChange, authCommands }: AuthIn
   const isEmailError = authState.errors.emailError !== "";
 
   const onForgotPasswordClick = () => {
-    authCommands.enablePasswordReset();
+    authCommands.setAuthView("reset_password");
   };
 
   return (

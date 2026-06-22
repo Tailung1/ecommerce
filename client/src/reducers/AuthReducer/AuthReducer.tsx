@@ -9,7 +9,6 @@ const initialState: AuthState = {
   currentCode: "995",
   inputValues: { email: "", password: "", phone: "" },
   errors: { emailError: "", passwordError: "", phoneError: "" },
-  enablePasswordReset: false,
 };
 
 const useAuthReducer = () => {
@@ -57,8 +56,7 @@ const useAuthReducer = () => {
           currentCode: action.payload,
           showCountryCodes: false,
         };
-      case "ENABLE_PASSWORD_RESET":
-        return { ...state, enablePasswordReset: action.payload };
+    
       default:
         return state;
     }

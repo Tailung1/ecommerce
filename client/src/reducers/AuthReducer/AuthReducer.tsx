@@ -56,7 +56,7 @@ const useAuthReducer = () => {
           currentCode: action.payload,
           showCountryCodes: false,
         };
-    
+
       default:
         return state;
     }

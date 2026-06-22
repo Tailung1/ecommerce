@@ -15,7 +15,7 @@ import type { AuthView } from "../../../reducers/AuthReducer/auth-types";
 export default function AuthBar() {
   const { authState, authDispatch } = useAuthReducer();
   const { setBar } = useBarDispatch();
-  const authCommands = useAuthCommands();
+  const authCommands = useAuthCommands(authDispatch);
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const EmailAuthIsActive = authState.activeAuthOption !== "phone";
   const checkIcon = authState.isChecked ? checked : unchecked;

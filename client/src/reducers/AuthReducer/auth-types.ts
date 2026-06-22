@@ -6,6 +6,12 @@ export type AuthView = "login" | "register" | "reset_password"; // why i used _ 
 
 export type AuthOption = "email" | "phone";
 export type AuthInputFields = "email" | "password" | "phone";
+export type AuthInputValues = { email: string; password: string; phone: string };
+export type AuthInputErrors = {
+  emailError: string;
+  passwordError: string;
+  phoneError: string;
+};
 
 export type AuthState = {
   authView: AuthView;
@@ -13,12 +19,8 @@ export type AuthState = {
   isChecked: boolean;
   showCountryCodes: boolean;
   currentCode: string;
-  inputValues: { email: string; password: string; phone: string };
-  errors: {
-    emailError: string;
-    passwordError: string;
-    phoneError: string;
-  };
+  inputValues: AuthInputValues;
+  errors: AuthInputErrors;
 };
 
 export type AuthErrors = {

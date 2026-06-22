@@ -3,6 +3,8 @@ import type {
   AuthView,
   AuthOption,
   AuthInputFields,
+  AuthInputValues,
+  AuthErrors,
 } from "../../../reducers/AuthReducer/auth-types";
 import "./AuthInputs.scss";
 
@@ -10,8 +12,8 @@ interface AuthInputsProps {
   authState: {
     authView: AuthView;
     activeAuthOption: AuthOption;
-    inputValues: { email: string; password: string; phone: string };
-    errors: { emailError: string; passwordError: string; phoneError: string };
+    inputValues: AuthInputValues;
+    errors: AuthErrors;
     currentCode: string;
     showCountryCodes: boolean;
   };

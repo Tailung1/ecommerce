@@ -8,7 +8,7 @@ import useAuthReducer from "../../../reducers/AuthReducer/AuthReducer";
 import { useBarDispatch } from "../../../contexts/BarContext";
 import ResetPassword from "../reset-password/ResetPassword";
 import AuthInputs from "./AuthInputs";
-import { useAuthCommands } from "../logic/auth.commands";
+import { useAuthCommands } from "../auth.commands";
 import { useBarStateValue } from "../../../contexts/BarContext";
 import type { AuthView } from "../../../reducers/AuthReducer/auth-types";
 

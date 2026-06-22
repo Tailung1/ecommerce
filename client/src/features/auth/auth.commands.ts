@@ -1,4 +1,4 @@
-import type { AuthView, AuthInputFields } from "../../../reducers/AuthReducer/auth-types";
+import type { AuthView, AuthInputFields } from "../../reducers/AuthReducer/auth-types";
 
 export const useAuthCommands = (authDispatch: any) => {
   return {

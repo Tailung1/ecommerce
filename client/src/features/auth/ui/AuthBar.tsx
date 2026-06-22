@@ -6,9 +6,10 @@ import unchecked from "../../../assets/unchecked.png";
 import exitBtn from "../../../assets/reject.png";
 import useAuthReducer from "../../../reducers/AuthReducer/AuthReducer";
 import { useBarDispatch } from "../../../contexts/BarContext";
-import ResetPassword from "../ResetPassword/ResetPassword";
-import AuthInputs from "../AuthInputs/AuthInputs";
-import { useAuthFlow } from "./useAuthFlow";
+import ResetPassword from "../reset-password/ResetPassword";
+import AuthInputs from "./AuthInputs";
+import { authCommands } from "../logic/auth.commands";
+import { useBarStateValue } from "../../../contexts/BarContext";
 
 export default function AuthBar() {
   const { authState, authDispatch } = useAuthReducer();
@@ -16,20 +17,11 @@ export default function AuthBar() {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const EmailAuthIsActive = authState.activeAuthOption !== "phone";
   const checkIcon = authState.isChecked ? checked : unchecked;
-
-  const authCommands = {
-    ToggleCountryCodes: () => authDispatch({ type: "TOGGLE_COUNTRY_CODES" }),
-    SelectCountryCode: (code: string) => authDispatch({ type: "SET_COUNTRY_CODE", payload: code }),
-    EnablePasswordReset: () => authDispatch({ type: "ENABLE_PASSWORD_RESET", payload: true }),
-  };
+  const isExitingBar = useBarStateValue("isExitingBar");
 
   const handleValuesChange = (field: "email" | "password" | "phone", value: string) => {
     if (field === "phone" && value !== "" && !/^[0-9]+$/.test(value)) return;
-    authDispatch({ type: "SET_INPUT", field, value });
-  };
-
-  const resetValues = () => {
-    authDispatch({ type: "RESET_FORM" });
+    authCommands.setInput(field, value);
   };
 
   const validateInputs = (
@@ -129,7 +121,7 @@ export default function AuthBar() {
           className={`Bar ${isExitingBar && "ExitBar"}`}
         >
           {" "}
-          <div onClick={resetValues} className='flex flex-col gap-2 w-full relative'>
+          <div onClick={authCommands.resetForms} className='flex flex-col gap-2 w-full relative'>
             <div className='acces-options'>
               <img
                 src={exitBtn}
@@ -151,7 +143,7 @@ export default function AuthBar() {
             />
           </div>
           <div
-            onClick={resetValues}
+            onClick={authCommands.resetForms}
             style={{ paddingBottom: EmailAuthIsActive ? "20px" : "15px" }}
             className='auth-option flex gap-2'
           >

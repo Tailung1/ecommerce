@@ -1,5 +1,5 @@
 import FloatingInput from "../../../components/reusable/FloatingInput";
-import "./AuthInputs.scss"
+import "./AuthInputs.scss";
 
 interface AuthInputsProps {
   authState: {
@@ -12,9 +12,10 @@ interface AuthInputsProps {
   };
   handleValuesChange: (field: "email" | "password" | "phone", value: string) => void;
   authCommands: {
-    ToggleCountryCodes: () => void;
-    SelectCountryCode: (code: string) => void;
-    EnablePasswordReset: () => void;
+    resetForms: () => void;
+    toggleCountryCodes: () => void;
+    selectCountryCode: (code: string) => void;
+    enablePasswordReset: () => void;
   };
 }
 
@@ -23,7 +24,7 @@ export default function ({ authState, handleValuesChange, authCommands }: AuthIn
   const isEmailError = authState.errors.emailError !== "";
 
   const onForgotPasswordClick = () => {
-    authCommands.EnablePasswordReset();
+    authCommands.enablePasswordReset();
   };
 
   return (
@@ -31,14 +32,14 @@ export default function ({ authState, handleValuesChange, authCommands }: AuthIn
       {authState.activeAuthOption === "phone" ? (
         <div className='auth-and-register-with-phone-container'>
           <div className='country-codes-container'>
-            <div onClick={authCommands.ToggleCountryCodes} className='country-code'>
+            <div onClick={authCommands.toggleCountryCodes} className='country-code'>
               +{authState.currentCode}
             </div>
 
             {authState.showCountryCodes && (
               <div className='codes-wrapper'>
                 {countryCodes.map((code) => (
-                  <span key={code} onClick={() => authCommands.SelectCountryCode(code)}>
+                  <span key={code} onClick={() => authCommands.selectCountryCode(code)}>
                     +{code}
                   </span>
                 ))}

@@ -1,7 +1,7 @@
 import "./ResetPassword.scss";
 import { useState } from "react";
 import FloatingInput from "../../../components/reusable/FloatingInput";
-import type { errorTypes, PasswordRecoveryStepTypes } from "./ResetPassword-types";
+import type { errorTypes, PasswordRecoveryStepTypes } from "./ResetPassword.types";
 
 export default function ResetPassword() {
   const [inputValues, setInputValues] = useState({

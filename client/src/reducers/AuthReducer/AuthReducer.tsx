@@ -1,8 +1,8 @@
 import { useReducer } from "react";
-import type {AuthState,AuthAction} from "./auth-types"
+import type { AuthState, AuthAction } from "./auth-types";
 
 const initialState: AuthState = {
-  authView: "login" || "register",
+  authView: "login",
   activeAuthOption: "phone",
   isChecked: false,
   showCountryCodes: false,

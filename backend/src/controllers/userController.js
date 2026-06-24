@@ -84,6 +84,8 @@ async function requestPasswordReset(req, res) {
   const { email } = req.body;
   try {
     const user = await prisma.users.findUnique({ where: { email } });
+    console.log(0);
+
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
@@ -95,12 +97,19 @@ async function requestPasswordReset(req, res) {
         pass: process.env.EMAIL_PASS,
       },
     });
+    console.log(1);
 
-    transporter.sendMail({
+    const sendOtp = await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: email,
       text: `Your otp code is ${otpCode}`,
     });
+    console.log(2);
+
+    console.log(sendOtp)
+    if (!sendOtp) {
+      throw new Error("Failed to send OTP");
+    }
 
     res.status(200).json({ message: "Otp code sent successfully" });
   } catch (err) {

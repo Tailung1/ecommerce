@@ -18,7 +18,7 @@ export default function ResetPassword() {
   });
 
   const [passwordRecoveryStep, setPasswordRecoveryStep] =
-    useState<PasswordRecoveryStepTypes>("collect_identifier");Ì
+    useState<PasswordRecoveryStepTypes>("collect_identifier");
 
   const handleValueChange = (value: string) => {
     if (passwordRecoveryStep === "verify_otp") {
@@ -91,17 +91,14 @@ export default function ResetPassword() {
       });
       const result = await response.json();
       if (!response.ok) {
-        console.log(result.message, "8");
+        console.log(result.message);
         return;
       }
-      console.log(result.message, "6");
-      console.log(response);
+      console.log(result.message);
+
       handlePostRequestAction();
     } catch (err: unknown) {
-      if (err instanceof Error) {
-        console.log(err.message, "5");
-      }
-      console.log(err, "4");
+      console.log(err);
     }
   };
 

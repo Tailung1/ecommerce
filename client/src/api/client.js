@@ -1,6 +1,15 @@
-import axios from "axios";
+export const apiClinet = async (url, options = {}) => {
+  const res = await fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      ...options.headers,
+    },
+    ...options,
+  });
+  const data = await res.json().catch(() => null);
 
-export  const api = axios.create({
-  baseURL: "http://localhost:5432/api",
-  withCredentials: true,
-});
+  if (!res.ok) {
+    throw new Error(data?.message || "Request failed");
+  }
+  return data;
+};

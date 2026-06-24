@@ -2,10 +2,10 @@ import FloatingInput from "../../../components/reusable/FloatingInput";
 import type {
   AuthView,
   AuthOption,
-  AuthInputFields,
   AuthInputValues,
   AuthErrors,
-} from "../../../reducers/AuthReducer/auth-types";
+  AuthCommands,
+} from "../auth.types";
 import "./AuthInputs.scss";
 
 interface AuthInputsProps {
@@ -17,14 +17,12 @@ interface AuthInputsProps {
     currentCode: string;
     showCountryCodes: boolean;
   };
-  handleValuesChange: (field: "email" | "password" | "phone", value: string) => void;
-  authCommands: {
-    setAuthView: (payload: AuthView) => void;
-    setInputField: (field: AuthInputFields, value: string) => void;
-    resetForms: () => void;
-    toggleCountryCodes: () => void;
-    selectCountryCode: (code: string) => void;
-  };
+  handleValuesChange: (
+    field: "email" | "password" | "phone",
+    value: string,
+    authCommands: AuthCommands
+  ) => void;
+  authCommands: AuthCommands;
 }
 
 export default function ({ authState, handleValuesChange, authCommands }: AuthInputsProps) {
@@ -57,7 +55,7 @@ export default function ({ authState, handleValuesChange, authCommands }: AuthIn
           <FloatingInput
             label={"Phone number"}
             value={authState.inputValues.phone}
-            propsedOnChange={(value) => handleValuesChange("phone", value)}
+            propsedOnChange={(value) => handleValuesChange("phone", value, authCommands)}
             errorMessage={authState.errors.phoneError}
             active={authState.authView}
           />
@@ -67,14 +65,14 @@ export default function ({ authState, handleValuesChange, authCommands }: AuthIn
           <FloatingInput
             label={"Email"}
             value={authState.inputValues.email}
-            propsedOnChange={(value) => handleValuesChange("email", value)}
+            propsedOnChange={(value) => handleValuesChange("email", value, authCommands)}
             errorMessage={authState.errors.emailError}
             active={authState.authView}
           />
           <FloatingInput
             label={"Password"}
             value={authState.inputValues.password}
-            propsedOnChange={(value) => handleValuesChange("password", value)}
+            propsedOnChange={(value) => handleValuesChange("password", value, authCommands)}
             errorMessage={authState.errors.passwordError}
             active={authState.authView}
             onForgotPasswordClick={onForgotPasswordClick}

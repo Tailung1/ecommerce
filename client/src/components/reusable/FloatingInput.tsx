@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import type { AuthView } from "../../reducers/AuthReducer/auth-types";
+import type { AuthView } from "../../features/auth/auth.types";
 
 interface propsTypes {
   label: string;

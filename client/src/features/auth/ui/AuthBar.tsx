@@ -4,84 +4,34 @@ import icon from "../../../assets/main-logo.png";
 import checked from "../../../assets/checked-rules.png";
 import unchecked from "../../../assets/unchecked.png";
 import exitBtn from "../../../assets/reject.png";
-import useAuthReducer from "../../../reducers/AuthReducer/AuthReducer";
+import useAuthReducer from "../auth.reducer";
 import { useBarDispatch } from "../../../contexts/BarContext";
 import ResetPassword from "../reset-password/ResetPassword";
 import AuthInputs from "./AuthInputs";
 import { useAuthCommands } from "../auth.commands";
 import { useBarStateValue } from "../../../contexts/BarContext";
-import type { AuthView } from "../../../reducers/AuthReducer/auth-types";
+import {
+  validateInputs,
+  handleValuesChange,
+  getRequestData,
+  startAuthRequest,
+} from "../auth.service";
 
 export default function AuthBar() {
   const { authState, authDispatch } = useAuthReducer();
   const { setBar } = useBarDispatch();
   const authCommands = useAuthCommands(authDispatch);
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const EmailAuthIsActive = authState.activeAuthOption !== "phone";
   const checkIcon = authState.isChecked ? checked : unchecked;
   const isExitingBar = useBarStateValue("isExitingBar");
 
-  const handleValuesChange = (field: "email" | "password" | "phone", value: string) => {
-    if (field === "phone" && value !== "" && !/^[0-9]+$/.test(value)) return;
-    authCommands.setInputField(field, value);
-  };
-
-  const validateInputs = (
-    authOption: "email" | "phone",
-    value: { email: string; password: string; phone: string }
-  ) => {
-    const errors: Partial<{ emailError: string; passwordError: string; phoneError: string }> = {};
-
-    if (authOption === "email") {
-      errors.emailError = !value.email
-        ? "Can't be empty"
-        : !emailRegex.test(authState.inputValues.email)
-        ? "Invalid email format"
-        : "";
-      errors.passwordError = !value.password ? "Can't be empty" : "";
-    }
-    if (authOption === "phone") {
-      errors.phoneError = !value.phone ? "Can't be empty" : "";
-    }
-    return errors;
-  };
-
-  const startAuthRequest = async (authMode: AuthView, activeAuthOption: "email" | "phone") => {
-    let actionData = {};
-    if (activeAuthOption === "email") {
-      actionData = { email: authState.inputValues.email, password: authState.inputValues.password };
-    } else {
-      actionData = { phone: authState.inputValues.phone };
-    }
-
-    try {
-      const response = await fetch(`http://localhost:3000/api/users/${authMode}`, {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(actionData),
-        credentials: "include",
-      });
-
-      const result = await response.json();
-
-      console.log(result.message);
-    } catch (err: unknown) {
-      if (err instanceof Error) {
-        console.log(err.message);
-      } else {
-        console.log(err);
-      }
-    }
-  };
-
   const handleAuth = () => {
-    const errors = validateInputs(authState.activeAuthOption, authState.inputValues);
+    const errors = validateInputs(authState, authState.activeAuthOption, authState.inputValues);
     authDispatch({ type: "SET_ERRORS", payload: errors });
     const hasError = Object.values(errors).some(Boolean);
     if (hasError) return;
-    startAuthRequest(authState.authView, authState.activeAuthOption);
+    const requestData = getRequestData(authState);
+    startAuthRequest(authState.authView, requestData);
   };
 
   return (

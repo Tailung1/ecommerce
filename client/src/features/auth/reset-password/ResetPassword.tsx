@@ -16,19 +16,20 @@ export default function ResetPassword() {
     newPassword: "",
     repeatNewPassword: "",
   });
+
   const [passwordRecoveryStep, setPasswordRecoveryStep] =
-    useState<PasswordRecoveryStepTypes>("collect_identifier");
+    useState<PasswordRecoveryStepTypes>("collect_identifier");Ì
 
   const handleValueChange = (value: string) => {
     if (passwordRecoveryStep === "verify_otp") {
-      setInputValues((prev) => ({ ...prev, checkOtpCode: value }));
+      setInputValues((prev) => ({ ...prev, otpCode: value }));
     } else {
       setInputValues((prev) => ({ ...prev, email: value }));
     }
   };
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const validateInputs = () => {
-    let errors!: errorTypes;
+    let errors = inputErrors;
 
     if (passwordRecoveryStep === "collect_identifier") {
       if (!emailRegex.test(inputValues.email)) {
@@ -46,6 +47,7 @@ export default function ResetPassword() {
         errors = { ...inputErrors, repeatNewPassword: "Passwords dosn't much" };
       }
     }
+
     setInputErrors(errors);
     return Object.values(errors).some(Boolean);
   };
@@ -53,18 +55,18 @@ export default function ResetPassword() {
   let isError = false;
 
   const getData = () => {
-    let dataToSend = {};
+    let requestData = {};
     if (passwordRecoveryStep === "collect_identifier") {
-      dataToSend = { email: inputValues.email };
+      requestData = { email: inputValues.email };
     } else if (passwordRecoveryStep === "verify_otp") {
-      dataToSend = { otpCode: inputValues.otpCode };
+      requestData = { otpCode: inputValues.otpCode };
     } else if (passwordRecoveryStep === "set_new_password") {
-      dataToSend = {
+      requestData = {
         newPassword: inputValues.newPassword,
         repeatNewPassword: inputValues.repeatNewPassword,
       };
     }
-    return { dataToSend };
+    return { requestData };
   };
 
   const handlePostRequestAction = () => {
@@ -78,27 +80,28 @@ export default function ResetPassword() {
   };
 
   const startResetRequest = async () => {
-    const { dataToSend } = getData();
+    const { requestData } = getData();
     try {
       const response = await fetch(`http://localhost:3000/api/users/${passwordRecoveryStep}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(dataToSend),
+        body: JSON.stringify(requestData),
       });
       const result = await response.json();
       if (!response.ok) {
-        console.log(result.message);
+        console.log(result.message, "8");
         return;
       }
-      console.log(result.message);
+      console.log(result.message, "6");
+      console.log(response);
       handlePostRequestAction();
     } catch (err: unknown) {
       if (err instanceof Error) {
-        console.log(err.message);
+        console.log(err.message, "5");
       }
-      console.log(err);
+      console.log(err, "4");
     }
   };
 
@@ -132,7 +135,7 @@ export default function ResetPassword() {
         } reset-password-input-container`}
       >
         <FloatingInput
-          label={passwordRecoveryStep === "collect_identifier" ? "Enter Code" : "Email"}
+          label={passwordRecoveryStep === "collect_identifier" ? "Email" : "Enter Code"}
           value={`${
             passwordRecoveryStep === "verify_otp" ? inputValues.otpCode : inputValues.email
           }`}

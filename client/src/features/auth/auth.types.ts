@@ -45,3 +45,11 @@ export type AuthAction =
   | { type: "RESET_FORM" }
   | { type: "TOGGLE_COUNTRY_CODES" }
   | { type: "SET_COUNTRY_CODE"; payload: string };
+
+  export type AuthCommands = {
+    setAuthView: (payload: AuthView) => void;
+    setInputField: (field: AuthInputFields, value: string) => void;
+    resetForms: () => void;
+    toggleCountryCodes: () => void;
+    selectCountryCode: (code: string) => void;
+  };

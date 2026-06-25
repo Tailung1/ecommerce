@@ -4,18 +4,13 @@ import icon from "../../../assets/main-logo.png";
 import checked from "../../../assets/checked-rules.png";
 import unchecked from "../../../assets/unchecked.png";
 import exitBtn from "../../../assets/reject.png";
-import useAuthReducer from "../auth.reducer";
+import useAuthReducer from "../authReducer";
 import { useBarDispatch } from "../../../contexts/BarContext";
 import ResetPassword from "../reset-password/ResetPassword";
 import AuthInputs from "./AuthInputs";
-import { useAuthCommands } from "../auth.commands";
+import { useAuthCommands } from "../authCommands";
 import { useBarStateValue } from "../../../contexts/BarContext";
-import {
-  validateInputs,
-  handleValuesChange,
-  getRequestData,
-  startAuthRequest,
-} from "../auth.service";
+import { authService } from "../authService";
 
 export default function AuthBar() {
   const { authState, authDispatch } = useAuthReducer();
@@ -26,12 +21,16 @@ export default function AuthBar() {
   const isExitingBar = useBarStateValue("isExitingBar");
 
   const handleAuth = () => {
-    const errors = validateInputs(authState, authState.activeAuthOption, authState.inputValues);
-    authDispatch({ type: "SET_ERRORS", payload: errors });
+    const errors = authService.validateInputs(
+      authState,
+      authState.activeAuthOption,
+      authState.inputValues
+    );
+
     const hasError = Object.values(errors).some(Boolean);
-    if (hasError) return;
-    const requestData = getRequestData(authState);
-    startAuthRequest(authState.authView, requestData);
+    if (hasError) return authDispatch({ type: "SET_ERRORS", payload: errors });
+    // const requestData = authService.getRequestData(authState);
+    // startAuthRequest(authState.authView, requestData);
   };
 
   return (
@@ -120,7 +119,7 @@ export default function AuthBar() {
           <div className='w-full relative'>
             <AuthInputs
               authState={authState}
-              handleValuesChange={handleValuesChange}
+              handleValuesChange={authService.handleValuesChange}
               authCommands={authCommands}
             />
 

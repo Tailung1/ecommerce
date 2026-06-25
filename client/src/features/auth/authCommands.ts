@@ -1,4 +1,4 @@
-import type { AuthView, AuthInputFields } from "./auth.types";
+import type { AuthView, AuthInputFields } from "./authTypes";
 
 export const useAuthCommands = (authDispatch: any) => {
   return {

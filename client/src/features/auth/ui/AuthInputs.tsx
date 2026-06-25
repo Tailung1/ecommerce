@@ -5,7 +5,7 @@ import type {
   AuthInputValues,
   AuthErrors,
   AuthCommands,
-} from "../auth.types";
+} from "../authTypes";
 import "./AuthInputs.scss";
 
 interface AuthInputsProps {

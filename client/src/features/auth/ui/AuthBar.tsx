@@ -22,9 +22,7 @@ export default function AuthBar() {
 
   const handleAuth = () => {
     const errors = authService.validateInputs(
-      authState,
-      authState.activeAuthOption,
-      authState.inputValues
+      authState
     );
 
     const hasError = Object.values(errors).some(Boolean);

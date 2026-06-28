@@ -9,7 +9,6 @@ function generateOTP() {
 
 async function requestOTP(req, res) {
   const { email } = req.body;
-  console.log(email);
   try {
     if (!email) {
       throw new Error("Email isn't defined");
@@ -19,6 +18,10 @@ async function requestOTP(req, res) {
       return res.status(404).json({ message: "User not found" });
     }
     const otpCode = generateOTP();
+    const setOtpToDB = await prisma.users.update({ where: { email }, data: { otpCode } });
+    if (!setOtpToDB) {
+      throw new Error("Failed to set OTP to database");
+    }
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -44,11 +47,13 @@ async function requestOTP(req, res) {
 }
 
 async function verifyOTP(req, res) {
-  const { email, otpCode } = req.body;
+  const { email, otp } = req.body;
   try {
     const user = await prisma.users.findUnique({ where: { email: email } });
-
-    if (otpCode === user.otpCode) {
+    if (otp !== user.otpCode) {
+      return res.status(400).json({ message: "Wrong OTP" });
+    }
+    if (otp === user.otpCode) {
       res.status(200).json({ message: "Otp code is correct" });
     }
   } catch (err) {

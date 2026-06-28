@@ -30,7 +30,7 @@ export default function ResetPassword() {
         errors = { ...inputErrors, email: "Invalid email inputValuesat" };
       }
     } else if (passwordResetStep === "VERIFY_OTP") {
-      if (inputValues.otpCode.length !== 4) {
+      if (inputValues.otpCode.length !== 6) {
         errors = { ...inputErrors, otpCode: "Invalid data" };
       }
     } else {

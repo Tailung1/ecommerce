@@ -1,10 +1,10 @@
-export const apiClinet = async (url, options = {}) => {
+export const apiClient = async (url: string, requestData: any) => {
   const res = await fetch(url, {
+    method: "POST",
     headers: {
-      "Content-Type": "application/json",
-      ...options.headers,
+      "Content-type": "application/json",
     },
-    ...options,
+    body: JSON.stringify(requestData),
   });
   const data = await res.json().catch(() => null);
 

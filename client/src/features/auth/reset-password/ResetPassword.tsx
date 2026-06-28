@@ -2,6 +2,7 @@ import "./ResetPassword.scss";
 import { useState } from "react";
 import type { InputErrors, PasswordResetStep } from "./ResetPassword.types";
 import ResetPasswordInputs from "./ResetPasswordInputs";
+import { authApi } from "./resetPasswordApi";
 
 export default function ResetPassword() {
   const [inputValues, setInputValues] = useState({
@@ -18,21 +19,15 @@ export default function ResetPassword() {
   });
 
   const [passwordResetStep, setPasswordResetStep] = useState<PasswordResetStep>("IDENTIFY_USER");
+  const [error, setError] = useState<string>("");
 
-  const handleValueChange = (value: string) => {
-    if (passwordResetStep === "VERIFY_OTP") {
-      setInputValues((prev) => ({ ...prev, otpCode: value }));
-    } else {
-      setInputValues((prev) => ({ ...prev, email: value }));
-    }
-  };
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const validateInputs = () => {
     let errors = inputErrors;
 
     if (passwordResetStep === "IDENTIFY_USER") {
       if (!emailRegex.test(inputValues.email)) {
-        errors = { ...inputErrors, email: "Invalid email format" };
+        errors = { ...inputErrors, email: "Invalid email inputValuesat" };
       }
     } else if (passwordResetStep === "VERIFY_OTP") {
       if (inputValues.otpCode.length !== 4) {
@@ -52,36 +47,36 @@ export default function ResetPassword() {
   };
 
   let isError = false;
+  const startPasswodResetRequest = async () => {
+    try {
+      if (passwordResetStep === "IDENTIFY_USER") {
+        await authApi.requestOtp(inputValues.email);
+        setPasswordResetStep("VERIFY_OTP");
+        return;
+      }
 
-  const getData = () => {
-    let requestData = {};
-    if (passwordResetStep === "IDENTIFY_USER") {
-      requestData = { email: inputValues.email };
-    } else if (passwordResetStep === "VERIFY_OTP") {
-      requestData = { otpCode: inputValues.otpCode };
-    } else if (passwordResetStep === "RESET_PASSWORD") {
-      requestData = {
-        newPassword: inputValues.newPassword,
-        repeatNewPassword: inputValues.repeatNewPassword,
-      };
+      if (passwordResetStep === "VERIFY_OTP") {
+        await authApi.verifyOtp(inputValues.email, inputValues.otpCode);
+        setPasswordResetStep("RESET_PASSWORD");
+        return;
+      }
+
+      if (passwordResetStep === "RESET_PASSWORD") {
+        await authApi.resetPassword(inputValues.email, inputValues.newPassword);
+        setPasswordResetStep("COMPLETED");
+        return;
+      }
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      }
+      console.log(err);
     }
-    return { requestData };
-  };
-
-  const handlePostRequestAction = () => {
-    const passwordResetStateTransitions: Record<PasswordResetStep, PasswordResetStep> = {
-      IDENTIFY_USER: "VERIFY_OTP",
-      VERIFY_OTP: "RESET_PASSWORD",
-      RESET_PASSWORD: "COMPLETED",
-      COMPLETED: "COMPLETED",
-    };
-    // setStep(nextStep[passwordResetStep]);
   };
 
   const handleSubmit = () => {
-    if (isError) return;
-    const validationResult = validateInputs();
-    if (validationResult) return (isError = true);
+    if (validateInputs()) return;
+    startPasswodResetRequest();
   };
 
   return (
@@ -89,6 +84,7 @@ export default function ResetPassword() {
       className={`reset-password-container ${passwordResetStep === "VERIFY_OTP" ? "animate" : ""}`}
     >
       <h2>Password Recovery</h2>
+      <h1>{error}</h1>
       <hr />
       <h3>
         {passwordResetStep === "VERIFY_OTP"

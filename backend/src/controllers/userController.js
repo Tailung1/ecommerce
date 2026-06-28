@@ -1,10 +1,8 @@
 // import pool from "../db.config.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import nodemailer from "nodemailer";
 import { PrismaClient } from "@prisma/client";
 import { Prisma } from "@prisma/client";
-import crypto from "crypto";
 
 const prisma = new PrismaClient();
 const isProd = process.env.NODE_ENV !== "development";
@@ -76,60 +74,4 @@ async function register(req, res) {
   }
 }
 
-function generateOTP() {
-  return crypto.randomInt(100000, 1000000).toString();
-}
-
-async function requestPasswordReset(req, res) {
-  const { email } = req.body;
-  try {
-    const user = await prisma.users.findUnique({ where: { email } });
-    console.log(0);
-
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-    const otpCode = generateOTP();
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
-    console.log(1);
-
-    const sendOtp = await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: email,
-      text: `Your otp code is ${otpCode}`,
-    });
-    console.log(2);
-
-    console.log(sendOtp)
-    if (!sendOtp) {
-      throw new Error("Failed to send OTP");
-    }
-
-    res.status(200).json({ message: "Otp code sent successfully" });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-}
-
-async function verifyResetCode(req, res) {
-  const { email, otpCode } = req.body;
-  try {
-    const user = await prisma.users.findUnique({ where: { email: email } });
-
-    if (otpCode === user.otpCode) {
-      res.status(200).json({ message: "Otp code is correct" });
-    }
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-}
-
-async function recoveryPassword() {}
-
-export { login, register, recoveryPassword, requestPasswordReset, verifyResetCode };
+export { login, register };

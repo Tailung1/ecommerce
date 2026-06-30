@@ -11,12 +11,14 @@ export default function ResetPasswordInputs({
   inputValues,
   inputErrors,
   setInputValues,
+  setInputErrors,
 }: ResetPasswordInputsProps) {
   const handleValueChange = (field: keyof ResetPasswordFormValues, value: string) => {
     setInputValues((prev) => ({
       ...prev,
       [field]: value,
     }));
+    setInputErrors({ email: "", otpCode: "", newPassword: "", repeatNewPassword: "" });
   };
   const stepUI: Partial<Record<PasswordResetStep, ReactNode>> = {
     IDENTIFY_USER: (
@@ -38,7 +40,7 @@ export default function ResetPasswordInputs({
     ),
 
     RESET_PASSWORD: (
-      <div>
+      <div className='new-password-container'>
         <FloatingInput
           label='New password'
           value={inputValues.newPassword}
@@ -46,7 +48,7 @@ export default function ResetPasswordInputs({
           errorMessage={inputErrors.newPassword}
         />
         <FloatingInput
-          label='Repeat new Password'
+          label='Repeat new password'
           value={inputValues.repeatNewPassword}
           propsedOnChange={(v) => handleValueChange("repeatNewPassword", v)}
           errorMessage={inputErrors.repeatNewPassword}

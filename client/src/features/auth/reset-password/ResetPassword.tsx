@@ -23,11 +23,16 @@ export default function ResetPassword() {
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const validateInputs = () => {
-    let errors = inputErrors;
+    let errors = {
+      email: "",
+      otpCode: "",
+      newPassword: "",
+      repeatNewPassword: "",
+    };
 
     if (passwordResetStep === "IDENTIFY_USER") {
       if (!emailRegex.test(inputValues.email)) {
-        errors = { ...inputErrors, email: "Invalid email inputValuesat" };
+        errors = { ...inputErrors, email: "Invalid email" };
       }
     } else if (passwordResetStep === "VERIFY_OTP") {
       if (inputValues.otpCode.length !== 6) {
@@ -86,14 +91,14 @@ export default function ResetPassword() {
       <h2>Password Recovery</h2>
       <h1>{error}</h1>
       <hr />
-      <h3>
+      <h3 className={` ${passwordResetStep === "VERIFY_OTP" ? "OtpPadding" : "defaultPadding"}`}>
         {passwordResetStep === "VERIFY_OTP"
           ? "Verify Identify"
           : "Enter your phone number or email"}
       </h3>
-      <h4
-        className={`${passwordResetStep === "VERIFY_OTP" ? "opacityShow" : "opacityHide"}`}
-      >{`Code sent to your email: ${inputValues.email}`}</h4>
+      {passwordResetStep === "VERIFY_OTP" && (
+        <h4>{`Code sent to your email: ${inputValues.email}`}</h4>
+      )}
       <div
         className={`${
           isError ? "isErrorPadding" : "defaultPadding"
@@ -104,6 +109,7 @@ export default function ResetPassword() {
           inputValues={inputValues}
           inputErrors={inputErrors}
           setInputValues={setInputValues}
+          setInputErrors={setInputErrors}
         />
       </div>
       <button onClick={handleSubmit}>

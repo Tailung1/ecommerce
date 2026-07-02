@@ -22,6 +22,7 @@ export default function ResetPassword() {
   const [error, setError] = useState<string>("");
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
   const validateInputs = () => {
     let errors = {
       email: "",
@@ -41,8 +42,7 @@ export default function ResetPassword() {
     } else {
       if (inputValues.newPassword.length < 5) {
         errors = { ...inputErrors, newPassword: "Min 5 charachters" };
-      }
-      if (inputValues.repeatNewPassword !== inputValues.newPassword) {
+      } else if (inputValues.repeatNewPassword !== inputValues.newPassword) {
         errors = { ...inputErrors, repeatNewPassword: "Passwords dosn't much" };
       }
     }

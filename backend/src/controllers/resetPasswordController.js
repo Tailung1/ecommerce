@@ -61,6 +61,13 @@ async function verifyOTP(req, res) {
   }
 }
 
-async function resetPassword(req, res) {}
+async function resetPassword(req, res) {
+  const { newPassword, repeatNewPassword } = req.body;
+  try {
+
+    
+  }catch(err){}
+
+}
 
 export { requestOTP, verifyOTP, resetPassword };

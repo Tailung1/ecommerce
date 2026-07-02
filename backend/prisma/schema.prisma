@@ -14,3 +14,13 @@ model users {
   password   String?  @db.VarChar(255)
   otpCode    String?  @db.VarChar(255)
 }
+
+model passwordResetSession {
+  id        String   @id @default(uuid())
+  userId    Int
+  otpHash   String
+  status    String // PENDING | VERIFIED | USED
+  expiresAt DateTime
+  attempts  Int      @default(0)
+  createdAt DateTime @default(now())
+}

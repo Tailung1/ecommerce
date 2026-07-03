@@ -3,6 +3,7 @@ import { useState } from "react";
 import type { InputErrors, PasswordResetStep } from "./ResetPassword.types";
 import ResetPasswordInputs from "./ResetPasswordInputs";
 import { authApi } from "./resetPasswordApi";
+import Completed from "./Completed";
 
 export default function ResetPassword() {
   const [inputValues, setInputValues] = useState({
@@ -20,6 +21,7 @@ export default function ResetPassword() {
 
   const [passwordResetStep, setPasswordResetStep] = useState<PasswordResetStep>("IDENTIFY_USER");
   const [error, setError] = useState<string>("");
+  const [sessionId, setSessionId] = useState<string>("");
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -50,30 +52,34 @@ export default function ResetPassword() {
     setInputErrors(errors);
     return Object.values(errors).some(Boolean);
   };
-
+  console.log(passwordResetStep);
   let isError = false;
   const startPasswodResetRequest = async () => {
     try {
       if (passwordResetStep === "IDENTIFY_USER") {
-        await authApi.requestOtp(inputValues.email);
+        const response = await authApi.requestOtp(inputValues.email);
         setPasswordResetStep("VERIFY_OTP");
+        setSessionId(response.sessionId);
         return;
       }
 
       if (passwordResetStep === "VERIFY_OTP") {
-        await authApi.verifyOtp(inputValues.email, inputValues.otpCode);
+        await authApi.verifyOtp(sessionId);
         setPasswordResetStep("RESET_PASSWORD");
         return;
       }
 
       if (passwordResetStep === "RESET_PASSWORD") {
-        await authApi.resetPassword(inputValues.email, inputValues.newPassword);
+        console.log("came");
+        await authApi.resetPassword(sessionId, inputValues.newPassword);
         setPasswordResetStep("COMPLETED");
+
         return;
       }
     } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message);
+        console.log(err.message);
       }
       console.log(err);
     }
@@ -88,33 +94,42 @@ export default function ResetPassword() {
     <div
       className={`reset-password-container ${passwordResetStep === "VERIFY_OTP" ? "animate" : ""}`}
     >
-      <h2>Password Recovery</h2>
-      <h1>{error}</h1>
-      <hr />
-      <h3 className={` ${passwordResetStep === "VERIFY_OTP" ? "OtpPadding" : "defaultPadding"}`}>
-        {passwordResetStep === "VERIFY_OTP"
-          ? "Verify Identify"
-          : "Enter your phone number or email"}
-      </h3>
-      {passwordResetStep === "VERIFY_OTP" && (
-        <h4>{`Code sent to your email: ${inputValues.email}`}</h4>
+      {passwordResetStep !== "COMPLETED" ? (
+        <>
+          {" "}
+          <h2>Password Recovery</h2>
+          <h1>{error}</h1>
+          <hr />
+          <h3
+            className={` ${passwordResetStep === "VERIFY_OTP" ? "OtpPadding" : "defaultPadding"}`}
+          >
+            {passwordResetStep === "VERIFY_OTP"
+              ? "Verify Identify"
+              : "Enter your phone number or email"}
+          </h3>
+          {passwordResetStep === "VERIFY_OTP" && (
+            <h4>{`Code sent to your email: ${inputValues.email}`}</h4>
+          )}
+          <div
+            className={`${
+              isError ? "isErrorPadding" : "defaultPadding"
+            } reset-password-input-container`}
+          >
+            <ResetPasswordInputs
+              passwordResetStep={passwordResetStep}
+              inputValues={inputValues}
+              inputErrors={inputErrors}
+              setInputValues={setInputValues}
+              setInputErrors={setInputErrors}
+            />
+          </div>
+          <button onClick={handleSubmit}>
+            {passwordResetStep === "VERIFY_OTP" ? "ENTER NUMBER" : "RECOVER PASSWORD"}
+          </button>
+        </>
+      ) : (
+        <Completed />
       )}
-      <div
-        className={`${
-          isError ? "isErrorPadding" : "defaultPadding"
-        } reset-password-input-container`}
-      >
-        <ResetPasswordInputs
-          passwordResetStep={passwordResetStep}
-          inputValues={inputValues}
-          inputErrors={inputErrors}
-          setInputValues={setInputValues}
-          setInputErrors={setInputErrors}
-        />
-      </div>
-      <button onClick={handleSubmit}>
-        {passwordResetStep === "VERIFY_OTP" ? "ENTER NUMBER" : "RECOVER PASSWORD"}
-      </button>
     </div>
   );
 }

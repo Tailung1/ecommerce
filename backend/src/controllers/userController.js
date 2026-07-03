@@ -18,7 +18,7 @@ async function login(req, res) {
     //   throw new Error("Incorrect email");
     // }
     // prisma
-    const user = await prisma.users.findUnique({ where: { email: normalizedEmail } });
+    const user = await prisma.user.findUnique({ where: { email: normalizedEmail } });
     if (!user) {
       throw new Error("Incorrect email");
     }
@@ -58,7 +58,7 @@ async function register(req, res) {
     //  );
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = await prisma.users.create({
+    const user = await prisma.user.create({
       data: { email: normalizedEmail, password: hashedPassword },
     });
 

@@ -3,10 +3,12 @@ import { PrismaClient } from "@prisma/client";
 import crypto from "crypto";
 import bcrypt from "bcrypt";
 const prisma = new PrismaClient();
+import { passwordResetRequestLimiter } from "../utils/passwordResetRequestLimiter";
 
 async function requestOTP(req, res) {
   const { email } = req.body;
   try {
+    await passwordResetRequestLimiter.consume(email);
     if (!email) {
       throw new Error("Email isn't defined");
     }
@@ -46,6 +48,9 @@ async function requestOTP(req, res) {
 
     res.status(200).json({ sessionId: user.id });
   } catch (err) {
+    if (err instanceof RateLimitError) {
+      return res.status(429).json({ message: "Too many requests" });
+    }
     res.status(500).json({ message: err.message });
   }
 }

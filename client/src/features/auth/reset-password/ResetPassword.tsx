@@ -21,7 +21,7 @@ export default function ResetPassword() {
 
   const [passwordResetStep, setPasswordResetStep] = useState<PasswordResetStep>("IDENTIFY_USER");
   const [error, setError] = useState<string>("");
-  const [sessionId, setSessionId] = useState<string>("");
+  const [userId, setUserId] = useState<string>("");
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -58,30 +58,33 @@ export default function ResetPassword() {
     try {
       if (passwordResetStep === "IDENTIFY_USER") {
         const response = await authApi.requestOtp(inputValues.email);
+        if (!response) {
+          const data = response.json();
+          setError(data.message);
+        }
         setPasswordResetStep("VERIFY_OTP");
-        setSessionId(response.sessionId);
+        setUserId(response.sessionId);
         return;
       }
 
       if (passwordResetStep === "VERIFY_OTP") {
-        await authApi.verifyOtp(sessionId);
+        await authApi.verifyOtp(userId, inputValues.otpCode);
         setPasswordResetStep("RESET_PASSWORD");
         return;
       }
 
       if (passwordResetStep === "RESET_PASSWORD") {
-        console.log("came");
-        await authApi.resetPassword(sessionId, inputValues.newPassword);
+        await authApi.resetPassword(userId, inputValues.newPassword);
         setPasswordResetStep("COMPLETED");
-
         return;
       }
     } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message);
-        console.log(err.message);
+        console.log("caught", err.message);
+        return;
       }
-      console.log(err);
+      console.log("uncaught", err);
     }
   };
 

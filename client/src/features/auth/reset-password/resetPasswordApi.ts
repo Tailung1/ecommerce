@@ -4,9 +4,9 @@ export const authApi = {
   requestOtp: (email: string) =>
     apiClient("http://localhost:3000/api/reset-password/request-otp", { email }),
 
-  verifyOtp: (sessionId: string) =>
-    apiClient("http://localhost:3000/api/reset-password/verify-otp", { sessionId }),
+  verifyOtp: (userId: string, otp: string) =>
+    apiClient("http://localhost:3000/api/reset-password/verify-otp", { userId, otp }),
 
-  resetPassword: (sessionId: string, password: string) =>
-    apiClient("http://localhost:3000/api/reset-password/reset-password", { sessionId, password }),
+  resetPassword: (userId: string, newPassword: string) =>
+    apiClient("http://localhost:3000/api/reset-password/reset-password", { userId, newPassword }),
 };

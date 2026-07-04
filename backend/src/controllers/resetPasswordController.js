@@ -51,24 +51,44 @@ async function requestOTP(req, res) {
 }
 
 async function verifyOTP(req, res) {
-  const { email, otp } = req.body;
+  const { userId, otp } = req.body;
   try {
-    const user = await prisma.user.findUnique({ where: { email: email } });
-    if (otp !== user.otpCode) {
+    const sessionObject = await prisma.passwordResetSession.findMany({ where: { userId } });
+    if (!sessionObject.length === 0) {
+      return res.json({ message: "Failed to find session object" });
+    }
+    if (sessionObject[0].attempts === 3) {
+      return res.status(400).json({ message: "Otp attempt limit reached, try again later" });
+    }
+    const passwordCompareCheck = await bcrypt.compare(otp, sessionObject[0].otpHash);
+
+    if (passwordCompareCheck) {
+      await prisma.passwordResetSession.update({
+        where: { userId },
+        data: {
+          attempts: sessionObject[0].attempts + 1,
+        },
+      });
+    } else {
       return res.status(400).json({ message: "Wrong OTP" });
     }
-    if (otp === user.otpCode) {
-      res.status(200).json({ message: "Otp code is correct" });
-    }
+
+    res.status(200).json({ message: "Otp is correct" });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 }
 
 async function resetPassword(req, res) {
-  const { newPassword, repeatNewPassword } = req.body;
+  const { userId, newPassword } = req.body;
   try {
-  } catch (err) {}
+    const hashNewPassword = await bcrypt.hash(newPassword, 10);
+    await prisma.user.update({ where: { id: userId }, data: { password: hashNewPassword } });
+    await prisma.passwordResetSession.delete({ where: { userId } });
+    return res.status(200).json({ message: "Password updated successefully" });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 }
 
 export { requestOTP, verifyOTP, resetPassword };

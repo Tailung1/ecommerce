@@ -3,16 +3,31 @@ import { PrismaClient } from "@prisma/client";
 import crypto from "crypto";
 import bcrypt from "bcrypt";
 const prisma = new PrismaClient();
-import { passwordResetRequestLimiter } from "../utils/passwordResetRequestLimiter";
+import { passwordResetRequestLimiter } from "../utils/passwordResetRequestLimiter.js";
+import RateLimitError from "../utils/passwordResetRequestLimitError.js";
 
 async function requestOTP(req, res) {
   const { email } = req.body;
   try {
-    await passwordResetRequestLimiter.consume(email);
     if (!email) {
       throw new Error("Email isn't defined");
     }
-    const user = await prisma.user.findUnique({ where: { email } });
+    try {
+      await passwordResetRequestLimiter.consume(email);
+    } catch (err) {
+      if (typeof err.msBeforeNext === "number") {
+        return res.status(429).json({
+          message: "Too many requests",
+          retryAfter: Math.ceil(err.msBeforeNext / 1000),
+        });
+      }
+
+      return res.status(500).json({
+        message: "Unexpected limiter error",
+      });
+    }
+
+    const user = await prisma.user.findFirst({ where: { email }, orderBy: { created_at: "desc" } }); // descending
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
@@ -58,26 +73,31 @@ async function requestOTP(req, res) {
 async function verifyOTP(req, res) {
   const { userId, otp } = req.body;
   try {
-    const sessionObject = await prisma.passwordResetSession.findMany({ where: { userId } });
-    if (!sessionObject.length === 0) {
+    const sessionObject = await prisma.passwordResetSession.findFirst({
+      where: { userId },
+      orderBy: { createdAt: "desc" },
+    });
+    if (!sessionObject) {
       return res.json({ message: "Failed to find session object" });
     }
-    if (sessionObject[0].attempts === 3) {
-      return res.status(400).json({ message: "Otp attempt limit reached, try again later" });
+    if (sessionObject.attempts === 3) {
+      return res.status(400).json({ message: "Otp attempt limit reached max, try again later" });
     }
-    const passwordCompareCheck = await bcrypt.compare(otp, sessionObject[0].otpHash);
+    const passwordCompareCheck = await bcrypt.compare(otp, sessionObject.otpHash);
 
-    if (passwordCompareCheck) {
+    if (!passwordCompareCheck) {
       await prisma.passwordResetSession.update({
-        where: { userId },
+        where: { id: sessionObject.id },
         data: {
-          attempts: sessionObject[0].attempts + 1,
+          attempts: sessionObject.attempts + 1,
         },
       });
-    } else {
       return res.status(400).json({ message: "Wrong OTP" });
     }
-
+    await prisma.passwordResetSession.update({
+      where: { id: sessionObject.id, status: "PENDING" },
+      data: { status: "VERIFIED" },
+    });
     res.status(200).json({ message: "Otp is correct" });
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -88,8 +108,18 @@ async function resetPassword(req, res) {
   const { userId, newPassword } = req.body;
   try {
     const hashNewPassword = await bcrypt.hash(newPassword, 10);
+
+    const sessionObject = await prisma.passwordResetSession.findFirst({
+      where: { userId },
+      orderBy: { createdAt: "desc" },
+    });
+    await prisma.passwordResetSession.update({
+      where: { id: sessionObject.id, status: "VERIFIED" },
+      data: { status: "USED" },
+    });
+
     await prisma.user.update({ where: { id: userId }, data: { password: hashNewPassword } });
-    await prisma.passwordResetSession.delete({ where: { userId } });
+    
     return res.status(200).json({ message: "Password updated successefully" });
   } catch (err) {
     res.status(500).json({ message: err.message });

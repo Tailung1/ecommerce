@@ -74,11 +74,11 @@ async function verifyOTP(req, res) {
   const { userId, otp } = req.body;
   try {
     const sessionObject = await prisma.passwordResetSession.findFirst({
-      where: { userId },
+      where: { userId, status: "PENDING", expiresAt: { gt: new Date() } },
       orderBy: { createdAt: "desc" },
     });
     if (!sessionObject) {
-      return res.json({ message: "Failed to find session object" });
+      return res.json({ message: "Failed to find session" });
     }
     if (sessionObject.attempts === 3) {
       return res.status(400).json({ message: "Otp attempt limit reached max, try again later" });
@@ -119,7 +119,7 @@ async function resetPassword(req, res) {
     });
 
     await prisma.user.update({ where: { id: userId }, data: { password: hashNewPassword } });
-    
+
     return res.status(200).json({ message: "Password updated successefully" });
   } catch (err) {
     res.status(500).json({ message: err.message });

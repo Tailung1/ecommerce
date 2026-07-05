@@ -21,7 +21,7 @@ model PasswordResetSession {
   id        String   @id @default(uuid())
   userId    Int      
   otpHash   String
-  status    String // PENDING | VERIFIED | USED
+  status    String // PENDING | VERIFIED | USED | EXPIRED
   expiresAt DateTime
   attempts  Int      @default(0)
   createdAt DateTime @default(now())

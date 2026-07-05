@@ -78,7 +78,7 @@ async function verifyOTP(req, res) {
       orderBy: { createdAt: "desc" },
     });
     if (!sessionObject) {
-      return res.json({ message: "Failed to find session" });
+      return res.json({ message: "Session not found" });
     }
     if (sessionObject.attempts === 3) {
       return res.status(400).json({ message: "Otp attempt limit reached max, try again later" });
@@ -95,7 +95,7 @@ async function verifyOTP(req, res) {
       return res.status(400).json({ message: "Wrong OTP" });
     }
     await prisma.passwordResetSession.update({
-      where: { id: sessionObject.id, status: "PENDING" },
+      where: { id: sessionObject.id },
       data: { status: "VERIFIED" },
     });
     res.status(200).json({ message: "Otp is correct" });
@@ -109,12 +109,15 @@ async function resetPassword(req, res) {
   try {
     const hashNewPassword = await bcrypt.hash(newPassword, 10);
 
-    const sessionObject = await prisma.passwordResetSession.findFirst({
-      where: { userId },
+    const session = await prisma.passwordResetSession.findFirst({
+      where: { userId, status: "VERIFIED", expiresAt: { gt: new Date() } },
       orderBy: { createdAt: "desc" },
     });
+    if (!session) {
+      return res.status(404).json({ message: "Session not found" });
+    }
     await prisma.passwordResetSession.update({
-      where: { id: sessionObject.id, status: "VERIFIED" },
+      where: { id: session.id},
       data: { status: "USED" },
     });
 

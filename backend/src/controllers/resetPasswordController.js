@@ -4,7 +4,7 @@ import crypto from "crypto";
 import bcrypt from "bcrypt";
 const prisma = new PrismaClient();
 import { passwordResetRequestLimiter } from "../utils/passwordResetRequestLimiter.js";
-import RateLimitError from "../utils/passwordResetRequestLimitError.js";
+// import RateLimitError from "../utils/passwordResetRequestLimitError.js";
 
 async function requestOTP(req, res) {
   const { email } = req.body;
@@ -18,7 +18,8 @@ async function requestOTP(req, res) {
       if (typeof err.msBeforeNext === "number") {
         return res.status(429).json({
           message: "Too many requests",
-          retryAfter: Math.ceil(err.msBeforeNext / 1000),
+          // err.msBeforeNext is given in milliseconds(ms), But APIs (and HTTP conventions) usually expect seconds.
+          //   retryAfter: Math.ceil(err.msBeforeNext / 1000),
         });
       }
 
@@ -27,7 +28,7 @@ async function requestOTP(req, res) {
       });
     }
 
-    const user = await prisma.user.findFirst({ where: { email }, orderBy: { created_at: "desc" } }); // descending
+    const user = await prisma.user.findFirst({ where: { email }, orderBy: { created_at: "desc" } }); // descending;
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
@@ -63,9 +64,6 @@ async function requestOTP(req, res) {
 
     res.status(200).json({ sessionId: user.id });
   } catch (err) {
-    if (err instanceof RateLimitError) {
-      return res.status(429).json({ message: "Too many requests" });
-    }
     res.status(500).json({ message: err.message });
   }
 }
@@ -117,7 +115,7 @@ async function resetPassword(req, res) {
       return res.status(404).json({ message: "Session not found" });
     }
     await prisma.passwordResetSession.update({
-      where: { id: session.id},
+      where: { id: session.id },
       data: { status: "USED" },
     });
 

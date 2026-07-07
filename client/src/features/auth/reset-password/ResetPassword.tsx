@@ -2,8 +2,9 @@ import "./ResetPassword.scss";
 import { useState } from "react";
 import type { InputErrors, PasswordResetStep } from "./ResetPassword.types";
 import ResetPasswordInputs from "./ResetPasswordInputs";
-import { authApi } from "./resetPasswordApi";
+import { resetPasswordApi } from "./resetPasswordApi";
 import Completed from "./Completed";
+import { BeatLoader } from "react-spinners";
 
 export default function ResetPassword() {
   const [inputValues, setInputValues] = useState({
@@ -22,6 +23,7 @@ export default function ResetPassword() {
   const [passwordResetStep, setPasswordResetStep] = useState<PasswordResetStep>("IDENTIFY_USER");
   const [error, setError] = useState<string>("");
   const [userId, setUserId] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -57,7 +59,8 @@ export default function ResetPassword() {
   const startPasswodResetRequest = async () => {
     try {
       if (passwordResetStep === "IDENTIFY_USER") {
-        const response = await authApi.requestOtp(inputValues.email);
+        setIsLoading(true);
+        const response = await resetPasswordApi.requestOtp(inputValues.email);
         if (!response) {
           const data = response.json();
           setError(data.message);
@@ -68,13 +71,15 @@ export default function ResetPassword() {
       }
 
       if (passwordResetStep === "VERIFY_OTP") {
-        await authApi.verifyOtp(userId, inputValues.otpCode);
+        setIsLoading(true);
+        await resetPasswordApi.verifyOtp(userId, inputValues.otpCode);
         setPasswordResetStep("RESET_PASSWORD");
         return;
       }
 
       if (passwordResetStep === "RESET_PASSWORD") {
-        await authApi.resetPassword(userId, inputValues.newPassword);
+        setIsLoading(true);
+        await resetPasswordApi.resetPassword(userId, inputValues.newPassword);
         setPasswordResetStep("COMPLETED");
         return;
       }
@@ -85,6 +90,8 @@ export default function ResetPassword() {
         return;
       }
       console.log("uncaught", err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -127,7 +134,13 @@ export default function ResetPassword() {
             />
           </div>
           <button onClick={handleSubmit}>
-            {passwordResetStep === "VERIFY_OTP" ? "ENTER NUMBER" : "RECOVER PASSWORD"}
+            {isLoading ? (
+              <BeatLoader size={10} color="green" />
+            ) : passwordResetStep === "VERIFY_OTP" ? (
+              "ENTER NUMBER"
+            ) : (
+              "RECOVER PASSWORD"
+            )}
           </button>
         </>
       ) : (

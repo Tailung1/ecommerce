@@ -28,7 +28,7 @@ export default function FloatingInput({
   const isActive = activityTrack.isFocused || value;
   const inputId = `${label.toLowerCase().replace(" ", "-")}-input`;
   return (
-    <div className='floating-container'>
+    <div key={label} className='floating-container'>
       <motion.label
         className={`${isActive && "text-orange-500"}`}
         initial={{ x: 8, y: 15 }}

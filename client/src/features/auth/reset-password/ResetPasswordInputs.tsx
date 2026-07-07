@@ -18,7 +18,9 @@ export default function ResetPasswordInputs({
       ...prev,
       [field]: value,
     }));
-    setInputErrors({ email: "", otpCode: "", newPassword: "", repeatNewPassword: "" });
+    const entries = Object.entries(inputErrors).map(([key]) => [key, ""]);
+    const newInputErrros = Object.fromEntries(entries);
+    setInputErrors(newInputErrros);
   };
   const stepUI: Partial<Record<PasswordResetStep, ReactNode>> = {
     IDENTIFY_USER: (

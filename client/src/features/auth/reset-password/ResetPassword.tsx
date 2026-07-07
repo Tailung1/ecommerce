@@ -54,7 +54,7 @@ export default function ResetPassword() {
     setInputErrors(errors);
     return Object.values(errors).some(Boolean);
   };
-  console.log(passwordResetStep);
+
   let isError = false;
   const startPasswodResetRequest = async () => {
     try {

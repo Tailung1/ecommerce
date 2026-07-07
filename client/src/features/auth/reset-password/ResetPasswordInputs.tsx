@@ -22,6 +22,11 @@ export default function ResetPasswordInputs({
     const newInputErrros = Object.fromEntries(entries);
     setInputErrors(newInputErrros);
   };
+  const isNewPasswordError = inputErrors.newPassword.length !== 0;
+  console.log(isNewPasswordError);
+  console.log(inputErrors.newPassword.length);
+  console.log(inputErrors.newPassword);
+
   const stepUI: Partial<Record<PasswordResetStep, ReactNode>> = {
     IDENTIFY_USER: (
       <FloatingInput
@@ -42,7 +47,7 @@ export default function ResetPasswordInputs({
     ),
 
     RESET_PASSWORD: (
-      <div className='new-password-container'>
+      <div className={`new-password-container ${isNewPasswordError && "padding-when-errored"}`}>
         <FloatingInput
           label='New password'
           value={inputValues.newPassword}

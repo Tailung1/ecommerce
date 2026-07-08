@@ -33,7 +33,7 @@ export default function BarWrapper({
   return ReactDom.createPortal(
     <>
       <div
-        className={`auth-overlay  ${isExitingBar ? "Exit-overlay" : "Enter-overlay"}`}
+        className={`overlay  ${isExitingBar ? "Exit-overlay" : "Enter-overlay"}`}
         style={
           layerTarget === "main"
             ? { height: `${mainHeight.height}px`, top: `${mainHeight.offsetTop}px`, zIndex: 7 }

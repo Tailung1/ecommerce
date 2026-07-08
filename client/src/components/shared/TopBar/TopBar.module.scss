@@ -17,12 +17,12 @@
   font-size: 14px;
 }
 
-.pc-first-section {
+.pc-topBar {
   display: none;
 }
 
 @media (min-width: 1024px) {
-  .pc-first-section {
+  .pc-topBar {
     @include display-gap-padding-justify(
       $gap: 0px,
       $padding: 15px 120px,

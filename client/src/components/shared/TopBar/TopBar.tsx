@@ -5,7 +5,7 @@ import teleCall from "../../../assets/telephone-call.png";
 
 export default function TopBar() {
   return (
-    <div className={styles["pc-first-section"]}>
+    <div className={styles["pc-topBar"]}>
       <div className={styles["contact-info"]}>
         <img src={teleCall} alt='telephone call icon' />
         <span>*7007</span>

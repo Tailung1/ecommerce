@@ -76,6 +76,7 @@ export default function ({ authState, handleValuesChange, authCommands }: AuthIn
             errorMessage={authState.errors.passwordError}
             active={authState.authView}
             onForgotPasswordClick={onForgotPasswordClick}
+            inputTypePassword='password'
           />
         </div>
       )}

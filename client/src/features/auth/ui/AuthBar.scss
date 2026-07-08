@@ -123,33 +123,7 @@ input::placeholder {
   font-size: 18px;
 }
 // FLOATING !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-.floating-container {
-  position: relative;
-  width: 100%;
-}
 
-label {
-  position: absolute;
-  pointer-events: none;
-}
-.input-feedback {
-  position: absolute;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  bottom: -30px;
-  font-size: 18px;
-}
-.input-feedback span:nth-child(1) {
-  color: red;
-}
-.input-feedback span:nth-child(2) {
-  cursor: pointer;
-  color: #dc4813;
-}
-.input-feedback span:nth-child(2):hover {
-  color: #df8463;
-}
 
 @media (min-width: 1024px) {
   .policy-container {

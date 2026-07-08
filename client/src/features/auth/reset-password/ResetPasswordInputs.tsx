@@ -53,12 +53,14 @@ export default function ResetPasswordInputs({
           value={inputValues.newPassword}
           propsedOnChange={(v) => handleValueChange("newPassword", v)}
           errorMessage={inputErrors.newPassword}
+          inputTypePassword='password'
         />
         <FloatingInput
           label='Repeat new password'
           value={inputValues.repeatNewPassword}
           propsedOnChange={(v) => handleValueChange("repeatNewPassword", v)}
           errorMessage={inputErrors.repeatNewPassword}
+          inputTypePassword='password'
         />
       </div>
     ),

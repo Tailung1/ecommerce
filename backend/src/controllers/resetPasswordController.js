@@ -5,27 +5,24 @@ import bcrypt from "bcrypt";
 const prisma = new PrismaClient();
 import { passwordResetRequestLimiter } from "../utils/passwordResetRequestLimiter.js";
 // import RateLimitError from "../utils/passwordResetRequestLimitError.js";
+import AppError from "../errors/AppError.js";
+import errorHandler from "../middleware/errorHandler.js";
 
-async function requestOTP(req, res) {
+async function requestOTP(req, res, next) {
   const { email } = req.body;
   try {
     if (!email) {
-      throw new Error("Email isn't defined");
+      throw new AppError(400, "Email isn't defined");
     }
     try {
       await passwordResetRequestLimiter.consume(email);
     } catch (err) {
       if (typeof err.msBeforeNext === "number") {
-        return res.status(429).json({
-          message: "Too many requests",
-          // err.msBeforeNext is given in milliseconds(ms), But APIs (and HTTP conventions) usually expect seconds.
-          //   retryAfter: Math.ceil(err.msBeforeNext / 1000),
-        });
+        throw new AppError(429, "Too many requests");
+        // err.msBeforeNext is given in milliseconds(ms), But APIs (and HTTP conventions) usually expect seconds.
+        //   retryAfter: Math.ceil(err.msBeforeNext / 1000),
       }
-
-      return res.status(500).json({
-        message: "Unexpected limiter error",
-      });
+      throw new AppError(500, "Unexpected limiter error");
     }
 
     const user = await prisma.user.findFirst({ where: { email }, orderBy: { created_at: "desc" } }); // descending;
@@ -59,21 +56,16 @@ async function requestOTP(req, res) {
     });
 
     if (!sendOtp) {
-      throw new Error("Failed to send OTP");
+      throw new AppError(503, "Failed to send OTP");
     }
 
     res.status(200).json({ sessionId: user.id });
   } catch (err) {
-    console.log(err);
-    if (err instanceof TypeError) {
-      res.status(500).json({ message: "Network error" });
-    } else {
-      res.status(500).json({ message: "Something went wrong!" });
-    }
+    next(errorHandler);
   }
 }
 
-async function verifyOTP(req, res) {
+async function verifyOTP(req, res, next) {
   const { userId, otp } = req.body;
   try {
     const sessionObject = await prisma.passwordResetSession.findFirst({
@@ -81,10 +73,10 @@ async function verifyOTP(req, res) {
       orderBy: { createdAt: "desc" },
     });
     if (!sessionObject) {
-      return res.json({ message: "Session not found" });
+      throw new AppError(404, "Session not found");
     }
     if (sessionObject.attempts === 3) {
-      return res.status(400).json({ message: "Otp attempt limit reached max, try again later" });
+      throw new AppError(404, "Otp attempt limit reached max, try again later");
     }
     const passwordCompareCheck = await bcrypt.compare(otp, sessionObject.otpHash);
 
@@ -95,7 +87,7 @@ async function verifyOTP(req, res) {
           attempts: sessionObject.attempts + 1,
         },
       });
-      return res.status(400).json({ message: "Wrong OTP" });
+      throw new AppError(404, "Wrong OTP");
     }
     await prisma.passwordResetSession.update({
       where: { id: sessionObject.id },
@@ -103,11 +95,11 @@ async function verifyOTP(req, res) {
     });
     res.status(200).json({ message: "Otp is correct" });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    next(errorHandler);
   }
 }
 
-async function resetPassword(req, res) {
+async function resetPassword(req, res, next) {
   const { userId, newPassword } = req.body;
   try {
     const hashNewPassword = await bcrypt.hash(newPassword, 10);
@@ -117,7 +109,7 @@ async function resetPassword(req, res) {
       orderBy: { createdAt: "desc" },
     });
     if (!session) {
-      return res.status(404).json({ message: "Session not found" });
+      throw new AppError(404, "Session not found");
     }
     await prisma.passwordResetSession.update({
       where: { id: session.id },
@@ -128,7 +120,7 @@ async function resetPassword(req, res) {
 
     return res.status(200).json({ message: "Password updated successefully" });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    next(errorHandler);
   }
 }
 

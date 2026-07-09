@@ -84,12 +84,14 @@ export default function ResetPassword() {
         return;
       }
     } catch (err: unknown) {
-      if (err instanceof Error) {
+      if (err instanceof TypeError) {
+        setError(err.message);
+      } else if (err instanceof Error) {
         setError(err.message);
         console.log("caught", err.message);
-        return;
+      } else {
+        console.log("uncaught error");
       }
-      console.log("uncaught", err);
     } finally {
       setIsLoading(false);
     }
@@ -127,6 +129,7 @@ export default function ResetPassword() {
           >
             <ResetPasswordInputs
               passwordResetStep={passwordResetStep}
+              setPasswordResetStep={setPasswordResetStep}
               inputValues={inputValues}
               inputErrors={inputErrors}
               setInputValues={setInputValues}
@@ -135,7 +138,7 @@ export default function ResetPassword() {
           </div>
           <button onClick={handleSubmit}>
             {isLoading ? (
-              <BeatLoader size={10} color="green" />
+              <BeatLoader size={10} color='green' />
             ) : passwordResetStep === "VERIFY_OTP" ? (
               "ENTER NUMBER"
             ) : (

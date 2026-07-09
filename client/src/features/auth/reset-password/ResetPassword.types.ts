@@ -27,4 +27,5 @@ export type ResetPasswordInputsProps = {
   inputErrors: ResetPasswordFormErrors;
   setInputValues: React.Dispatch<React.SetStateAction<ResetPasswordFormValues>>;
   setInputErrors: React.Dispatch<React.SetStateAction<ResetPasswordFormValues>>;
+  setPasswordResetStep: React.Dispatch<React.SetStateAction<PasswordResetStep>>;
 };

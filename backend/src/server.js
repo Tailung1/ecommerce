@@ -30,6 +30,13 @@ export default function authMiddleware(req, res, next) {
   }
 }
 
+app.use((err, req, res) => {
+  const statusCode = err.statusCode || 500;
+  res.status(statusCode).json({
+    message: process.env.NODE_ENV === "development" ? err.message : "Something went wrongggg2",
+  });
+});
+
 app.use("/api/products", productRouter);
 app.use("/api/users", userRouter);
 app.use("/api/reset-password", resetPasswordRouter);

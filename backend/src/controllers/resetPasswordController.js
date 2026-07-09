@@ -64,7 +64,12 @@ async function requestOTP(req, res) {
 
     res.status(200).json({ sessionId: user.id });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    console.log(err);
+    if (err instanceof TypeError) {
+      res.status(500).json({ message: "Network error" });
+    } else {
+      res.status(500).json({ message: "Something went wrong!" });
+    }
   }
 }
 

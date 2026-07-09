@@ -8,6 +8,7 @@ import type { ReactNode } from "react";
 
 export default function ResetPasswordInputs({
   passwordResetStep,
+  setPasswordResetStep,
   inputValues,
   inputErrors,
   setInputValues,
@@ -23,9 +24,6 @@ export default function ResetPasswordInputs({
     setInputErrors(newInputErrros);
   };
   const isNewPasswordError = inputErrors.newPassword.length !== 0;
-  console.log(isNewPasswordError);
-  console.log(inputErrors.newPassword.length);
-  console.log(inputErrors.newPassword);
 
   const stepUI: Partial<Record<PasswordResetStep, ReactNode>> = {
     IDENTIFY_USER: (
@@ -38,12 +36,17 @@ export default function ResetPasswordInputs({
     ),
 
     VERIFY_OTP: (
-      <FloatingInput
-        label='Enter Code'
-        value={inputValues.otpCode}
-        propsedOnChange={(v) => handleValueChange("otpCode", v)}
-        errorMessage={inputErrors.otpCode}
-      />
+      <div className='flex flex-col items-start'>
+        <FloatingInput
+          label='Enter Code'
+          value={inputValues.otpCode}
+          propsedOnChange={(v) => handleValueChange("otpCode", v)}
+          errorMessage={inputErrors.otpCode}
+        />
+        <span className='pt-2 pl-1' onClick={() => setPasswordResetStep("IDENTIFY_USER")}>
+          &lt; Go back
+        </span>
+      </div>
     ),
 
     RESET_PASSWORD: (

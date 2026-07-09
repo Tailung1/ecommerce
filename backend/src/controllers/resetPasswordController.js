@@ -27,7 +27,7 @@ async function requestOTP(req, res, next) {
 
     const user = await prisma.user.findFirst({ where: { email }, orderBy: { created_at: "desc" } }); // descending;
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      throw new AppError(404, "User not found");
     }
     const otp = crypto.randomInt(100000, 1000000).toString();
     const otpHash = await bcrypt.hash(otp, 10);
@@ -61,7 +61,7 @@ async function requestOTP(req, res, next) {
 
     res.status(200).json({ sessionId: user.id });
   } catch (err) {
-    next(errorHandler);
+    next(err);
   }
 }
 
@@ -95,7 +95,7 @@ async function verifyOTP(req, res, next) {
     });
     res.status(200).json({ message: "Otp is correct" });
   } catch (err) {
-    next(errorHandler);
+    next(err);
   }
 }
 
@@ -120,7 +120,7 @@ async function resetPassword(req, res, next) {
 
     return res.status(200).json({ message: "Password updated successefully" });
   } catch (err) {
-    next(errorHandler);
+    next(err);
   }
 }
 

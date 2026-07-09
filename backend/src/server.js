@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import productRouter from "./routes/productRoutes.js";
 import userRouter from "./routes/userRoutes.js";
 import resetPasswordRouter from "./routes/resetPasswordRoutes.js";
+import errorHandler from "./middleware/errorHandler.js";
 
 const app = express();
 
@@ -30,16 +31,11 @@ export default function authMiddleware(req, res, next) {
   }
 }
 
-app.use((err, req, res) => {
-  const statusCode = err.statusCode || 500;
-  res.status(statusCode).json({
-    message: process.env.NODE_ENV === "development" ? err.message : "Something went wrongggg2",
-  });
-});
-
 app.use("/api/products", productRouter);
 app.use("/api/users", userRouter);
 app.use("/api/reset-password", resetPasswordRouter);
 app.use((req, res) => res.json("Route Not found"));
+
+app.use(errorHandler);
 
 app.listen(3000, () => console.log("Backend server is running on port '3000' "));

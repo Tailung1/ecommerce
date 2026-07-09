@@ -85,7 +85,7 @@ export default function ResetPassword() {
       }
     } catch (err: unknown) {
       if (err instanceof TypeError) {
-        setError(err.message);
+        setError(err.message,);
       } else if (err instanceof Error) {
         setError(err.message);
         console.log("caught", err.message);

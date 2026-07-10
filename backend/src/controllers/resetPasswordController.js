@@ -49,14 +49,14 @@ async function requestOTP(req, res, next) {
       },
     });
 
-    const sendOtp = await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: email,
-      text: `Your otp code is ${otp}`,
-    });
-
-    if (!sendOtp) {
-      throw new AppError(503, "Failed to send OTP");
+    try {
+      await transporter.sendMail({
+        from: process.env.EMAIL_USER,
+        to: email,
+        text: `Your otp code is ${otp}`,
+      });
+    } catch (err) {
+      throw new AppError(503, "Unable to send verification code");
     }
 
     res.status(200).json({ sessionId: user.id });

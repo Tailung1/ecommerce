@@ -13,10 +13,10 @@ const productRouter = express.Router();
 
 productRouter.get("/", getProducts);
 productRouter.get("/popularSearches", getPopularSearches);
-productRouter.get("/getProduct/:slug", getProduct);
-productRouter.post("/createProduct", createProduct);
+productRouter.get("/product/:slug", getProduct);
+productRouter.post("/product", createProduct);
 productRouter.post("/:id", updateProduct);
 productRouter.delete("/:id", deleteProduct);
-productRouter.get("/getCategoryStats", CategoryStats);
+productRouter.get("/categoryStats", CategoryStats);
 
 export default productRouter;

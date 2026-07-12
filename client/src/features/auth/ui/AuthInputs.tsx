@@ -1,11 +1,5 @@
 import FloatingInput from "../../../components/reusable/FloatingInput";
-import type {
-  AuthView,
-  AuthOption,
-  AuthInputValues,
-  AuthErrors,
-  AuthCommands,
-} from "../authTypes";
+import type { AuthView, AuthOption, AuthInputValues, AuthErrors, AuthCommands } from "../authTypes";
 import "./AuthInputs.scss";
 
 interface AuthInputsProps {
@@ -57,7 +51,7 @@ export default function ({ authState, handleValuesChange, authCommands }: AuthIn
             value={authState.inputValues.phone}
             propsedOnChange={(value) => handleValuesChange("phone", value, authCommands)}
             errorMessage={authState.errors.phoneError}
-            active={authState.authView}
+            activeView={authState.authView}
           />
         </div>
       ) : (
@@ -67,14 +61,14 @@ export default function ({ authState, handleValuesChange, authCommands }: AuthIn
             value={authState.inputValues.email}
             propsedOnChange={(value) => handleValuesChange("email", value, authCommands)}
             errorMessage={authState.errors.emailError}
-            active={authState.authView}
+            activeView={authState.authView}
           />
           <FloatingInput
             label={"Password"}
             value={authState.inputValues.password}
             propsedOnChange={(value) => handleValuesChange("password", value, authCommands)}
             errorMessage={authState.errors.passwordError}
-            active={authState.authView}
+            activeView={authState.authView}
             onForgotPasswordClick={onForgotPasswordClick}
             inputTypePassword='password'
           />

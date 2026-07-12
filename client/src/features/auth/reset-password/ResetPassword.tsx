@@ -136,7 +136,7 @@ export default function ResetPassword() {
               setInputErrors={setInputErrors}
             />
           </div>
-          <button onClick={handleSubmit}>
+          <button className='reset-password-submit-btn' onClick={handleSubmit}>
             {isLoading ? (
               <BeatLoader size={10} color='green' />
             ) : passwordResetStep === "VERIFY_OTP" ? (

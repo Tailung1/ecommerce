@@ -13,7 +13,7 @@ import { useBarStateValue } from "../../../contexts/BarContext";
 import { authService } from "../authService";
 
 export default function AuthBar() {
-  const { authState, authDispatch } = useAuthReducer();
+  const { authState, authDispatch } = useAuthReducer(); // created instance A of auth reducer
   const { setBar } = useBarDispatch();
   const authCommands = useAuthCommands(authDispatch);
   const EmailAuthIsActive = authState.activeAuthOption !== "phone";
@@ -21,12 +21,11 @@ export default function AuthBar() {
   const isExitingBar = useBarStateValue("isExitingBar");
 
   const handleAuth = () => {
-    const errors = authService.validateInputs(
-      authState
-    );
+    const errors = authService.validateInputs(authState);
 
     const hasError = Object.values(errors).some(Boolean);
-    if (hasError) return authDispatch({ type: "SET_ERRORS", payload: errors });
+
+    if (hasError) return authCommands.setAuthInputErrros(errors);
     // const requestData = authService.getRequestData(authState);
     // startAuthRequest(authState.authView, requestData);
   };
@@ -75,12 +74,8 @@ export default function AuthBar() {
                 className='exit-btn w-10 h-8'
                 alt='Exit icon'
               />
-              <p onClick={() => authDispatch({ type: "SET_AUTH_VIEW", payload: "login" })}>
-                Authentication
-              </p>
-              <p onClick={() => authDispatch({ type: "SET_AUTH_VIEW", payload: "register" })}>
-                Register
-              </p>
+              <p onClick={() => authCommands.setAuthView("login")}>Authentication</p>
+              <p onClick={() => authCommands.setAuthView("register")}>Register</p>
             </div>
             <hr
               className={`auth-hr ${
@@ -99,7 +94,7 @@ export default function AuthBar() {
                   ? "active-auth-option"
                   : "non-active-auth-option"
               }
-              onClick={() => authDispatch({ type: "SET_AUTH_OPTION", payload: "phone" })}
+              onClick={() => authCommands.setAuthOption("phone")}
             >
               {`${authState.authView === "login" ? "Authenticate" : "Register"} with Phone number`}
             </p>
@@ -109,7 +104,7 @@ export default function AuthBar() {
                   ? "active-auth-option"
                   : "non-active-auth-option"
               }
-              onClick={() => authDispatch({ type: "SET_AUTH_OPTION", payload: "email" })}
+              onClick={() => authCommands.setAuthOption("email")}
             >
               {`${authState.authView === "login" ? "Authenticate" : "Register"} with Email`}
             </p>

@@ -4,6 +4,7 @@ import type {
   ResetPasswordInputsProps,
   ResetPasswordFormValues,
 } from "./ResetPassword.types";
+
 import type { ReactNode } from "react";
 
 export default function ResetPasswordInputs({

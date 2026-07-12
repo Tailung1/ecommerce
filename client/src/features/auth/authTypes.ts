@@ -30,7 +30,7 @@ export type AuthErrors = {
 };
 
 export type AuthAction =
-  | { type: "SET_AUTH_VIEW"; payload: "login" | "register" | "reset_password" }
+  | { type: "SET_AUTH_VIEW"; payload: "login" | "register" }
   | { type: "SET_AUTH_OPTION"; payload: "email" | "phone" }
   | { type: "SET_CHECKED"; payload: boolean }
   | {
@@ -46,10 +46,10 @@ export type AuthAction =
   | { type: "TOGGLE_COUNTRY_CODES" }
   | { type: "SET_COUNTRY_CODE"; payload: string };
 
-  export type AuthCommands = {
-    setAuthView: (payload: AuthView) => void;
-    setInputField: (field: AuthInputFields, value: string) => void;
-    resetForms: () => void;
-    toggleCountryCodes: () => void;
-    selectCountryCode: (code: string) => void;
-  };
+export type AuthCommands = {
+  setAuthView: (payload: AuthView) => void;
+  setInputField: (field: AuthInputFields, value: string) => void;
+  resetForms: () => void;
+  toggleCountryCodes: () => void;
+  selectCountryCode: (code: string) => void;
+};

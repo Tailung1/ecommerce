@@ -9,7 +9,7 @@ interface propsTypes {
   value: string;
   propsedOnChange: (value: string) => void;
   errorMessage: string;
-  active?: AuthView;
+  activeView?: AuthView;
   onForgotPasswordClick?: () => void;
   inputTypePassword?: "password";
 }
@@ -19,7 +19,7 @@ export default function FloatingInput({
   value,
   propsedOnChange,
   errorMessage,
-  active,
+  activeView,
   onForgotPasswordClick,
   inputTypePassword,
 }: propsTypes) {
@@ -30,11 +30,11 @@ export default function FloatingInput({
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const hasError = errorMessage !== "";
-  const isActive = activityTrack.isFocused || value;
-  const inputId = `${label.toLowerCase().replace(" ", "-")}-input`;
+  const isActive = activityTrack.isFocused || value.length > 0;
+  const inputId = `${label}-${activeView}`.toLowerCase().replace(" ", "-");
 
   return (
-    <div key={label} className='floating-container'>
+    <div className='floating-container'>
       <motion.label
         className={`${isActive && "text-orange-500"} floating-label`}
         initial={{ x: 0, y: 15 }}
@@ -58,7 +58,7 @@ export default function FloatingInput({
           type={inputTypePassword && showPassword ? "password" : "text"}
         />
         {inputTypePassword && (
-          <button className='absolute right-3' onClick={() => setShowPassword((prev) => !prev)}>
+          <button className='eye-btn' onClick={() => setShowPassword((prev) => !prev)}>
             {showPassword ? <EyeOff /> : <Eye />}
           </button>
         )}
@@ -66,7 +66,7 @@ export default function FloatingInput({
       <div className='input-feedback'>
         <span>{hasError ? errorMessage : ""}</span>
         <span onClick={onForgotPasswordClick}>
-          {label === "Password" && active === "login" ? "Forgot Password" : ""}
+          {label === "Password" && activeView === "login" ? "Forgot Password" : ""}
         </span>
       </div>
     </div>

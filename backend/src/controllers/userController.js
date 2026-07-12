@@ -3,14 +3,14 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { PrismaClient } from "@prisma/client";
 import { Prisma } from "@prisma/client";
+import AppError from "../errors/AppError.js";
 
 const prisma = new PrismaClient();
-const isProd = process.env.NODE_ENV !== "development";
+// const isProd = process.env.NODE_ENV !== "development";
 
-async function login(req, res) {
+async function login(req, res, next) {
   const { email, password } = req.body;
   const normalizedEmail = email.toLowerCase();
-  console.log(isProd);
   try {
     // const user = await pool.query("SELECT * FROM users WHERE email=$1", [email]);
     // const User = user.rows[0];
@@ -20,12 +20,12 @@ async function login(req, res) {
     // prisma
     const user = await prisma.user.findUnique({ where: { email: normalizedEmail } });
     if (!user) {
-      throw new Error("Incorrect email");
+      throw new AppError(404, "Incorrect email");
     }
 
     const comparePassword = await bcrypt.compare(password, user.password);
     if (!comparePassword) {
-      throw new Error("Incorrect password");
+      throw new AppError(404, "Incorrect password");
     }
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
     res.cookie("token", token, {
@@ -36,9 +36,9 @@ async function login(req, res) {
     });
     res.json({ success: true, message: "Logged in successfully" });
   } catch (err) {
-    console.log(err.message);
+    next(err);
     // bcs of its object, express will automatically convert them to JSON
-    res.status(400).json({ success: false, message: err.message });
+
     // String → sent as plain text (NOT JSON)
     // res.status(400).send("done");
     // Always JSON → explicit, safe, consistent (recommended)
@@ -46,7 +46,7 @@ async function login(req, res) {
   }
 }
 
-async function register(req, res) {
+async function register(req, res,next) {
   const { email, password } = req.body;
   try {
     const normalizedEmail = email.toLowerCase();

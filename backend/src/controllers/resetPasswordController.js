@@ -6,7 +6,6 @@ const prisma = new PrismaClient();
 import { passwordResetRequestLimiter } from "../utils/passwordResetRequestLimiter.js";
 // import RateLimitError from "../utils/passwordResetRequestLimitError.js";
 import AppError from "../errors/AppError.js";
-import errorHandler from "../middleware/errorHandler.js";
 
 async function requestOTP(req, res, next) {
   const { email } = req.body;
@@ -49,15 +48,11 @@ async function requestOTP(req, res, next) {
       },
     });
 
-    try {
-      await transporter.sendMail({
-        from: process.env.EMAIL_USER,
-        to: email,
-        text: `Your otp code is ${otp}`,
-      });
-    } catch (err) {
-      throw new AppError(503, "Unable to send verification code");
-    }
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: email,
+      text: `Your otp code is ${otp}`,
+    });
 
     res.status(200).json({ sessionId: user.id });
   } catch (err) {

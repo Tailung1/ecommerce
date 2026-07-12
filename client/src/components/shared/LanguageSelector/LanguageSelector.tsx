@@ -2,6 +2,7 @@ import "./LanguageSelector.scss";
 import usaFlag from "../../../assets/eng.png";
 import geoFlag from "../../../assets/georgia.png";
 import { useLanguageDispatch, useLanguageStateValue } from "../../../contexts/LanguageContext";
+import { useNavigate } from "react-router-dom";
 
 export default function LanguageSelector() {
   const { isLanguagesVisible, activeLanguage } = useLanguageStateValue();
@@ -11,6 +12,7 @@ export default function LanguageSelector() {
     setIsLanguagesVisible(isLanguagesVisible ? false : true);
   };
   const languages = ["EN", "GE"];
+  const navigate = useNavigate();
   return (
     <div onClick={handleToggleLanguges} className='languages-container'>
       <img src={languageFlag} alt='Language flag' />
@@ -19,7 +21,11 @@ export default function LanguageSelector() {
           {languages.map((lang) => (
             <p
               className='hover:bg-slate-200 cursor-pointer w-full text-black px-2 text-[18px]'
-              onClick={() => setActiveLanguage(lang as "EN" | "GE")}
+              onClick={() => {
+                setActiveLanguage(lang as "EN" | "GE");
+                if (lang !== "GE") navigate("/lang");
+                if (lang === "GE") navigate("/");
+              }}
               key={lang}
             >
               {lang}

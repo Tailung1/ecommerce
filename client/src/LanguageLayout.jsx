@@ -1,16 +1,19 @@
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import i18n from "./i18n";
-import { i } from "vite/dist/node/chunks/moduleRunnerTransport";
 
 export default function LanguageLayout() {
-  const lang = useParams();
+  const location = useLocation();
+
   useEffect(() => {
-    if (lang) {
-      i18n.changeLanguage(lang);
+    const isEnglish = location.pathname.startsWith("/en");
+
+    if (isEnglish) {
+      i18n.changeLanguage("en");
     } else {
       i18n.changeLanguage("ka");
     }
-  }, [lang]);
+  }, [location.pathname]);
+
   return <Outlet />;
 }

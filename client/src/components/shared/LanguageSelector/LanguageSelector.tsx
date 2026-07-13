@@ -2,17 +2,19 @@ import "./LanguageSelector.scss";
 import usaFlag from "../../../assets/eng.png";
 import geoFlag from "../../../assets/georgia.png";
 import { useLanguageDispatch, useLanguageStateValue } from "../../../contexts/LanguageContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function LanguageSelector() {
   const { isLanguagesVisible, activeLanguage } = useLanguageStateValue();
   const { setActiveLanguage, setIsLanguagesVisible } = useLanguageDispatch();
-  let languageFlag = activeLanguage === "EN" ? usaFlag : geoFlag;
+  let languageFlag = activeLanguage === "en" ? usaFlag : geoFlag;
   const handleToggleLanguges = () => {
     setIsLanguagesVisible(isLanguagesVisible ? false : true);
   };
-  const languages = ["EN", "GE"];
+  const languages = ["en", "ka"];
   const navigate = useNavigate();
+  const location = useLocation();
+
   return (
     <div onClick={handleToggleLanguges} className='languages-container'>
       <img src={languageFlag} alt='Language flag' />
@@ -22,9 +24,16 @@ export default function LanguageSelector() {
             <p
               className='hover:bg-slate-200 cursor-pointer w-full text-black px-2 text-[18px]'
               onClick={() => {
-                setActiveLanguage(lang as "EN" | "GE");
-                if (lang !== "GE") navigate("/lang");
-                if (lang === "GE") navigate("/");
+                setActiveLanguage(lang as "en" | "ka");
+                if (lang === activeLanguage) return;
+                if (lang === "ka") {
+                  const path = location.pathname;
+                  const newPath = path.replace(/^\/(en|ka)/, "");
+                  navigate(`${newPath}`);
+                  return;
+                }
+                navigate(`/${lang}${location.pathname}`);
+                // window.location.reload();
               }}
               key={lang}
             >

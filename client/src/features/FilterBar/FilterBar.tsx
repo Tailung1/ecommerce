@@ -4,11 +4,13 @@ import binIcon from "../../assets/bin.png";
 import { useBarDispatch } from "../../contexts/BarContext";
 import { useBarStateValue } from "../../contexts/BarContext";
 import PriceRangeSlider from "../PriceRangeSlider/PriceRangeSlider";
+import { useTranslation } from "react-i18next";
 
 export default function FilterBar() {
   const { setBar } = useBarDispatch();
   const isExitingBar = useBarStateValue("isExitingBar");
   const handleReset = () => {};
+  const { t } = useTranslation();
 
   const handleAnimationEnd = (e: React.AnimationEvent<HTMLDivElement>) => {
     if (isExitingBar && e.animationName === "reject-FilterBar") {
@@ -36,10 +38,10 @@ export default function FilterBar() {
       </div>
       <section className='filter-price-container'>
         <div className='price-header'>
-          <span>Price</span>
+          <span>{t("price")}</span>
           <span>-</span>
         </div>
-        <PriceRangeSlider max={2000} min={0} step={10}   />
+        <PriceRangeSlider max={2000} min={0} step={10} />
       </section>
     </div>
   );

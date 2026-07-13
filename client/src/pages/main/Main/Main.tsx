@@ -7,9 +7,11 @@ import mobilePhone from "../../../assets/iphone.png";
 import tv from "../../../assets/television.png";
 import laptops from "../../../assets/laptop.png";
 import ProductsContainer from "../../../components/reusable/ProductsContainer/ProductsContainer";
+import { useTranslation } from "react-i18next";
 
 export default function Main() {
   const width = useWindowWidth();
+  const { t } = useTranslation();
   return (
     <div className='main-content'>
       <section className='hightlights-wrapper'>
@@ -22,7 +24,7 @@ export default function Main() {
       {width > 1023 && <CategoriesAndCarousel />}
 
       <section className='products-shared-container'>
-        <p>Breathles in zommer</p>
+        <p>{t("breathles in zoomer")}</p>
         <ProductsContainer data={data.breathles} img={mobilePhone} />
       </section>
       <section>

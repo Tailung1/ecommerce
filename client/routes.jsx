@@ -7,40 +7,48 @@ import Cart from "./src/pages/main/ShoppingCart/ShoppingCart";
 import Compare from "./src/features/Compare/Compare";
 import Promotions from "./src/pages/main/Promotions/Promotions";
 import Search from "./src/pages/main/SearchBar/SearchBar";
+import LanguageLayout from "./src/LanguageLayout";
+const shopRoutes = [
+  {
+    index: true,
+    element: <Main />,
+  },
+  {
+    path: "search",
+    element: <Search />,
+  },
+  {
+    path: ":slug",
+    element: <Products />,
+  },
+  {
+    path: ":category/:id",
+    element: <Product />,
+  },
+  {
+    path: "cart",
+    element: <Cart />,
+  },
+];
 
 const router = createBrowserRouter([
   {
-    element: <Layout />,
+    element: <LanguageLayout />,
     children: [
       {
-        path: "/",
-        element: <Main />,
+        element: <Layout />,
+        children: shopRoutes,
       },
-      {
-        path: "/search",
-        element: <Search />,
-      },
-      {
-        path: "/:slug",
-        element: <Products />,
-      },
-      {
-        path: "/:category/:id",
-        element: <Product />,
-      },
+    ],
+  },
 
+  {
+    path: "/en",
+    element: <LanguageLayout />,
+    children: [
       {
-        path: "/cart",
-        element: <Cart />,
-      },
-
-      {
-        path: "/promotions",
-        element: <Promotions />,
-      },
-      {
-        path: "/compare-products",
-        element: <Compare />,
+        element: <Layout />,
+        children: shopRoutes,
       },
     ],
   },

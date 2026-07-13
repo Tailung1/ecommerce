@@ -1,4 +1,4 @@
-import { useReducer, createContext, useContext, type ReactNode,  } from "react";
+import { useReducer, createContext, useContext, type ReactNode } from "react";
 
 interface languageStateTypes {
   isLanguagesVisible: boolean;
@@ -6,11 +6,11 @@ interface languageStateTypes {
 }
 type languageActionTypes =
   | { type: "IS_LANGUAGES_VISIBLE"; payload: boolean }
-  | { type: "SET_ACTIVE_LANGUAGE"; payload: "EN" | "GE" };
+  | { type: "SET_ACTIVE_LANGUAGE"; payload: "en" | "ka" };
 
 const initialState = {
   isLanguagesVisible: false,
-  activeLanguage: "EN",
+  activeLanguage: "ka",
 };
 
 function LanguageReducer(state: languageStateTypes, action: languageActionTypes) {
@@ -45,7 +45,7 @@ export const useLanguageDispatch = () => {
   const context = useContext(Context);
   const { languageDispatch } = context;
 
-  const setActiveLanguage = (arg: "EN" | "GE") => {
+  const setActiveLanguage = (arg: "en" | "ka") => {
     return languageDispatch({ type: "SET_ACTIVE_LANGUAGE", payload: arg });
   };
   const setIsLanguagesVisible = (arg: boolean) => {

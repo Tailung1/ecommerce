@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import App from "./App.tsx";
+import App from "./App.jsx";
 import "./i18n.js";
 import ContextProvider from "./contexts/MyContext.tsx";
 import { BarProvider } from "./contexts/BarContext.tsx";

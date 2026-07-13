@@ -18,6 +18,14 @@ const shopRoutes = [
     element: <Search />,
   },
   {
+    path: "compare-products",
+    element: <Compare />,
+  },
+  {
+    path: "promotions",
+    element: <Promotions />,
+  },
+  {
     path: ":slug",
     element: <Products />,
   },

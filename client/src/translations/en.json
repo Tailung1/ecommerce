@@ -1,5 +1,8 @@
 {
   "filter": "Filter",
+  "navigation": "Navigation",
+  "login": "Log in",
+  "cart": "Cart",
   "price": "Price",
   "breathles in zoomer": "Breathles in zommer"
 }

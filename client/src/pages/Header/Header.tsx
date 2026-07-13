@@ -11,6 +11,7 @@ import SearchBar from "../main/SearchBar/SearchBar";
 import { useEffect } from "react";
 import { useBarDispatch } from "../../contexts/BarContext";
 import { useBarStateValue } from "../../contexts/BarContext";
+import { useTranslation } from "react-i18next";
 
 export default function Header() {
   const { setBar } = useBarDispatch();
@@ -32,7 +33,7 @@ export default function Header() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
+  const { t } = useTranslation();
   const navigate = useNavigate();
   return (
     <header>
@@ -58,7 +59,7 @@ export default function Header() {
       <div className='pc-header'>
         <Logo />
         <div className='header-right-side-items'>
-          <button className='orange-btn'>Navigation</button>
+          <button className='orange-btn'>{t("navigation")}</button>
           {showSearchBar ? (
             <SearchBar />
           ) : (
@@ -70,14 +71,14 @@ export default function Header() {
 
           <div className='cart-container-header'>
             <img src={cartIcon} alt='Shopping cart icon' />
-            <span>Cart</span>
+            <span>{t("cart")}</span>
             <div className='invisible-div'></div>
             <ShoppingCartPop />
           </div>
 
           <div onClick={() => setBar("showAuthBar", true)} className='login-container-header'>
             <img src={loginIcon} alt='Login icon' />
-            <span>Log In</span>
+            <span>{t("login")}</span>
           </div>
           <button className='orange-btn'>%</button>
         </div>

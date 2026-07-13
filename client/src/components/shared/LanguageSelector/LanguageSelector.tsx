@@ -3,6 +3,7 @@ import usaFlag from "../../../assets/eng.png";
 import geoFlag from "../../../assets/georgia.png";
 import { useLanguageDispatch, useLanguageStateValue } from "../../../contexts/LanguageContext";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function LanguageSelector() {
   const { isLanguagesVisible, activeLanguage } = useLanguageStateValue();
@@ -15,6 +16,10 @@ export default function LanguageSelector() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  useEffect(() => {
+    if (location.pathname.startsWith("/en")) setActiveLanguage("en");
+  }, []);
+
   return (
     <div onClick={handleToggleLanguges} className='languages-container'>
       <img src={languageFlag} alt='Language flag' />
@@ -26,14 +31,12 @@ export default function LanguageSelector() {
               onClick={() => {
                 setActiveLanguage(lang as "en" | "ka");
                 if (lang === activeLanguage) return;
+                const newPath = location.pathname.replace(/^\/(en|ka)/, "");
                 if (lang === "ka") {
-                  const path = location.pathname;
-                  const newPath = path.replace(/^\/(en|ka)/, "");
                   navigate(`${newPath}`);
                   return;
                 }
-                navigate(`/${lang}${location.pathname}`);
-                // window.location.reload();
+                navigate(`/${lang}${newPath}`);
               }}
               key={lang}
             >

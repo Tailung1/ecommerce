@@ -34,7 +34,7 @@ export default function FloatingInput({
   const inputId = `${label}-${activeView}`.toLowerCase().replace(" ", "-");
 
   return (
-    <div className='floating-container'>
+    <div key={label + activeView} className='floating-container'>
       <motion.label
         className={`${isActive && "text-orange-500"} floating-label`}
         initial={{ x: 0, y: 15 }}
@@ -55,11 +55,11 @@ export default function FloatingInput({
           onChange={(e) => propsedOnChange(e.target.value)}
           onFocus={() => setActivityTrack((prev) => ({ ...prev, isFocused: true }))}
           onBlur={() => setActivityTrack((prev) => ({ ...prev, isFocused: false }))}
-          type={inputTypePassword && showPassword ? "password" : "text"}
+          type={inputTypePassword && !showPassword ? "password" : "text"}
         />
         {inputTypePassword && (
           <button className='eye-btn' onClick={() => setShowPassword((prev) => !prev)}>
-            {showPassword ? <EyeOff /> : <Eye />}
+            {showPassword ? <Eye /> : <EyeOff />}
           </button>
         )}
       </div>

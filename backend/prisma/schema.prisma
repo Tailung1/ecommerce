@@ -8,23 +8,22 @@ datasource db {
 }
 
 model User {
-  id         Int      @id @default(autoincrement())
-  created_at DateTime @default(now()) @db.Timestamp(6)
-  email      String?  @unique @db.VarChar(255)
-  password   String?  @db.VarChar(255)
-  otpCode    String?  @db.VarChar(255)
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamp(6) @map("created_at")
+  email     String?  @unique @db.VarChar(255)
+  password  String?  @db.VarChar(255)
 
   @@map("users")
 }
 
 model PasswordResetSession {
   id        String   @id @default(uuid())
-  userId    Int      
-  otpHash   String
+  userId    Int      @map("user_id")
+  otpHash   String   @map("otp_hash")
   status    String // PENDING | VERIFIED | USED | EXPIRED
-  expiresAt DateTime
+  expiresAt DateTime @map("expires_at")
   attempts  Int      @default(0)
-  createdAt DateTime @default(now())
+  createdAt DateTime @default(now()) @map("created_at")
 
   @@map("password_reset_sessions")
 }

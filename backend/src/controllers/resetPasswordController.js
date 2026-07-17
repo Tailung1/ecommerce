@@ -67,13 +67,16 @@ async function verifyOTP(req, res, next) {
       where: { userId, status: "PENDING", expiresAt: { gt: new Date() } },
       orderBy: { createdAt: "desc" },
     });
+
     if (!sessionObject) {
       throw new AppError(404, "Session not found");
     }
+
     if (sessionObject.attempts === 3) {
       throw new AppError(404, "Otp attempt limit reached max, try again later");
     }
-    const passwordCompareCheck = await bcrypt.compare(otp, sessionObject.otp_hash);
+
+    const passwordCompareCheck = await bcrypt.compare(otp, sessionObject.otpHash);
 
     if (!passwordCompareCheck) {
       await prisma.passwordResetSession.update({

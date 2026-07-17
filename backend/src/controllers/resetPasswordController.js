@@ -24,7 +24,7 @@ async function requestOTP(req, res, next) {
       throw new AppError(500, "Unexpected limiter error");
     }
 
-    const user = await prisma.user.findFirst({ where: { email }, orderBy: { created_at: "desc" } }); // descending;
+    const user = await prisma.user.findFirst({ where: { email }, orderBy: { createdAt: "desc" } }); // descending;
     if (!user) {
       throw new AppError(404, "User not found");
     }
@@ -73,7 +73,7 @@ async function verifyOTP(req, res, next) {
     if (sessionObject.attempts === 3) {
       throw new AppError(404, "Otp attempt limit reached max, try again later");
     }
-    const passwordCompareCheck = await bcrypt.compare(otp, sessionObject.otpHash);
+    const passwordCompareCheck = await bcrypt.compare(otp, sessionObject.otp_hash);
 
     if (!passwordCompareCheck) {
       await prisma.passwordResetSession.update({

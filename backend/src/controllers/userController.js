@@ -46,8 +46,9 @@ async function login(req, res, next) {
   }
 }
 
-async function register(req, res,next) {
+async function register(req, res, next) {
   const { email, password } = req.body;
+  console.log("came")
   try {
     const normalizedEmail = email.toLowerCase();
     // const user = await pool.query("SELECT * FROM users WHERE email=$1", [normalizedEmail]);

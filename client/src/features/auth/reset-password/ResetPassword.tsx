@@ -84,13 +84,10 @@ export default function ResetPassword() {
         return;
       }
     } catch (err: unknown) {
-      if (err instanceof TypeError) {
-        setError("Network error");
-      } else if (err instanceof Error) {
+      if (err instanceof Error) {
         setError(err.message);
-        console.log("caught", err.message);
       } else {
-        console.log("uncaught error", err);
+        setError("Something went wrong");
       }
     } finally {
       setIsLoading(false);

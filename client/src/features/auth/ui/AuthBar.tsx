@@ -1,4 +1,5 @@
 import "./AuthBar.scss";
+import { useState } from "react";
 import "../../../css/reusable/bar.scss";
 import icon from "../../../assets/main-logo.png";
 import checked from "../../../assets/checked-rules.png";
@@ -11,6 +12,8 @@ import AuthInputs from "./AuthInputs";
 import { useAuthCommands } from "../authCommands";
 import { useBarStateValue } from "../../../contexts/BarContext";
 import { authService } from "../authService";
+import { authApi } from "../auth.api";
+import { BeatLoader } from "react-spinners";
 
 export default function AuthBar() {
   const { authState, authDispatch } = useAuthReducer(); // created instance A of auth reducer
@@ -19,15 +22,35 @@ export default function AuthBar() {
   const EmailAuthIsActive = authState.activeAuthOption !== "phone";
   const checkIcon = authState.isChecked ? checked : unchecked;
   const isExitingBar = useBarStateValue("isExitingBar");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const startAuthRequest = async () => {
+    try {
+      setIsLoading(true);
+      if (authState.activeAuthOption === "email") {
+        const { email, password } = authState.inputValues;
+        if (authState.authView === "login") {
+          await authApi.loginUser(email, password);
+        } else if (authState.authView === "register") {
+          await authApi.registerUser(email, password);
+        }
+      }
+    } catch (err) {
+      if (err instanceof Error) {
+        console.log(err.message);
+      } else {
+        console.log("Something went wrong");
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleAuth = () => {
     const errors = authService.validateInputs(authState);
-
     const hasError = Object.values(errors).some(Boolean);
-
     if (hasError) return authCommands.setAuthInputErrros(errors);
-    // const requestData = authService.getRequestData(authState);
-    // startAuthRequest(authState.authView, requestData);
+    startAuthRequest();
   };
 
   return (
@@ -146,11 +169,15 @@ export default function AuthBar() {
               }`}
               disabled={authState.authView === "register" && !authState.isChecked}
             >
-              {authState.authView === "register"
-                ? "REGISTRATION"
-                : authState.activeAuthOption === "phone"
-                ? "SEND CODE"
-                : "LOG IN"}
+              {isLoading ? (
+                <BeatLoader size={10} color='green' />
+              ) : authState.authView === "register" ? (
+                "REGISTRATION"
+              ) : authState.activeAuthOption === "phone" ? (
+                "SEND CODE"
+              ) : (
+                "LOG IN"
+              )}
             </button>
             <hr />
             <p className='font-bold'>Or log in with other method</p>

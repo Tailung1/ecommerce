@@ -9,6 +9,7 @@ const prisma = new PrismaClient();
 // const isProd = process.env.NODE_ENV !== "development";
 
 async function login(req, res, next) {
+    console.log("came")
   const { email, password } = req.body;
   const normalizedEmail = email.toLowerCase();
   try {
@@ -47,8 +48,9 @@ async function login(req, res, next) {
 }
 
 async function register(req, res, next) {
+    console.log("came1");
+
   const { email, password } = req.body;
-  console.log("came")
   try {
     const normalizedEmail = email.toLowerCase();
     // const user = await pool.query("SELECT * FROM users WHERE email=$1", [normalizedEmail]);

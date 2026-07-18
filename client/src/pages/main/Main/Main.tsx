@@ -1,4 +1,4 @@
-import useWindowWidth from "../../../CosutmHooks/useWindowWidth";
+import useWindowWidth from "../../../hooks/useWindowWidth";
 import "../../../css/main.scss"; // had to import there.. maybe temporarily
 import "./Main.scss";
 import data from "../../../data.json";

@@ -6,7 +6,7 @@ import { AnimatePresence } from "framer-motion";
 import Footer from "./src/pages/Footer/Footer";
 import BottomNavBar from "./src/components/shared/BottomNavBar/BottomNavBar";
 import TopBar from "./src/components/shared/TopBar/TopBar";
-import useWindowWidth from "./src/CosutmHooks/useWindowWidth";
+import useWindowWidth from "./src/hooks/useWindowWidth";
 import { useBarStateValue } from "./src/contexts/BarContext";
 import BarWrapper from "./src/BarWrapper/BarWrapper";
 

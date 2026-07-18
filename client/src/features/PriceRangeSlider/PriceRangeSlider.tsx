@@ -1,7 +1,7 @@
 import "./PriceRangeSlider.scss";
 import lariSign from "../../assets/lari-sign.png";
 import { useEffect, useState, useRef } from "react";
-import useWindowWidth from "../../CosutmHooks/useWindowWidth";
+import useWindowWidth from "../../hooks/useWindowWidth";
 
 export default function PriceRangeSlider({
   min = 0,

@@ -1,4 +1,4 @@
-// import pool from "../db.config.js";
+import pool from "../db.config.js";
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
@@ -23,4 +23,14 @@ async function createProduct(req, res, next) {
   }
 }
 
-export { createProduct };
+async function getProduct(req, res) {
+  try {
+    await pool.query("SELECT * FROM products");
+    await prisma.product.findMany({});
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Internal server error" });
+  }
+}
+
+export { createProduct, getProduct };

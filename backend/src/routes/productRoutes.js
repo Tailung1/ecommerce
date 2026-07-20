@@ -1,22 +1,8 @@
 import express from "express";
-import {
-  getProducts,
-  getPopularSearches,
-  getProduct,
-  createProduct,
-  updateProduct,
-  deleteProduct,
-  CategoryStats,
-} from "../controllers/p.js";
+import { createProduct } from "../controllers/productController.js";
 
-const productRouter = express.Router();
+const router = express.Router();
 
-productRouter.get("/", getProducts);
-productRouter.get("/popularSearches", getPopularSearches);
-productRouter.get("/product/:slug", getProduct);
-productRouter.post("/product", createProduct);
-productRouter.post("/:id", updateProduct);
-productRouter.delete("/:id", deleteProduct);
-productRouter.get("/categoryStats", CategoryStats);
+router.post("/", createProduct);
 
-export default productRouter;
+export default router;

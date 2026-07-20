@@ -1,4 +1,4 @@
-import { api } from "../../client.js";
+import { api } from "../../client.js"; // doesnot exists.... old code, no error bcs its js, not ts.. maybe.
 
 export const getProduct = (id) => {
   return api.get(`/products/${id}`);

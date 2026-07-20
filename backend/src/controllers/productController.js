@@ -1,1 +1,26 @@
-// import pool from "../db.config"
+// import pool from "../db.config.js";
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
+
+async function createProduct(req, res, next) {
+  try {
+    const { name, description, price, stock, image_url } = req.body;
+    const productData = req.body;
+    // const { name, description, price, stock, imageUrl } = req.body;
+    // const result = await pool.query(
+    //   // Placeholders keep data separate from SQL code, preventing SQL injection.
+    //   "INSERT INTO products (name, description, price, stock, image_url) VALUES ($1,$2,$3,$4,$5) RETURNING *",
+    //   [name, description, price, stock, image_url]
+    // );
+    // res.status(201s).json(result.rows[0]);
+    const result = await prisma.product.create({
+      data: { name, description, price, stock, imageUrl: image_url },
+    });
+    res.status(201).json({ message: "Product created successfully", createdProduct: result });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Internal server error" });
+  }
+}
+
+export { createProduct };

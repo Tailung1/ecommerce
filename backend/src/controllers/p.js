@@ -55,12 +55,12 @@ async function CategoryStats(req, res) {
   res.json(result.rows);
 }
 
-export {
-  getProducts,
-  getPopularSearches,
-  getProduct,
-  createProduct,
-  updateProduct,
-  deleteProduct,
-  CategoryStats,
-};
+// export {
+//   getProducts,
+//   getPopularSearches,
+//   getProduct,
+//   createProduct,
+//   updateProduct,
+//   deleteProduct,
+//   CategoryStats,
+// };

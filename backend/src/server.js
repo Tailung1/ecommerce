@@ -34,7 +34,7 @@ export default function authMiddleware(req, res, next) {
 app.use("/api/products", productRouter);
 app.use("/api/users", userRouter);
 app.use("/api/reset-password", resetPasswordRouter);
-app.use((req, res) => res.status(404).json({message:"Route Not found"}));
+app.use((req, res) => res.status(404).json({ message: "Route Not found" }));
 
 app.use(errorHandler);
 

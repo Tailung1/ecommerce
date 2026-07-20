@@ -93,6 +93,8 @@ async function verifyOTP(req, res, next) {
     });
     res.status(200).json({ message: "Otp is correct" });
   } catch (err) {
+    // Providing a value to next() (next(err)) triggers error middleware.
+    // It does not matter if next(err) is called inside try or catch block.
     next(err);
   }
 }

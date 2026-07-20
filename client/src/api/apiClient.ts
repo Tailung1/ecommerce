@@ -4,8 +4,9 @@ type requestOptions = {
   headers?: HeadersInit;
 };
 
-export const apiClient = async (url: string, options: requestOptions) => {
-  const res = await fetch(url, {
+export const apiClient = async (url: string, options: requestOptions = { method: "GET" }) => {
+  const API_URL = import.meta.env.VITE_API_URL;
+  const res = await fetch(`${API_URL}${url}`, {
     method: options.method ?? "GET",
     headers: {
       "Content-type": "application/json",

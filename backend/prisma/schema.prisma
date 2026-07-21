@@ -40,3 +40,16 @@ model PasswordResetSession {
 
   @@map("password_reset_sessions")
 }
+
+model collection {
+    id String @id @default(uuid())
+    name String  @unique
+    @@map("collections")
+}
+
+model collectionProduct {
+    id String @id @default(uuid())
+    collectionId String  @map("collection_id")
+    productId String  @map("product_id")
+    @@map("collection_products")
+}

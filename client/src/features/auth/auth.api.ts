@@ -1,15 +1,14 @@
-import { apiClient } from "../../api/apiClient";
-const API_URL = import.meta.env.VITE_API_URL;
+import { apiClient } from "../../api/client.api";
 
 export const authApi = {
   loginUser: (email: string, password: string) =>
-    apiClient(`${API_URL}/users/login`, {
+    apiClient("/users/login", {
       method: "POST",
       body: { email, password },
     }),
 
   registerUser: (email: string, password: string) =>
-    apiClient(`${API_URL}/users/register`, {
+    apiClient("/users/register", {
       method: "POST",
       body: { email, password },
     }),

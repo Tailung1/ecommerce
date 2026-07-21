@@ -1,23 +1,26 @@
 import useWindowWidth from "../../../hooks/useWindowWidth";
 import "../../../css/main.scss"; // had to import there.. maybe temporarily
-import "./Main.scss";
-import data from "../../../data.json";
+import "./Home.scss";
+// import data from "../../../data.json";
 import CategoriesAndCarousel from "../CategoriesCarousel/CategoriesCarousel";
 import mobilePhone from "../../../assets/iphone.png";
 import tv from "../../../assets/television.png";
 import laptops from "../../../assets/laptop.png";
-import ProductsContainer from "../../../components/reusable/ProductsContainer/ProductsContainer";
+import ProductsContainer from "../../../components/reusable/ProductsContainer/ProductsWrapper";
+import { useProducts } from "../../../hooks/useProducts";
 import { useTranslation } from "react-i18next";
 
 export default function Main() {
+  const { data } = useProducts();
   const width = useWindowWidth();
   const { t } = useTranslation();
   return (
     <div className='main-content'>
       <section className='hightlights-wrapper'>
-        {data.highlights.map((h, index) => (
+        {/* React Query always starts with data = undefined until the request finishes.Thats why i used ? with data */}
+        {data?.map((i: any, index: number) => (
           <div key={index}>
-            <p>{h.name}</p>
+            <p>{i.name}</p>
           </div>
         ))}
       </section>
@@ -25,15 +28,15 @@ export default function Main() {
 
       <section className='products-shared-container'>
         <p>{t("breathles in zoomer")}</p>
-        <ProductsContainer data={data.breathles} img={mobilePhone} />
+        <ProductsContainer data={data} />
       </section>
       <section>
         <h3>Discover Gifts Awaiting You</h3>
-        <ProductsContainer data={data.gifts} img={tv} />
+        <ProductsContainer data={data} />
       </section>
       <section>
         <h3>New Models</h3>
-        <ProductsContainer data={data["new-models"]} img={laptops} />
+        {/* <ProductsContainer data={data["new-models"]} img={laptops} /> */}
       </section>
     </div>
   );

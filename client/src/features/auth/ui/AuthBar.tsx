@@ -12,7 +12,7 @@ import AuthInputs from "./AuthInputs";
 import { useAuthCommands } from "../authCommands";
 import { useBarStateValue } from "../../../contexts/BarContext";
 import { authService } from "../authService";
-import { authApi } from "../authApi";
+import { authApi } from "../auth.api";
 import { BeatLoader } from "react-spinners";
 
 export default function AuthBar() {

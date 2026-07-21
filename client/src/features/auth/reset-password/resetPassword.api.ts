@@ -1,4 +1,4 @@
-import { apiClient } from "../../../api/apiClient";
+import { apiClient } from "../../../api/client.api";
 
 const API_URL = import.meta.env.VITE_API_URL;
 

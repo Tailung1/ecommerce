@@ -2,7 +2,7 @@ import "./ResetPassword.scss";
 import { useState } from "react";
 import type { InputErrors, PasswordResetStep } from "./ResetPassword.types";
 import ResetPasswordInputs from "./ResetPasswordInputs";
-import { resetPasswordApi } from "./resetPasswordApi";
+import { resetPasswordApi } from "./resetPassword.api";
 import Completed from "./Completed";
 import { BeatLoader } from "react-spinners";
 
@@ -56,6 +56,7 @@ export default function ResetPassword() {
   };
 
   let isError = false;
+  
   const startPasswodResetRequest = async () => {
     try {
       if (passwordResetStep === "IDENTIFY_USER") {

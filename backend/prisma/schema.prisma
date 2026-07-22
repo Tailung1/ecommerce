@@ -16,19 +16,6 @@ model User {
   @@map("users")
 }
 
-model Product {
-  id          Int      @id @default(autoincrement())
-  name        String   @db.VarChar(255)
-  description String?
-  price       Decimal  @db.Decimal(10, 2)
-  stock       Int      @default(0)
-  imageUrl    String?  @map("image_url")
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt  @map("updated_at")
-
-  @@map("products")
-}
-
 model PasswordResetSession {
   id        String   @id @default(uuid())
   userId    Int      @map("user_id")
@@ -41,15 +28,41 @@ model PasswordResetSession {
   @@map("password_reset_sessions")
 }
 
-model collection {
-    id String @id @default(uuid())
-    name String  @unique
-    @@map("collections")
+model Product {
+  id                 Int                 @id @default(autoincrement())
+  name               String              @db.VarChar(255)
+  description        String?
+  price              Decimal             @db.Decimal(10, 2)
+  stock              Int                 @default(0)
+  imageUrl           String?             @map("image_url")
+  createdAt          DateTime            @default(now()) @map("created_at")
+  updatedAt          DateTime            @default(now()) @updatedAt @map("updated_at")
+  collectionProducts CollectionProduct[]
+
+  @@map("products")
 }
 
-model collectionProduct {
-    id String @id @default(uuid())
-    collectionId String  @map("collection_id")
-    productId String  @map("product_id")
-    @@map("collection_products")
+model category {
+  id   Int    @id @default(autoincrement())
+  name String
+  slug String @unique
+}
+
+model Collection {
+  id                 Int                 @id @default(autoincrement())
+  name               String              @unique
+  collectionProducts CollectionProduct[]
+
+  @@map("collections")
+}
+
+model CollectionProduct {
+  id           Int        @id @default(autoincrement())
+  collectionId Int        @map("collection_id")
+  productId    Int        @map("product_id")
+  collection   Collection @relation(fields: [collectionId], references: [id])
+  product      Product    @relation(fields: [productId], references: [id])
+
+  @@unique([collectionId, productId])
+  @@map("collection_products")
 }

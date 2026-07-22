@@ -38,14 +38,28 @@ model Product {
   createdAt          DateTime            @default(now()) @map("created_at")
   updatedAt          DateTime            @default(now()) @updatedAt @map("updated_at")
   collectionProducts CollectionProduct[]
+  categoryProducts   CategoryProduct[]
 
   @@map("products")
 }
 
-model category {
+model Category {
   id   Int    @id @default(autoincrement())
   name String
   slug String @unique
+
+  categoryProducts CategoryProduct[]
+}
+
+model CategoryProduct {
+  id         Int @id @default(autoincrement())
+  productId  Int @map("product_id")
+  categoryId Int @map("category_id")
+
+  category Category @relation(fields: [categoryId], references: [id])
+  product  Product  @relation(fields: [productId], references: [id])
+
+  @@map("category_product")
 }
 
 model Collection {

@@ -1,15 +1,15 @@
 import "./CategoriesCarousel.scss";
 import { useEffect, useRef, useState } from "react";
-import { useMyContext } from "../../../contexts/MyContext";
-import Categories from "../../../components/reusable/Categories/Categories";
-import leftArrowIcon from "../../../assets/left-arrow.png";
-import rightArrowIcon from "../../../assets/right-arrow.png";
-import iphone from "../../../assets/iphone.png";
-import consoleIcon from "../../../assets/console.png";
-import tv from "../../../assets/television.png";
+import { useMyContext } from "../../contexts/MyContext";
+import Categories from "../reusable/CategoriesSystem/Categories";
+import leftArrowIcon from "../../assets/left-arrow.png";
+import rightArrowIcon from "../../assets/right-arrow.png";
+import iphone from "../../assets/iphone.png";
+import consoleIcon from "../../assets/console.png";
+import tv from "../../assets/television.png";
 
 export default function CategoriesAndCarousel() {
-  const { setEnablePC, activeCategory } = useMyContext();
+  const { activeCategory } = useMyContext();
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -21,26 +21,14 @@ export default function CategoriesAndCarousel() {
     const handleMouseEnter = () => setIsHovered(true);
     const handleMouseLeave = () => setIsHovered(false);
 
-    containerRef.current?.addEventListener(
-      "mouseenter",
-      handleMouseEnter
-    );
-    containerRef.current?.addEventListener(
-      "mouseleave",
-      handleMouseLeave
-    );
+    containerRef.current?.addEventListener("mouseenter", handleMouseEnter);
+    containerRef.current?.addEventListener("mouseleave", handleMouseLeave);
 
     return () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
       if (intervalRef.current) clearInterval(intervalRef.current);
-      containerRef.current?.removeEventListener(
-        "mouseenter",
-        handleMouseEnter
-      );
-      containerRef.current?.removeEventListener(
-        "mouseleave",
-        handleMouseLeave
-      );
+      containerRef.current?.removeEventListener("mouseenter", handleMouseEnter);
+      containerRef.current?.removeEventListener("mouseleave", handleMouseLeave);
     };
   }, []);
   const sliderWrapperRef = useRef<HTMLDivElement | null>(null);
@@ -53,36 +41,27 @@ export default function CategoriesAndCarousel() {
     timeoutRef.current = setTimeout(() => {
       intervalRef.current = setInterval(() => {
         const leftSpace =
-          sliderWrapperRef.current!.scrollWidth -
-          sliderWrapperRef.current!.scrollLeft;
+          sliderWrapperRef.current!.scrollWidth - sliderWrapperRef.current!.scrollLeft;
 
         if (leftSpace > sliderWrapperRef.current!.clientWidth) {
           sliderWrapperRef.current!.scrollLeft += 500;
           return;
         }
-        sliderWrapperRef.current!.scrollLeft -=
-          sliderWrapperRef.current!.scrollWidth;
+        sliderWrapperRef.current!.scrollLeft -= sliderWrapperRef.current!.scrollWidth;
       }, 2000);
     }, 3000);
   }, [isHovered]);
 
-  useEffect(() => {
-    setEnablePC(true);
-  }, []);
-
   const handleScroll = (dir: "left" | "right") => {
     setIsHovered(true);
-    const leftSpace =
-      sliderWrapperRef.current!.scrollWidth -
-      sliderWrapperRef.current!.scrollLeft;
+    const leftSpace = sliderWrapperRef.current!.scrollWidth - sliderWrapperRef.current!.scrollLeft;
     if (dir === "right") {
       if (leftSpace > sliderWrapperRef.current!.clientWidth)
         sliderWrapperRef.current!.scrollLeft += 500;
       else return;
     } else {
       sliderWrapperRef.current!.scrollLeft -= 500;
-      if (sliderWrapperRef.current!.scrollLeft < 0)
-        sliderWrapperRef.current!.scrollLeft = 0;
+      if (sliderWrapperRef.current!.scrollLeft < 0) sliderWrapperRef.current!.scrollLeft = 0;
       return;
     }
   };
@@ -106,11 +85,7 @@ export default function CategoriesAndCarousel() {
           ))}
         </div>
         <div className='arrows-container'>
-          <img
-            onClick={() => handleScroll("left")}
-            src={leftArrowIcon}
-            alt='Left Arrow'
-          />
+          <img onClick={() => handleScroll("left")} src={leftArrowIcon} alt='Left Arrow' />
           <img
             onClick={() => handleScroll("right")}
             className='rightArrow'

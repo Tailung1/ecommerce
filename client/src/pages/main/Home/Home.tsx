@@ -2,18 +2,20 @@ import useWindowWidth from "../../../hooks/useWindowWidth";
 import "../../../css/main.scss"; // had to import there.. maybe temporarily
 import "./Home.scss";
 // import data from "../../../data.json";
-import CategoriesAndCarousel from "../CategoriesCarousel/CategoriesCarousel";
+import CategoriesAndCarousel from "../../../components/CategoriesCarousel/CategoriesCarousel";
 // import mobilePhone from "../../../assets/iphone.png";
 // import tv from "../../../assets/television.png";
 // import laptops from "../../../assets/laptop.png";
 import ProductsContainer from "../../../components/reusable/ProductsContainer/ProductsWrapper";
 import { useProducts } from "../../../hooks/useProducts";
 import { useTranslation } from "react-i18next";
+import { useMyContext } from "../../../contexts/MyContext";
 
 export default function Home() {
   const { data } = useProducts();
-  const width = useWindowWidth();
+  const { resolution } = useMyContext();
   const { t } = useTranslation();
+
   return (
     <div className='main-content'>
       <section className='hightlights-wrapper'>
@@ -24,7 +26,7 @@ export default function Home() {
           </div>
         ))}
       </section>
-      {width > 1023 && <CategoriesAndCarousel />}
+      {resolution.isPc && <CategoriesAndCarousel />}
 
       <section className='products-shared-container'>
         <p>{t("breathles in zoomer")}</p>

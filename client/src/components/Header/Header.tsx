@@ -1,13 +1,13 @@
 import "./Header.scss";
-import LanguageSelector from "../../components/shared/LanguageSelector/LanguageSelector";
+import LanguageSelector from "../shared/LanguageSelector/LanguageSelector";
 import ShoppingCartPop from "./ShoppingCartPop/ShoppingCartPop";
 import slideIcon from "../../assets/slide-icon.png";
 import searchIcon from "../../assets/search-icon.png";
 import cartIcon from "../../assets/shopping-cart.png";
 import loginIcon from "../../assets/login.png";
 import { useNavigate } from "react-router-dom";
-import Logo from "../../components/shared/Logo/Logo";
-import SearchBar from "../main/SearchBar/SearchBar";
+import Logo from "../shared/Logo/Logo";
+import SearchBar from "../../pages/main/SearchBar/SearchBar";
 import { useEffect } from "react";
 import { useBarDispatch } from "../../contexts/BarContext";
 import { useBarStateValue } from "../../contexts/BarContext";

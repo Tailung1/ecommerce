@@ -1,14 +1,14 @@
 import { useEffect, useMemo, useState, useRef } from "react";
 import { Outlet } from "react-router-dom";
-import Header from "./src/pages/Header/Header";
-import HeaderSlider from "./src/pages/Header/HeaderSlider/HeaderSlider";
+import Header from "./src/components/Header/Header";
+import HeaderSlider from "./src/components/Header/HeaderSlider/HeaderSlider";
 import { AnimatePresence } from "framer-motion";
-import Footer from "./src/pages/Footer/Footer";
+import Footer from "./src/components/Footer/Footer";
 import BottomNavBar from "./src/components/shared/BottomNavBar/BottomNavBar";
 import TopBar from "./src/components/shared/TopBar/TopBar";
-import useWindowWidth from "./src/hooks/useWindowWidth";
 import { useBarStateValue } from "./src/contexts/BarContext";
 import BarWrapper from "./src/BarWrapper/BarWrapper";
+import { useMyContext } from "./src/contexts/MyContext";
 
 export default function Layout() {
   const [layerTarget, setLayerTarget] = useState<"main" | "full">("main");
@@ -16,6 +16,7 @@ export default function Layout() {
     height: 0,
     offsetTop: 0,
   });
+  const { resolution } = useMyContext();
 
   const showAuthBar = useBarStateValue("showAuthBar");
   const showFilterBar = useBarStateValue("showFilterBar");
@@ -25,7 +26,6 @@ export default function Layout() {
   const showAlert = useBarStateValue("alert").showAlert;
 
   const mainRef = useRef<HTMLElement>(null);
-  const width = useWindowWidth();
 
   let isVisible = useMemo(
     () => [showCompareBar, showAuthBar, showAlert, showSearchBar, showFilterBar].some(Boolean),
@@ -36,7 +36,7 @@ export default function Layout() {
     document.body.classList.toggle("no-scroll", isVisible);
   }, [isVisible]);
 
-  let isPc = width >= 1024;
+  let isPc = resolution.isPc;
 
   useEffect(() => {
     if (mainRef.current) {
@@ -49,13 +49,7 @@ export default function Layout() {
 
   return (
     <div className='flex flex-col flex-grow'>
-      {isVisible && (
-        <BarWrapper
-          layerTarget={layerTarget}
-          mainHeight={mainHeight}
-          isPc={isPc}
-        />
-      )}
+      {isVisible && <BarWrapper layerTarget={layerTarget} mainHeight={mainHeight} isPc={isPc} />}
       <TopBar />
       <Header />
       <AnimatePresence>{showSideBar && <HeaderSlider />}</AnimatePresence>

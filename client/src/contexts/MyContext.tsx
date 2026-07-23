@@ -13,14 +13,23 @@ interface types {
   setPopularSearches: React.Dispatch<SetStateAction<productType[]>>;
   shoppingCart: any[];
   setShoppingCart: React.Dispatch<SetStateAction<productType[]>>;
-  enablePC: boolean;
-  setEnablePC: React.Dispatch<SetStateAction<boolean>>;
+  resolution: { isIpad: boolean; isPc: boolean };
+  setResoltion: React.Dispatch<
+    SetStateAction<{
+      isIpad: boolean;
+      isPc: boolean;
+    }>
+  >;
 }
 
 const MyContext = createContext({} as types);
 
 export default function ContextProvider({ children }: { children: ReactNode }) {
-  const [enablePC, setEnablePC] = useState<boolean>(false);
+  const width = typeof window.innerWidth === "undefined" ? 0 : window.innerWidth;
+  const [resolution, setResoltion] = useState<{
+    isIpad: boolean;
+    isPc: boolean;
+  }>({ isIpad: width >= 768 && width < 1023, isPc: width > 1023 });
   const [activeCategory, setActiveCategory] = useState<string>("mobile-phones");
   const [popularSearches, setPopularSearches] = useState<productType[]>([]);
   const [shoppingCart, setShoppingCart] = useState<productType[] | []>([]);
@@ -34,8 +43,8 @@ export default function ContextProvider({ children }: { children: ReactNode }) {
         setPopularSearches,
         setShoppingCart,
         shoppingCart,
-        enablePC,
-        setEnablePC,
+        resolution,
+        setResoltion,
       }}
     >
       {children}

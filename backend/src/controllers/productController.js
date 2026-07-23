@@ -1,6 +1,5 @@
-import pool from "../db.config.js";
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+// import pool from "../db.config.js";
+import prisma from "../../prisma/prismClient.js";
 
 async function createProduct(req, res) {
   try {

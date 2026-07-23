@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import productRouter from "./routes/productRoutes.js";
 import userRouter from "./routes/userRoutes.js";
 import resetPasswordRouter from "./routes/resetPasswordRoutes.js";
+import categoryRouter from "./routes/categoryRoutes.js";
 import errorHandler from "./middleware/errorHandler.js";
 
 const app = express();
@@ -32,6 +33,7 @@ export default function authMiddleware(req, res, next) {
 }
 
 app.use("/api/products", productRouter);
+app.use("/api/categories", categoryRouter);
 app.use("/api/users", userRouter);
 app.use("/api/reset-password", resetPasswordRouter);
 app.use((req, res) => res.status(404).json({ message: "Route Not found" }));

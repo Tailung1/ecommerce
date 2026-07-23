@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "./Layout";
-import Main from "./src/pages/main/Main/Main";
+import Home from "./src/pages/main/Home/Home";
 import Product from "./src/pages/main/Product/Product";
 import Products from "./src/pages/main/Products/Products";
 import Cart from "./src/pages/main/ShoppingCart/ShoppingCart";
@@ -8,10 +8,11 @@ import Compare from "./src/features/Compare/Compare";
 import Promotions from "./src/pages/main/Promotions/Promotions";
 import Search from "./src/pages/main/SearchBar/SearchBar";
 import LanguageLayout from "./src/LanguageLayout";
+
 const shopRoutes = [
   {
     index: true,
-    element: <Main />,
+    element: <Home />,
   },
   {
     path: "search",

@@ -3,14 +3,14 @@ import "../../../css/main.scss"; // had to import there.. maybe temporarily
 import "./Home.scss";
 // import data from "../../../data.json";
 import CategoriesAndCarousel from "../CategoriesCarousel/CategoriesCarousel";
-import mobilePhone from "../../../assets/iphone.png";
-import tv from "../../../assets/television.png";
-import laptops from "../../../assets/laptop.png";
+// import mobilePhone from "../../../assets/iphone.png";
+// import tv from "../../../assets/television.png";
+// import laptops from "../../../assets/laptop.png";
 import ProductsContainer from "../../../components/reusable/ProductsContainer/ProductsWrapper";
 import { useProducts } from "../../../hooks/useProducts";
 import { useTranslation } from "react-i18next";
 
-export default function Main() {
+export default function Home() {
   const { data } = useProducts();
   const width = useWindowWidth();
   const { t } = useTranslation();

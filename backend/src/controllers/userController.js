@@ -1,11 +1,9 @@
 // import pool from "../db.config.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { PrismaClient } from "@prisma/client";
-import { Prisma } from "@prisma/client";
 import AppError from "../errors/AppError.js";
+import prisma from "../../prisma/prismClient.js";
 
-const prisma = new PrismaClient();
 // const isProd = process.env.NODE_ENV !== "development";
 
 async function login(req, res, next) {

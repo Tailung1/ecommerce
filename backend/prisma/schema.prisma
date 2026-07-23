@@ -49,6 +49,8 @@ model Category {
   slug String @unique
 
   categoryProducts CategoryProduct[]
+
+  @@map("categories")
 }
 
 model CategoryProduct {
@@ -78,5 +80,5 @@ model CollectionProduct {
   product      Product    @relation(fields: [productId], references: [id])
 
   @@unique([collectionId, productId])
-  @@map("collection_products")
+  @@map("collection_product")
 }

@@ -1,8 +1,7 @@
 import nodemailer from "nodemailer";
-import { PrismaClient } from "@prisma/client";
 import crypto from "crypto";
 import bcrypt from "bcrypt";
-const prisma = new PrismaClient();
+import prisma from "../../prisma/prismClient.js";
 import { passwordResetRequestLimiter } from "../utils/passwordResetRequestLimiter.js";
 // import RateLimitError from "../utils/passwordResetRequestLimitError.js";
 import AppError from "../errors/AppError.js";

@@ -1,5 +1,5 @@
 import "./Footer.scss"
 
 export default function Footer() {
-  return <div>This is footer</div>;
+  return <footer>This is footer</footer>;
 }

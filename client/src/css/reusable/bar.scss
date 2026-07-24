@@ -14,7 +14,7 @@
   flex-direction: column;
   gap: 5px;
   text-align: center;
-  bottom: 0; // needed, beacse when height changes, it doesnot pushes container under user viewport
+  bottom: 0; // needed, because when height changes, it doesnot pushes container under user viewport
   width: 100%;
   height: fit-content;
   z-index: 8;

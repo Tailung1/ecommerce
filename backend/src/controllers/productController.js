@@ -23,7 +23,6 @@ async function createProduct(req, res) {
 }
 
 async function getProduct(req, res) {
-  console.log("came");
   try {
     // await pool.query("SELECT * FROM products");
     const data = await prisma.product.findMany({});

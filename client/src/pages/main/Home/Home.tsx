@@ -40,6 +40,30 @@ export default function Home() {
         <h3>New Models</h3>
         {/* <ProductsContainer data={data["new-models"]} img={laptops} /> */}
       </section>
+      <section className='products-shared-container'>
+        <p>{t("breathles in zoomer")}</p>
+        <ProductsContainer data={data} />
+      </section>
+      <section>
+        <h3>Discover Gifts Awaiting You</h3>
+        <ProductsContainer data={data} />
+      </section>
+      <section>
+        <h3>New Models</h3>
+        {/* <ProductsContainer data={data["new-models"]} img={laptops} /> */}
+      </section>
+      <section className='products-shared-container'>
+        <p>{t("breathles in zoomer")}</p>
+        <ProductsContainer data={data} />
+      </section>
+      <section>
+        <h3>Discover Gifts Awaiting You</h3>
+        <ProductsContainer data={data} />
+      </section>
+      <section>
+        <h3>New Models</h3>
+        {/* <ProductsContainer data={data["new-models"]} img={laptops} /> */}
+      </section>
     </div>
   );
 }

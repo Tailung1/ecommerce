@@ -16,6 +16,7 @@ import { useTranslation } from "react-i18next";
 export default function Header() {
   const { setBar } = useBarDispatch();
   const showSearchBar = useBarStateValue("showSearchBar");
+  
   useEffect(() => {
     const handleScroll = () => {
       const Y = window.scrollY;
@@ -33,8 +34,10 @@ export default function Header() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
   const { t } = useTranslation();
   const navigate = useNavigate();
+  
   return (
     <header>
       <div className='header'>

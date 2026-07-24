@@ -22,7 +22,6 @@ createRoot(document.getElementById("root")).render(
             </CompareProvider>
           </BarProvider>
         </ContextProvider>
-        Ì
       </LanguageProvider>
     </QueryClientProvider>
   </StrictMode>

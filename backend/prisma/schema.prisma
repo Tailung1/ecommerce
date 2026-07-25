@@ -64,22 +64,3 @@ model CategoryProduct {
   @@map("category_product")
 }
 
-model Collection {
-  id                 Int                 @id @default(autoincrement())
-  title              String
-  slug               String              @unique
-  collectionProducts CollectionProduct[]
-
-  @@map("collections")
-}
-
-model CollectionProduct {
-  id           Int        @id @default(autoincrement())
-  collectionId Int        @map("collection_id")
-  productId    Int        @map("product_id")
-  collection   Collection @relation(fields: [collectionId], references: [id])
-  product      Product    @relation(fields: [productId], references: [id])
-
-  @@unique([collectionId, productId])
-  @@map("collection_product")
-}

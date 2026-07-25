@@ -2,7 +2,7 @@ import useWindowWidth from "../../../hooks/useWindowWidth";
 import "../../../css/main.scss"; // had to import there.. maybe temporarily
 import "./Home.scss";
 // import data from "../../../data.json";
-import CategoriesAndCarousel from "../../../components/CategoriesCarousel/CategoriesCarousel";
+import CategoriesAndCarousel from "../../../components/CategoriesCarousel/CategoriesAndCarousel";
 // import mobilePhone from "../../../assets/iphone.png";
 // import tv from "../../../assets/television.png";
 // import laptops from "../../../assets/laptop.png";

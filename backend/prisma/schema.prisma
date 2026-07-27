@@ -29,25 +29,23 @@ model PasswordResetSession {
 }
 
 model Product {
-  id                 Int                 @id @default(autoincrement())
-  name               String              @db.VarChar(255)
-  description        String?
-  price              Decimal             @db.Decimal(10, 2)
-  stock              Int                 @default(0)
-  imageUrl           String?             @map("image_url")
-  createdAt          DateTime            @default(now()) @map("created_at")
-  updatedAt          DateTime            @default(now()) @updatedAt @map("updated_at")
-  collectionProducts CollectionProduct[]
-  categoryProducts   CategoryProduct[]
+  id               Int               @id @default(autoincrement())
+  name             String            @db.VarChar(255)
+  description      String?
+  price            Decimal           @db.Decimal(10, 2)
+  stock            Int               @default(0)
+  imageUrl         String?           @map("image_url")
+  createdAt        DateTime          @default(now()) @map("created_at")
+  updatedAt        DateTime          @default(now()) @updatedAt @map("updated_at")
+  categoryProducts CategoryProduct[]
 
   @@map("products")
 }
 
 model Category {
-  id   Int    @id @default(autoincrement())
-  name String
-  slug String @unique
-
+  id               Int               @id @default(autoincrement())
+  name             String
+  slug             String            @unique
   categoryProducts CategoryProduct[]
 
   @@map("categories")
@@ -64,3 +62,46 @@ model CategoryProduct {
   @@map("category_product")
 }
 
+model HomePageSection {
+    id @id @default(autoincrement())
+    type String
+    title String?
+    position Int
+    enabled Boolean
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @updatedAt @map("updated_at")
+
+    @@map("home_page_sections")
+}
+
+model ProductCarouselConfig {
+    id @id @default(autoincrement())
+    sectionId Int @unique @map("section_id")
+    section HomePageSection @relation(fields:[sectionId],references:[id])
+    categoryId Int?
+    limit Int @default(10)
+
+  @@map("product_carousel_config")
+}
+
+model sectionProduct {
+    id Int @id @default(autoincrement())
+    sectionId Int @map("section_id")
+    productId Int  @map("product_id")
+    position Int
+
+ section HomepageSection @relation(
+   fields:[sectionId],
+   references:[id]
+ )
+
+ product Product @relation(
+   fields:[productId],
+   references:[id]
+ )
+
+ @unique([sectionId,productId])
+
+  @@map("section_products")
+
+}

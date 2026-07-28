@@ -6,6 +6,7 @@ import userRouter from "./routes/userRoutes.js";
 import resetPasswordRouter from "./routes/resetPasswordRoutes.js";
 import categoryRouter from "./routes/categoryRoutes.js";
 import errorHandler from "./middleware/errorHandler.js";
+import multer from "multer";
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(
 );
 
 app.use(express.json());
+app.use("./images", express.static("./images"));
 
 export default function authMiddleware(req, res, next) {
   const token = req.cookies.token;

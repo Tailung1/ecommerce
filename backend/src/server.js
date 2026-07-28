@@ -6,7 +6,7 @@ import userRouter from "./routes/userRoutes.js";
 import resetPasswordRouter from "./routes/resetPasswordRoutes.js";
 import categoryRouter from "./routes/categoryRoutes.js";
 import errorHandler from "./middleware/errorHandler.js";
-import multer from "multer";
+import fileRouter from "./routes/fileRoutes.js";
 
 const app = express();
 
@@ -19,7 +19,9 @@ app.use(
 );
 
 app.use(express.json());
-app.use("./images", express.static("./images"));
+// express.static() is middleware that exposes a folder as a public static file directory.
+// It allows Express to automatically serve files from that folder without creating individual routes for each file.
+app.use("/uploads", express.static("backend/uploads"));
 
 export default function authMiddleware(req, res, next) {
   const token = req.cookies.token;
@@ -33,8 +35,8 @@ export default function authMiddleware(req, res, next) {
     res.status(401).json({ message: "Invalid token" });
   }
 }
-
 app.use("/api/products", productRouter);
+app.use("/api/file", fileRouter);
 app.use("/api/categories", categoryRouter);
 app.use("/api/users", userRouter);
 app.use("/api/reset-password", resetPasswordRouter);

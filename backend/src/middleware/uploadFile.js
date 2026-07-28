@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
 
 const filterImageFile = (req, file, cb) => {
   const allowedFileTypes = ["image/jpeg", "image/png", "image/jpg"];
-  if (allowedFileTypes.includes(file.mimtype)) {
+  if (allowedFileTypes.includes(file.mimetype)) {
     cb(null, true);
   } else {
     cb(new Error("Invalid file type"));
@@ -22,19 +22,25 @@ const filterImageFile = (req, file, cb) => {
 };
 const filterExcelFile = (req, file, cb) => {
   const allowedFileTypes = ["image/jpeg", "image/png", "image/jpg"];
-  if (allowedFileTypes.includes(file.mimtype)) {
+  if (allowedFileTypes.includes(file.mimetype)) {
     cb(null, true);
   } else {
     cb(new Error("Invalid file type"));
   }
 };
-const multerImage = {
+const multerImage = multer({
   storage: storage,
-  filterImageFile,
-};
-const multerExcel = {
+  fileFilter: filterImageFile,
+  limits: {
+    fileSize: 5 * 1024 * 1024, // 5 MB
+  },
+});
+const multerExcel = multer({
   storage: storage,
-  filterExcelFile,
-};
+  fileFilter: filterExcelFile,
+  limits: {
+    fileSize: 10 * 1024 * 1024, // 10 MB
+  },
+});
 
 export { multerImage, multerExcel };

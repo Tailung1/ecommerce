@@ -8,6 +8,11 @@ import categoryRouter from "./routes/categoryRoutes.js";
 import errorHandler from "./middleware/errorHandler.js";
 import fileRouter from "./routes/fileRoutes.js";
 
+// Currently using a layer-based architecture.
+// Larger applications often move to Feature-Based Architecture / Modular Architecture
+// to organize code by business domains.
+// Very large systems with independent scaling and deployment needs may use microservices.
+
 const app = express();
 
 // const allowedOrigins = ["http://localhost:5173"];
@@ -36,7 +41,7 @@ export default function authMiddleware(req, res, next) {
   }
 }
 app.use("/api/products", productRouter);
-app.use("/api/file", fileRouter);
+app.use("/api/uploads", fileRouter);
 app.use("/api/categories", categoryRouter);
 app.use("/api/users", userRouter);
 app.use("/api/reset-password", resetPasswordRouter);

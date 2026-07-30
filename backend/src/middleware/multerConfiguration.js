@@ -1,7 +1,7 @@
 import multer from "multer";
 import path from "path";
 
-const uploadDir = "./uploads";
+const uploadDir = "backend/uploads";
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, uploadDir);
@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
 });
 
 const filterImageFile = (req, file, cb) => {
-  const allowedFileTypes = ["image/jpeg", "image/png", "image/jpg"];
+  const allowedFileTypes = ["image/jpeg", "image/png", "image/jpg","image/svg+xml"];
   if (allowedFileTypes.includes(file.mimetype)) {
     cb(null, true);
   } else {
@@ -28,14 +28,14 @@ const filterExcelFile = (req, file, cb) => {
     cb(new Error("Invalid file type"));
   }
 };
-const multerImage = multer({
+const imageUpload = multer({
   storage: storage,
   fileFilter: filterImageFile,
   limits: {
     fileSize: 5 * 1024 * 1024, // 5 MB
   },
 });
-const multerExcel = multer({
+const spreadSheetUpload = multer({
   storage: storage,
   fileFilter: filterExcelFile,
   limits: {
@@ -43,4 +43,4 @@ const multerExcel = multer({
   },
 });
 
-export { multerImage, multerExcel };
+export { imageUpload, spreadSheetUpload };

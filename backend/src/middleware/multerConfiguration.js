@@ -21,7 +21,11 @@ const filterImageFile = (req, file, cb) => {
   }
 };
 const filterExcelFile = (req, file, cb) => {
-  const allowedFileTypes = ["image/jpeg", "image/png", "image/jpg"];
+  const allowedFileTypes = [
+    "text/csv",
+    "application/vnd.ms-excel",
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+  ];
   if (allowedFileTypes.includes(file.mimetype)) {
     cb(null, true);
   } else {

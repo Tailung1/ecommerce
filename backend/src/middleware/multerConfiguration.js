@@ -20,7 +20,7 @@ const filterImageFile = (req, file, cb) => {
     cb(new Error("Invalid file type"));
   }
 };
-const filterExcelFile = (req, file, cb) => {
+const filterSpreadsheetFile = (req, file, cb) => {
   const allowedFileTypes = [
     "text/csv",
     "application/vnd.ms-excel",
@@ -41,7 +41,7 @@ const imageUpload = multer({
 });
 const spreadSheetUpload = multer({
   storage: storage,
-  fileFilter: filterExcelFile,
+  fileFilter: filterSpreadsheetFile,
   limits: {
     fileSize: 10 * 1024 * 1024, // 10 MB
   },

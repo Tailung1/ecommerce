@@ -34,10 +34,8 @@ export default function PriceRangeSlider({
     if (!sliderRef.current) return min;
 
     const rect = sliderRef.current.getBoundingClientRect();
-    console.log(rect.width,"slider")
     const percent = clamp((clientX - rect.left) / rect.width, 0, 1);
-    const value = snap(percent * max);
-    return value;
+    return snap(percent * max);
   };
 
   const handleMove = (clientX: number) => {
@@ -66,13 +64,6 @@ export default function PriceRangeSlider({
         setMaxInput(value);
       }
     }
-  };
-
-  const startDrag = (target: "MIN" | "MAX") => {
-    setDraggingTarget(target);
-  };
-  const endDrag = () => {
-    setDraggingTarget(null);
   };
 
   useEffect(() => {
@@ -185,9 +176,8 @@ export default function PriceRangeSlider({
               <img className='lari-sign' src={lariSign} alt='Lari sign' />
             </div>
             <div
-              onTouchStart={() => startDrag("MIN")}
+              onTouchStart={() => setDraggingTarget("MIN")}
               onMouseDown={() => setDraggingTarget("MIN")}
-              onTouchEnd={endDrag}
               className='handle'
             ></div>
           </div>
@@ -203,9 +193,8 @@ export default function PriceRangeSlider({
               <img className='lari-sign' src={lariSign} alt='Lari sign' />
             </div>
             <div
-              onTouchStart={() => startDrag("MAX")}
               onMouseDown={() => setDraggingTarget("MAX")}
-              onTouchEnd={endDrag}
+              onTouchStart={() => setDraggingTarget("MAX")}
               className='handle'
             ></div>
           </div>

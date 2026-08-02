@@ -10,11 +10,11 @@ import { useBarDispatch } from "../contexts/BarContext";
 export default function BarWrapper({
   layerTarget,
   mainHeight,
-  isPc,
+  isDesktop,
 }: {
   layerTarget: string;
   mainHeight: { height: number; offsetTop: number };
-  isPc: boolean;
+  isDesktop: boolean;
 }) {
   const showAuthBar = useBarStateValue("showAuthBar");
   const showFilterBar = useBarStateValue("showFilterBar");
@@ -25,7 +25,7 @@ export default function BarWrapper({
   const { setBar } = useBarDispatch();
 
   const handleOnClick = () => {
-    if (!isPc || (isPc && showSearchBar)) {
+    if (!isDesktop || (isDesktop && showSearchBar)) {
       setBar("isExitingBar", true);
     }
   };

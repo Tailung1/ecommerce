@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function useWindowWidth() {
+export default function useIsDesktop() {
   // typeof always returns a string, e.g., "object" for window or "undefined" if it doesn't exist
   const [width, setWidth] = useState(typeof window !== "undefined" ? window.innerWidth : 0);
   useEffect(() => {
@@ -12,5 +12,7 @@ export default function useWindowWidth() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  return width;
+  const isDesktop = width > 1023;
+
+  return isDesktop;
 }

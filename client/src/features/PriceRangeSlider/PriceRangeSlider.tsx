@@ -1,7 +1,7 @@
 import "./PriceRangeSlider.scss";
 import lariSign from "../../assets/lari-sign.png";
 import { useEffect, useState, useRef } from "react";
-import useWindowWidth from "../../hooks/useWindowWidth";
+import useIsDesktop from "../../hooks/useWindowWidth";
 
 export default function PriceRangeSlider({
   min = 0,
@@ -12,8 +12,7 @@ export default function PriceRangeSlider({
   max: number;
   step: number;
 }) {
-  const width = useWindowWidth();
-  const isPC = width > 1023;
+  const isDesktop = useIsDesktop();
   const sliderRef = useRef<HTMLDivElement>(null);
   const [minValue, setMinValue] = useState<number>(min);
   const [maxValue, setMaxValue] = useState<number>(max);
@@ -35,6 +34,7 @@ export default function PriceRangeSlider({
     if (!sliderRef.current) return min;
 
     const rect = sliderRef.current.getBoundingClientRect();
+    console.log(rect.width,"slider")
     const percent = clamp((clientX - rect.left) / rect.width, 0, 1);
     const value = snap(percent * max);
     return value;
@@ -180,7 +180,7 @@ export default function PriceRangeSlider({
           className='min-container handle-container'
         >
           <div className='handle-wrapper'>
-            <div className={`handle-price-styles ${isPC ? "above" : "below"}`}>
+            <div className={`handle-price-styles ${isDesktop ? "above" : "below"}`}>
               <span>{minValue}</span>
               <img className='lari-sign' src={lariSign} alt='Lari sign' />
             </div>
@@ -198,7 +198,7 @@ export default function PriceRangeSlider({
           className='max-container handle-container'
         >
           <div className='handle-wrapper'>
-            <div className={`handle-price-styles ${isPC ? "above" : "below"}`}>
+            <div className={`handle-price-styles ${isDesktop ? "above" : "below"}`}>
               <span>{maxValue}</span>
               <img className='lari-sign' src={lariSign} alt='Lari sign' />
             </div>

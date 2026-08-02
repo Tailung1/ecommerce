@@ -8,7 +8,7 @@ import BottomNavBar from "./src/components/shared/BottomNavBar/BottomNavBar";
 import TopBar from "./src/components/shared/TopBar/TopBar";
 import { useBarStateValue } from "./src/contexts/BarContext";
 import BarWrapper from "./src/BarWrapper/BarWrapper";
-import { useMyContext } from "./src/contexts/MyContext";
+import useIsDesktop from "./src/hooks/useWindowWidth";
 
 export default function Layout() {
   const [layerTarget, setLayerTarget] = useState<"main" | "full">("main");
@@ -16,7 +16,7 @@ export default function Layout() {
     height: 0,
     offsetTop: 0,
   });
-  const { resolution } = useMyContext();
+  const isDesktop = useIsDesktop();
 
   const showAuthBar = useBarStateValue("showAuthBar");
   const showFilterBar = useBarStateValue("showFilterBar");
@@ -36,20 +36,21 @@ export default function Layout() {
     document.body.classList.toggle("no-scroll", isVisible);
   }, [isVisible]);
 
-  let isPc = resolution.isPc;
 
   useEffect(() => {
     if (mainRef.current) {
       const rect = mainRef.current.getBoundingClientRect();
       setMainHeight({ height: rect.height, offsetTop: rect.top + window.scrollY });
     }
-    const target = showFilterBar || (isPc && !showSearchBar) ? "full" : "main";
+    const target = showFilterBar || (isDesktop && !showSearchBar) ? "full" : "main";
     setLayerTarget(target);
-  }, [mainRef, isPc, isVisible]);
+  }, [mainRef, isDesktop, isVisible]);
 
   return (
     <div className='flex flex-col flex-grow'>
-      {isVisible && <BarWrapper layerTarget={layerTarget} mainHeight={mainHeight} isPc={isPc} />}
+      {isVisible && (
+        <BarWrapper layerTarget={layerTarget} mainHeight={mainHeight} isDesktop={isDesktop} />
+      )}
       <TopBar />
       <Header />
       <AnimatePresence>{showSideBar && <HeaderSlider />}</AnimatePresence>

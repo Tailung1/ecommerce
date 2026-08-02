@@ -9,11 +9,10 @@ import CategoriesAndCarousel from "../../../components/CategoriesCarousel/Catego
 import ProductsContainer from "../../../components/reusable/ProductsContainer/ProductsWrapper";
 import { useProducts } from "../../../hooks/useProducts";
 import { useTranslation } from "react-i18next";
-import { useMyContext } from "../../../contexts/MyContext";
 
 export default function Home() {
   const { data } = useProducts();
-  const { resolution } = useMyContext();
+  const width = useWindowWidth();
   const { t } = useTranslation();
 
   return (
@@ -26,7 +25,7 @@ export default function Home() {
           </div>
         ))}
       </section>
-      {resolution.isPc && <CategoriesAndCarousel />}
+      {width > 1023 && <CategoriesAndCarousel />}
 
       <section className='products-shared-container'>
         <p>{t("breathles in zoomer")}</p>

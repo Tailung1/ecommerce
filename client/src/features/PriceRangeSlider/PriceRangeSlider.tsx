@@ -69,20 +69,15 @@ export default function PriceRangeSlider({
   useEffect(() => {
     if (draggingTarget === null) return;
 
-    const onMouseMove = (e: MouseEvent) => handleMove(e.clientX);
-    const onTouchMove = (e: TouchEvent) => handleMove(e.touches[0].clientX);
+    const onMove = (e: PointerEvent) => handleMove(e.clientX);
     const onEnd = () => setDraggingTarget(null);
 
-    window.addEventListener("mousemove", onMouseMove);
-    window.addEventListener("mouseup", onEnd);
-    window.addEventListener("touchmove", onTouchMove);
-    window.addEventListener("touchend", onEnd);
+    window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointerup", onEnd);
 
     return () => {
-      window.removeEventListener("mousemove", onMouseMove);
-      window.removeEventListener("mouseup", onEnd);
-      window.removeEventListener("touchmove", onTouchMove);
-      window.removeEventListener("touchend", onEnd);
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerup", onEnd);
     };
   }, [draggingTarget]);
 
@@ -176,10 +171,12 @@ export default function PriceRangeSlider({
               <img className='lari-sign' src={lariSign} alt='Lari sign' />
             </div>
             <div
-              onTouchStart={() => setDraggingTarget("MIN")}
-              onMouseDown={() => setDraggingTarget("MIN")}
+              onPointerDown={(e) => {
+                e.preventDefault();
+                setDraggingTarget("MIN");
+              }}
               className='handle'
-            ></div>
+            />
           </div>
         </div>
 
@@ -193,10 +190,12 @@ export default function PriceRangeSlider({
               <img className='lari-sign' src={lariSign} alt='Lari sign' />
             </div>
             <div
-              onMouseDown={() => setDraggingTarget("MAX")}
-              onTouchStart={() => setDraggingTarget("MAX")}
+              onPointerDown={(e) => {
+                e.preventDefault();
+                setDraggingTarget("MAX");
+              }}
               className='handle'
-            ></div>
+            />
           </div>
         </div>
       </div>
@@ -206,7 +205,7 @@ export default function PriceRangeSlider({
           <div>
             <input
               onChange={(e) => handleInputChange("MIN", Number(e.target.value))}
-              className='costum-input d'
+      
               value={minInput}
             />
             <img className='lari-sign' src={lariSign} alt='Lari sign' />
@@ -217,7 +216,7 @@ export default function PriceRangeSlider({
           <div>
             <input
               onChange={(e) => handleInputChange("MAX", Number(e.target.value))}
-              className='costum-input d'
+        
               value={maxInput}
             />
             <img className='lari-sign' src={lariSign} alt='Lari sign' />

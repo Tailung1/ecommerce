@@ -166,7 +166,7 @@ export default function PriceRangeSlider({
           className='min-container handle-container'
         >
           <div className='handle-wrapper'>
-            <div className={`handle-price-styles ${isDesktop ? "above" : "below"}`}>
+            <div className={`price-range-indicator ${isDesktop ? "above" : "below"}`}>
               <span>{minValue}</span>
               <img className='lari-sign' src={lariSign} alt='Lari sign' />
             </div>
@@ -185,7 +185,7 @@ export default function PriceRangeSlider({
           className='max-container handle-container'
         >
           <div className='handle-wrapper'>
-            <div className={`handle-price-styles ${isDesktop ? "above" : "below"}`}>
+            <div className={`price-range-indicator ${isDesktop ? "above" : "below"}`}>
               <span>{maxValue}</span>
               <img className='lari-sign' src={lariSign} alt='Lari sign' />
             </div>
@@ -205,7 +205,6 @@ export default function PriceRangeSlider({
           <div>
             <input
               onChange={(e) => handleInputChange("MIN", Number(e.target.value))}
-      
               value={minInput}
             />
             <img className='lari-sign' src={lariSign} alt='Lari sign' />
@@ -216,7 +215,6 @@ export default function PriceRangeSlider({
           <div>
             <input
               onChange={(e) => handleInputChange("MAX", Number(e.target.value))}
-        
               value={maxInput}
             />
             <img className='lari-sign' src={lariSign} alt='Lari sign' />

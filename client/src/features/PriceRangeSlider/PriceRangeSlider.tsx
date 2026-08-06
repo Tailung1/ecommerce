@@ -156,10 +156,10 @@ export default function PriceRangeSlider({
           style={{
             left: `${minPercent}%`,
             width: `${Math.abs(maxPercent - minPercent)}%`,
-            transition: !draggingTarget ? " 0.15s" : "",
+            transition: !draggingTarget ? "0.15s" : "",
           }}
           className='slider-range'
-        ></div>
+        />
 
         <div
           style={{ left: `${minPercent}%`, transition: !draggingTarget ? "0.15s" : "" }}

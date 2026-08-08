@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import useIsDesktop from "../../hooks/useWindowWidth";
 
 export default function PriceRangeSlider({
-  min = 10,
+  min = 0,
   max = 2000,
   step = 10,
 }: {

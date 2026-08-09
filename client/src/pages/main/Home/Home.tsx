@@ -1,18 +1,18 @@
-import useWindowWidth from "../../../hooks/useWindowWidth";
 import "../../../css/main.scss"; // had to import there.. maybe temporarily
 import "./Home.scss";
 // import data from "../../../data.json";
-import CategoriesAndCarousel from "../../../components/CategoriesCarousel/CategoriesAndCarousel";
+import CategoriesAndCarousel from "../../../components/CategoriesAndCarousel/CategoriesAndCarousel";
 // import mobilePhone from "../../../assets/iphone.png";
 // import tv from "../../../assets/television.png";
 // import laptops from "../../../assets/laptop.png";
 import ProductsContainer from "../../../components/reusable/ProductsContainer/ProductsWrapper";
 import { useProducts } from "../../../hooks/useProducts";
 import { useTranslation } from "react-i18next";
+import useIsDesktop from "../../../hooks/useWindowWidth";
 
 export default function Home() {
   const { data } = useProducts();
-  const width = useWindowWidth();
+  const isDesktop = useIsDesktop();
   const { t } = useTranslation();
 
   return (
@@ -25,7 +25,7 @@ export default function Home() {
           </div>
         ))}
       </section>
-      {width > 1023 && <CategoriesAndCarousel />}
+      {isDesktop && <CategoriesAndCarousel />}
 
       <section className='products-shared-container'>
         <p>{t("breathles in zoomer")}</p>

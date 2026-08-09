@@ -7,7 +7,7 @@ import cartIcon from "../../assets/shopping-cart.png";
 import loginIcon from "../../assets/login.png";
 import { useNavigate } from "react-router-dom";
 import Logo from "../shared/Logo/Logo";
-import SearchBar from "../../pages/main/SearchBar/SearchBar";
+import SearchBar from "../../pages/main/searchBar/SearchBar";
 import { useEffect } from "react";
 import { useBarDispatch } from "../../contexts/BarContext";
 import { useBarStateValue } from "../../contexts/BarContext";

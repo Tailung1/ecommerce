@@ -11,7 +11,7 @@ export default function Cart() {
         <img className='w-[200px] h-[200px]' src={cartImage} alt='shopping cart icon' />
       ) : (
         <div>
-          {shoppingCart.map((item: productType) => (
+          {shoppingCart.map((item: any) => (
             <div key={Math.random() * 3212} className='flex flex-col gap-3'>
               <h1>{item.name}</h1>
               <h2>{item.price}</h2> <h1>PRODUCTSS</h1>

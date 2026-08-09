@@ -1,4 +1,4 @@
-import "./CategoriesAndCarousel.scss";
+import "./DesktopHomeTopSection.scss";
 import { useEffect, useRef, useState } from "react";
 import { useMyContext } from "../../contexts/MyContext";
 import Categories from "../reusable/CategoriesSystem/Categories";

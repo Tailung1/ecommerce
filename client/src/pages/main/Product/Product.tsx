@@ -13,7 +13,7 @@ export default function Product() {
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
 
-  const [product, setProduct] = useState<productType | null>(null);
+  const [product, setProduct] = useState<any | null>(null);
 
   useEffect(() => {
     const getProduct = async () => {

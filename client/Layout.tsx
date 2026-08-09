@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState, useRef } from "react";
 import { Outlet } from "react-router-dom";
-import Header from "./src/components/Header/Header";
-import HeaderSlider from "./src/components/Header/HeaderSlider/HeaderSlider";
+import Header from "./src/components/header/Header";
+import HeaderSlider from "./src/components/header/HeaderSlider/HeaderSlider";
 import { AnimatePresence } from "framer-motion";
-import Footer from "./src/components/Footer/Footer";
+import Footer from "./src/components/footer/Footer";
 import BottomNavBar from "./src/components/shared/BottomNavBar/BottomNavBar";
 import TopBar from "./src/components/shared/TopBar/TopBar";
 import { useBarStateValue } from "./src/contexts/BarContext";

@@ -3,7 +3,7 @@ import exitIcon from "../../assets/reject.png";
 import binIcon from "../../assets/bin.png";
 import { useBarDispatch } from "../../contexts/BarContext";
 import { useBarStateValue } from "../../contexts/BarContext";
-import PriceRangeSlider from "../PriceRangeSlider/PriceRangeSlider";
+import PriceRangeSlider from "../priceRangeSlider/PriceRangeSlider";
 import { useTranslation } from "react-i18next";
 
 export default function FilterBar() {

@@ -1,7 +1,7 @@
 import "../../../css/main.scss"; // had to import there.. maybe temporarily
 import "./Home.scss";
 // import data from "../../../data.json";
-import CategoriesAndCarousel from "../../../components/CategoriesAndCarousel/CategoriesAndCarousel";
+import CategoriesAndCarousel from "../../../components/desktopHomeTopSection/DesktopHomeTopSection";
 // import mobilePhone from "../../../assets/iphone.png";
 // import tv from "../../../assets/television.png";
 // import laptops from "../../../assets/laptop.png";

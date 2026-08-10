@@ -1,6 +1,6 @@
 import "./HeaderSlider.scss";
 import { easeOut, motion } from "framer-motion";
-import Categories from "../../reusable/categories/CategoryList";
+import Categories from "../../../features/categories/CategoryList";
 import { useNavigate } from "react-router-dom";
 import BrandList from "./BrandList/BrandList";
 import searchIcon from "../../../assets/search-icon.png";

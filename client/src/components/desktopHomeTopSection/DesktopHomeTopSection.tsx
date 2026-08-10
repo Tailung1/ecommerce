@@ -1,7 +1,7 @@
 import "./DesktopHomeTopSection.scss";
 import { useEffect, useRef, useState } from "react";
 import { useMyContext } from "../../contexts/MyContext";
-import Categories from "../reusable/CategoriesSystem/Categories";
+import Categories from "../reusable/categories/CategoryList";
 import leftArrowIcon from "../../assets/left-arrow.png";
 import rightArrowIcon from "../../assets/right-arrow.png";
 import iphone from "../../assets/iphone.png";

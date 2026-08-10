@@ -2,7 +2,7 @@ import "./HeaderSlider.scss";
 import { easeOut, motion } from "framer-motion";
 import Categories from "../../reusable/CategoriesSystem/Categories";
 import { useNavigate } from "react-router-dom";
-import BrandList from "./BrandList";
+import BrandList from "./BrandList/BrandList";
 import searchIcon from "../../../assets/search-icon.png";
 import rejectIcon from "../../../assets/reject.png";
 import { useBarDispatch } from "../../../contexts/BarContext";
@@ -17,7 +17,7 @@ export default function HeaderSlider() {
       animate={{ x: 0 }}
       exit={{ x: "-100vw" }}
       transition={{ duration: 0.3, ease: easeOut }}
-      className='slider-container'
+      className='header-slider-container'
     >
       <div className='header-slider-exit-input-container'>
         <img
@@ -41,10 +41,7 @@ export default function HeaderSlider() {
       </div>
       <div className='categories-and-brands-container'>
         <Categories />
-        <section className='brands-container'>
-          {" "}
-          <BrandList />
-        </section>
+        <BrandList />
       </div>
     </motion.div>
   );

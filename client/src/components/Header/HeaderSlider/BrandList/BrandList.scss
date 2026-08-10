@@ -1,0 +1,39 @@
+.brands-container,
+.brands-section,
+.brands-wrapper,
+.brand-image {
+  width: 100%;
+}
+
+.brands-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.brands-wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding-right: 5px;
+  grid-gap: 10px;
+  overflow-y: auto;
+  max-height: 750px;
+  background-color: red;
+}
+.brand-item {
+  height: 100px;
+  background-color: rgb(217, 218, 226);
+  border-radius: 10px;
+  padding: 2px;
+  overflow: hidden;
+  position: relative;
+}
+.brand-paragraph {
+  font-size: 14px;
+  color: rgb(205, 136, 9);
+}
+.brand-image {
+  position: absolute;
+  height: 80%;
+  right: -19px;
+  bottom: -20%;
+}

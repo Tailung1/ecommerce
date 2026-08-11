@@ -1,7 +1,7 @@
 import "./PriceRangeSlider.scss";
 import lariSign from "../../assets/lari-sign.png";
 import { useEffect, useState, useRef } from "react";
-import useIsDesktop from "../../hooks/useWindowWidth";
+import useMediaQuery from "../../hooks/useMediaQuery";
 
 export default function PriceRangeSlider({
   min = 0,
@@ -12,7 +12,7 @@ export default function PriceRangeSlider({
   max: number;
   step: number;
 }) {
-  const isDesktop = useIsDesktop();
+  const isDesktop = useMediaQuery();
   const sliderRef = useRef<HTMLDivElement>(null);
   const [minValue, setMinValue] = useState<number>(min);
   const [maxValue, setMaxValue] = useState<number>(max);

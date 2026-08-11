@@ -8,7 +8,7 @@ import BottomNavBar from "./src/components/shared/BottomNavBar/BottomNavBar";
 import TopBar from "./src/components/shared/TopBar/TopBar";
 import { useBarStateValue } from "./src/contexts/BarContext";
 import BarWrapper from "./src/BarWrapper/BarWrapper";
-import useIsDesktop from "./src/hooks/useWindowWidth";
+import useMediaQuery from "./src/hooks/useMediaQuery";
 
 export default function Layout() {
   const [layerTarget, setLayerTarget] = useState<"main" | "full">("main");
@@ -16,7 +16,7 @@ export default function Layout() {
     height: 0,
     offsetTop: 0,
   });
-  const isDesktop = useIsDesktop();
+  const isDesktop = useMediaQuery();
 
   const showAuthBar = useBarStateValue("showAuthBar");
   const showFilterBar = useBarStateValue("showFilterBar");
@@ -35,7 +35,6 @@ export default function Layout() {
   useEffect(() => {
     document.body.classList.toggle("no-scroll", isVisible);
   }, [isVisible]);
-
 
   useEffect(() => {
     if (mainRef.current) {

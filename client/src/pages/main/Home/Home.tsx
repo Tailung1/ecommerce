@@ -8,11 +8,11 @@ import CategoriesAndCarousel from "../../../components/desktopHomeTopSection/Des
 import ProductsContainer from "../../../components/reusable/ProductsContainer/ProductsWrapper";
 import { useProducts } from "../../../hooks/useProducts";
 import { useTranslation } from "react-i18next";
-import useIsDesktop from "../../../hooks/useWindowWidth";
+import useMediaQuery from "../../../hooks/useMediaQuery";
 
 export default function Home() {
   const { data } = useProducts();
-  const isDesktop = useIsDesktop();
+  const isDesktop = useMediaQuery();
   const { t } = useTranslation();
 
   return (

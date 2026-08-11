@@ -1,7 +1,8 @@
-import React from 'react'
+import useMediaQuery from "../../../hooks/useMediaQuery";
+import DesktopCategoryMenu from "./desktop/DesktopCategoryMenu";
+import MobileCategoryMenu from "./mobile/MobileCategoryMenu";
 
 export default function CategoryNavigation() {
-  return (
-    <div>CategoryNavigation</div>
-  )
+  const isDesktop = useMediaQuery();
+  return <>{isDesktop ? <DesktopCategoryMenu /> : <MobileCategoryMenu />}</>;
 }

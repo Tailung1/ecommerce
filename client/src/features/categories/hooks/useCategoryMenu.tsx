@@ -1,7 +1,11 @@
-import React from 'react'
-
+import { useState } from "react";
 export default function useCategoryMenu() {
-  return (
-    <div>useCategoryMenu</div>
-  )
+  const [openedCategoryId, setOpenedCategoryId] = useState<number | null>(null);
+  function openCategory(id: number) {
+    setOpenedCategoryId(id);
+  }
+  function closeCategory() {
+    setOpenedCategoryId(null);
+  }
+  return { openedCategoryId, openCategory, closeCategory };
 }

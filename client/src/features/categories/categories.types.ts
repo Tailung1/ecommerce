@@ -1,9 +1,9 @@
-export interface category {
+export  interface Category {
   id: number;
   name: string;
   slug: string;
+  children?: Category[];
 }
 
-export type categories = category[];
+export type Categories = Category[];
 
-// export { category, categories };

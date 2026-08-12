@@ -1,7 +1,11 @@
-import React from 'react'
+import type { Categories } from "../../categories.types";
 
-export default function CategoryList() {
+export default function CategoryList({ categoriesData }: { categoriesData: Categories }) {
   return (
-    <div>CategoryList</div>
-  )
+    <div>
+      {categoriesData.map((s) => (
+        <div>{s.name}</div>
+      ))}
+    </div>
+  );
 }

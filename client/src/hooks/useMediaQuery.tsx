@@ -4,10 +4,10 @@ export default function useIsDesktop() {
   // typeof always returns a string, e.g., "object" for window or "undefined" if it doesn't exist
   //   const [isDesktop, setIsDesktop] = useState(typeof window !== "undefined" ? window.innerWidth : 0);
 
-  const [isDesktop, setIsDesktop] = useState<boolean>(false);
-  const mediaQuery = window.matchMedia("(min-width:1024px)");
+  const [isDesktop, setIsDesktop] = useState(window.matchMedia("(min-width:1024px)").matches);
 
   useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width:1024px)");
     const handleResize = () => {
       setIsDesktop(mediaQuery.matches);
     };

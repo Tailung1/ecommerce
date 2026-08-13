@@ -1,6 +1,7 @@
 
 
-export default function MobileCategoryBrands() {
+export default function MobileMegaMenu
+() {
   return (
     <div>MobileCategoryBrands</div>
   )

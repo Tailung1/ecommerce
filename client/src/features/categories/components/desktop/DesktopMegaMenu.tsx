@@ -1,6 +1,6 @@
 
 
-export default function DesktopCategoryBrands() {
+export default function DesktopMegaMenu() {
   return (
     <div>DesktopCategoryBrands</div>
   )

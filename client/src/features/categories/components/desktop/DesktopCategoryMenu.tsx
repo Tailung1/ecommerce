@@ -1,5 +1,5 @@
 import CategoryList from "../shared/CategoryList";
-import DesktopCategoryBrands from "./DesktopCategoryBrands";
+import DesktopCategoryBrands from "./DesktopMegaMenu";
 import type { Categories } from "../../categories.types";
 
 export default function DesktopCategoryMenu({ categoriesData }: { categoriesData: Categories }) {

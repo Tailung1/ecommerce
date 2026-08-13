@@ -1,6 +1,6 @@
 import type { Categories } from "../../categories.types";
 import CategoryList from "../shared/CategoryList";
-import MobileCategoryBrands from "./MobileCategoryBrands";
+import MobileCategoryBrands from "./MobileMegaMenu";
 
 export default function MobileCategoryMenu({ categoriesData }: { categoriesData: Categories }) {
   return (

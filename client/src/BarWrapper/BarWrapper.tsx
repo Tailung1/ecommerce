@@ -1,7 +1,7 @@
 import "./BarWrapper.scss";
 import AuthBar from "../features/auth/ui/AuthBar";
 import CompareBar from "../features/compare/CompareBar";
-import AlertBar from "../features/AlerBar/AlertBar";
+import AlertBar from "../features/alertBar/AlertBar";
 import FilterBar from "../features/filterBar/FilterBar";
 import { useBarStateValue } from "../contexts/BarContext";
 import ReactDom from "react-dom";

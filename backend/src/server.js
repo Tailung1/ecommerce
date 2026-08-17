@@ -8,14 +8,8 @@ import categoryRouter from "./routes/categoryRoutes.js";
 import errorHandler from "./middleware/errorHandler.js";
 import fileRouter from "./routes/fileRoutes.js";
 
-// Currently using a layer-based architecture.
-// Larger applications often move to Feature-Based Architecture / Modular Architecture
-// to organize code by business domains.
-// Very large systems with independent scaling and deployment needs may use microservices.
-
 const app = express();
 
-// const allowedOrigins = ["http://localhost:5173"];
 app.use(
   cors({
     origin: "http://localhost:5173",
@@ -24,12 +18,21 @@ app.use(
 );
 
 app.use(express.json());
-// express.static() is middleware that exposes a folder as a public static file directory.
-// It allows Express to automatically serve files from that folder without creating individual routes for each file.
+
+// Show every incoming request route
+app.use((req, res, next) => {
+  console.log("➡️ Request received:");
+  console.log("Method:", req.method);
+  console.log("Route:", req.originalUrl);
+  next();
+});
+
+// Static files
 app.use("/uploads", express.static("backend/uploads"));
 
 export default function authMiddleware(req, res, next) {
   const token = req.cookies.token;
+
   if (!token) return res.status(401).json({ message: "Not logged in" });
 
   try {
@@ -40,13 +43,20 @@ export default function authMiddleware(req, res, next) {
     res.status(401).json({ message: "Invalid token" });
   }
 }
+
+// Routes
 app.use("/api/products", productRouter);
 app.use("/api/uploads", fileRouter);
 app.use("/api/categories", categoryRouter);
 app.use("/api/users", userRouter);
 app.use("/api/reset-password", resetPasswordRouter);
-app.use((req, res) => res.status(404).json({ message: "Route Not found" }));
+
+// Not found route
+app.use((req, res) => {
+  console.log("❌ Route not found:", req.method, req.originalUrl);
+  res.status(404).json({ message: "Route Not found" });
+});
 
 app.use(errorHandler);
 
-app.listen(3000, () => console.log("Backend server is running on port '3000' "));
+app.listen(3000, () => console.log("Backend server is running on port '3000'"));

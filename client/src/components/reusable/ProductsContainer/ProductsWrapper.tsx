@@ -1,14 +1,13 @@
 import "./ProductsWrapper.scss";
 import { useNavigate } from "react-router-dom";
 import { useMyContext } from "../../../contexts/MyContext";
-// import compareIcon from "../../../assets/compare.png";
-// import cartIcon from "../../../assets/shopping-cart.png";
+import compareIcon from "../../../assets/compare.png";
+import cartIcon from "../../../assets/shopping-cart.png";
 import { useBarDispatch } from "../../../contexts/BarContext";
 import { useCompareCart } from "../../../contexts/CompareContext";
 import { useCompareDispatch } from "../../../contexts/CompareContext";
-// import phone from "../../../assets/mobile-phone.png";
 
-export default function ProductsWrapper({ data }: { data: any }) {
+export default function ProductsWrapper({ data, img }: { data: any; img: string }) {
   const { shoppingCart, setShoppingCart } = useMyContext();
   const { setAlert } = useBarDispatch();
   const { compareCart, activeCompareCategory } = useCompareCart();
@@ -83,8 +82,46 @@ export default function ProductsWrapper({ data }: { data: any }) {
   };
 
   return (
-    <div>
-      
+    <div className='products-shared-wrapper'>
+      {data.map((item: any) => (
+        <div key={item.id}>
+          <img
+            onClick={() => generateSlug(item.name, item.category, item.id)}
+            className='item-image'
+            src={img}
+            alt='Item icon'
+          />
+          <div className='item-info-container'>
+            {item.gifts ? (
+              <span className='gift'>GIFTS</span>
+            ) : (
+              item.new && <span className='new'>NEW</span>
+            )}
+
+            <span className='price'>2000$</span>
+            <p className='installment'>
+              Per month from <span>74 $</span>
+            </p>
+
+            <span className='item-name'>{item.name}</span>
+          </div>
+          <div className='product-actions-container'>
+            <div onClick={() => handleAction("compare", item)} className='compare-box'>
+              <img src={compareIcon} alt='Compare icon' />
+            </div>
+            {handleProductCheckInCart(item) ? (
+              <div onClick={() => handleAction("cart", item)} className='cart-container'>
+                <span>In cart </span>
+              </div>
+            ) : (
+              <div onClick={() => handleAction("cart", item)} className='cart-container'>
+                <img src={cartIcon} alt='Cart icon' />
+                <span>Add</span>
+              </div>
+            )}
+          </div>
+        </div>
+      ))}
     </div>
   );
 }

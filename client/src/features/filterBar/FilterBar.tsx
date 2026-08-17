@@ -15,8 +15,6 @@ export default function FilterBar() {
   const isExitingBar = useBarStateValue("isExitingBar");
 
   const { t } = useTranslation();
-
-  // Filter state lives here
   const [minValue, setMinValue] = useState(DEFAULT_MIN);
   const [maxValue, setMaxValue] = useState(DEFAULT_MAX);
   const [resetKey, setResetKey] = useState(0);

@@ -1,9 +1,10 @@
 import "./HeaderSlider.scss";
 import { easeOut, motion } from "framer-motion";
-import CategoryNavigation from "../../../features/categories/components/CategoryNavigation";
-// import Categories from "../../../features/categories/components/CategoryList";
+// import CategoryNavigation from "../../../features/categories/components/CategoryNavigation";
+import Categories from "../../reusable/Categories/Categories";
+// import CategoryList from "../../../features/categories/components/shared/CategoryList";
 import { useNavigate } from "react-router-dom";
-// import BrandList from "./BrandList/BrandList";
+import BrandList from "./BrandList/BrandList";
 import searchIcon from "../../../assets/search-icon.png";
 import rejectIcon from "../../../assets/reject.png";
 import { useBarDispatch } from "../../../contexts/BarContext";
@@ -41,7 +42,8 @@ export default function HeaderSlider() {
         </div>
       </div>
       <div className='categories-and-brands-container'>
-        <CategoryNavigation />
+        <Categories/>
+        <BrandList />
       </div>
     </motion.div>
   );

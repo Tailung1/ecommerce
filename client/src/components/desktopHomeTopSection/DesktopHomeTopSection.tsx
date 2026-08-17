@@ -1,8 +1,8 @@
 import "./DesktopHomeTopSection.scss";
 import { useEffect, useRef, useState } from "react";
 import { useMyContext } from "../../contexts/MyContext";
-import CategoryNavigation from "../../features/categories/components/CategoryNavigation";
-// import Categories from "../../features/categories/components/CategoryList";
+// import CategoryNavigation from "../../features/categories/components/CategoryNavigation";
+import Categories from "../reusable/Categories/Categories";
 import leftArrowIcon from "../../assets/left-arrow.png";
 import rightArrowIcon from "../../assets/right-arrow.png";
 import iphone from "../../assets/iphone.png";
@@ -71,7 +71,7 @@ export default function CategoriesAndCarousel() {
     <div className='pc-main-first-section'>
       <div className='categories-and-brands-parent'>
         <div className='pc-categories-and-brands-container'>
-          <CategoryNavigation/>
+          <Categories/>
           <div className='pc-brands-container'>{activeCategory}</div>
         </div>
       </div>

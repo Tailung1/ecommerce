@@ -7,7 +7,6 @@ export default function MobileCategoryMenu({ categoriesData }: { categoriesData:
     <div>
       <CategoryList categoriesData={categoriesData} />
       <MobileCategoryBrands />
-      
     </div>
   );
 }

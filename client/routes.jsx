@@ -1,11 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "./Layout";
 import Home from "./src/pages/main/Home/Home";
-import Product from "./src/pages/main/Product/Product";
-import Products from "./src/pages/main/Products/Products";
-import Cart from "./src/pages/main/ShoppingCart/ShoppingCart";
-import Compare from "./src/features/Compare/Compare";
-import Promotions from "./src/pages/main/Promotions/Promotions";
+import Product from "./src/pages/main/product/Product";
+import Products from "./src/pages/main/products/Products";
+import Cart from "./src/pages/main/shoppingCart/ShoppingCart";
+import Compare from "./src/features/compare/Compare";
+import Promotions from "./src/pages/main/promotions/Promotions";
 import SearchBar from "./src/pages/main/searchBar/SearchBar";
 import LanguageLayout from "./src/LanguageLayout";
 

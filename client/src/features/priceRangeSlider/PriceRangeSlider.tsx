@@ -7,18 +7,25 @@ export default function PriceRangeSlider({
   min = 0,
   max = 2000,
   step = 10,
+  minValue,
+  maxValue,
+  setMinValue,
+  setMaxValue,
+  resetKey
 }: {
   min: number;
   max: number;
   step: number;
+  minValue: number;
+  maxValue: number;
+  setMinValue: React.Dispatch<React.SetStateAction<number>>;
+  setMaxValue: React.Dispatch<React.SetStateAction<number>>;
+  resetKey:number
 }) {
   const isDesktop = useMediaQuery();
   const sliderRef = useRef<HTMLDivElement>(null);
-  const [minValue, setMinValue] = useState<number>(min);
-  const [maxValue, setMaxValue] = useState<number>(max);
   const [minInput, setMinInput] = useState<number>(min);
   const [maxInput, setMaxInput] = useState<number>(max);
-
   const [draggingTarget, setDraggingTarget] = useState<"MIN" | "MAX" | null>(null);
 
   const clamp = (value: number, minBound: number, maxBound: number) =>
@@ -96,6 +103,10 @@ export default function PriceRangeSlider({
       setMinInput(value);
     }
   };
+  useEffect(() => {
+    setMinInput(min);
+    setMaxInput(max);
+  }, [resetKey]);
 
   const handleInputChange = (target: "MIN" | "MAX", rawValue: number) => {
     if (target === "MIN") {

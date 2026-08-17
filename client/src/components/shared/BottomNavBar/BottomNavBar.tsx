@@ -30,8 +30,7 @@ export default function BottomNavBar() {
   const handlers: Record<optionsUnion, () => void> = {
     Main: () => {
       navigate("/");
-
-      setBar("showSearchBar", true);
+    //   setBar("showSearchBar", true);
       setIndex(1);
     },
     Categories: () => setBar("showSideBar", true),

@@ -51,9 +51,9 @@ app.use("/api/categories", categoryRouter);
 app.use("/api/users", userRouter);
 app.use("/api/reset-password", resetPasswordRouter);
 
-// Not found route
+
 app.use((req, res) => {
-  console.log("❌ Route not found:", req.method, req.originalUrl);
+  console.log("Route not found:", req.method, req.originalUrl);
   res.status(404).json({ message: "Route Not found" });
 });
 

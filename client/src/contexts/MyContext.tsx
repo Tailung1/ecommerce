@@ -10,17 +10,17 @@ interface types {
   activeCategory: string;
   setActiveCategory: React.Dispatch<SetStateAction<string>>;
   popularSearches: any[];
-  setPopularSearches: React.Dispatch<SetStateAction<productType[]>>;
+  setPopularSearches: React.Dispatch<SetStateAction<any>>;
   shoppingCart: any[];
-  setShoppingCart: React.Dispatch<SetStateAction<productType[]>>;
+  setShoppingCart: React.Dispatch<SetStateAction<any[]>>;
 }
 
 const MyContext = createContext({} as types);
 
 export default function ContextProvider({ children }: { children: ReactNode }) {
   const [activeCategory, setActiveCategory] = useState<string>("mobile-phones");
-  const [popularSearches, setPopularSearches] = useState<productType[]>([]);
-  const [shoppingCart, setShoppingCart] = useState<productType[] | []>([]);
+  const [popularSearches, setPopularSearches] = useState<any>([]);
+  const [shoppingCart, setShoppingCart] = useState<any[] | []>([]);
 
   return (
     <MyContext.Provider

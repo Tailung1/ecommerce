@@ -1,5 +1,4 @@
 import "./ShoppingCartPop.scss";
-import "../Header/Header"
 import { useMyContext } from "../../../contexts/MyContext";
 import emptyCart from "../../../assets/cartImage.png";
 import bin from "../../../assets/bin.png";

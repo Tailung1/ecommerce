@@ -47,7 +47,7 @@ export default function ResetPassword() {
       if (inputValues.newPassword.length < 5) {
         errors = { ...inputErrors, newPassword: "Min 5 charachters" };
       } else if (inputValues.repeatNewPassword !== inputValues.newPassword) {
-        errors = { ...inputErrors, repeatNewPassword: "Passwords dosn't much" };
+        errors = { ...inputErrors, repeatNewPassword: "Passwords don't match" };
       }
     }
 

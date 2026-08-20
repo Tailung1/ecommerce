@@ -27,7 +27,7 @@ export default function SearchBar() {
     }
   };
 
-  const generateSlug = async (name: string, color: string, id: number) => {
+  const generateSlug =  (name: string, color: string, id: number) => {
     const destName = name.replace(/\s+/g, "-");
     const slug = `${destName}-${color}-${id}`.toLowerCase();
     navigate(`/${slug}`);

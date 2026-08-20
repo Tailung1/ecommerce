@@ -17,9 +17,11 @@ export default function BottomNavBar() {
   const { setIsCompareVisible } = useCompareDispatch();
   const { compareCart } = useCompareCart();
 
-  type optionsUnion = "Main" | "Categories" | "Promotions" | "Compare" | "Login";
+  type OptionsUnion = "Main" | "Categories" | "Promotions" | "Compare" | "Login";
 
-  const options: { id: optionsUnion; icon: string; index: number }[] = [
+  const compareAmount = compareCart.filter((item) => item !== null).length;
+
+  const options: { id: OptionsUnion; icon: string; index: number }[] = [
     { id: "Main", icon: MainIcon, index: 1 },
     { id: "Categories", icon: CategoriesIcon, index: 2 },
     { id: "Promotions", icon: PromotionsIcon, index: 3 },
@@ -27,10 +29,9 @@ export default function BottomNavBar() {
     { id: "Login", icon: LoginIcon, index: 6 },
   ];
 
-  const handlers: Record<optionsUnion, () => void> = {
+  const handlers: Record<OptionsUnion, () => void> = {
     Main: () => {
       navigate("/");
-    //   setBar("showSearchBar", true);
       setIndex(1);
     },
     Categories: () => setBar("showSideBar", true),
@@ -39,7 +40,7 @@ export default function BottomNavBar() {
       setIndex(3);
     },
     Compare: () => {
-      setIsCompareVisible(true)
+      setIsCompareVisible(true);
       navigate("/compare-products");
       setIndex(4);
     },
@@ -62,13 +63,14 @@ export default function BottomNavBar() {
           ) : (
             <img src={cat.icon} alt={cat.id} />
           )}
-          <span className={`${index === cat.index ? "active-category-text" : ""}`}>{cat.id}</span>
+
+          <span className={index === cat.index ? "active-category-text" : ""}>{cat.id}</span>
         </div>
       ))}
 
-      {compareCart.some((item) => item !== null) && (
+      {compareAmount > 0 && (
         <div className='compare-amount'>
-          <span>{compareCart.filter((item) => item !== null).length}</span>
+          <span>{compareAmount}</span>
         </div>
       )}
     </nav>

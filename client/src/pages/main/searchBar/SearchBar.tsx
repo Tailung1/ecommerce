@@ -27,7 +27,7 @@ export default function SearchBar() {
     }
   };
 
-  const generateSlug =  (name: string, color: string, id: number) => {
+  const generateSlug = (name: string, color: string, id: number) => {
     const destName = name.replace(/\s+/g, "-");
     const slug = `${destName}-${color}-${id}`.toLowerCase();
     navigate(`/${slug}`);
@@ -41,7 +41,7 @@ export default function SearchBar() {
       </div>
 
       <div
-        onAnimationEnd={(e) => handleAnimationEnd(e)}
+        onAnimationEnd={handleAnimationEnd}
         className={`popular-searches-container  ${
           isExiting ? "popular-searches-containerOUT" : "popular-searches-containerIN"
         }`}

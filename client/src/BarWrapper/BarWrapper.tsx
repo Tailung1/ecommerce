@@ -48,6 +48,6 @@ export default function BarWrapper({
         {showFilterBar && <FilterBar />}
       </div>
     </>,
-    document && document.body
+     document.body
   );
 }

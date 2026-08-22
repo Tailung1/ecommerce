@@ -1,0 +1,18 @@
+.customScrollbar-parent {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 50px;
+  width: 5px;
+  background-color: green;
+  z-index: 999;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.1s all ease;
+}
+.customScrollbar-parent:hover {
+  width: 15px;
+}
+.customScrollbar-parent {
+  touch-action: none;
+}

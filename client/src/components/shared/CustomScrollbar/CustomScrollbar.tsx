@@ -8,9 +8,9 @@ export default function CustomScrollbar() {
   const [clientY, setClientY] = useState<number>(0);
 
   useEffect(() => {
-    const documentHeight = document.documentElement.scrollHeight;
-    const viewportHeight = window.innerHeight;
-    const trackHeight = barRef.current?.clientHeight;
+    // const documentHeight = document.documentElement.scrollHeight;
+    // const viewportHeight = window.innerHeight;
+    // const trackHeight = barRef.current?.clientHeight;
   }, []);
 
   const handleScroll = (clientY: number) => {

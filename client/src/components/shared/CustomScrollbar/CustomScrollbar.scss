@@ -10,9 +10,11 @@
   cursor: pointer;
   transition: 0.1s all ease;
 }
-.customScrollbar-parent:hover {
+.customScrollbar-parent:hover,
+.isDraggingWidth {
   width: 15px;
 }
+
 .customScrollbar-parent {
   touch-action: none;
 }

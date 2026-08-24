@@ -58,7 +58,6 @@ export default function Header() {
         </div>
         <LanguageSelector />
       </div>
-      {/* </div> */} {/* </div> */} {/* </div> */} {/* </div> */}{" "}
       <div className='pc-header'>
         <Logo />
         <div className='header-right-side-items'>

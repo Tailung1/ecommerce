@@ -26,9 +26,7 @@ img {
   pointer-events: none;
 }
 
-html {
-  background: transparent;
-}
+
 
 /* ::-webkit-scrollbar {
   width: 12px;

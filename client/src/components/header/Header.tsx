@@ -16,7 +16,7 @@ import { useTranslation } from "react-i18next";
 export default function Header() {
   const { setBar } = useBarDispatch();
   const showSearchBar = useBarStateValue("showSearchBar");
-  
+
   useEffect(() => {
     const handleScroll = () => {
       const Y = window.scrollY;
@@ -26,48 +26,49 @@ export default function Header() {
       if (Y > 127) {
         header.classList.add("header-sticky");
       }
+
       if (header.classList.contains("header-sticky") && Y < 57) {
         header.classList.remove("header-sticky");
       }
     };
 
     window.addEventListener("scroll", handleScroll);
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const { t } = useTranslation();
   const navigate = useNavigate();
-  
+
   return (
     <header>
       <div className='header'>
-        {" "}
-        <img onClick={() => setBar("showSideBar", true)} src={slideIcon} alt='slide-icon' />
+        <img onClick={() => setBar("showSideBar", true)} src={slideIcon} alt='Open menu' />
         <Logo />
       </div>
+
       <div className='header header-right-side-items'>
-        <img
-          onClick={() => {
-            navigate("/search");
-          }}
-          src={searchIcon}
-          alt='search-logo'
-        />
+        <img onClick={() => navigate("/search")} src={searchIcon} alt='Search products' />
+
         <div className='shopping-cart-container-header'>
-          <img onClick={() => navigate("/cart")} src={cartIcon} alt='cart-logo' />
+          <img onClick={() => navigate("/cart")} src={cartIcon} alt='Shopping cart' />
         </div>
+
         <LanguageSelector />
       </div>
+
       <div className='pc-header'>
         <Logo />
+
         <div className='header-right-side-items'>
           <button className='orange-btn'>{t("navigation")}</button>
+
           {showSearchBar ? (
             <SearchBar />
           ) : (
             <div onClick={() => setBar("showSearchBar", true)} className='input-container'>
               <input className='input' placeholder='Search' type='text' />
-              <img className='search-icon' src={searchIcon} alt='search icon' />
+              <img className='search-icon' src={searchIcon} alt='Search icon' />
             </div>
           )}
 
@@ -82,6 +83,7 @@ export default function Header() {
             <img src={loginIcon} alt='Login icon' />
             <span>{t("login")}</span>
           </div>
+
           <button className='orange-btn'>%</button>
         </div>
       </div>

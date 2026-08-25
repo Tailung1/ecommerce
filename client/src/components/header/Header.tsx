@@ -8,7 +8,7 @@ import loginIcon from "../../assets/login.png";
 import { useNavigate } from "react-router-dom";
 import Logo from "../shared/Logo/Logo";
 import SearchBar from "../../pages/main/searchBar/SearchBar";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useBarDispatch } from "../../contexts/BarContext";
 import { useBarStateValue } from "../../contexts/BarContext";
 import { useTranslation } from "react-i18next";
@@ -17,10 +17,13 @@ export default function Header() {
   const { setBar } = useBarDispatch();
   const showSearchBar = useBarStateValue("showSearchBar");
 
+  const headerRef = useRef<HTMLElement | null>(null);
+
   useEffect(() => {
     const handleScroll = () => {
       const Y = window.scrollY;
-      const header = document.querySelector("header");
+      const header = headerRef.current;
+
       if (!header) return;
 
       if (Y > 127) {
@@ -41,14 +44,20 @@ export default function Header() {
   const navigate = useNavigate();
 
   return (
-    <header>
+    <header ref={headerRef}>
       <div className='header'>
         <img onClick={() => setBar("showSideBar", true)} src={slideIcon} alt='Open menu' />
         <Logo />
       </div>
 
       <div className='header header-right-side-items'>
-        <img onClick={() => navigate("/search")} src={searchIcon} alt='Search products' />
+        <img
+          onClick={() => {
+            navigate("/search");
+          }}
+          src={searchIcon}
+          alt='Search products'
+        />
 
         <div className='shopping-cart-container-header'>
           <img onClick={() => navigate("/cart")} src={cartIcon} alt='Shopping cart' />

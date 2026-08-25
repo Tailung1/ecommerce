@@ -28,9 +28,7 @@ export default function Header() {
 
       if (Y > 127) {
         header.classList.add("header-sticky");
-      }
-
-      if (header.classList.contains("header-sticky") && Y < 57) {
+      } else if (Y < 57) {
         header.classList.remove("header-sticky");
       }
     };
@@ -51,13 +49,7 @@ export default function Header() {
       </div>
 
       <div className='header header-right-side-items'>
-        <img
-          onClick={() => {
-            navigate("/search");
-          }}
-          src={searchIcon}
-          alt='Search products'
-        />
+        <img onClick={() => navigate("/search")} src={searchIcon} alt='Search products' />
 
         <div className='shopping-cart-container-header'>
           <img onClick={() => navigate("/cart")} src={cartIcon} alt='Shopping cart' />

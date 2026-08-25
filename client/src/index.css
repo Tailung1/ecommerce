@@ -11,11 +11,6 @@ body.no-scroll {
   overflow: hidden;
 }
 
-#root {
-  height: 100vh;
-  overflow-y: scroll;
-}
-
 img {
   width: 25px;
   height: 25px;
@@ -25,8 +20,6 @@ img {
 .noPointerEvents {
   pointer-events: none;
 }
-
-
 
 /* ::-webkit-scrollbar {
   width: 12px;

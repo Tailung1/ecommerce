@@ -2,7 +2,28 @@ import styles from "./TopBar.module.scss";
 import LanguageSelector from "../LanguageSelector/LanguageSelector";
 import teleCall from "../../../assets/telephone-call.png";
 
-const navigationItems = ["Trade Politics", "Installment", "Career", "Trade In", "Branches"];
+const navigationItems = [
+  {
+    label: "Trade Politics",
+    href: "/trade-politics",
+  },
+  {
+    label: "Installment",
+    href: "/installment",
+  },
+  {
+    label: "Career",
+    href: "/career",
+  },
+  {
+    label: "Trade In",
+    href: "/trade-in",
+  },
+  {
+    label: "Branches",
+    href: "/branches",
+  },
+];
 
 export default function TopBar() {
   return (
@@ -13,9 +34,11 @@ export default function TopBar() {
       </div>
 
       <div className={styles.infoContainer}>
-        <nav>
-          {navigationItems.map((item) => (
-            <span key={item}>{item}</span>
+        <nav aria-label='Top navigation'>
+          {navigationItems.map(({ label, href }) => (
+            <a href={href} key={label}>
+              {label}
+            </a>
           ))}
         </nav>
 

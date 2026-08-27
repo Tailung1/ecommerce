@@ -1,23 +1,24 @@
-import styles from  "./TopBar.module.scss";
+import styles from "./TopBar.module.scss";
 import LanguageSelector from "../LanguageSelector/LanguageSelector";
 import teleCall from "../../../assets/telephone-call.png";
 
+const navigationItems = ["Trade Politics", "Installment", "Career", "Trade In", "Branches"];
 
 export default function TopBar() {
   return (
-    <div className={styles["pc-topBar"]}>
-      <div className={styles["contact-info"]}>
-        <img src={teleCall} alt='telephone call icon' />
+    <div className={styles.topBar}>
+      <div className={styles.contactInfo}>
+        <img src={teleCall} alt='Telephone call icon' width={18} height={18} />
         <span>*7007</span>
       </div>
-      <div className={styles["info-container"]}>
+
+      <div className={styles.infoContainer}>
         <nav>
-          <span>Trade Politics</span>
-          <span>Installment</span>
-          <span>Carrer</span>
-          <span>Trade In</span>
-          <span>Branches</span>
+          {navigationItems.map((item) => (
+            <span key={item}>{item}</span>
+          ))}
         </nav>
+
         <LanguageSelector />
       </div>
     </div>

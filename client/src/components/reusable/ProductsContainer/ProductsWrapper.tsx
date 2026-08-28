@@ -4,8 +4,7 @@ import { useMyContext } from "../../../contexts/MyContext";
 import compareIcon from "../../../assets/compare.png";
 import cartIcon from "../../../assets/shopping-cart.png";
 import { useBarDispatch } from "../../../contexts/BarContext";
-import { useCompareCart } from "../../../contexts/CompareContext";
-import { useCompareDispatch } from "../../../contexts/CompareContext";
+import { useCompareCart, useCompareDispatch } from "../../../contexts/CompareContext";
 
 export default function ProductsWrapper({ data, img }: { data: any; img: string }) {
   const { shoppingCart, setShoppingCart } = useMyContext();

@@ -14,11 +14,11 @@ export default function ProductsWrapper({ data, img }: { data: any; img: string 
   const { setCompareCart, setCompareCategory } = useCompareDispatch();
   const navigate = useNavigate();
 
-  const generateSlug = async (name: string, category: string, id: number) => {
-    const destName = name.replace(/\s+/g, "-");
-    const slug = `${category}/${destName}-${id}`.toLowerCase();
-    navigate(`/${slug}`);
-  };
+const generateSlug = (name: string, category: string, id: number) => {
+  const destName = name.replace(/\s+/g, "-");
+  const slug = `${category}/${destName}-${id}`.toLowerCase();
+  navigate(`/${slug}`);
+};
 
   const enableAlertShow = ({
     isFull = false,

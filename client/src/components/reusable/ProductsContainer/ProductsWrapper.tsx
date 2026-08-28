@@ -14,16 +14,6 @@ export default function ProductsWrapper({ data, img }: { data: any; img: string 
   const { setCompareCart, setCompareCategory } = useCompareDispatch();
   const navigate = useNavigate();
 
-  //   great solution for category check if no useState is used to track it !!!!!
-
-  //   const isCategory = compareCart.find(
-  //     (i) => i !== null
-  //   )?.category;
-  //   if (isCategory && isCategory !== item.category) {
-  //     setShowAlert(true);
-  //     return;
-  //   }
-
   const generateSlug = async (name: string, category: string, id: number) => {
     const destName = name.replace(/\s+/g, "-");
     const slug = `${category}/${destName}-${id}`.toLowerCase();
@@ -53,6 +43,7 @@ export default function ProductsWrapper({ data, img }: { data: any; img: string 
   const handleAction = (task: "cart" | "compare", item: any) => {
     if (task === "compare") {
       const status = getCompareActionStatus(item);
+
       if (status !== "ok") {
         enableAlertShow({ [status]: true });
         return;
@@ -60,25 +51,27 @@ export default function ProductsWrapper({ data, img }: { data: any; img: string 
 
       const newArr = [...compareCart];
       const index = newArr.findIndex((i) => i === null);
+
       newArr[index] = item;
       setCompareCart(newArr);
 
-      if (!activeCompareCategory) setCompareCategory(item.category);
+      if (!activeCompareCategory) {
+        setCompareCategory(item.category);
+      }
     }
 
-    if (task == "cart") {
+    if (task === "cart") {
       if (shoppingCart.some((i) => i.id === item.id)) {
         enableAlertShow({ isChosen: true });
         return;
-      } else {
-        setShoppingCart((prev) => [...prev, item]);
       }
+
+      setShoppingCart((prev) => [...prev, item]);
     }
   };
 
   const handleProductCheckInCart = (item: any) => {
-    const inCart = shoppingCart.some((i) => i.id === item.id && i.category === item.category);
-    return inCart;
+    return shoppingCart.some((i) => i.id === item.id && i.category === item.category);
   };
 
   return (
@@ -89,8 +82,10 @@ export default function ProductsWrapper({ data, img }: { data: any; img: string 
             onClick={() => generateSlug(item.name, item.category, item.id)}
             className='item-image'
             src={img}
-            alt='Item icon'
+            alt={`${item.name} image`}
+            decoding='async'
           />
+
           <div className='item-info-container'>
             {item.gifts ? (
               <span className='gift'>GIFTS</span>
@@ -99,23 +94,26 @@ export default function ProductsWrapper({ data, img }: { data: any; img: string 
             )}
 
             <span className='price'>2000$</span>
+
             <p className='installment'>
               Per month from <span>74 $</span>
             </p>
 
             <span className='item-name'>{item.name}</span>
           </div>
+
           <div className='product-actions-container'>
             <div onClick={() => handleAction("compare", item)} className='compare-box'>
-              <img src={compareIcon} alt='Compare icon' />
+              <img src={compareIcon} alt='Compare icon' decoding='async' />
             </div>
+
             {handleProductCheckInCart(item) ? (
               <div onClick={() => handleAction("cart", item)} className='cart-container'>
-                <span>In cart </span>
+                <span>In cart</span>
               </div>
             ) : (
               <div onClick={() => handleAction("cart", item)} className='cart-container'>
-                <img src={cartIcon} alt='Cart icon' />
+                <img src={cartIcon} alt='Cart icon' decoding='async' />
                 <span>Add</span>
               </div>
             )}

@@ -33,6 +33,7 @@ export default function Categories() {
       icon: smartHome,
     },
   ];
+
   return (
     <section className='categories-wrapper'>
       {categories.map((cat) => (
@@ -45,7 +46,8 @@ export default function Categories() {
           onMouseEnter={isDesktop ? () => setActiveCategory(cat.id) : undefined}
           onMouseLeave={isDesktop ? () => setActiveCategory("") : undefined}
         >
-          <img src={cat.icon} alt={`${cat.id} icon`} />
+          <img src={cat.icon} alt={`${cat.id} icon`} decoding='async' />
+
           <div className={`${cat.label.length > 1 && cat.id}`}>
             {cat.label.map((text) => (
               <p key={text}>{text}</p>

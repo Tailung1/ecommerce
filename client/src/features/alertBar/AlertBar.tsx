@@ -62,7 +62,7 @@ export default function AlertBar() {
             {compareCart
               .filter((item) => item !== null)
               .map((prod) => (
-                <div key={Math.random() * 2372} className='product-container'>
+                <div key={prod?.id} className='product-container'>
                   <div>
                     <img src={phoneImage} alt='phone image' />
                     <p>{prod?.name}</p>

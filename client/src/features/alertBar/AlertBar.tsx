@@ -27,6 +27,8 @@ export default function AlertBar() {
     navigate("/compare-products");
   };
 
+  const products = compareCart.filter((prod): prod is NonNullable<typeof prod> => prod !== null);
+
   return ReactDOM.createPortal(
     <div
       onAnimationEnd={(e) => {
@@ -64,7 +66,7 @@ export default function AlertBar() {
           </p>
 
           <section className='compare-products-parent'>
-            {compareCart.filter(Boolean).map((prod) => (
+            {products.map((prod) => (
               <div key={prod.id} className='product-container'>
                 <div>
                   <img src={phoneImage} alt='phone image' />

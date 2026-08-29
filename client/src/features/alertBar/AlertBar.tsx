@@ -18,6 +18,10 @@ export default function AlertBar() {
 
   const { isFull: isCompareCartFull, isChosen: isProductChosen } = alertState;
 
+  const handleClose = () => {
+    setBar("isExitingBar", true);
+  };
+
   const handleReject = () => {
     setAlert("showAlert", false);
     navigate("/compare-products");
@@ -35,7 +39,7 @@ export default function AlertBar() {
     >
       <img
         src={exitBtn}
-        onClick={() => setBar("isExitingBar", true)}
+        onClick={handleClose}
         className='exit-btn exit-btn-warning w-10 h-8'
         alt='Exit icon'
       />
@@ -74,7 +78,7 @@ export default function AlertBar() {
         </div>
       )}
 
-      <button onClick={() => setBar("isExitingBar", true)}>It is clear</button>
+      <button onClick={handleClose}>It is clear</button>
     </div>,
     document.body
   );

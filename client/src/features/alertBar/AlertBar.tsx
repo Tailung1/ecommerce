@@ -11,11 +11,12 @@ export default function AlertBar() {
 
   const { setBar, setAlert } = useBarDispatch();
 
-  const isCompareCartFull = useBarStateValue("alert").isFull;
-  const isProductChosen = useBarStateValue("alert").isChosen;
+  const alertState = useBarStateValue("alert");
   const isExitingBar = useBarStateValue("isExitingBar");
 
   const { compareCart } = useCompareCart();
+
+  const { isFull: isCompareCartFull, isChosen: isProductChosen } = alertState;
 
   const handleReject = () => {
     setAlert("showAlert", false);
@@ -30,7 +31,7 @@ export default function AlertBar() {
           setBar("isExitingBar", false);
         }
       }}
-      className={`Bar bar-modifed-warning ${isExitingBar && "ExitBar"}`}
+      className={`Bar bar-modifed-warning ${isExitingBar ? "ExitBar" : ""}`}
     >
       <img
         src={exitBtn}
@@ -59,18 +60,16 @@ export default function AlertBar() {
           </p>
 
           <section className='compare-products-parent'>
-            {compareCart
-              .filter((item) => item !== null)
-              .map((prod) => (
-                <div key={prod?.id} className='product-container'>
-                  <div>
-                    <img src={phoneImage} alt='phone image' />
-                    <p>{prod?.name}</p>
-                  </div>
-
-                  <img onClick={handleReject} src={exitBtn} alt='Reject icon' />
+            {compareCart.filter(Boolean).map((prod) => (
+              <div key={prod.id} className='product-container'>
+                <div>
+                  <img src={phoneImage} alt='phone image' />
+                  <p>{prod.name}</p>
                 </div>
-              ))}
+
+                <img onClick={handleReject} src={exitBtn} alt='Reject icon' />
+              </div>
+            ))}
           </section>
         </div>
       )}

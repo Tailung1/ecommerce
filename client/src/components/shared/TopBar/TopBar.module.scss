@@ -1,4 +1,8 @@
-@mixin display-gap-padding-justify($gap: 0px, $padding: 0px, $justify-content: center) {
+@mixin display-gap-padding-justify(
+  $gap: 0px,
+  $padding: 0px,
+  $justify-content: center
+) {
   display: flex;
   align-items: center;
   gap: $gap;
@@ -13,30 +17,32 @@
   font-size: 14px;
 }
 
-.pc-topBar {
+.topBar {
   display: none;
 }
 
 @media (min-width: 1024px) {
-  .pc-topBar {
+  .topBar {
     @include display-gap-padding-justify(
       $gap: 0px,
       $padding: 15px 120px,
       $justify-content: space-between
     );
-    background-color: rgb(235, 101, 57);
 
-    .contact-info {
-      @include flex-center-gap;
-    }
+    background-color: rgb(235, 101, 57);
+  }
+
+  .contactInfo {
+    @include flex-center-gap;
 
     img {
       padding-top: 0.25rem;
     }
   }
 
-  .info-container {
+  .infoContainer {
     @include flex-center-gap;
+
     font-weight: 500;
     color: #d7d2ad;
 
@@ -44,7 +50,7 @@
       display: flex;
       gap: 1rem;
 
-      span {
+      a {
         cursor: pointer;
         transition: transform 0.2s;
 

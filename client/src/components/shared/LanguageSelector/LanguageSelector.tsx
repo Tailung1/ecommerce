@@ -14,6 +14,11 @@ const languageFlags: Record<Language, string> = {
   ka: geoFlag,
 };
 
+const languageLabels: Record<Language, string> = {
+  en: "English",
+  ka: "ქართული",
+};
+
 export default function LanguageSelector() {
   const { isLanguagesVisible, activeLanguage } = useLanguageStateValue();
   const { setActiveLanguage, setIsLanguagesVisible } = useLanguageDispatch();
@@ -37,12 +42,14 @@ export default function LanguageSelector() {
 
   const handleLanguageChange = (language: Language) => {
     if (language === activeLanguage) {
+      setIsLanguagesVisible(false);
       return;
     }
 
     const newPath = location.pathname.replace(/^\/(en|ka)/, "");
 
     setActiveLanguage(language);
+    setIsLanguagesVisible(false);
 
     if (language === "ka") {
       navigate(newPath);
@@ -54,18 +61,22 @@ export default function LanguageSelector() {
 
   return (
     <div onClick={handleToggleLanguages} className='languages-container'>
-      <img src={languageFlag} alt='Language flag' />
+      <img src={languageFlag} alt={`${languageLabels[activeLanguage as Language]} flag`} />
 
       {isLanguagesVisible && (
         <div className='bg-white overflow-hidden flex flex-col items-center text-center justify-center rounded-lg absolute left-0 top-[40px] w-full'>
           {languages.map((language) => (
-            <p
+            <button
               key={language}
+              type='button'
               className='hover:bg-slate-200 cursor-pointer w-full text-black px-2 text-[18px]'
-              onClick={() => handleLanguageChange(language)}
+              onClick={(event) => {
+                event.stopPropagation();
+                handleLanguageChange(language);
+              }}
             >
-              {language}
-            </p>
+              {languageLabels[language]}
+            </button>
           ))}
         </div>
       )}

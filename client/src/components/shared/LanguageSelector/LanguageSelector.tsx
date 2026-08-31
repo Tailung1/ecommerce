@@ -15,8 +15,8 @@ const languageFlags: Record<Language, string> = {
 };
 
 const languageLabels: Record<Language, string> = {
-  en: "ENG",
-  ka: "GEO",
+  en: "EN",
+  ka: "GE",
 };
 
 export default function LanguageSelector() {

@@ -15,8 +15,8 @@ const languageFlags: Record<Language, string> = {
 };
 
 const languageLabels: Record<Language, string> = {
-  en: "English",
-  ka: "ქართული",
+  en: "ENG",
+  ka: "GEO",
 };
 
 export default function LanguageSelector() {
@@ -47,6 +47,7 @@ export default function LanguageSelector() {
     }
 
     const newPath = location.pathname.replace(/^\/(en|ka)/, "");
+    console.log(newPath)
 
     setActiveLanguage(language);
     setIsLanguagesVisible(false);

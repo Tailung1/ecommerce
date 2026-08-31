@@ -1,6 +1,7 @@
 import "./Product.scss";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+// import { Helmet } from "react-helmet";
 import { useBarDispatch } from "../../../contexts/BarContext";
 
 export default function Product() {
@@ -8,7 +9,7 @@ export default function Product() {
   const { setBar } = useBarDispatch();
   const productTitle = slug
     ?.split("-")
-    .slice(0, -3)
+    .slice(0, -3) // to remove  elements  from right to left
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
 

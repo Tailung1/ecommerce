@@ -1,79 +1,109 @@
-import {
-  createContext,
-  useContext,
-  useMemo,
-  useState,
-  type ReactNode,
-  type Dispatch,
-  type SetStateAction,
-} from "react";
+import "./LanguageSelector.scss";
+import usaFlag from "../../../assets/eng.png";
+import geoFlag from "../../../assets/georgia.png";
+import { useLanguageDispatch, useLanguageStateValue } from "../../../contexts/LanguageContext";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
-export type Language = "en" | "ka";
+type Language = "en" | "ka";
 
-interface LanguageState {
-  activeLanguage: Language;
-  isLanguagesVisible: boolean;
-}
+const languages: Language[] = ["en", "ka"];
 
-interface LanguageDispatch {
-  setActiveLanguage: Dispatch<SetStateAction<Language>>;
-  setIsLanguagesVisible: Dispatch<SetStateAction<boolean>>;
-}
+const languageFlags: Record<Language, string> = {
+  en: usaFlag,
+  ka: geoFlag,
+};
 
-const LanguageStateContext = createContext<LanguageState | undefined>(undefined);
+const languageLabels: Record<Language, string> = {
+  en: "EN",
+  ka: "GE",
+};
 
-const LanguageDispatchContext = createContext<LanguageDispatch | undefined>(undefined);
+const getLanguageFromPath = (pathname: string): Language => {
+  const [, language] = pathname.split("/");
 
-interface LanguageProviderProps {
-  children: ReactNode;
-}
+  return language === "en" ? "en" : "ka";
+};
 
-export function LanguageProvider({ children }: LanguageProviderProps) {
-  const [activeLanguage, setActiveLanguage] = useState<Language>("ka");
+const getLocalizedPath = (pathname: string, language: Language): string => {
+  const pathWithoutLanguage = pathname.replace(/^\/en/, "");
 
-  const [isLanguagesVisible, setIsLanguagesVisible] = useState(false);
+  if (language === "ka") {
+    return pathWithoutLanguage || "/";
+  }
 
-  const stateValue = useMemo(
-    () => ({
-      activeLanguage,
-      isLanguagesVisible,
-    }),
-    [activeLanguage, isLanguagesVisible]
-  );
+  return `/en${pathWithoutLanguage}`;
+};
 
-  const dispatchValue = useMemo(
-    () => ({
-      setActiveLanguage,
-      setIsLanguagesVisible,
-    }),
-    []
-  );
+export default function LanguageSelector() {
+  const { isLanguagesVisible, activeLanguage } = useLanguageStateValue();
+
+  const { setActiveLanguage, setIsLanguagesVisible } = useLanguageDispatch();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const currentLanguage: Language = activeLanguage === "en" ? "en" : "ka";
+
+  const activeLanguageFlag = languageFlags[currentLanguage];
+
+  useEffect(() => {
+    const languageFromPath = getLanguageFromPath(location.pathname);
+
+    if (languageFromPath !== activeLanguage) {
+      setActiveLanguage(languageFromPath);
+    }
+  }, [location.pathname, activeLanguage, setActiveLanguage]);
+
+  const handleToggleLanguages = () => {
+    setIsLanguagesVisible(!isLanguagesVisible);
+  };
+
+  const handleLanguageChange = (language: Language) => {
+    setIsLanguagesVisible(false);
+
+    if (language === currentLanguage) {
+      return;
+    }
+
+    const localizedPath = getLocalizedPath(location.pathname, language);
+
+    navigate(localizedPath);
+  };
 
   return (
-    <LanguageStateContext.Provider value={stateValue}>
-      <LanguageDispatchContext.Provider value={dispatchValue}>
-        {children}
-      </LanguageDispatchContext.Provider>
-    </LanguageStateContext.Provider>
+    <div className='languages-container relative'>
+      <button
+        type='button'
+        onClick={handleToggleLanguages}
+        aria-label={`Current language: ${languageLabels[currentLanguage]}`}
+        aria-expanded={isLanguagesVisible}
+        aria-haspopup='listbox'
+        className='flex items-center'
+      >
+        <img src={activeLanguageFlag} alt='' aria-hidden='true' />
+      </button>
+
+      {isLanguagesVisible && (
+        <div
+          role='listbox'
+          aria-label='Select language'
+          className='bg-white overflow-hidden flex flex-col items-center text-center justify-center rounded-lg absolute left-0 top-[40px] w-full'
+        >
+          {languages.map((language) => (
+            <button
+              key={language}
+              type='button'
+              role='option'
+              aria-selected={language === currentLanguage}
+              className='hover:bg-slate-200 cursor-pointer w-full text-black px-2 text-[18px]'
+              onClick={() => handleLanguageChange(language)}
+            >
+              {languageLabels[language]}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
   );
-}
-
-export function useLanguageStateValue(): LanguageState {
-  const context = useContext(LanguageStateContext);
-
-  if (!context) {
-    throw new Error("useLanguageStateValue must be used within a LanguageProvider");
-  }
-
-  return context;
-}
-
-export function useLanguageDispatch(): LanguageDispatch {
-  const context = useContext(LanguageDispatchContext);
-
-  if (!context) {
-    throw new Error("useLanguageDispatch must be used within a LanguageProvider");
-  }
-
-  return context;
 }

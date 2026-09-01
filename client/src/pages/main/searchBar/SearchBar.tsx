@@ -39,9 +39,15 @@ export default function SearchBar() {
   return (
     <div className='searchBar-container'>
       <div className='input-container'>
-        <input className='input' ref={inputRef} placeholder='Search' type='text' />
+        <input
+          className='input'
+          ref={inputRef}
+          placeholder='Search'
+          type='text'
+          aria-label='Search'
+        />
 
-        <img className='search-icon' src={searchIcon} alt='Search' />
+        <img className='search-icon' src={searchIcon} alt='' aria-hidden='true' />
       </div>
 
       <div
@@ -52,14 +58,15 @@ export default function SearchBar() {
       >
         <p>Popular Searches:</p>
 
-        <section className='popular-searches-wrapper'>
+        <section className='popular-searches-wrapper' aria-label='Popular searches'>
           {popularSearches.map((item) => (
-            <p
+            <button
               key={item.id}
+              type='button'
               onClick={() => handlePopularSearchClick(item.name, item.color, item.id)}
             >
               {item.name}
-            </p>
+            </button>
           ))}
         </section>
       </div>

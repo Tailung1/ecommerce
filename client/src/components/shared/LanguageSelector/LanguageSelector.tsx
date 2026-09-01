@@ -1,86 +1,79 @@
-import "./LanguageSelector.scss";
-import usaFlag from "../../../assets/eng.png";
-import geoFlag from "../../../assets/georgia.png";
-import { useLanguageDispatch, useLanguageStateValue } from "../../../contexts/LanguageContext";
-import { useNavigate, useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import {
+  createContext,
+  useContext,
+  useMemo,
+  useState,
+  type ReactNode,
+  type Dispatch,
+  type SetStateAction,
+} from "react";
 
-type Language = "en" | "ka";
+export type Language = "en" | "ka";
 
-const languages: Language[] = ["en", "ka"];
+interface LanguageState {
+  activeLanguage: Language;
+  isLanguagesVisible: boolean;
+}
 
-const languageFlags: Record<Language, string> = {
-  en: usaFlag,
-  ka: geoFlag,
-};
+interface LanguageDispatch {
+  setActiveLanguage: Dispatch<SetStateAction<Language>>;
+  setIsLanguagesVisible: Dispatch<SetStateAction<boolean>>;
+}
 
-const languageLabels: Record<Language, string> = {
-  en: "EN",
-  ka: "GE",
-};
+const LanguageStateContext = createContext<LanguageState | undefined>(undefined);
 
-export default function LanguageSelector() {
-  const { isLanguagesVisible, activeLanguage } = useLanguageStateValue();
-  const { setActiveLanguage, setIsLanguagesVisible } = useLanguageDispatch();
+const LanguageDispatchContext = createContext<LanguageDispatch | undefined>(undefined);
 
-  const navigate = useNavigate();
-  const location = useLocation();
+interface LanguageProviderProps {
+  children: ReactNode;
+}
 
-  const languageFlag = languageFlags[activeLanguage as Language];
+export function LanguageProvider({ children }: LanguageProviderProps) {
+  const [activeLanguage, setActiveLanguage] = useState<Language>("ka");
 
-  useEffect(() => {
-    const language: Language = location.pathname.startsWith("/en") ? "en" : "ka";
+  const [isLanguagesVisible, setIsLanguagesVisible] = useState(false);
 
-    if (language !== activeLanguage) {
-      setActiveLanguage(language);
-    }
-  }, [location.pathname, activeLanguage, setActiveLanguage]);
+  const stateValue = useMemo(
+    () => ({
+      activeLanguage,
+      isLanguagesVisible,
+    }),
+    [activeLanguage, isLanguagesVisible]
+  );
 
-  const handleToggleLanguages = () => {
-    setIsLanguagesVisible(!isLanguagesVisible);
-  };
-
-  const handleLanguageChange = (language: Language) => {
-    if (language === activeLanguage) {
-      setIsLanguagesVisible(false);
-      return;
-    }
-
-    const newPath = location.pathname.replace(/^\/(en|ka)/, "");
-    console.log(newPath)
-
-    setActiveLanguage(language);
-    setIsLanguagesVisible(false);
-
-    if (language === "ka") {
-      navigate(newPath);
-      return;
-    }
-
-    navigate(`/${language}${newPath}`);
-  };
+  const dispatchValue = useMemo(
+    () => ({
+      setActiveLanguage,
+      setIsLanguagesVisible,
+    }),
+    []
+  );
 
   return (
-    <div onClick={handleToggleLanguages} className='languages-container'>
-      <img src={languageFlag} alt={`${languageLabels[activeLanguage as Language]} flag`} />
-
-      {isLanguagesVisible && (
-        <div className='bg-white overflow-hidden flex flex-col items-center text-center justify-center rounded-lg absolute left-0 top-[40px] w-full'>
-          {languages.map((language) => (
-            <button
-              key={language}
-              type='button'
-              className='hover:bg-slate-200 cursor-pointer w-full text-black px-2 text-[18px]'
-              onClick={(event) => {
-                event.stopPropagation();
-                handleLanguageChange(language);
-              }}
-            >
-              {languageLabels[language]}
-            </button>
-          ))}
-        </div>
-      )}
-    </div>
+    <LanguageStateContext.Provider value={stateValue}>
+      <LanguageDispatchContext.Provider value={dispatchValue}>
+        {children}
+      </LanguageDispatchContext.Provider>
+    </LanguageStateContext.Provider>
   );
+}
+
+export function useLanguageStateValue(): LanguageState {
+  const context = useContext(LanguageStateContext);
+
+  if (!context) {
+    throw new Error("useLanguageStateValue must be used within a LanguageProvider");
+  }
+
+  return context;
+}
+
+export function useLanguageDispatch(): LanguageDispatch {
+  const context = useContext(LanguageDispatchContext);
+
+  if (!context) {
+    throw new Error("useLanguageDispatch must be used within a LanguageProvider");
+  }
+
+  return context;
 }

@@ -3,58 +3,60 @@ import { useMyContext } from "../../../contexts/MyContext";
 import searchIcon from "../../../assets/search-icon.png";
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { useBarStateValue } from "../../../contexts/BarContext";
-import { useBarDispatch } from "../../../contexts/BarContext";
+import { useBarStateValue, useBarDispatch } from "../../../contexts/BarContext";
+
+const generateSlug = (name: string, color: string, id: number) => {
+  const normalizedName = name.trim().replace(/\s+/g, "-");
+
+  return `${normalizedName}-${color}-${id}`.toLowerCase();
+};
 
 export default function SearchBar() {
   const { popularSearches } = useMyContext();
   const isExiting = useBarStateValue("isExitingBar");
-  const inputRef = useRef<HTMLInputElement>(null);
   const { setBar } = useBarDispatch();
+
+  const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
+    inputRef.current?.focus();
   }, []);
 
-  // no need this logic for mobile !!!! new width traker !!! 12 april.
-  const handleAnimationEnd = (e: React.AnimationEvent<HTMLDivElement>) => {
-    if (e.animationName === "SearchBarOut") {
-      setBar("showSearchBar", false);
-      setBar("isExitingBar", false);
+  const handleAnimationEnd = (event: React.AnimationEvent<HTMLDivElement>) => {
+    if (event.animationName !== "SearchBarOut") {
+      return;
     }
+
+    setBar("showSearchBar", false);
+    setBar("isExitingBar", false);
   };
 
-  const generateSlug = (name: string, color: string, id: number) => {
-    const destName = name.replace(/\s+/g, "-");
-    const slug = `${destName}-${color}-${id}`.toLowerCase();
-    navigate(`/${slug}`);
+  const handlePopularSearchClick = (name: string, color: string, id: number) => {
+    navigate(`/${generateSlug(name, color, id)}`);
   };
 
   return (
     <div className='searchBar-container'>
       <div className='input-container'>
         <input className='input' ref={inputRef} placeholder='Search' type='text' />
-        <img className='search-icon' src={searchIcon} alt='search icon' />
+
+        <img className='search-icon' src={searchIcon} alt='Search' />
       </div>
 
       <div
         onAnimationEnd={handleAnimationEnd}
-        className={`popular-searches-container  ${
+        className={`popular-searches-container ${
           isExiting ? "popular-searches-containerOUT" : "popular-searches-containerIN"
         }`}
       >
         <p>Popular Searches:</p>
 
-        <section className='popular-searches-wrapper '>
+        <section className='popular-searches-wrapper'>
           {popularSearches.map((item) => (
             <p
-              onClick={() => {
-                generateSlug(item.name, item.color, item.id);
-              }}
               key={item.id}
+              onClick={() => handlePopularSearchClick(item.name, item.color, item.id)}
             >
               {item.name}
             </p>

@@ -1,27 +1,28 @@
 import styles from "./TopBar.module.scss";
 import LanguageSelector from "../LanguageSelector/LanguageSelector";
 import teleCall from "../../../assets/telephone-call.png";
+import { Link } from "react-router-dom";
 
 const navigationItems = [
   {
     label: "Trade Politics",
-    href: "/trade-politics",
+    to: "/trade-politics",
   },
   {
     label: "Installment",
-    href: "/installment",
+    to: "/installment",
   },
   {
     label: "Career",
-    href: "/career",
+    to: "/career",
   },
   {
     label: "Trade In",
-    href: "/trade-in",
+    to: "/trade-in",
   },
   {
     label: "Branches",
-    href: "/branches",
+    to: "/branches",
   },
 ];
 
@@ -35,10 +36,10 @@ export default function TopBar() {
 
       <div className={styles.infoContainer}>
         <nav aria-label='Top navigation'>
-          {navigationItems.map(({ label, href }) => (
-            <a href={href} key={label}>
+          {navigationItems.map(({ label, to }) => (
+            <Link to={to} key={label}>
               {label}
-            </a>
+            </Link>
           ))}
         </nav>
 

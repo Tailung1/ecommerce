@@ -13,32 +13,43 @@ export default function Home() {
   const isDesktop = useMediaQuery();
   const { t } = useTranslation();
 
+  const productSections = [
+    {
+      title: "home.breathlessInZoomer",
+      data: data.breathles,
+      image: mobilePhone,
+    },
+    {
+      title: "home.discoverGifts",
+      data: data.gifts,
+      image: laptops,
+    },
+    {
+      title: "home.newModels",
+      data: data["new-models"],
+      image: tv,
+    },
+  ];
+
   return (
     <div className='main-content'>
       <section className='hightlights-wrapper'>
-        {data.highlights.map((i, index) => (
-          <div key={index}>
-            <p>{i.name}</p>
+        {data.highlights.map((highlight) => (
+          <div key={highlight.name}>
+            <p>{highlight.name}</p>
           </div>
         ))}
       </section>
 
       {isDesktop && <CategoriesAndCarousel />}
 
-      <section className='products-shared-container'>
-        <p>{t("breathles in zoomer")}</p>
-        <ProductsWrapper data={data.breathles} img={mobilePhone} />
-      </section>
+      {productSections.map((section) => (
+        <section className='products-shared-container' key={section.title}>
+          <h3>{t(section.title)}</h3>
 
-      <section>
-        <h3>Discover Gifts Awaiting You</h3>
-        <ProductsWrapper data={data.gifts} img={laptops} />
-      </section>
-
-      <section>
-        <h3>New Models</h3>
-        <ProductsWrapper data={data["new-models"]} img={tv} />
-      </section>
+          <ProductsWrapper data={section.data} img={section.image} />
+        </section>
+      ))}
     </div>
   );
 }

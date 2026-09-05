@@ -7,14 +7,17 @@ import cartIcon from "../../assets/shopping-cart.png";
 import loginIcon from "../../assets/login.png";
 import { useNavigate } from "react-router-dom";
 import Logo from "../shared/Logo/Logo";
+import { useBarDispatch } from "../../contexts/BarContext";
 
 export default function Header() {
+  const { setBar } = useBarDispatch();
   const navigate = useNavigate();
 
   return (
     <header>
       <div className='header'>
-        <img src={slideIcon} alt='Open menu' />
+        <img onClick={() => setBar("showSideBar", true)} src={slideIcon} alt='Open menu' />
+
         <Logo />
       </div>
 
@@ -36,17 +39,23 @@ export default function Header() {
 
           <div className='input-container'>
             <input className='input' placeholder='Search' type='text' />
+
             <img className='search-icon' src={searchIcon} alt='Search icon' />
           </div>
 
           <div className='cart-container-header'>
             <img src={cartIcon} alt='Shopping cart icon' />
+
             <span>Cart</span>
+
             <div className='invisible-div'></div>
+
+            <ShoppingCartPop />
           </div>
 
-          <div className='login-container-header'>
+          <div onClick={() => setBar("showAuthBar", true)} className='login-container-header'>
             <img src={loginIcon} alt='Login icon' />
+
             <span>Login</span>
           </div>
 

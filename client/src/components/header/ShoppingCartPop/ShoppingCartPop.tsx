@@ -4,7 +4,6 @@ import emptyCart from "../../../assets/cartImage.png";
 import bin from "../../../assets/bin.png";
 import iphone from "../../../assets/iphone.png";
 
-
 export default function ShoppingCartPop() {
   const { shoppingCart } = useMyContext();
 
@@ -14,17 +13,18 @@ export default function ShoppingCartPop() {
         <span>Cart</span>
         <span>{shoppingCart.length} Product</span>
       </div>
+
       {shoppingCart.length === 0 ? (
         <div className='strech'>
-          {" "}
           <img className='emptyCart-Image' src={emptyCart} alt='Empty cart icon' />
         </div>
       ) : (
         <div className='items-container'>
           {shoppingCart.map((item) => (
-            <div key={Math.random() * 982} className='item-container'>
+            <div key={item.id} className='item-container'>
               <div className='flex justify-center items-center'>
                 <img src={iphone} alt={item.name} />
+
                 <div className='flex flex-col'>
                   {item.name}
                   {item.price}
@@ -33,7 +33,8 @@ export default function ShoppingCartPop() {
 
               <div className='flex flex-col gap-5 items-end'>
                 <img className='bin' src={bin} alt='bin image' />
-                <div className='math-container '>
+
+                <div className='math-container'>
                   <span>-</span>
                   <span>{item.quantity}</span>
                   <span>+</span>
@@ -43,6 +44,7 @@ export default function ShoppingCartPop() {
           ))}
         </div>
       )}
+
       <div className='total-price-container'>
         <span></span>
         <p>

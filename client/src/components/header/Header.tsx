@@ -7,10 +7,15 @@ import cartIcon from "../../assets/shopping-cart.png";
 import loginIcon from "../../assets/login.png";
 import { useNavigate } from "react-router-dom";
 import Logo from "../shared/Logo/Logo";
-import { useBarDispatch } from "../../contexts/BarContext";
+import SearchBar from "../../pages/main/searchBar/SearchBar";
+import { useBarDispatch, useBarStateValue } from "../../contexts/BarContext";
+import { useTranslation } from "react-i18next";
 
 export default function Header() {
   const { setBar } = useBarDispatch();
+  const showSearchBar = useBarStateValue("showSearchBar");
+
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   return (
@@ -35,18 +40,22 @@ export default function Header() {
         <Logo />
 
         <div className='header-right-side-items'>
-          <button className='orange-btn'>Navigation</button>
+          <button className='orange-btn'>{t("navigation")}</button>
 
-          <div className='input-container'>
-            <input className='input' placeholder='Search' type='text' />
+          {showSearchBar ? (
+            <SearchBar />
+          ) : (
+            <div onClick={() => setBar("showSearchBar", true)} className='input-container'>
+              <input className='input' placeholder='Search' type='text' />
 
-            <img className='search-icon' src={searchIcon} alt='Search icon' />
-          </div>
+              <img className='search-icon' src={searchIcon} alt='Search icon' />
+            </div>
+          )}
 
           <div className='cart-container-header'>
             <img src={cartIcon} alt='Shopping cart icon' />
 
-            <span>Cart</span>
+            <span>{t("cart")}</span>
 
             <div className='invisible-div'></div>
 
@@ -56,7 +65,7 @@ export default function Header() {
           <div onClick={() => setBar("showAuthBar", true)} className='login-container-header'>
             <img src={loginIcon} alt='Login icon' />
 
-            <span>Login</span>
+            <span>{t("login")}</span>
           </div>
 
           <button className='orange-btn'>%</button>

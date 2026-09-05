@@ -7,6 +7,8 @@ import iphone from "../../../assets/iphone.png";
 export default function ShoppingCartPop() {
   const { shoppingCart } = useMyContext();
 
+  const totalPrice = shoppingCart.reduce((total, item) => total + item.price * item.quantity, 0);
+
   return (
     <div className='cart-pop'>
       <div>
@@ -48,7 +50,7 @@ export default function ShoppingCartPop() {
       <div className='total-price-container'>
         <span></span>
         <p>
-          Total Price: <span>{3099} $</span>
+          Total Price: <span>{totalPrice} $</span>
         </p>
       </div>
 

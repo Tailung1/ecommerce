@@ -17,7 +17,7 @@ export default function HeaderSlider() {
     setBar("showSideBar", false);
   };
 
-  const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSearch = (event: React.SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const trimmedSearchValue = searchValue.trim();

@@ -1,8 +1,7 @@
 import "./HeaderSlider.scss";
 import { easeOut, motion } from "framer-motion";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import CategoryList from "../../../features/categories/components/shared/CategoryList";
-// import CategoryNavigation from "../../../features/categories/components/CategoryNavigation";
 import Categories from "../../reusable/Categories/Categories";
 import BrandList from "./BrandList/BrandList";
 import searchIcon from "../../../assets/search-icon.png";
@@ -12,13 +11,22 @@ import { useBarDispatch } from "../../../contexts/BarContext";
 export default function HeaderSlider() {
   const navigate = useNavigate();
   const { setBar } = useBarDispatch();
+  const [searchValue, setSearchValue] = useState("");
 
   const closeSidebar = () => {
     setBar("showSideBar", false);
   };
 
-  const handleSearchClick = () => {
-    navigate("/search");
+  const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const trimmedSearchValue = searchValue.trim();
+
+    if (!trimmedSearchValue) {
+      return;
+    }
+
+    navigate(`/search?query=${encodeURIComponent(trimmedSearchValue)}`);
     closeSidebar();
   };
 
@@ -33,12 +41,31 @@ export default function HeaderSlider() {
       <div className='header-slider-exit-input-container'>
         <img src={rejectIcon} alt='Close' className='cursor-pointer' onClick={closeSidebar} />
 
-        <div onClick={handleSearchClick} className='search-input-container'>
+        <form onSubmit={handleSearch} className='search-input-container'>
           <div className='input-container'>
-            <input className='input' placeholder='Search' type='text' />
-            <img className='search-icon' src={searchIcon} alt='Search' />
+            <input
+              name='search'
+              className='input'
+              placeholder='Search'
+              type='search'
+              value={searchValue}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                setSearchValue(event.target.value)
+              }
+              autoComplete='off'
+              aria-label='Search products'
+            />
+
+            <button
+              type='submit'
+              className='search-button'
+              aria-label='Search'
+              disabled={!searchValue.trim()}
+            >
+              <img className='search-icon' src={searchIcon} alt='' />
+            </button>
           </div>
-        </div>
+        </form>
       </div>
 
       <div className='categories-and-brands-container'>

@@ -17,7 +17,11 @@ export default function HeaderSlider() {
     setBar("showSideBar", false);
   };
 
-  const handleSearch = (event: React.SyntheticEvent<HTMLFormElement>) => {
+  const clearSearch = () => {
+    setSearchValue("");
+  };
+
+  const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const trimmedSearchValue = searchValue.trim();
@@ -55,6 +59,17 @@ export default function HeaderSlider() {
               autoComplete='off'
               aria-label='Search products'
             />
+
+            {searchValue && (
+              <button
+                type='button'
+                className='clear-search-button'
+                onClick={clearSearch}
+                aria-label='Clear search'
+              >
+                ×
+              </button>
+            )}
 
             <button
               type='submit'

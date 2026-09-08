@@ -1,7 +1,7 @@
 import "./SearchBar.scss";
 import { useMyContext } from "../../../contexts/MyContext";
 import searchIcon from "../../../assets/search-icon.png";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useBarStateValue, useBarDispatch } from "../../../contexts/BarContext";
 
@@ -23,18 +23,24 @@ export default function SearchBar() {
     inputRef.current?.focus();
   }, []);
 
-  const handleAnimationEnd = (event: React.AnimationEvent<HTMLDivElement>) => {
-    if (event.animationName !== "SearchBarOut") {
-      return;
-    }
+  const handleAnimationEnd = useCallback(
+    (event: React.AnimationEvent<HTMLDivElement>) => {
+      if (event.animationName !== "SearchBarOut") {
+        return;
+      }
 
-    setBar("showSearchBar", false);
-    setBar("isExitingBar", false);
-  };
+      setBar("showSearchBar", false);
+      setBar("isExitingBar", false);
+    },
+    [setBar]
+  );
 
-  const handlePopularSearchClick = (name: string, color: string, id: number) => {
-    navigate(`/${generateSearchSlug(name, color, id)}`);
-  };
+  const handlePopularSearchClick = useCallback(
+    (name: string, color: string, id: number) => {
+      navigate(`/${generateSearchSlug(name, color, id)}`);
+    },
+    [navigate]
+  );
 
   return (
     <div className='searchBar-container'>

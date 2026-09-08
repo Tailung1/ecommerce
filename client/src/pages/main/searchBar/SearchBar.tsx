@@ -42,6 +42,10 @@ export default function SearchBar() {
     [navigate]
   );
 
+  const popularSearchesClassName = isExiting
+    ? "popular-searches-containerOUT"
+    : "popular-searches-containerIN";
+
   return (
     <div className='searchBar-container'>
       <div className='input-container'>
@@ -58,9 +62,7 @@ export default function SearchBar() {
 
       <div
         onAnimationEnd={handleAnimationEnd}
-        className={`popular-searches-container ${
-          isExiting ? "popular-searches-containerOUT" : "popular-searches-containerIN"
-        }`}
+        className={`popular-searches-container ${popularSearchesClassName}`}
       >
         <p>Popular Searches:</p>
 

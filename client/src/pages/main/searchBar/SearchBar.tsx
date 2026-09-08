@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useBarStateValue, useBarDispatch } from "../../../contexts/BarContext";
 
-const generateSlug = (name: string, color: string, id: number) => {
+const generateSearchSlug = (name: string, color: string, id: number) => {
   const normalizedName = name.trim().replace(/\s+/g, "-");
 
   return `${normalizedName}-${color}-${id}`.toLowerCase();
@@ -33,7 +33,7 @@ export default function SearchBar() {
   };
 
   const handlePopularSearchClick = (name: string, color: string, id: number) => {
-    navigate(`/${generateSlug(name, color, id)}`);
+    navigate(`/${generateSearchSlug(name, color, id)}`);
   };
 
   return (

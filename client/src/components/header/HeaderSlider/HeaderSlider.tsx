@@ -16,12 +16,12 @@ export default function HeaderSlider() {
   const closeSidebar = () => {
     setBar("showSideBar", false);
   };
-
-  const clearSearch = () => {
-    setSearchValue("");
+  const openSeatchBar = () => {
+    setBar("showSideBar", false);
+    navigate("/search")
   };
 
-  const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSearch = (event: React.SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const trimmedSearchValue = searchValue.trim();
@@ -58,18 +58,8 @@ export default function HeaderSlider() {
               }
               autoComplete='off'
               aria-label='Search products'
+              onClick={openSeatchBar}
             />
-
-            {searchValue && (
-              <button
-                type='button'
-                className='clear-search-button'
-                onClick={clearSearch}
-                aria-label='Clear search'
-              >
-                ×
-              </button>
-            )}
 
             <button
               type='submit'

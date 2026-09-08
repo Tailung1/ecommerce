@@ -57,7 +57,12 @@ export default function SearchBar() {
           aria-label='Search'
         />
 
-        <img className='search-icon' src={searchIcon} alt='' aria-hidden='true' />
+        <img
+          className='search-icon'
+          src={searchIcon}
+          alt=''
+          aria-hidden='true'
+        />
       </div>
 
       <div
@@ -66,12 +71,17 @@ export default function SearchBar() {
       >
         <p>Popular Searches:</p>
 
-        <section className='popular-searches-wrapper' aria-label='Popular searches'>
+        <section
+          className='popular-searches-wrapper'
+          aria-label='Popular searches'
+        >
           {popularSearches.map((item) => (
             <button
               key={item.id}
               type='button'
-              onClick={() => handlePopularSearchClick(item.name, item.color, item.id)}
+              onClick={() =>
+                handlePopularSearchClick(item.name, item.color, item.id)
+              }
             >
               {item.name}
             </button>

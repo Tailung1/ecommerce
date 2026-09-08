@@ -25,34 +25,6 @@ export default function Products() {
       </div>
 
       <p>products</p>
-      <p>products</p>
-      <p>products</p>
-      <p>products</p>
-      <p>products</p>
-      <p>products</p>
-      <p>products</p>
-      <p>products</p>
-      <p>products</p>
-      <p>products</p>
-      <p>products</p>
-      <p>products</p>
-      <p>products</p>
-      <p>products</p>
-      <p>products</p>
-      <p>products</p>
-      <p>products</p>
-      <p>products</p>
-      <p>products</p>
-      <p>products</p>
-      <p>products</p>
-      <p>products</p>
-      <p>products</p>
-      <p>products</p>
-      <p>products</p>
-      <p>products</p>
-      <p>products</p>
-
-      <h1>productss productss</h1>
     </div>
   );
 }

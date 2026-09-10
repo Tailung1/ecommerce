@@ -10,6 +10,8 @@ interface CartItem {
 export default function Cart() {
   const { shoppingCart } = useMyContext();
 
+  const total = shoppingCart.reduce((sum: number, item: CartItem) => sum + item.price, 0);
+
   return (
     <div className='flex flex-col flex-grow items-center pt-[100px] px-4'>
       {shoppingCart.length === 0 ? (
@@ -17,6 +19,7 @@ export default function Cart() {
           <img className='w-[200px] h-[200px]' src={cartImage} alt='Empty shopping cart' />
 
           <h1 className='text-2xl font-semibold'>Your cart is empty</h1>
+
           <p className='text-gray-500'>Add some products to your cart to see them here.</p>
         </div>
       ) : (
@@ -34,6 +37,12 @@ export default function Cart() {
                 <span className='font-semibold'>${item.price.toFixed(2)}</span>
               </div>
             ))}
+          </div>
+
+          <div className='mt-6 flex items-center justify-between border-t pt-4'>
+            <h2 className='text-xl font-bold'>Total</h2>
+
+            <span className='text-xl font-bold'>${total.toFixed(2)}</span>
           </div>
         </div>
       )}

@@ -11,17 +11,30 @@ export default function Cart() {
   const { shoppingCart } = useMyContext();
 
   return (
-    <div className='flex flex-col flex-grow items-center pt-[100px]'>
+    <div className='flex flex-col flex-grow items-center pt-[100px] px-4'>
       {shoppingCart.length === 0 ? (
-        <img className='w-[200px] h-[200px]' src={cartImage} alt='Shopping cart icon' />
+        <div className='flex flex-col items-center gap-4 text-center'>
+          <img className='w-[200px] h-[200px]' src={cartImage} alt='Empty shopping cart' />
+
+          <h1 className='text-2xl font-semibold'>Your cart is empty</h1>
+          <p className='text-gray-500'>Add some products to your cart to see them here.</p>
+        </div>
       ) : (
-        <div>
-          {shoppingCart.map((item: CartItem) => (
-            <div key={item.id} className='flex flex-col gap-3'>
-              <h1>{item.name}</h1>
-              <h2>{item.price}</h2>
-            </div>
-          ))}
+        <div className='w-full max-w-2xl'>
+          <h1 className='text-3xl font-bold mb-6'>Shopping Cart</h1>
+
+          <div className='flex flex-col gap-4'>
+            {shoppingCart.map((item: CartItem) => (
+              <div
+                key={item.id}
+                className='flex items-center justify-between rounded-lg border p-4 shadow-sm'
+              >
+                <h2 className='font-medium'>{item.name}</h2>
+
+                <span className='font-semibold'>${item.price.toFixed(2)}</span>
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>

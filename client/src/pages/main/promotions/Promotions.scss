@@ -1,3 +1,75 @@
 .promotions-container {
-  background-color: red;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  padding: 32px;
+  background-color: #f4f4f4;
+}
+
+.promotion-card {
+  min-height: 220px;
+  padding: 28px;
+  border-radius: 16px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+  h3 {
+    margin: 8px 0;
+    font-size: 28px;
+  }
+
+  p {
+    margin: 0 0 20px;
+    font-size: 16px;
+    opacity: 0.9;
+  }
+
+  button {
+    width: fit-content;
+    padding: 10px 18px;
+    border: 0;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #222222;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      opacity: 0.9;
+    }
+  }
+}
+
+.promotion-label {
+  width: fit-content;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.2);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.p-breathless {
+  background: linear-gradient(135deg, #7f1d1d, #dc2626);
+}
+
+.p-gifts {
+  background: linear-gradient(135deg, #6b21a8, #a855f7);
+}
+
+.p-new-models {
+  background: linear-gradient(135deg, #075985, #0ea5e9);
+}
+
+@media (max-width: 900px) {
+  .promotions-container {
+    grid-template-columns: 1fr;
+  }
 }

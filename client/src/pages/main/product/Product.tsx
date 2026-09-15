@@ -34,6 +34,28 @@ export default function Product() {
       <h1>{productTitle}</h1>
       <h1>hikjhwelkjhwlekdjwedlwed</h1>
       <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1> <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1> <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>
+      <h1>hikjhwelkjhwlekdjwedlwed</h1>{" "}
       <div className='price-container flex items-center left-0  fixed w-full bottom-0 justify-between bg-orange-500 p-2'>
         <p className='text-white font-bold'>{product?.price} Gel</p>
         <button

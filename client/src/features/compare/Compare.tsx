@@ -20,6 +20,7 @@ export default function Compare() {
   const handleReset = () => {
     const hasAnyProduct = compareCart.some((item) => item !== null);
     if (!hasAnyProduct) return;
+
     setCompareCart([null, null, null, null]);
     setCompareCategory("");
   };
@@ -28,6 +29,7 @@ export default function Compare() {
     if (!compareCart.includes(null)) {
       return;
     }
+
     if (id && compareCart.some((item) => item?.id === id)) return;
 
     setBar("showCompareBar", true);
@@ -54,10 +56,11 @@ export default function Compare() {
         </div>
         <hr className='compare-hr' />
       </div>
+
       <section className='compare-products-parent'>
         {compareCart.map((prod, index) => (
           <div
-            key={Math.random() * 2372}
+            key={index}
             onClick={() => handleBarOpen(prod?.id as number)}
             className='selected-to-compare-product-container'
           >
@@ -68,9 +71,10 @@ export default function Compare() {
               </div>
             ) : (
               <div className='flex gap-5'>
-                <h1>name:{prod.name}</h1>{" "}
+                <h1>name:{prod.name}</h1>
               </div>
             )}
+
             <img
               onClick={() => prod && handleReject(index)}
               src={prod ? rejectIcon : searchIcon}
@@ -79,6 +83,7 @@ export default function Compare() {
           </div>
         ))}
       </section>
+
       <button
         className={`${
           allowCompare && "opacity-65 pointer-events-none"

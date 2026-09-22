@@ -85,8 +85,9 @@ export default function Compare() {
       </section>
 
       <button
+        disabled={allowCompare}
         className={`${
-          allowCompare && "opacity-65 pointer-events-none"
+          allowCompare ? "opacity-65 pointer-events-none" : ""
         } bg-orange-400 text-white p-3 rounded-lg w-full items-center`}
       >
         Compare
